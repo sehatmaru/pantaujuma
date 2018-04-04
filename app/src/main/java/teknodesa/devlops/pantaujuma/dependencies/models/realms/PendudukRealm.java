@@ -1,11 +1,17 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.realms;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+
 /**
  * Created by Roy Deddy Tobing on 4/4/2018.
  */
 
-public class PendudukRealm extends RealmObjects{
-    private String idPenduduk;
+public class PendudukRealm extends RealmObject {
+    @PrimaryKey
+    private int idPenduduk;
     private String NIK;
     private String foto;
     private String namaDepan;
@@ -27,12 +33,13 @@ public class PendudukRealm extends RealmObjects{
     private String provinsi;
     private String noHP;
     private String noTelp;
-    private String status;
+    public RealmList<LahanRealm> daftarLahan;
+    private int status;
 
     public PendudukRealm() {
     }
 
-    public PendudukRealm(String idPenduduk, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, String status) {
+    public PendudukRealm(int idPenduduk, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, RealmList<LahanRealm> daftarLahan, int status) {
         this.idPenduduk = idPenduduk;
         this.NIK = NIK;
         this.foto = foto;
@@ -55,14 +62,15 @@ public class PendudukRealm extends RealmObjects{
         this.provinsi = provinsi;
         this.noHP = noHP;
         this.noTelp = noTelp;
+        this.daftarLahan = daftarLahan;
         this.status = status;
     }
 
-    public String getIdPenduduk() {
+    public int getIdPenduduk() {
         return idPenduduk;
     }
 
-    public void setIdPenduduk(String idPenduduk) {
+    public void setIdPenduduk(int idPenduduk) {
         this.idPenduduk = idPenduduk;
     }
 
@@ -234,11 +242,19 @@ public class PendudukRealm extends RealmObjects{
         this.noTelp = noTelp;
     }
 
-    public String getStatus() {
+    public RealmList<LahanRealm> getDaftarLahan() {
+        return daftarLahan;
+    }
+
+    public void setDaftarLahan(RealmList<LahanRealm> daftarLahan) {
+        this.daftarLahan = daftarLahan;
+    }
+
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
