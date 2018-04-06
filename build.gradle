@@ -3,9 +3,15 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.google.gms:google-services:3.2.0'
+        classpath "io.realm:realm-gradle-plugin:5.0.0"//untuk realm
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -14,10 +20,78 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{
+
+    //Sdk and tools
+    minSdkVersion = 19
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+
+    // App dependencies
+    supportLibraryVersion = '26.1.0'
+    constraintLayoutVersion = '1.0.2'
+
+    //Algolia Version
+    algoliaVersion = '1.4.0'
+
+    //Font Version
+    calligraphyVersion = '2.2.0'
+
+    //parceler
+    parcelerVersion = '1.1.6'
+
+    //Event bus
+    eventBusVersion='3.0.0'
+
+    //icon
+    iconVersion='2.2.2'
+    //Firebase
+    firebaseVersion='10.2.1'
+
+    //lombok
+    lombokVersion ='1.16.8'
+
+    //Image Loader
+    glideVersion='3.7.0'
+
+    //parser
+    gsonVersion = '2.8.0'
+
+    //dependency injection
+    dagger2Version = '2.8'
+
+    //reactive
+    rxjava2Version = '2.0.6'
+    rxandroidVersion = '2.0.1'
+
+    //code generator for view
+    butterKnifeVersion = '8.6.0'
+
+    //swipe view
+    placeholderviewVersion = '0.6.1'
+    //logger
+    timberVersion = '4.5.1'
+
+    //Test dependencies
+    junitVersion = '4.12'
+    espressoVersion = '3.0.1'
+    mockitoVersion = '2.7.1'
+
+    okHttpVersion = '3.6.0'
+    retrofit2Version = '2.2.0'
+
 }
