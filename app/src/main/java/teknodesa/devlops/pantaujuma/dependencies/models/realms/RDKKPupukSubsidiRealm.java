@@ -3,6 +3,8 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan.PupukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.PetugasRealm;
 
 public class RDKKPupukSubsidiRealm extends RealmObject {

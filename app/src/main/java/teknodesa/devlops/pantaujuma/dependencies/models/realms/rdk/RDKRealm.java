@@ -4,7 +4,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.PetugasRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PoktanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PoktanRealm;
 
 public class RDKRealm extends RealmObject {
     @PrimaryKey

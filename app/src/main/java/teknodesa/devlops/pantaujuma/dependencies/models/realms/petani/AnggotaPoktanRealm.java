@@ -1,7 +1,9 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms;
+package teknodesa.devlops.pantaujuma.dependencies.models.realms.petani;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PoktanRealm;
 
 public class AnggotaPoktanRealm extends RealmObject {
     @PrimaryKey
