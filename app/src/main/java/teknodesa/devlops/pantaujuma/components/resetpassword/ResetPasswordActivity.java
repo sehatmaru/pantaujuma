@@ -16,7 +16,7 @@ import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
 
-public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordContract.View{
+public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordContract.View {
 
     ResetFirebaseController resetFirebaseController;
 
@@ -27,10 +27,10 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
     Button btnReset;
 
     @OnClick(R.id.btn_reset_password)
-    void resetClicked(){
-        if(TextUtils.isEmpty(email.getText().toString())){
+    void resetClicked() {
+        if (TextUtils.isEmpty(email.getText().toString())) {
             Toast.makeText(this, getString(R.string.error_email), Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             progressdialog.setMessage(getString(R.string.judul_pd));
             progressdialog.show();
             progressdialog.setCancelable(false);
@@ -39,15 +39,19 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         }
 
     }
+
     @BindView(R.id.btn_back)
     Button btnBack;
+
     @OnClick(R.id.btn_back)
-    void backClicked(){
+    void backClicked() {
         finish();
     }
+
     public static Intent createIntent(Context context) {
         return new Intent(context, ResetPasswordActivity.class);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

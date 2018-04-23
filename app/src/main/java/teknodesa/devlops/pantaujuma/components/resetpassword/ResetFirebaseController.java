@@ -9,20 +9,21 @@ import android.content.Context;
 public class ResetFirebaseController implements ResetPasswordContract.Controller {
 
     private ResetPasswordContract.View mView;
-    ResetPasswordContract.Repository resetRepository;
+    ResetPasswordContract.Repository mRepository;
 
 
     public ResetFirebaseController(ResetPasswordContract.View mView) {
         this.mView = mView;
-        resetRepository = new ResetPasswordRepository(this);
+        mRepository = new ResetPasswordRepository(this);
     }
+
     @Override
     public void resetPassword(Context context, String email) {
-        resetRepository.resetPassword(context,email);
+        mRepository.resetPassword(context, email);
     }
 
     @Override
     public void resetResult(boolean result, String message) {
-        mView.resetResult(result,message);
+        mView.resetResult(result, message);
     }
 }

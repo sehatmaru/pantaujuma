@@ -19,6 +19,8 @@ import onanteam.devlops.onan.di.models.RegisterModel;
 import onanteam.devlops.onan.di.models.firebase.Saldo;
 import onanteam.devlops.onan.di.models.firebase.user.User;
 import onanteam.devlops.onan.service.RegisterService;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.firebase.RegisterModel;
 
 /**
  * Created by Marthin on 2/10/2018.
@@ -83,9 +85,6 @@ public class RegisterController implements RegisterContract.Controller {
                     }
                 });
     }
-
-
-
 
     @Override
     public void registerSuccess(String message) {

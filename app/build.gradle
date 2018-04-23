@@ -86,8 +86,9 @@ dependencies {
     //implementation "com.google.firebase:firebase-database:$rootProject.firebaseVersion"
     //implementation "com.google.firebase:firebase-crash:$rootProject.firebaseVersion"
     //implementation "com.google.firebase:firebase-storage:$rootProject.firebaseVersion"
+
     //for firebase authentication
-    //implementation "com.google.firebase:firebase-auth:$rootProject.firebaseVersion"
+    implementation "com.google.firebase:firebase-auth:$rootProject.firebaseVersion"
 
     //Event bus
     implementation "org.greenrobot:eventbus:$rootProject.eventBusVersion"
@@ -120,4 +121,4 @@ dependencies {
 apply plugin: 'realm-android' //this is for realm
 
 //this is for firebase
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

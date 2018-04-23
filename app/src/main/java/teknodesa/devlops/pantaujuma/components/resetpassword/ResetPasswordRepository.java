@@ -21,11 +21,11 @@ public class ResetPasswordRepository implements ResetPasswordContract.Repository
     @Override
     public void resetPassword(Context context, String email) {
         mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener((Activity)context, task -> {
+                .addOnCompleteListener((Activity) context, task -> {
                     if (task.isSuccessful()) {
-                        resetController.resetResult(true,"Silahkan Cek Email untuk reset Password");
+                        resetController.resetResult(true, "Silahkan Cek Email untuk reset Password");
                     } else {
-                        resetController.resetResult(false,task.getException().getMessage().toString());
+                        resetController.resetResult(false, task.getException().getMessage().toString());
                     }
                 });
     }

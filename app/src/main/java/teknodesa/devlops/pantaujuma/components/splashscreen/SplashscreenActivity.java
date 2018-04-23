@@ -13,6 +13,7 @@ import teknodesa.devlops.pantaujuma.MainActivity;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
 
 
 public class SplashscreenActivity extends BaseActivity implements SplashscreenContract.View{

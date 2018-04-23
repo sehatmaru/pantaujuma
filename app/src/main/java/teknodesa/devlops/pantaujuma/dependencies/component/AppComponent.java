@@ -4,6 +4,11 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import teknodesa.devlops.pantaujuma.MainApplication;
+import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
+import teknodesa.devlops.pantaujuma.components.signin.LoginController;
+import teknodesa.devlops.pantaujuma.components.signup.RegisterActivity;
+import teknodesa.devlops.pantaujuma.components.signup.RegisterController;
+import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenActivity;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.dependencies.modules.AppModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
@@ -15,4 +20,11 @@ public interface AppComponent {
 
     //Controllers
     void inject(SplashscreenController controller);
+    void inject(RegisterController controller);
+    void inject(LoginController controller);
+
+    //Activity
+    void inject(SplashscreenActivity activity);
+    void inject(LoginActivity activity);
+    void inject(RegisterActivity activity);
 }
