@@ -3,4 +3,22 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!--Login  -->
+    <string name="namaLengkap">Nama Lengkap</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_text">Login</string>
+    <string name="signup_text">Sign Up</string>
+    <string name="title_forgot_psw">Lupa Password?</string>
+    <string name="error_email">Email tidak boleh kosong</string>
+    <string name="error_not_verified">Email belum diverifikasi</string>
+    <string name="change_password">Ubah Password</string>
+    <string name="password_min">Password minimal 6 karakter</string>
+    <string name="password_error_retype">Password dan konfirmasi password tidak sesuai</string>
+    <string name="password_success_change">Password Berhasil diubah</string>
+    <!--Finish String Login-->
+
+    <string name="some_error">Some Error Occurred!</string>
+    <string name="network_error">No Internet Connection!</string>
 </resources>

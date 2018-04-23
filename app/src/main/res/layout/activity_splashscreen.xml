@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgSplash"
+    tools:context="teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenActivity">
+
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/imgicon"
+        android:layout_below="@+id/imgtext"
+        android:src="@drawable/onan"/>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/imgtext"
+        android:src="@drawable/logosementara"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="#f7f7f7"
+        android:lineSpacingExtra="-5.3sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        tools:text="Loading.."/>
+
+
+
+</RelativeLayout>

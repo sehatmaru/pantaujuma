@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenActivity;
 import teknodesa.devlops.pantaujuma.contracts.MVPView;
 import teknodesa.devlops.pantaujuma.utils.CommonUtils;
 import teknodesa.devlops.pantaujuma.utils.NetworkUtils;

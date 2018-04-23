@@ -6,7 +6,8 @@ package teknodesa.devlops.pantaujuma.contracts;
  * and open the template in the editor.
  */
 
-import io.realm.RealmList;
+
+import io.realm.RealmResults;
 
 /**
  *
@@ -24,10 +25,10 @@ public class CRUDSelectContract {
         void updateItem(int idItem, U item);
         void deleteItem(int idItem);
 
-        RealmList<U> getAllItem();
-        U getSingleItemById(int idItem);
+        RealmResults<U> getAllItem();
+        RealmResults getSingleItemById(int idItem);
 
-        void responseCRUD(boolean status); //dipanggil setelah data sudah diterima dari  Repository
+        void responseCRUD(boolean status, String type); //dipanggil setelah data sudah diterima dari  Repository
     }
 
     public interface Repository<U> {
@@ -35,7 +36,7 @@ public class CRUDSelectContract {
         void updateItem(int idItem, U item);
         void deleteItem(int idItem);
 
-        RealmList<U> getAllItem();
-        U getSingleItemById(int idItem);
+        RealmResults<U> getAllItem();
+        RealmResults getSingleItemById(int idItem);
     }
 }

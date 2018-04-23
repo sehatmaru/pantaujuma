@@ -18,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -88,8 +92,9 @@ dependencies {
     //Event bus
     implementation "org.greenrobot:eventbus:$rootProject.eventBusVersion"
     //Lombok
-    implementation "org.projectlombok:lombok:$rootProject.lombokVersion"
-    annotationProcessor "org.projectlombok:lombok:1.16.20"
+    compileOnly 'org.projectlombok:lombok:1.16.20'
+    annotationProcessor 'org.projectlombok:lombok:1.16.20'
+
     // swipe view
     implementation "com.mindorks:placeholderview:$rootProject.placeholderviewVersion"
 
