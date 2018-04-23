@@ -1,10 +1,8 @@
 package teknodesa.devlops.pantaujuma.components.signin;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -15,8 +13,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.components.resetpassword.ResetPasswordActivity;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View{
     @Inject
@@ -66,7 +66,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ((App) getApplication())
+        ((MainApplication) getApplication())
                 .getComponent()
                 .inject(this);
         ButterKnife.bind(this);

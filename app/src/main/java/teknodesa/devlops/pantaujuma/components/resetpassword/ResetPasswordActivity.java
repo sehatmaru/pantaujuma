@@ -13,8 +13,8 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import onanteam.devlops.onan.R;
-import onanteam.devlops.onan.ui.signin.LoginActivity;
+import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
 
 public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordContract.View{
 

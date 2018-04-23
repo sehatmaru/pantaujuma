@@ -4,6 +4,10 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <!--Progress dialog-->
+    <string name="judul_pd">Silahkan Menunggu....</string>
+    <string name="pd_judul_registrasi">Registrasi....</string>
+
     <!--Login  -->
     <string name="namaLengkap">Nama Lengkap</string>
     <string name="email">Email</string>
@@ -18,6 +22,22 @@
     <string name="password_error_retype">Password dan konfirmasi password tidak sesuai</string>
     <string name="password_success_change">Password Berhasil diubah</string>
     <!--Finish String Login-->
+
+    <!--Registrasi-->
+    <string name="error_nama_kosong">"Nama Tidak Boleh Kosong"</string>
+    <string name="re_password">Ketik Ulang Password</string>
+    <string name="error_email_kosong">"Email Tidak Boleh Kosong"</string>
+    <string name="error_password_kosong">Password Tidak boleh Kosong</string>
+    <string name="error_password_tidak_sesuai">Password dan Re type Password tidak cocok</string>
+    <string name="btn_back"> Kembali</string>
+    <string name="error_mail">Email sudah digunakan </string>
+    <string name="success_registrasi">Silahkan cek email untuk melakukan verifikasi akun</string>
+    <string name="title_activity_register">RegisterActivity</string>
+
+    <!--Reset Password-->
+    <string name="title_activity_reset_password">Reset Password</string>
+    <string name="forgot_password_msg">Kami membutuhkan email yang anda gunakan ketika mendaftar untuk melakukan reset password</string>
+    <string name="btn_reset_password">Reset Password</string>
 
     <string name="some_error">Some Error Occurred!</string>
     <string name="network_error">No Internet Connection!</string>

@@ -40,4 +40,8 @@ public class MainApplication extends Application {
                 .build();
         Realm.setDefaultConfiguration(realmConfig);
     }
+
+    public AppComponent getComponent() {
+        return mComponent;
+    }
 }
