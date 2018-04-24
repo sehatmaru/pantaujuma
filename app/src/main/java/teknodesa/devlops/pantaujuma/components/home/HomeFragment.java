@@ -1,0 +1,7 @@
+package teknodesa.devlops.pantaujuma.components.home;
+
+import android.support.v4.app.Fragment;
+
+public class HomeFragment extends Fragment {
+	
+}

@@ -17,7 +17,8 @@ public class MainApplication extends Application {
     private AppComponent mComponent;
     private final static int SCHEMA_VERSION = 1;
 
-    @Override public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
         initRealmConfiguration();
         initIconConfiguration();
@@ -26,12 +27,13 @@ public class MainApplication extends Application {
                 .build();
     }
 
-    private void initIconConfiguration(){
+    private void initIconConfiguration() {
         Iconify
                 .with(new FontAwesomeModule())
                 .with(new TypiconsModule())
                 .with(new IoniconsModule());
     }
+
     private void initRealmConfiguration() {
         Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
