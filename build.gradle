@@ -59,11 +59,12 @@ ext{
 
     //icon
     iconVersion='2.2.2'
+
     //Firebase
     firebaseVersion='10.2.1'
 
     //lombok
-    lombokVersion ='1.16.8'
+    lombokVersion ='1.16.20'
 
     //Image Loader
     glideVersion='3.7.0'
