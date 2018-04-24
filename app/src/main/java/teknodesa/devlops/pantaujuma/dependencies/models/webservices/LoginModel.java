@@ -1,4 +1,4 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.firebase;
+package teknodesa.devlops.pantaujuma.dependencies.models.webservices;
 
 /**
  * Created by Marthin on 2/23/2018.

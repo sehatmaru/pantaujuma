@@ -10,9 +10,9 @@ import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
-import onanteam.devlops.onan.di.component.AppComponent;
-import onanteam.devlops.onan.di.models.LoginModel;
-import onanteam.devlops.onan.service.LoginService;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
 
 
 /**
@@ -47,9 +47,6 @@ public class LoginController implements LoginContract.Controller {
         views = view;
         this.mContext =mContext;
     }
-
-
-
 
     @Override
     public void loginUser(LoginModel loginModel) {

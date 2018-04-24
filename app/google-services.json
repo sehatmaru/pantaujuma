@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "377337103216",
+    "firebase_url": "https://pantaujuma-36877.firebaseio.com",
+    "project_id": "pantaujuma-36877",
+    "storage_bucket": "pantaujuma-36877.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377337103216:android:6ecc99eec9c7761f",
+        "android_client_info": {
+          "package_name": "teknodesa.devlops.pantaujuma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377337103216-1an4cpt3m001aluc924rthrd3dogk5nn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsQ0xDubqEGOEiHv01rOncdXXs1NzNFcg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,11 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp;
 
+import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.annotations.LinkingObjects;
 import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.RiwayatLahanRealm;
 
-public class DetailRKTPRealm {
+public class DetailRKTPRealm extends RealmObject{
     @PrimaryKey
     private int idDetailRKTP;
 

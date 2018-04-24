@@ -21,6 +21,7 @@
     <string name="password_min">Password minimal 6 karakter</string>
     <string name="password_error_retype">Password dan konfirmasi password tidak sesuai</string>
     <string name="password_success_change">Password Berhasil diubah</string>
+    <string name="pulsa_phonenumber">Phone Number</string>
     <!--Finish String Login-->
 
     <!--Registrasi-->

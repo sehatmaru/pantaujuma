@@ -26,12 +26,9 @@ import teknodesa.devlops.pantaujuma.utils.NetworkUtils;
 public class BaseActivity extends AppCompatActivity implements MVPView {
     private ProgressDialog mProgressDialog;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -55,6 +52,7 @@ public class BaseActivity extends AppCompatActivity implements MVPView {
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();
     }
+
     @Override
     public void openActivityOnTokenExpire() {
         startActivity(SplashscreenActivity.createIntent(this));

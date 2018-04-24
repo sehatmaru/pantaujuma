@@ -13,13 +13,13 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import teknodesa.devlops.pantaujuma.MainActivity;
-import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.MainActivity;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.components.resetpassword.ResetPasswordActivity;
 import teknodesa.devlops.pantaujuma.components.signup.RegisterActivity;
-import teknodesa.devlops.pantaujuma.dependencies.models.firebase.LoginModel;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View{
     @Inject

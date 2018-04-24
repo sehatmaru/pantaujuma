@@ -1,6 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.signup;
 
-import onanteam.devlops.onan.di.models.RegisterModel;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.RegisterModel;
 
 
 /**
@@ -23,5 +23,4 @@ public class RegisterContract {
     public interface Repository {
         void registerUser(RegisterModel registerModel);
     }
-
 }

@@ -82,7 +82,7 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
 
     //this is for firebase realtime database
-    //implementation "com.google.firebase:firebase-core:$rootProject.firebaseVersion"
+    implementation "com.google.firebase:firebase-core:$rootProject.firebaseVersion"
     //implementation "com.google.firebase:firebase-database:$rootProject.firebaseVersion"
     //implementation "com.google.firebase:firebase-crash:$rootProject.firebaseVersion"
     //implementation "com.google.firebase:firebase-storage:$rootProject.firebaseVersion"
@@ -92,9 +92,10 @@ dependencies {
 
     //Event bus
     implementation "org.greenrobot:eventbus:$rootProject.eventBusVersion"
+
     //Lombok
-    compileOnly 'org.projectlombok:lombok:1.16.20'
-    annotationProcessor 'org.projectlombok:lombok:1.16.20'
+    compileOnly "org.projectlombok:lombok:$rootProject.lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$rootProject.lombokVersion"
 
     // swipe view
     implementation "com.mindorks:placeholderview:$rootProject.placeholderviewVersion"

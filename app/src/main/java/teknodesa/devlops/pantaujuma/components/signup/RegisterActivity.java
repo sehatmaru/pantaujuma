@@ -18,9 +18,9 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
-import teknodesa.devlops.pantaujuma.dependencies.models.firebase.RegisterModel;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.RegisterModel;
 
-public class RegisterActivity extends BaseActivity implements RegisterContract.View {
+public class RegisterActivity extends BaseActivity implements RegisterContract.View{
     @Inject
     RegisterController mUserController;
 
@@ -28,6 +28,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     LinearLayout linearLayout;
     @BindView(R.id.retNamaLengkap)
     TextInputEditText retNamaLengkap;
+    @BindView(R.id.retPhoneNumber)
+    TextInputEditText retPhoneNumber;
+
     @BindView(R.id.retEmail)
     TextInputEditText retEmail;
     @BindView(R.id.retPassword)
@@ -36,24 +39,25 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     TextInputEditText reTypePassword;
     @BindView(R.id.btnSignup)
     Button btnSignup;
-
     @OnClick(R.id.btnSignup)
-    void registerClicked() {
-        if (TextUtils.isEmpty(retEmail.getText().toString())) {
+    void registerClicked(){
+        if(TextUtils.isEmpty(retEmail.getText().toString())){
             retEmail.setError(getString(R.string.error_email_kosong));
-        } else if (TextUtils.isEmpty(retPassword.getText().toString())) {
+        }else if(TextUtils.isEmpty(retPassword.getText().toString())){
             retPassword.setError(getString(R.string.error_password_kosong));
-        } else if (TextUtils.isEmpty(retNamaLengkap.getText().toString())) {
+        }else if(TextUtils.isEmpty(retPhoneNumber.getText().toString())){
+            retPhoneNumber.setError("Phone Number tidak boleh Kosong");
+        }else if(TextUtils.isEmpty(retNamaLengkap.getText().toString())){
             retNamaLengkap.setError(getString(R.string.error_nama_kosong));
-        } else if (retPassword.getText().toString().compareTo(reTypePassword.getText().toString()) != 0) {
+        }else if(retPassword.getText().toString().compareTo(reTypePassword.getText().toString())!= 0){
             reTypePassword.setError(getString(R.string.error_password_tidak_sesuai));
-        } else {
-            if (isNetworkConnected()) {
+        }else{
+            if(isNetworkConnected()){
                 showLoading();
-                RegisterModel reg = new RegisterModel(retNamaLengkap.getText().toString(), retEmail.getText().toString(), retPassword.getText().toString());
-                mUserController.setView(this, mContext);
+                RegisterModel reg =new RegisterModel(retNamaLengkap.getText().toString(),retEmail.getText().toString(),retPassword.getText().toString(),retPhoneNumber.getText().toString());
+                mUserController.setView(this,mContext);
                 mUserController.registerUser(reg);
-            } else {
+            }else{
                 onError("No Internet Connection");
             }
         }
@@ -61,19 +65,16 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @BindView(R.id.btn_back)
     Button btnBack;
-
     @OnClick(R.id.btn_back)
-    void backClick() {
+    void backClick(){
         finish();
         overridePendingTransition(R.transition.slide_bot, R.transition.transition_do_nothing);
     }
 
     Context mContext;
-
     public static Intent createIntent(Context context) {
         return new Intent(context, RegisterActivity.class);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         ButterKnife.bind(this);
         mContext = this;
     }
+
 
 
     @Override

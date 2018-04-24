@@ -1,4 +1,4 @@
-package teknodesa.devlops.pantaujuma;
+package teknodesa.devlops.pantaujuma.components;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import teknodesa.devlops.pantaujuma.R;
 
 public class MainActivity extends AppCompatActivity {
 

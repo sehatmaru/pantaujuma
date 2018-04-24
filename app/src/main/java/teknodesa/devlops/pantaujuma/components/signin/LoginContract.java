@@ -1,8 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.signin;
 
-import android.content.Context;
-
-import onanteam.devlops.onan.di.models.LoginModel;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
 
 /**
  * Created by Marthin on 2/11/2018.

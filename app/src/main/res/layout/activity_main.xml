@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="teknodesa.devlops.pantaujuma.MainActivity">
+    tools:context="teknodesa.devlops.pantaujuma.components.MainActivity">
 
     <FrameLayout
         android:id="@+id/content"

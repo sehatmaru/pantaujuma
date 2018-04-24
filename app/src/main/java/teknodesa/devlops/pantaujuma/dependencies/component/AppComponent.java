@@ -12,11 +12,18 @@ import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenActivity
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.dependencies.modules.AppModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
+import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.RegisterService;
 
 @Singleton
-@Component(modules = {AppModule.class, RealmModule.class})
+@Component(modules = {AppModule.class, RealmModule.class, WebServiceModule.class})
 public interface AppComponent {
     void inject(MainApplication app);
+
+    //Service
+    void inject(LoginService service);
+    void inject(RegisterService service);
 
     //Controllers
     void inject(SplashscreenController controller);
