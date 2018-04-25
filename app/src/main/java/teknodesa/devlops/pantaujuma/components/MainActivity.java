@@ -43,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_home);
                     replaceFragment(homeFragment);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_juma:
+                    mTextMessage.setText(R.string.title_juma);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_post:
+                    mTextMessage.setText(R.string.title_post);
+                    return true;
+                case R.id.navigation_profil:
+                    mTextMessage.setText(R.string.title_profil);
                     return true;
             }
             return false;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame_container, fragment);
+        ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
