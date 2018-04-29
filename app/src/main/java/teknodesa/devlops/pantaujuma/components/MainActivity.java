@@ -20,8 +20,8 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.message)
-    TextView mTextMessage;
+    /*@BindView(R.id.message)
+    TextView mTextMessage;*/
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
@@ -40,17 +40,17 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     replaceFragment(homeFragment);
                     return true;
                 case R.id.navigation_juma:
-                    mTextMessage.setText(R.string.title_juma);
+                    //mTextMessage.setText(R.string.title_juma);
                     return true;
                 case R.id.navigation_post:
-                    mTextMessage.setText(R.string.title_post);
+                    //mTextMessage.setText(R.string.title_post);
                     return true;
                 case R.id.navigation_profil:
-                    mTextMessage.setText(R.string.title_profil);
+                    //mTextMessage.setText(R.string.title_profil);
                     return true;
             }
             return false;

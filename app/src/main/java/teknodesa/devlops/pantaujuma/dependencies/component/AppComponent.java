@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import teknodesa.devlops.pantaujuma.MainApplication;
+import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
 import teknodesa.devlops.pantaujuma.components.signup.RegisterActivity;
@@ -34,4 +35,7 @@ public interface AppComponent {
     void inject(SplashscreenActivity activity);
     void inject(LoginActivity activity);
     void inject(RegisterActivity activity);
+
+    //fragment
+    void inject(HomeFragment fragment);
 }
