@@ -25,7 +25,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="150dp" />
 
-
             <teknodesa.devlops.pantaujuma.utils.pageindicator.CirclePageIndicator
                 android:id="@+id/indicator"
                 android:theme="@style/Transparent"
@@ -34,6 +33,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view_pager"
                 android:padding="10dip"  />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_pager"
+                android:clipToPadding="false"
+                android:scrollbars="vertical" />
         </RelativeLayout>
 
     </LinearLayout>

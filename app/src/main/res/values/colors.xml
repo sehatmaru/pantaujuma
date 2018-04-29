@@ -39,4 +39,8 @@
     <color name="print_delivery">#f5f5f5</color>
     <color name="print_hint">#f1f1f1</color>
     <color name="print_bg_payment">#cbcbcb</color>
+
+    <!--HAPUS JIKA DIPERLUKAN:: UNTUK CARDVIEW-->
+    <color name="viewBg">#f1f5f8</color>
+    <color name="album_title">#4c4c4c</color>
 </resources>

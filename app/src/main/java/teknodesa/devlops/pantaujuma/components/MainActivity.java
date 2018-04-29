@@ -65,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        setupTabLayout();
+    }
+
+    private void setupTabLayout() {
+        homeFragment=new HomeFragment();
     }
 
     public void replaceFragment(Fragment fragment) {
