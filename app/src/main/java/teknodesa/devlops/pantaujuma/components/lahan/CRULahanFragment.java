@@ -1,4 +1,4 @@
-package teknodesa.devlops.pantaujuma.components.penduduk;
+package teknodesa.devlops.pantaujuma.components.lahan;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -18,11 +18,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 
-public class CRUPendudukFragment extends Fragment {
-    BiodataFragment biodataFragment;
+
+public class CRULahanFragment extends Fragment {
+    DetailLahanFragment detailLahanFragment;
     AlamatFragment alamatFragment;
-    ViewPagerAdapter adapter;
+    CRULahanFragment.ViewPagerAdapter adapter;
 
     @BindView(R.id.tabs)
     TabLayout tabs;
@@ -33,7 +35,7 @@ public class CRUPendudukFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_crupenduduk, container, false);
+        View v = inflater.inflate(R.layout.fragment_crulahan, container, false);
         ButterKnife.bind(this, v);
 
         setViewpager();
@@ -44,9 +46,9 @@ public class CRUPendudukFragment extends Fragment {
     }
 
     private void setupTabIcons() {
-        //Pager Biodata
+        //Pager Detail Lahan
         TextView tabPenduduk = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
-        tabPenduduk.setText("Biodata");
+        tabPenduduk.setText("Detail Lahan");
         tabPenduduk.setTextColor(getResources().getColor(R.color.black));
         tabs.getTabAt(0).setCustomView(tabPenduduk).setIcon(R.drawable.penduduk);
 
@@ -57,12 +59,12 @@ public class CRUPendudukFragment extends Fragment {
         tabs.getTabAt(1).setCustomView(tabAlamat).setIcon(R.drawable.alamat);
     }
     private void setViewpager() {
-        biodataFragment = new BiodataFragment();
+        detailLahanFragment = new DetailLahanFragment();
         alamatFragment = new AlamatFragment();
 
-        adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter = new CRULahanFragment.ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
-        adapter.addFragment(biodataFragment);
+        adapter.addFragment(detailLahanFragment);
         adapter.addFragment(alamatFragment);
 
         viewPager.setAdapter(adapter);

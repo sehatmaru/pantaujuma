@@ -55,6 +55,17 @@
     <string name="jabatan">Jabatan</string>
     <string name="periode">Periode</string>
 
+    <!--Lahan-->
+    <string name="tabDetailLahan">Detail Lahan</string>
+    <string name="namaLahan">Nama Lahan</string>
+    <string name="posisiLintang">Posisi Lintang</string>
+    <string name="posisiBujur">Posisi Bujur</string>
+    <string name="luas">Luas</string>
+    <string name="batasTimur">Batas Timur</string>
+    <string name="batasBarat">Batas Barat</string>
+    <string name="batasSelatan">Batas Selatan</string>
+    <string name="batasUtara">Batas Utara</string>
+
     <!--Target Petugas-->
     <string name="tahunKerja">Tahun Kerja</string>
     <string name="komoditas">Komoditas</string>
