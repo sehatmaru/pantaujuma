@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.AddPendudukFragment;
 
 public class MainActivity extends AppCompatActivity {
     /*@BindView(R.id.message)
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
 
     HomeFragment homeFragment;
+    AddPendudukFragment addPendudukFragment;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_juma:
                     //mTextMessage.setText(R.string.title_juma);
+                    replaceFragment(addPendudukFragment);
                     return true;
                 case R.id.navigation_post:
                     //mTextMessage.setText(R.string.title_post);
@@ -70,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupTabLayout() {
-        homeFragment=new HomeFragment();
+        homeFragment = new HomeFragment();
+        addPendudukFragment = new AddPendudukFragment ();
     }
 
     public void replaceFragment(Fragment fragment) {

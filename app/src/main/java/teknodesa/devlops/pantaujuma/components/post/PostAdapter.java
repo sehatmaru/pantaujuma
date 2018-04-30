@@ -1,4 +1,4 @@
-package teknodesa.devlops.pantaujuma.components;
+package teknodesa.devlops.pantaujuma.components.post;
 
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -15,18 +17,25 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
+import io.realm.RealmRecyclerViewAdapter;
+import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
 
-public class PostAdapter  extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
+public class PostAdapter  extends RealmRecyclerViewAdapter<PostRealm, PostAdapter.MyViewHolder> {
 
     private Context mContext;
     private RealmList<PostRealm> dataList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R)
-        public TextView title, count;
-        public ImageView thumbnail, overflow;
+        @BindView(R.id.title)
+        TextView title;
+        @BindView(R.id.count)
+        TextView count;
+        @BindView(R.id.thumbnail)
+        ImageView thumbnail;
+        @BindView(R.id.overflow)
+        ImageView overflow;
 
         public MyViewHolder(View view) {
             super(view);
@@ -35,28 +44,31 @@ public class PostAdapter  extends RecyclerView.Adapter<PostAdapter.MyViewHolder>
         }
     }
 
-
-    public PostAdapter(Context mContext, RealmList<PostRealm> dataList) {
-        this.mContext = mContext;
-        this.dataList = dataList;
+    public PostAdapter(RealmResults<PostRealm> dataList) {
+        super(dataList, true);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.album_card, parent, false);
+                .inflate(R.layout.card_post, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Album album = dataList.get(position);
-        holder.title.setText(album.getName());
-        holder.count.setText(album.getNumOfSongs() + " songs");
+        final PostRealm obj = getItem(position);
 
+        String strJudul = obj.getJudul();
+        String strCount = obj.getViewCount();
+        String strThumbnail = obj.getThumbnail();
+        //Log.d("HORAS", idPemain+" "+nmDepan+" "+nmBelakang);
+
+        holder.title.setText(" "+strJudul);
+        holder.count.setText(strCount+" view(s)");
         // loading album cover using Glide library
-        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(strThumbnail).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +85,7 @@ public class PostAdapter  extends RecyclerView.Adapter<PostAdapter.MyViewHolder>
         // inflate menu
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_album, popup.getMenu());
+        inflater.inflate(R.menu.menu_post, popup.getMenu());
         popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
         popup.show();
     }
@@ -90,10 +102,10 @@ public class PostAdapter  extends RecyclerView.Adapter<PostAdapter.MyViewHolder>
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_add_favourite:
-                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, mContext.getString(R.string.action_add_favourite), Toast.LENGTH_SHORT).show();
                     return true;
-                case R.id.action_play_next:
-                    Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
+                case R.id.action_read_next:
+                    Toast.makeText(mContext, mContext.getString(R.string.action_read_next), Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

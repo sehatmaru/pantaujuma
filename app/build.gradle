@@ -118,6 +118,9 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+
+    //realam-recycler
+    implementation "io.realm:android-adapters:$rootProject.realmRecyclerVersion"
 }
 
 apply plugin: 'realm-android' //this is for realm

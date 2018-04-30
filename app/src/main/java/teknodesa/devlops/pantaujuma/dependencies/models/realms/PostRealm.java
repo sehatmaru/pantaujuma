@@ -16,11 +16,12 @@ public class PostRealm extends RealmObject {
     private String like;
     private String dislike;
     private String komentar;
+    private String thumbnail;
 
     public PostRealm() {
     }
 
-    public PostRealm(int idPost, PenggunaRealm pengguna, String judul, String isi, String tanggal, String waktu, String tipePost, String viewCount, String like, String dislike, String komentar) {
+    public PostRealm(int idPost, PenggunaRealm pengguna, String judul, String isi, String tanggal, String waktu, String tipePost, String viewCount, String like, String dislike, String komentar, String thumbnail) {
         this.idPost = idPost;
         this.pengguna = pengguna;
         this.judul = judul;
@@ -32,6 +33,7 @@ public class PostRealm extends RealmObject {
         this.like = like;
         this.dislike = dislike;
         this.komentar = komentar;
+        this.thumbnail = thumbnail;
     }
 
     public int getIdPost() {
@@ -120,5 +122,13 @@ public class PostRealm extends RealmObject {
 
     public void setKomentar(String komentar) {
         this.komentar = komentar;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }
