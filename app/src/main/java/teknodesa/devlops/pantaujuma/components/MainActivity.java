@@ -18,10 +18,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
-import teknodesa.devlops.pantaujuma.components.penduduk.AddPendudukFragment;
-import teknodesa.devlops.pantaujuma.components.petani.AddPengurusPoktanFragment;
-import teknodesa.devlops.pantaujuma.components.petani.AddPetaniFragment;
-import teknodesa.devlops.pantaujuma.components.petani.AddPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
+import teknodesa.devlops.pantaujuma.components.petani.CRUPengurusPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
+import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
 
 public class MainActivity extends AppCompatActivity {
     /*@BindView(R.id.message)
@@ -30,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
 
     HomeFragment homeFragment;
-    AddPendudukFragment addPendudukFragment;
-    AddPoktanFragment addPoktanFragment;
-    AddPengurusPoktanFragment addPengurusPoktanFragment;
-    AddPetaniFragment addPetaniFragment;
+    CRUPendudukFragment cruPendudukFragment;
+    CRUPoktanFragment cruPoktanFragment;
+    CRUPengurusPoktanFragment cruPengurusPoktanFragment;
+    CRUPetaniFragment cruPetaniFragment;
+    CRUTargetPetugasFragment cruTargetPetugasFragment;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -53,19 +55,19 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_juma:
                     //mTextMessage.setText(R.string.title_juma);
-                    replaceFragment(addPendudukFragment);
+                    replaceFragment(cruTargetPetugasFragment);
                     return true;
                 case R.id.navigation_komoditas:
                     //mTextMessage.setText(R.string.title_post);
-                    replaceFragment(addPetaniFragment);
+                    replaceFragment(cruPetaniFragment);
                     return true;
                 case R.id.navigation_post:
                     //mTextMessage.setText(R.string.title_post);
-                    replaceFragment(addPoktanFragment);
+                    replaceFragment(cruPoktanFragment);
                     return true;
                 case R.id.navigation_profil:
                     //mTextMessage.setText(R.string.title_profil);
-                    replaceFragment(addPengurusPoktanFragment);
+                    replaceFragment(cruPengurusPoktanFragment);
                     return true;
             }
             return false;
@@ -87,7 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupTabLayout() {
         homeFragment = new HomeFragment();
-        addPendudukFragment = new AddPendudukFragment ();
+        cruPendudukFragment = new CRUPendudukFragment ();
+        cruPoktanFragment = new CRUPoktanFragment();
+        cruPengurusPoktanFragment = new CRUPengurusPoktanFragment();
+        cruPetaniFragment = new CRUPetaniFragment();
+        cruTargetPetugasFragment = new CRUTargetPetugasFragment();
     }
 
     public void replaceFragment(Fragment fragment) {

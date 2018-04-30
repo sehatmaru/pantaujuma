@@ -46,9 +46,23 @@
     <string name="tanggalDidirikan">Tanggal Didirikan</string>
     <string name="deskripsi">Deskripsi</string>
 
+    <!--Anggota Poktan-->
+    <string name="namaPoktan">Nama Poktan</string>
+    <string name="tanggalMasuk">Tanggal Masuk</string>
+    <string name="tanggalKeluar">Tanggal Keluar</string>
+
     <!--Pengurus Poktan-->
     <string name="jabatan">Jabatan</string>
     <string name="periode">Periode</string>
+
+    <!--Target Petugas-->
+    <string name="tahunKerja">Tahun Kerja</string>
+    <string name="komoditas">Komoditas</string>
+    <string name="luasTanam">Luas Tanam</string>
+    <string name="luasPanen">Luas Panen</string>
+    <string name="sasaranProduksi">Sasaran Produksi</string>
+    <string name="sasaranProduktifitas">Sasaran Produktifitas</string>
+    <string name="keterangan">Keterangan</string>
 
     <!--Login  -->
     <string name="namaLengkap">Nama Lengkap</string>

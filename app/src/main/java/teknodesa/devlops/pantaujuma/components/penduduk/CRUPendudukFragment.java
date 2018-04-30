@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 
-public class AddPendudukFragment extends Fragment {
+public class CRUPendudukFragment extends Fragment {
     BiodataFragment biodataFragment;
     AlamatFragment alamatFragment;
     ViewPagerAdapter adapter;
@@ -33,7 +33,7 @@ public class AddPendudukFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_addpenduduk, container, false);
+        View v = inflater.inflate(R.layout.fragment_crupenduduk, container, false);
         ButterKnife.bind(this, v);
 
         setViewpager();
