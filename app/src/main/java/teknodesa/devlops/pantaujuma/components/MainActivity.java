@@ -19,6 +19,9 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.AddPendudukFragment;
+import teknodesa.devlops.pantaujuma.components.petani.AddPengurusPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.petani.AddPetaniFragment;
+import teknodesa.devlops.pantaujuma.components.petani.AddPoktanFragment;
 
 public class MainActivity extends AppCompatActivity {
     /*@BindView(R.id.message)
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     HomeFragment homeFragment;
     AddPendudukFragment addPendudukFragment;
+    AddPoktanFragment addPoktanFragment;
+    AddPengurusPoktanFragment addPengurusPoktanFragment;
+    AddPetaniFragment addPetaniFragment;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -49,11 +55,17 @@ public class MainActivity extends AppCompatActivity {
                     //mTextMessage.setText(R.string.title_juma);
                     replaceFragment(addPendudukFragment);
                     return true;
+                case R.id.navigation_komoditas:
+                    //mTextMessage.setText(R.string.title_post);
+                    replaceFragment(addPetaniFragment);
+                    return true;
                 case R.id.navigation_post:
                     //mTextMessage.setText(R.string.title_post);
+                    replaceFragment(addPoktanFragment);
                     return true;
                 case R.id.navigation_profil:
                     //mTextMessage.setText(R.string.title_profil);
+                    replaceFragment(addPengurusPoktanFragment);
                     return true;
             }
             return false;
@@ -70,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         setupTabLayout();
+        replaceFragment(homeFragment);
     }
 
     private void setupTabLayout() {

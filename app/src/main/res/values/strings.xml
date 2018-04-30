@@ -41,6 +41,15 @@
     <string name="tabBiodata">Biodata</string>
     <string name="tabAlamat">Alamat</string>
 
+    <!--Poktan-->
+    <string name="nama">Nama</string>
+    <string name="tanggalDidirikan">Tanggal Didirikan</string>
+    <string name="deskripsi">Deskripsi</string>
+
+    <!--Pengurus Poktan-->
+    <string name="jabatan">Jabatan</string>
+    <string name="periode">Periode</string>
+
     <!--Login  -->
     <string name="namaLengkap">Nama Lengkap</string>
     <string name="password">Password</string>

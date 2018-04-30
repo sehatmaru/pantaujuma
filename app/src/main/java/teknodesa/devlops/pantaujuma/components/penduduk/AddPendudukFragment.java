@@ -5,10 +5,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import teknodesa.devlops.pantaujuma.R;
 public class AddPendudukFragment extends Fragment {
     BiodataFragment biodataFragment;
     AlamatFragment alamatFragment;
+    ViewPagerAdapter adapter;
 
     @BindView(R.id.tabs)
     TabLayout tabs;
@@ -34,18 +37,36 @@ public class AddPendudukFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         setViewpager();
+        setupTabIcons();
+        viewPager.setCurrentItem(1);
+        //viewPager.getCurrentItem();
         return v;
     }
 
+    private void setupTabIcons() {
+        //Pager Biodata
+        TextView tabPenduduk = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
+        tabPenduduk.setText("Biodata");
+        tabPenduduk.setTextColor(getResources().getColor(R.color.black));
+        tabs.getTabAt(0).setCustomView(tabPenduduk).setIcon(R.drawable.penduduk);
+
+        //Pager Alamat
+        TextView tabAlamat = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
+        tabAlamat.setText("Alamat");
+        tabAlamat.setTextColor(getResources().getColor(R.color.black));
+        tabs.getTabAt(1).setCustomView(tabAlamat).setIcon(R.drawable.alamat);
+    }
     private void setViewpager() {
         biodataFragment = new BiodataFragment();
-        alamatFragment=new AlamatFragment();
+        alamatFragment = new AlamatFragment();
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
         adapter.addFragment(biodataFragment);
         adapter.addFragment(alamatFragment);
+
         viewPager.setAdapter(adapter);
+
         tabs.setupWithViewPager(viewPager);
     }
 
@@ -68,5 +89,13 @@ public class AddPendudukFragment extends Fragment {
         public void addFragment(Fragment fragment) {
             mFragmentList.add(fragment);
         }
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.viewPager, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
     }
 }

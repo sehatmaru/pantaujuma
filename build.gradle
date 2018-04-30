@@ -95,4 +95,6 @@ ext{
     okHttpVersion = '3.6.0'
     retrofit2Version = '2.2.0'
 
+    //realmrecycler
+    realmRecyclerVersion = '2.1.1'
 }
