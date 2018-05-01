@@ -14,7 +14,7 @@ public class CRUKegiatanPenyimpananFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_kegiatanpenyimpanan, container, false);
+        View v = inflater.inflate(R.layout.fragment_crukegiatanpenyimpanan, container, false);
         ButterKnife.bind(this, v);
 
         return v;

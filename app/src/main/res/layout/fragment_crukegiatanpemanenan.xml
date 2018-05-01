@@ -23,7 +23,7 @@
                 android:layout_weight="0.9">
 
                 <EditText
-                    android:id="@+id/input_nik"
+                    android:id="@+id/input_komoditas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
@@ -93,28 +93,41 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_jumlah"
+            android:id="@+id/input_layout_cara"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/input_jumlah"
+                android:id="@+id/input_cara"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/jumlah"
+                android:hint="@string/cara"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_sumber"
+            android:id="@+id/input_layout_luas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/input_sumber"
+                android:id="@+id/input_luas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/sumber"
+                android:hint="@string/luas"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_hasil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_hasil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hasil"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>

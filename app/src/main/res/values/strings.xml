@@ -75,6 +75,17 @@
     <string name="sasaranProduktifitas">Sasaran Produktifitas</string>
     <string name="keterangan">Keterangan</string>
 
+    <!--CRU Kegiatan-->
+    <string name="tanggalMulai">Tanggal Mulai</string>
+    <string name="tanggalAkhir">Tanggal Berakhir</string>
+    <string name="masaKegiatan">Masa Kegiatan</string>
+    <string name="jumlah">Jumlah</string>
+    <string name="sumber">Sumber</string>
+    <string name="cara">Cara</string>
+    <string name="hasil">Hasil</string>
+    <string name="pupuk">Pupuk</string>
+    <string name="jumlahPupuk">Jumlah Pupuk</string>
+
     <!--Login  -->
     <string name="namaLengkap">Nama Lengkap</string>
     <string name="password">Password</string>
