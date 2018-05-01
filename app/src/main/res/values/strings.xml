@@ -12,6 +12,40 @@
     <string name="judul_pd">Silahkan Menunggu....</string>
     <string name="pd_judul_registrasi">Registrasi....</string>
 
+    <!--CRU Action-->
+    <string name="simpan">Simpan Data</string>
+    <string name="update">Update Data</string>
+
+    <!--RDKK-->
+    <string name="namaPetani">Nama Petani</string>
+    <string name="butuhJanuari">Kebutuhan Bulan Januari</string>
+    <string name="butuhFebruari">Kebutuhan Bulan Februari</string>
+    <string name="butuhMaret">Kebutuhan Bulan Maret</string>
+    <string name="butuhApril">Kebutuhan Bulan April</string>
+    <string name="butuhMei">Kebutuhan Bulan Mei</string>
+    <string name="butuhJuni">Kebutuhan Bulan Juni</string>
+    <string name="butuhJuli">Kebutuhan Bulan Juli</string>
+    <string name="butuhAgustus">Kebutuhan Bulan Agustus</string>
+    <string name="butuhSeptember">Kebutuhan Bulan September</string>
+    <string name="butuhOktober">Kebutuhan Bulan Oktober</string>
+    <string name="butuhNovember">Kebutuhan Bulan November</string>
+    <string name="butuhDesember">Kebutuhan Bulan Desember</string>
+
+    <!--RKTP-->
+    <string name="tambahDetailRKTP">Tambah Detail RKTP</string>
+    <string name="tahun">Tahun</string>
+    <string name="tujuan">Tujuan</string>
+    <string name="masalah">Masalah</string>
+    <string name="sasaran">Sasaran</string>
+    <string name="materi">Materi</string>
+    <string name="metode">Metode</string>
+    <string name="volume">Volume</string>
+    <string name="lokasi">Lokasi</string>
+    <string name="waktu">Waktu</string>
+    <string name="sumberBiaya">Sumber Biaya</string>
+    <string name="penanggungJawab">Penanggung Jawab</string>
+    <string name="pelaksana">Pelaksana</string>
+
     <!--Add Penduduk-->
     <string name="nik">NIK</string>
     <string name="namaDepan">Nama Depan</string>
