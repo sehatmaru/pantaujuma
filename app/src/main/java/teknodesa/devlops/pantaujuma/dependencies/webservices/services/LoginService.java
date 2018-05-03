@@ -31,6 +31,7 @@ public class LoginService implements LoginContract.Repository {
     public LoginService(AppComponent appComponent) {
         appComponent.inject(this);
     }
+
     public LoginContract.Controller controller;
 
     public void instanceClass(LoginContract.Controller controller){

@@ -6,13 +6,25 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 
 public class HomeJumaFragment extends Fragment {
     FragmentActivity activity;
+
+    @BindView(R.id.btnPetani)
+    Button continueCheckOut;
+    @OnClick(R.id.btnPetani)
+    void clickCheckOut(){
+        startActivity(CRUActivity.createIntent(getContext(), "petani", "create", null));
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
