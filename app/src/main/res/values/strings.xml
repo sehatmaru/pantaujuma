@@ -3,7 +3,7 @@
 
     <!--BOTTOM MENU NAVIGATION-->
     <string name="title_home">Beranda</string>
-    <string name="title_juma">Juma</string>
+    <string name="title_juma">Petani</string>
     <string name="title_komoditas">Komoditas</string>
     <string name="title_post">Post</string>
     <string name="title_profil">Profil</string>
@@ -17,6 +17,8 @@
     <string name="update">Update Data</string>
 
     <!--RDKK-->
+    <string name="rdkk">RDKK</string>
+    <string name="petani">Petani</string>
     <string name="namaPetani">Nama Petani</string>
     <string name="butuhJanuari">Kebutuhan Bulan Januari</string>
     <string name="butuhFebruari">Kebutuhan Bulan Februari</string>
@@ -76,6 +78,7 @@
     <string name="tabAlamat">Alamat</string>
 
     <!--Poktan-->
+    <string name="poktan">Poktan</string>
     <string name="nama">Nama</string>
     <string name="tanggalDidirikan">Tanggal Didirikan</string>
     <string name="deskripsi">Deskripsi</string>

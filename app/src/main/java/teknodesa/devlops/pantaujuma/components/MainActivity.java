@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
+import teknodesa.devlops.pantaujuma.components.home.HomePetaniFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPengurusPoktanFragment;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     CRUTargetPetugasFragment cruTargetPetugasFragment;
 
     CRULahanFragment cruLahanFragment;
+    HomePetaniFragment homePetaniFragment;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_juma:
                     //mTextMessage.setText(R.string.title_juma);
-                    replaceFragment(cruTargetPetugasFragment);
+                    replaceFragment(homePetaniFragment);
                     return true;
                 case R.id.navigation_komoditas:
                     //mTextMessage.setText(R.string.title_post);
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         cruTargetPetugasFragment = new CRUTargetPetugasFragment();
 
         cruLahanFragment = new CRULahanFragment();
+        homePetaniFragment = new HomePetaniFragment();
     }
 
     public void replaceFragment(Fragment fragment) {
