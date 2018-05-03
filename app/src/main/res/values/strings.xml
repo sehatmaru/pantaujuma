@@ -3,10 +3,19 @@
 
     <!--BOTTOM MENU NAVIGATION-->
     <string name="title_home">Beranda</string>
-    <string name="title_juma">Petani</string>
+    <string name="title_juma">Juma</string>
     <string name="title_komoditas">Komoditas</string>
     <string name="title_post">Post</string>
     <string name="title_profil">Profil</string>
+
+    <!--HomePetani-->
+    <string name="rdklong">Rencana Definitif Kelompok</string>
+    <string name="rdkklong">Rencana Definitif Kebutuhan Kelompok</string>
+    <string name="rktplong">Rencana Kerja Tahunan Penyuluh Pertanian</string>
+    <string name="alsintan">Alsintan</string>
+    <string name="harga">Harga</string>
+    <string name="survei">Survei</string>
+    <string name="lahan">Lahan</string>
 
     <!--Progress dialog-->
     <string name="judul_pd">Silahkan Menunggu....</string>
@@ -15,6 +24,9 @@
     <!--CRU Action-->
     <string name="simpan">Simpan Data</string>
     <string name="update">Update Data</string>
+
+    <!--RDK-->
+    <string name="rdk">RDK</string>
 
     <!--RDKK-->
     <string name="rdkk">RDKK</string>
@@ -34,6 +46,7 @@
     <string name="butuhDesember">Kebutuhan Bulan Desember</string>
 
     <!--RKTP-->
+    <string name="rktp">RKTP</string>
     <string name="tambahDetailRKTP">Tambah Detail RKTP</string>
     <string name="tahun">Tahun</string>
     <string name="tujuan">Tujuan</string>

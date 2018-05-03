@@ -11,14 +11,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
-import teknodesa.devlops.pantaujuma.components.home.HomePetaniFragment;
+import teknodesa.devlops.pantaujuma.components.home.HomeJumaFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPengurusPoktanFragment;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     CRUTargetPetugasFragment cruTargetPetugasFragment;
 
     CRULahanFragment cruLahanFragment;
-    HomePetaniFragment homePetaniFragment;
+    HomeJumaFragment homePetaniFragment;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         cruTargetPetugasFragment = new CRUTargetPetugasFragment();
 
         cruLahanFragment = new CRULahanFragment();
-        homePetaniFragment = new HomePetaniFragment();
+        homePetaniFragment = new HomeJumaFragment();
     }
 
     public void replaceFragment(Fragment fragment) {

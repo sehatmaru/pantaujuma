@@ -22,16 +22,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/ActionBarTheme">
+
                 <ImageView
-                    android:src="@drawable/logobgyel"
                     android:layout_width="50dp"
-                    android:layout_height="50dp"/>
+                    android:layout_height="50dp"
+                    android:src="@drawable/logopantaujuma_nobg" />
 
                 <TextView
                     style="@style/toolbarTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Home" />
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/title_home" />
 
 
             </android.support.v7.widget.Toolbar>

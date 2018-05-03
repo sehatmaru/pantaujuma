@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 
-public class HomePetaniFragment extends Fragment {
+public class HomeJumaFragment extends Fragment {
     FragmentActivity activity;
 
     @Override
@@ -27,7 +27,7 @@ public class HomePetaniFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_homepetani, container, false);
+        View v = inflater.inflate(R.layout.fragment_homejuma, container, false);
         ButterKnife.bind(this, v);
 
         return v;
