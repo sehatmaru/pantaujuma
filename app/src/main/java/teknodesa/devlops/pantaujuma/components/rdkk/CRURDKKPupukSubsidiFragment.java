@@ -14,6 +14,7 @@ public class CRURDKKPupukSubsidiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View v = inflater.inflate(R.layout.fragment_crurdkkpupuksubsidi, container, false);
         ButterKnife.bind(this, v);
 
