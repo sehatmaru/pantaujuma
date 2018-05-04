@@ -63,6 +63,31 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/btnPenduduk"
+                        android:layout_width="@dimen/width_menu"
+                        android:layout_height="@dimen/height_menu"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/penduduk" />
+
+                    <TextView
+                        android:id="@+id/tvPenduduk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/penduduk"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
                         android:id="@+id/btnPetani"
                         android:layout_width="@dimen/width_menu"
                         android:layout_height="@dimen/height_menu"
@@ -95,7 +120,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="15dp"
-                        android:background="@drawable/penduduk" />
+                        android:background="@drawable/poktan" />
 
                     <TextView
                         android:id="@+id/tvPoktan"
@@ -190,6 +215,31 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnTarget"
+                        android:layout_width="@dimen/width_menu"
+                        android:layout_height="@dimen/height_menu"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/target" />
+
+                    <TextView
+                        android:id="@+id/tvTarget"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/targetPetugas"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

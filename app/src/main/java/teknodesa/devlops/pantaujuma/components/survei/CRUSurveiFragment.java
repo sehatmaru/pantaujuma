@@ -1,9 +1,8 @@
-package teknodesa.devlops.pantaujuma.components.penduduk;
+package teknodesa.devlops.pantaujuma.components.survei;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -18,15 +17,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 
-public class CRUPendudukFragment extends Fragment {
-    FragmentActivity activity;
 
-    BiodataFragment biodataFragment;
+public class CRUSurveiFragment extends Fragment {
+    DetailLahanFragment detailLahanFragment;
     AlamatFragment alamatFragment;
-    ViewPagerAdapter adapter;
+    CRUSurveiFragment.ViewPagerAdapter adapter;
 
     @BindView(R.id.tabs)
     TabLayout tabs;
@@ -34,19 +33,10 @@ public class CRUPendudukFragment extends Fragment {
     ViewPager viewPager;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity = getActivity();
-        ((MainApplication) getActivity().getApplication())
-                .getComponent()
-                .inject(this);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_crupenduduk, container, false);
+        View v = inflater.inflate(R.layout.fragment_crulahan, container, false);
         ButterKnife.bind(this, v);
 
         setViewpager();
@@ -57,9 +47,9 @@ public class CRUPendudukFragment extends Fragment {
     }
 
     private void setupTabIcons() {
-        //Pager Biodata
+        //Pager Detail Lahan
         TextView tabPenduduk = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
-        tabPenduduk.setText("Biodata");
+        tabPenduduk.setText("Detail Lahan");
         tabPenduduk.setTextColor(getResources().getColor(R.color.black));
         tabs.getTabAt(0).setCustomView(tabPenduduk).setIcon(R.drawable.penduduk);
 
@@ -70,12 +60,12 @@ public class CRUPendudukFragment extends Fragment {
         tabs.getTabAt(1).setCustomView(tabAlamat).setIcon(R.drawable.alamat);
     }
     private void setViewpager() {
-        biodataFragment = new BiodataFragment();
+        detailLahanFragment = new DetailLahanFragment();
         alamatFragment = new AlamatFragment();
 
-        adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter = new CRUSurveiFragment.ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
-        adapter.addFragment(biodataFragment);
+        adapter.addFragment(detailLahanFragment);
         adapter.addFragment(alamatFragment);
 
         viewPager.setAdapter(adapter);

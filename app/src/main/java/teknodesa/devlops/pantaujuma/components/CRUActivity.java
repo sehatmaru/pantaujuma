@@ -14,17 +14,55 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.alsintan.CRUAlsintanFragment;
+import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
+import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
+import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
+import teknodesa.devlops.pantaujuma.components.petani.CRUPengurusPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
+import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
+import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
+import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
+import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 
 public class CRUActivity extends AppCompatActivity {
     private String mJenisCRU;
     private String mAction;
     private Parcelable mData;
 
-    CRUPetaniFragment cruPetaniFragment = new CRUPetaniFragment();
+    @Inject
+    CRUPendudukFragment cruPendudukFragment;
+    @Inject
+    CRUPetaniFragment cruPetaniFragment;
+    @Inject
+    CRUPoktanFragment cruPoktanFragment;
+    @Inject
+    CRURDKFragment cruRDKFragment;
+    @Inject
+    CRURDKKPupukSubsidiFragment cruRDKKPupukSubsidiFragment;
+    @Inject
+    CRURKTPFragment cruRKTPFragment;
+    @Inject
+    CRUTargetPetugasFragment cruTargetPetugasFragment;
+    @Inject
+    CRULahanFragment cruLahanFragment;
+    @Inject
+    CRUKomoditasFragment cruKomoditasFragment;
+    @Inject
+    CRUAlsintanFragment cruAlsintanFragment;
+    @Inject
+    CRUHargaFragment cruHargaFragment;
+    @Inject
+    CRUSurveiFragment cruSurveiFragment;
 
     @BindView(R.id.content)
     FrameLayout content;
@@ -44,6 +82,7 @@ public class CRUActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_cru);
+
         ButterKnife.bind(this);
 
         /**
@@ -59,12 +98,20 @@ public class CRUActivity extends AppCompatActivity {
             this.mData = mData;
             Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
 
-            if (mJenisCRU.equals("petani")) {
-                replaceFragment(cruPetaniFragment);
-            }else{
-                replaceFragment(cruPetaniFragment);
+            switch (mJenisCRU){
+                case "penduduk": replaceFragment(cruPendudukFragment); break;
+                case "petani": replaceFragment(cruPetaniFragment); break;
+                case "poktan": replaceFragment(cruPoktanFragment); break;
+                case "rdk": replaceFragment(cruRDKFragment); break;
+                case "rdkk": replaceFragment(cruRDKKPupukSubsidiFragment); break;
+                case "rktp": replaceFragment(cruRKTPFragment); break;
+                case "target": replaceFragment(cruTargetPetugasFragment); break;
+                case "lahan": replaceFragment(cruLahanFragment); break;
+                case "komoditas": replaceFragment(cruKomoditasFragment); break;
+                case "alsintan": replaceFragment(cruAlsintanFragment); break;
+                case "harga": replaceFragment(cruHargaFragment); break;
+                case "survei": replaceFragment(cruSurveiFragment); break;
             }
-
         } else {
             /**
              * Apabila Bundle tidak ada, ambil dari Intent
@@ -72,7 +119,7 @@ public class CRUActivity extends AppCompatActivity {
             this.mJenisCRU = "-";
             this.mAction = "-";
             this.mData = null;
-            Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
         }
     }
 

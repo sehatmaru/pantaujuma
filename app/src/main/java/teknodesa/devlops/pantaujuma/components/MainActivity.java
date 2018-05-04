@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
@@ -31,14 +33,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
+    @Inject
     HomeFragment homeFragment;
-    CRUPendudukFragment cruPendudukFragment;
-    CRUPoktanFragment cruPoktanFragment;
-    CRUPengurusPoktanFragment cruPengurusPoktanFragment;
-    CRUPetaniFragment cruPetaniFragment;
-    CRUTargetPetugasFragment cruTargetPetugasFragment;
-
-    CRULahanFragment cruLahanFragment;
+    @Inject
     HomeJumaFragment homePetaniFragment;
 
     private boolean doubleBackToExitPressedOnce = false;
@@ -63,15 +60,15 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_komoditas:
                     //mTextMessage.setText(R.string.title_post);
-                    replaceFragment(cruLahanFragment);
+                    //replaceFragment(cruLahanFragment);
                     return true;
                 case R.id.navigation_post:
                     //mTextMessage.setText(R.string.title_post);
-                    replaceFragment(cruPoktanFragment);
+                    //replaceFragment(cruPoktanFragment);
                     return true;
                 case R.id.navigation_profil:
                     //mTextMessage.setText(R.string.title_profil);
-                    replaceFragment(cruPengurusPoktanFragment);
+                    //replaceFragment(cruPengurusPoktanFragment);
                     return true;
             }
             return false;
@@ -87,20 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        setupTabLayout();
-        replaceFragment(homeFragment);
     }
 
-    private void setupTabLayout() {
-        homeFragment = new HomeFragment();
-        cruPendudukFragment = new CRUPendudukFragment ();
-        cruPoktanFragment = new CRUPoktanFragment();
-        cruPengurusPoktanFragment = new CRUPengurusPoktanFragment();
-        cruPetaniFragment = new CRUPetaniFragment();
-        cruTargetPetugasFragment = new CRUTargetPetugasFragment();
-
-        cruLahanFragment = new CRULahanFragment();
-        homePetaniFragment = new HomeJumaFragment();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //replaceFragment(homeFragment);
     }
 
     public void replaceFragment(Fragment fragment) {

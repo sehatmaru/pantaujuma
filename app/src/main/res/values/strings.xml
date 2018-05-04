@@ -16,6 +16,8 @@
     <string name="harga">Harga</string>
     <string name="survei">Survei</string>
     <string name="lahan">Lahan</string>
+    <string name="penduduk">Penduduk</string>
+    <string name="targetPetugas">Target</string>
 
     <!--Progress dialog-->
     <string name="judul_pd">Silahkan Menunggu....</string>
