@@ -32,6 +32,9 @@
             android:name=".components.signin.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".components.ListDataActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".components.CRUActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

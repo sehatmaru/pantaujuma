@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.ListDataActivity;
 
 public class HomeJumaFragment extends Fragment {
     FragmentActivity activity;
@@ -22,7 +22,7 @@ public class HomeJumaFragment extends Fragment {
     Button continueCheckOut;
     @OnClick(R.id.btnPetani)
     void clickCheckOut(){
-        startActivity(CRUActivity.createIntent(getContext(), "petani", "create", null));
+        startActivity(ListDataActivity.createIntent(getContext(), "petani"));
     }
 
 
