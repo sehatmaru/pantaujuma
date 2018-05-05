@@ -35,11 +35,51 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
+            android:name=".components.CRUActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.penduduk.ListPendudukActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
             android:name=".components.petani.ListPetaniActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
-            android:name=".components.CRUActivity"
+            android:name=".components.rdk.ListRDKActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.rdkk.ListRDKKActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.rktp.ListRKTPActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.petugas.ListTargetActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.lahan.ListLahanActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.komoditas.ListKomoditasActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.alsintan.ListAlsintanActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.harga.ListHargaActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
+            android:name=".components.survei.ListSurveiActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity

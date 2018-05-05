@@ -80,6 +80,9 @@ public class CRUActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MainApplication) getApplication())
+                .getComponent()
+                .inject(this);
 
         setContentView(R.layout.activity_cru);
 

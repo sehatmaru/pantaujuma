@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.MainActivity;
 import teknodesa.devlops.pantaujuma.components.alsintan.CRUAlsintanFragment;
 import teknodesa.devlops.pantaujuma.components.alsintan.ListAlsintanActivity;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
@@ -61,7 +62,8 @@ public interface AppComponent {
     void inject(SplashscreenActivity activity);
     void inject(LoginActivity activity);
     void inject(RegisterActivity activity);
-
+    void inject(MainActivity activity);
+    void inject(CRUActivity activity);
     void inject(ListPendudukActivity activity);
     void inject(ListPetaniActivity activity);
     void inject(ListPoktanActivity activity);

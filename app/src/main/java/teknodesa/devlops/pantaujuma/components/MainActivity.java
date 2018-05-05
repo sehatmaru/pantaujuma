@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.home.HomeJumaFragment;
@@ -79,17 +80,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MainApplication) getApplication())
+                .getComponent()
+                .inject(this);
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //replaceFragment(homeFragment);
+        replaceFragment(homeFragment);
     }
 
     public void replaceFragment(Fragment fragment) {
