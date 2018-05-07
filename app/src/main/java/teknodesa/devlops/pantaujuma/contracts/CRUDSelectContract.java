@@ -15,7 +15,7 @@ import io.realm.RealmResults;
  */
 public class CRUDSelectContract {
 
-    public interface View {
+    public interface View<U> {
 
         void showNotification(String title, String header, String message); //dipanggil terjadi add, delete dan update
     }
@@ -26,7 +26,7 @@ public class CRUDSelectContract {
         void deleteItem(int idItem);
 
         RealmResults<U> getAllItem();
-        RealmResults getSingleItemById(int idItem);
+        RealmResults<U> getSingleItemById(int idItem);
 
         void responseCRUD(boolean status, String type); //dipanggil setelah data sudah diterima dari  Repository
     }
@@ -37,6 +37,6 @@ public class CRUDSelectContract {
         void deleteItem(int idItem);
 
         RealmResults<U> getAllItem();
-        RealmResults getSingleItemById(int idItem);
+        RealmResults<U> getSingleItemById(int idItem);
     }
 }

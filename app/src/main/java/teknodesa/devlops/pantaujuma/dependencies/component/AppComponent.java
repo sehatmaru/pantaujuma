@@ -21,6 +21,7 @@ import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petani.ListPetaniActivity;
+import teknodesa.devlops.pantaujuma.components.petani.ListPetaniRepository;
 import teknodesa.devlops.pantaujuma.components.petani.ListPoktanActivity;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.ListTargetActivity;
@@ -57,6 +58,9 @@ public interface AppComponent {
     void inject(SplashscreenController controller);
     void inject(RegisterController controller);
     void inject(LoginController controller);
+
+    //Repository
+    void inject(ListPetaniRepository repository);
 
     //Activity
     void inject(SplashscreenActivity activity);
