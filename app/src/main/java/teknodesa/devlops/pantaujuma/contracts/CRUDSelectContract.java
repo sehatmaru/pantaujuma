@@ -8,6 +8,7 @@ package teknodesa.devlops.pantaujuma.contracts;
 
 
 import io.realm.RealmResults;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
 /**
  *
@@ -26,7 +27,7 @@ public class CRUDSelectContract {
         void deleteItem(int idItem);
 
         RealmResults<U> getAllItem();
-        RealmResults<U> getSingleItemById(int idItem);
+        U getSingleItemById(int idItem);
 
         void responseCRUD(boolean status, String type); //dipanggil setelah data sudah diterima dari  Repository
     }
@@ -37,6 +38,6 @@ public class CRUDSelectContract {
         void deleteItem(int idItem);
 
         RealmResults<U> getAllItem();
-        RealmResults<U> getSingleItemById(int idItem);
+        PetaniRealm getSingleItemById(int idItem);
     }
 }

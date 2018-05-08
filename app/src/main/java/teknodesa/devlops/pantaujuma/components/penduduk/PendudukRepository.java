@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
 public class PendudukRepository implements PendudukContract.Repository<PendudukRealm> {
     @Inject
@@ -89,7 +90,7 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
     }
 
     @Override
-    public RealmResults getSingleItemById(int idItem) {
+    public PetaniRealm getSingleItemById(int idItem) {
         // Or alternatively do the same all at once (the "Fluent interface"):
         RealmResults<PendudukRealm> results = realm.where(PendudukRealm.class)
                 .equalTo("idPenduduk", idItem)

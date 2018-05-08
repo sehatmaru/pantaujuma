@@ -23,12 +23,38 @@ public class ListPetaniRepository implements CRUDSelectContract.Repository<Petan
 
     @Override
     public void addItem(PetaniRealm item) {
-
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                PetaniRealm newItem = realm.copyToRealm(item);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                // Transaction was a success.
+                mController.responseCRUD(true, "create");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                // Transaction failed and was automatically canceled.
+                mController.responseCRUD(false, "create");
+            }
+        });
     }
 
     @Override
     public void updateItem(int idItem, PetaniRealm item) {
-
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                PetaniRealm updatedItem = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findFirst();
+                updatedItem.setBiodata(item.getBiodata());
+                updatedItem.setFoto(item.getFoto());
+                updatedItem.setDeskripsi(item.getDeskripsi());
+                updatedItem.setStatus(item.getStatus());
+            }
+        });
     }
 
     @Override
@@ -64,14 +90,14 @@ public class ListPetaniRepository implements CRUDSelectContract.Repository<Petan
     }
 
     @Override
-    public RealmResults getSingleItemById(int idItem) {
+    public PetaniRealm getSingleItemById(int idItem) {
         realm.beginTransaction();
-        RealmResults<PetaniRealm> items = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findAll();
+        PetaniRealm item = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findFirst();
         realm.commitTransaction();
-        if (items.isEmpty()) {
+        if (item == null) {
             return null;
         } else {
-            return items;
+            return item;
         }
     }
 }

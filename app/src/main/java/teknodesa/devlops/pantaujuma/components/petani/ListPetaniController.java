@@ -29,7 +29,7 @@ public class ListPetaniController implements CRUDSelectContract.Controller<Petan
     }
 
     @Override
-    public RealmResults getSingleItemById(int idItem) {
+    public PetaniRealm getSingleItemById(int idItem) {
         return mRepository.getSingleItemById(idItem);
     }
 
