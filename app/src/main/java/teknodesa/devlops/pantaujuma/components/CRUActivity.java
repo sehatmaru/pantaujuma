@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -124,6 +125,8 @@ public class CRUActivity extends AppCompatActivity {
             this.mData = null;
             //Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
         }
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     public void replaceFragment(Fragment fragment) {

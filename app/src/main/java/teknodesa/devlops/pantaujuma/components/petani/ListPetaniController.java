@@ -6,7 +6,7 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniReal
 
 public class ListPetaniController implements CRUDSelectContract.Controller<PetaniRealm>{
     private CRUDSelectContract.View<PetaniRealm> mView;
-    private CRUDSelectContract.Repository mRepository;
+    private CRUDSelectContract.Repository<PetaniRealm> mRepository;
 
     @Override
     public void addItem(PetaniRealm item) {

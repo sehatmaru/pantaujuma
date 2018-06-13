@@ -6,7 +6,7 @@ import teknodesa.devlops.pantaujuma.utils.Pesan;
 
 public class PendudukController implements PendudukContract.Controller<PendudukRealm> {
     PendudukContract.View mView;
-    PendudukContract.Repository mRepository;
+    PendudukContract.Repository<PendudukRealm> mRepository;
 
     public PendudukController(PendudukContract.View mView){
         this.mView = mView;
@@ -34,7 +34,7 @@ public class PendudukController implements PendudukContract.Controller<PendudukR
     }
 
     @Override
-    public RealmResults getSingleItemById(int idItem) {
+    public PendudukRealm getSingleItemById(int idItem) {
         return mRepository.getSingleItemById(idItem);
     }
 

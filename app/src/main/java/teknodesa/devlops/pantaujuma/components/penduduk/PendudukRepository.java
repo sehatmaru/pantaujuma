@@ -90,12 +90,14 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
     }
 
     @Override
-    public PetaniRealm getSingleItemById(int idItem) {
-        // Or alternatively do the same all at once (the "Fluent interface"):
-        RealmResults<PendudukRealm> results = realm.where(PendudukRealm.class)
-                .equalTo("idPenduduk", idItem)
-                .findAll();
-
-        return results;
+    public PendudukRealm getSingleItemById(int idItem) {
+        realm.beginTransaction();
+        PendudukRealm item = realm.where(PendudukRealm.class).equalTo("idPenduduk", idItem).findFirst();
+        realm.commitTransaction();
+        if (item == null) {
+            return null;
+        } else {
+            return item;
+        }
     }
 }

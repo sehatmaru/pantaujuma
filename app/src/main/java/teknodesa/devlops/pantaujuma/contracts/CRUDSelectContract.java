@@ -38,6 +38,6 @@ public class CRUDSelectContract {
         void deleteItem(int idItem);
 
         RealmResults<U> getAllItem();
-        PetaniRealm getSingleItemById(int idItem);
+        U getSingleItemById(int idItem);
     }
 }
