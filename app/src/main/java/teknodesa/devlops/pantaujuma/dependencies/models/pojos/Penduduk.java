@@ -5,34 +5,78 @@ package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
  */
 
 public class Penduduk {
-    private String idPenduduk;
-    private String NIK;
-    private String foto;
-    private String namaDepan;
-    private String namaBelakang;
-    private String jenisKelamin;
-    private String tempatLahir;
-    private String tanggalLahir;
-    private String agama;
-    private String golonganDarah;
-    private String pekerjaan;
-    private String pendidikan;
-    private String alamat;
-    private String rt;
-    private String rw;
-    private String dusun;
-    private String desa;
-    private String kecamatan;
-    private String datiII;
-    private String provinsi;
-    private String noHP;
-    private String noTelp;
-    private String status;
+    private int idPenduduk;
+    private String NIK = "-";
+    private String foto = "-";
+    private String namaDepan = "-";
+    private String namaBelakang = "-";
+    private String jenisKelamin = "-";
+    private String tempatLahir = "-";
+    private String tanggalLahir = "-";
+    private String agama = "-";
+    private String golonganDarah = "-";
+    private String pekerjaan = "-";
+    private String pendidikan = "-";
+    private String alamat = "-";
+    private String rt = "-";
+    private String rw = "-";
+    private String dusun = "-";
+    private String desa = "-";
+    private String kecamatan = "-";
+    private String datiII = "-";
+    private String provinsi = "-";
+    private String noHP = "-";
+    private String noTelp = "-";
+    private int kodePos;
+    private String email = "-";
+    private String status = "-";
 
     public Penduduk() {
     }
 
-    public Penduduk(String idPenduduk, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, String status) {
+    public Penduduk(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String status) {
+        this.NIK = NIK;
+        this.foto = foto;
+        this.namaDepan = namaDepan;
+        this.namaBelakang = namaBelakang;
+        this.jenisKelamin = jenisKelamin;
+        this.tempatLahir = tempatLahir;
+        this.tanggalLahir = tanggalLahir;
+        this.agama = agama;
+        this.golonganDarah = golonganDarah;
+        this.pekerjaan = pekerjaan;
+        this.pendidikan = pendidikan;
+        this.status = status;
+    }
+
+    public Penduduk(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, int kodePos, String email, String status) {
+        this.NIK = NIK;
+        this.foto = foto;
+        this.namaDepan = namaDepan;
+        this.namaBelakang = namaBelakang;
+        this.jenisKelamin = jenisKelamin;
+        this.tempatLahir = tempatLahir;
+        this.tanggalLahir = tanggalLahir;
+        this.agama = agama;
+        this.golonganDarah = golonganDarah;
+        this.pekerjaan = pekerjaan;
+        this.pendidikan = pendidikan;
+        this.alamat = alamat;
+        this.rt = rt;
+        this.rw = rw;
+        this.dusun = dusun;
+        this.desa = desa;
+        this.kecamatan = kecamatan;
+        this.datiII = datiII;
+        this.provinsi = provinsi;
+        this.noHP = noHP;
+        this.noTelp = noTelp;
+        this.kodePos = kodePos;
+        this.email = email;
+        this.status = status;
+    }
+
+    public Penduduk(int idPenduduk, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, int kodePos, String email, String status) {
         this.idPenduduk = idPenduduk;
         this.NIK = NIK;
         this.foto = foto;
@@ -55,14 +99,16 @@ public class Penduduk {
         this.provinsi = provinsi;
         this.noHP = noHP;
         this.noTelp = noTelp;
+        this.kodePos = kodePos;
+        this.email = email;
         this.status = status;
     }
 
-    public String getIdPenduduk() {
+    public int getIdPenduduk() {
         return idPenduduk;
     }
 
-    public void setIdPenduduk(String idPenduduk) {
+    public void setIdPenduduk(int idPenduduk) {
         this.idPenduduk = idPenduduk;
     }
 
@@ -240,5 +286,52 @@ public class Penduduk {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getKodePos() {
+        return kodePos;
+    }
+
+    public void setKodePos(int kodePos) {
+        this.kodePos = kodePos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Penduduk{" +
+                "idPenduduk=" + idPenduduk +
+                ", NIK='" + NIK + '\'' +
+                ", foto='" + foto + '\'' +
+                ", namaDepan='" + namaDepan + '\'' +
+                ", namaBelakang='" + namaBelakang + '\'' +
+                ", jenisKelamin='" + jenisKelamin + '\'' +
+                ", tempatLahir='" + tempatLahir + '\'' +
+                ", tanggalLahir='" + tanggalLahir + '\'' +
+                ", agama='" + agama + '\'' +
+                ", golonganDarah='" + golonganDarah + '\'' +
+                ", pekerjaan='" + pekerjaan + '\'' +
+                ", pendidikan='" + pendidikan + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", rt='" + rt + '\'' +
+                ", rw='" + rw + '\'' +
+                ", dusun='" + dusun + '\'' +
+                ", desa='" + desa + '\'' +
+                ", kecamatan='" + kecamatan + '\'' +
+                ", datiII='" + datiII + '\'' +
+                ", provinsi='" + provinsi + '\'' +
+                ", noHP='" + noHP + '\'' +
+                ", noTelp='" + noTelp + '\'' +
+                ", kodePos='" + kodePos + '\'' +
+                ", email='" + email + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

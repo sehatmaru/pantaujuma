@@ -14,20 +14,21 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniReal
  *
  * @author Roy Deddy Tobing
  */
-public class CRUDSelectContract {
+public class CRUDContract {
 
     public interface View<U> {
-
         void showNotification(String title, String header, String message); //dipanggil terjadi add, delete dan update
+    }
+
+    public interface ViewController<U>{
+        U getUIData();
+        void saveData(String tipe); //update;insert
     }
 
     public interface Controller<U> {
         void addItem(U item);
         void updateItem(int idItem, U item);
         void deleteItem(int idItem);
-
-        RealmResults<U> getAllItem();
-        U getSingleItemById(int idItem);
 
         void responseCRUD(boolean status, String type); //dipanggil setelah data sudah diterima dari  Repository
     }
@@ -36,8 +37,5 @@ public class CRUDSelectContract {
         void addItem(U item);
         void updateItem(int idItem, U item);
         void deleteItem(int idItem);
-
-        RealmResults<U> getAllItem();
-        U getSingleItemById(int idItem);
     }
 }

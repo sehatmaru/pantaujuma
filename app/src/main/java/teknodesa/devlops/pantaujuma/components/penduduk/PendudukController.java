@@ -29,16 +29,6 @@ public class PendudukController implements PendudukContract.Controller<PendudukR
     }
 
     @Override
-    public RealmResults<PendudukRealm> getAllItem() {
-        return mRepository.getAllItem();
-    }
-
-    @Override
-    public PendudukRealm getSingleItemById(int idItem) {
-        return mRepository.getSingleItemById(idItem);
-    }
-
-    @Override
     public void responseCRUD(boolean status, String type) {
         if (status == true) {
             switch (type) {

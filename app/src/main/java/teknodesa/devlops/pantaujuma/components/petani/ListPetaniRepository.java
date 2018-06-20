@@ -6,11 +6,11 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.contracts.CRUDSelectContract;
+import teknodesa.devlops.pantaujuma.contracts.CRUDContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
-public class ListPetaniRepository implements CRUDSelectContract.Repository<PetaniRealm> {
+public class ListPetaniRepository implements CRUDContract.Repository<PetaniRealm> {
     private ListPetaniController mController;
 
     @Inject

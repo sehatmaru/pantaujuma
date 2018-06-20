@@ -1,12 +1,12 @@
 package teknodesa.devlops.pantaujuma.components.petani;
 
 import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.contracts.CRUDSelectContract;
+import teknodesa.devlops.pantaujuma.contracts.CRUDContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
-public class ListPetaniController implements CRUDSelectContract.Controller<PetaniRealm>{
-    private CRUDSelectContract.View<PetaniRealm> mView;
-    private CRUDSelectContract.Repository<PetaniRealm> mRepository;
+public class ListPetaniController implements CRUDContract.Controller<PetaniRealm>{
+    private CRUDContract.View<PetaniRealm> mView;
+    private CRUDContract.Repository<PetaniRealm> mRepository;
 
     @Override
     public void addItem(PetaniRealm item) {

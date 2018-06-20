@@ -1,6 +1,7 @@
-package deltechs.devlops.infodes.models.enums;
+package teknodesa.devlops.pantaujuma.dependencies.models.enums;
 
 public enum Bulan {
+    CHOOSE("Pilih salah satu"),
     JANUARI("Januari"),
     FEBRUARI("Februari"),
     MARET("Maret"),

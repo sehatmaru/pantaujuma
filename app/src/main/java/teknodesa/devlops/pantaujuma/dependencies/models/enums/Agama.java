@@ -1,6 +1,7 @@
-package deltechs.devlops.infodes.models.enums;
+package teknodesa.devlops.pantaujuma.dependencies.models.enums;
 
 public enum Agama{
+    CHOOSE("Agama"),
     ISLAM("Islam"),
     KATOLIK("Katolik"),
     PROTESTAN("Protestan"),

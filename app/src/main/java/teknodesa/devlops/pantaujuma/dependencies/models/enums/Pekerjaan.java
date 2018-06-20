@@ -1,6 +1,7 @@
-package deltechs.devlops.infodes.models.enums;
+package teknodesa.devlops.pantaujuma.dependencies.models.enums;
 
 public enum Pekerjaan {
+    CHOOSE("Pekerjaan"),
     BELUM_BEKERJA("Belum / Tidak Bekerja"),
     MENGURUS_RUMAH_TANGGA("Mengurus Rumah Tangga"),
     PELAJAR_OR_MAHASISWA("Pelajar / Mahasiswa"),

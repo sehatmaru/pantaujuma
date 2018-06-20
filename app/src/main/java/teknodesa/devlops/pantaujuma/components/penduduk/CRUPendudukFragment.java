@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
-public class CRUPendudukFragment extends Fragment {
+public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<PendudukRealm>, PendudukContract.View{
     FragmentActivity activity;
 
     BiodataFragment biodataFragment;
@@ -53,6 +57,9 @@ public class CRUPendudukFragment extends Fragment {
         setupTabIcons();
         viewPager.setCurrentItem(0);
         //viewPager.getCurrentItem();
+
+        //Penduduk newItem = new Penduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin, strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strAlamat, strRt, strRw, strDusun, strDesa, strKecamatan, strDatiII, strProvinsi, strNoHP, strNoTelp, strStatus);
+
         return v;
     }
 
@@ -69,6 +76,7 @@ public class CRUPendudukFragment extends Fragment {
         tabAlamat.setTextColor(getResources().getColor(R.color.black));
         tabs.getTabAt(1).setCustomView(tabAlamat).setIcon(R.drawable.alamat);
     }
+
     private void setViewpager() {
         biodataFragment = new BiodataFragment();
         alamatFragment = new AlamatFragment();
@@ -81,6 +89,62 @@ public class CRUPendudukFragment extends Fragment {
         viewPager.setAdapter(adapter);
 
         tabs.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public PendudukRealm getUIData() {
+        Penduduk newPenduduk = biodataFragment.getUIData();
+        Alamat newAlamat = alamatFragment.getUIData();
+
+        PendudukRealm newRealmItem = new PendudukRealm();
+
+        newRealmItem.setNIK(newPenduduk.getNIK());
+        newRealmItem.setNamaDepan(newPenduduk.getNamaDepan());
+        newRealmItem.setNamaBelakang(newPenduduk.getNamaBelakang());
+        newRealmItem.setJenisKelamin(newPenduduk.getJenisKelamin());
+        newRealmItem.setTempatLahir(newPenduduk.getTempatLahir());
+        newRealmItem.setTanggalLahir(newPenduduk.getTanggalLahir());
+        newRealmItem.setAgama(newPenduduk.getAgama());
+        newRealmItem.setGolonganDarah(newPenduduk.getGolonganDarah());
+        newRealmItem.setPekerjaan(newPenduduk.getPekerjaan());
+        newRealmItem.setPendidikan(newPenduduk.getPendidikan());
+        newRealmItem.setStatus(newPenduduk.getStatus());
+
+        newRealmItem.setAlamat(newAlamat.getAlamat());
+        newRealmItem.setRt(newAlamat.getRt());
+        newRealmItem.setRw(newAlamat.getRw());
+        newRealmItem.setDusun(newAlamat.getDusun());
+        newRealmItem.setDesa(newAlamat.getDesa());
+        newRealmItem.setKecamatan(newAlamat.getKecamatan());
+        newRealmItem.setDatiII(newAlamat.getDatiII());
+        newRealmItem.setProvinsi(newAlamat.getProvinsi());
+        newRealmItem.setKodePos(newAlamat.getKodePos());
+        newRealmItem.setEmail(newAlamat.getEmail());
+        newRealmItem.setNoHP(newAlamat.getNoHP());
+        newRealmItem.setNoTelp(newAlamat.getNoTelp());
+
+        String hh = newPenduduk.toString();
+        Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
+        return null;
+    }
+
+    @Override
+    public void saveData(String tipe) {
+        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this);
+        PendudukRealm uiItem = getUIData();
+
+        if(tipe.equals("insert")){
+            mController.addItem(uiItem);
+        }else{
+            if(tipe.equals("update")){
+                //TODO: implement this
+            }
+        }
+    }
+
+    @Override
+    public void showNotification(String title, String header, String message) {
+
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

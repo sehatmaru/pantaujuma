@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -67,6 +68,7 @@ public class CRUActivity extends AppCompatActivity {
 
     @BindView(R.id.content)
     FrameLayout content;
+
     @BindView(R.id.btnAction)
     Button btnAction;
 
@@ -100,7 +102,7 @@ public class CRUActivity extends AppCompatActivity {
             this.mJenisCRU = bundle.getString("jenisCRU");
             this.mAction = bundle.getString("action");
             this.mData = mData;
-            Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
 
             switch (mJenisCRU){
                 case "penduduk": replaceFragment(cruPendudukFragment); break;
@@ -116,6 +118,16 @@ public class CRUActivity extends AppCompatActivity {
                 case "harga": replaceFragment(cruHargaFragment); break;
                 case "survei": replaceFragment(cruSurveiFragment); break;
             }
+
+            btnAction.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    switch (mJenisCRU){
+                        case "penduduk": cruPendudukFragment.getUIData(); break;
+                        case "petani": cruPetaniFragment.getUIData(); break;
+                    }
+                    // Code here executes on main thread after user presses button
+                }
+            });
         } else {
             /**
              * Apabila Bundle tidak ada, ambil dari Intent

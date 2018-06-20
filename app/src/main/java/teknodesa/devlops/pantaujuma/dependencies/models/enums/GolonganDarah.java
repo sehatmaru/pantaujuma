@@ -1,6 +1,7 @@
-package deltechs.devlops.infodes.models.enums;
+package teknodesa.devlops.pantaujuma.dependencies.models.enums;
 
 public enum GolonganDarah {
+    CHOOSE("Golongan Darah"),
     A("A"),
     B("B"),
     AB("AB"),

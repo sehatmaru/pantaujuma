@@ -1,17 +1,18 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
-import teknodesa.devlops.pantaujuma.contracts.CRUDSelectContract;
+import teknodesa.devlops.pantaujuma.contracts.CRUDContract;
 
 public class PendudukContract {
-    interface View extends CRUDSelectContract.View{
+    interface View extends CRUDContract.View{
 
     }
 
-    interface Controller<U> extends CRUDSelectContract.Controller<U>{
+    interface ViewController<U> extends CRUDContract.ViewController<U>{}
 
+    interface Controller<U> extends CRUDContract.Controller<U>{
     }
 
-    interface Repository<U> extends CRUDSelectContract.Repository<U>{
+    interface Repository<U> extends CRUDContract.Repository<U>{
 
     }
 }

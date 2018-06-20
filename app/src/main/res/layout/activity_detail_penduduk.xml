@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/backgroundDetail"
+    android:layout_height="match_parent"
+    tools:context="teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_margin="8dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/pickImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconschipcard"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/dataLinearLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/pickImage"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/niktext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="NIK"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/nik"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/nameImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconsuser"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/dataNama"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/nameImage"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/namatext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="Nama"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/nama"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/namettl"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconsbirthdate"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/datattl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/namettl"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ttltext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="Tempat, Tanggal Lahir"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/ttl"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/namejk"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconsmalefilled"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/datajk"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/namejk"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/jktext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="Jenis Kelamin"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/jk"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/namegd"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconsdiabetesfilled"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/datagd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/namegd"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/gdtext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="Golongan Darah"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/gd"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/nameagama"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconsprayfilled"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/dataagama"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/nameagama"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/agamatext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="Agama"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/agama"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/namesp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iconslovefilled"
+                    android:visibility="visible" />
+
+
+                <LinearLayout
+                    android:id="@+id/datasp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/namesp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/sptext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text="Pekerjaan"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/sp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/alamattext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="Alamat"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/alamat"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rttext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="RT/RW"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/rtrw"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/kelurahantext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:text="Dukuh atau Dusun"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/kelurahan"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:paddingLeft="5dip"
+                        android:paddingRight="5dip"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:freezesText="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
