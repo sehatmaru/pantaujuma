@@ -62,6 +62,7 @@ public class DetailPendudukActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_penduduk);
 
+        //TODO: change this to Fragment
         ((MainApplication) getApplication())
                 .getComponent()
                 .inject(this);

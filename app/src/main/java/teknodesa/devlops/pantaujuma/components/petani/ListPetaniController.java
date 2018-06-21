@@ -24,16 +24,6 @@ public class ListPetaniController implements CRUDContract.Controller<PetaniRealm
     }
 
     @Override
-    public RealmResults<PetaniRealm> getAllItem() {
-        return mRepository.getAllItem();
-    }
-
-    @Override
-    public PetaniRealm getSingleItemById(int idItem) {
-        return mRepository.getSingleItemById(idItem);
-    }
-
-    @Override
     public void responseCRUD(boolean status, String type) {
         mView.showNotification("title", "header", "berhasil");
     }

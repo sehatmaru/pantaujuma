@@ -17,6 +17,7 @@ import teknodesa.devlops.pantaujuma.components.komoditas.ListKomoditasActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
@@ -80,6 +81,7 @@ public interface AppComponent {
     void inject(ListAlsintanActivity activity);
     void inject(ListHargaActivity activity);
     void inject(ListSurveiActivity activity);
+    void inject(DetailPendudukActivity activity);
 
     //fragment
     void inject(HomeFragment fragment);

@@ -29,16 +29,6 @@ public class PetaniController implements PetaniContract.Controller<PetaniRealm> 
     }
 
     @Override
-    public RealmResults<PetaniRealm> getAllItem() {
-        return mRepository.getAllItem();
-    }
-
-    @Override
-    public PetaniRealm getSingleItemById(int idItem) {
-        return mRepository.getSingleItemById(idItem);
-    }
-
-    @Override
     public void responseCRUD(boolean status, String type) {
         if (status == true) {
             switch (type) {

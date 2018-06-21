@@ -76,28 +76,4 @@ public class ListPetaniRepository implements CRUDContract.Repository<PetaniRealm
             }
         });
     }
-
-    @Override
-    public RealmResults<PetaniRealm> getAllItem() {
-        realm.beginTransaction();
-        RealmResults<PetaniRealm> items = realm.where(PetaniRealm.class).findAll();
-        realm.commitTransaction();
-        if (items.isEmpty()) {
-            return null;
-        } else {
-            return items;
-        }
-    }
-
-    @Override
-    public PetaniRealm getSingleItemById(int idItem) {
-        realm.beginTransaction();
-        PetaniRealm item = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findFirst();
-        realm.commitTransaction();
-        if (item == null) {
-            return null;
-        } else {
-            return item;
-        }
-    }
 }

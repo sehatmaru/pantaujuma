@@ -81,7 +81,6 @@
                             android:id="@+id/input_nik"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:editable="false"
                             android:hint="@string/nik"
                             android:singleLine="true" />
                     </android.support.design.widget.TextInputLayout>

@@ -78,25 +78,4 @@ public class PetaniRepository implements PetaniContract.Repository<PetaniRealm> 
             }
         });
     }
-
-    @Override
-    public RealmResults<PetaniRealm> getAllItem() {
-        // Or alternatively do the same all at once (the "Fluent interface"):
-        RealmResults<PetaniRealm> results = realm.where(PetaniRealm.class)
-                .findAll();
-
-        return results;
-    }
-
-    @Override
-    public PetaniRealm getSingleItemById(int idItem) {
-        realm.beginTransaction();
-        PetaniRealm item = realm.where(PetaniRealm.class).equalTo("idPenduduk", idItem).findFirst();
-        realm.commitTransaction();
-        if (item == null) {
-            return null;
-        } else {
-            return item;
-        }
-    }
 }

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,10 +75,11 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
 
         btnPenduduk.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                switch (mJenisCRU){
-                    case "penduduk": cruPendudukFragment.getUIData(); break;
-                    case "petani": cruPetaniFragment.getUIData(); break;
-                }
+                Toast.makeText(getContext(), "Penduduk", Toast.LENGTH_SHORT).show();
+                //switch (mJenisCRU){
+                    //case "penduduk": cruPendudukFragment.getUIData(); break;
+                   // case "petani": cruPetaniFragment.getUIData(); break;
+                //}
                 // Code here executes on main thread after user presses button
             }
         });
