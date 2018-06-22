@@ -70,7 +70,7 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
         String strKecamatan = input_kecamatan.getText().toString();
         String strDatiII = input_datiii.getText().toString();
         String strProvinsi = input_provinsi.getText().toString();
-        int strKodePos = Integer.parseInt(input_kodepos.getText().toString());
+        int strKodePos = input_kodepos.getText().toString().equals("")? 0:Integer.parseInt(input_kodepos.getText().toString());
         String strEmail = input_email.getText().toString();
         String strNoHP = input_hp.getText().toString();
         String strNoTelp = input_telp.getText().toString();
