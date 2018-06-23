@@ -35,5 +35,4 @@ public class Pesan {
     public static final String HEADER_NOTVALID_FIELD = "Data Tidak Valid";
     public static final String NOTVALID_FIELD_TEXT = "Isian form Anda tidak valid.";
     public static final String NUMBERONLY_FIELD_TEXT = "Kolom hanya dapat diisi dengan angka.";
-    
 }

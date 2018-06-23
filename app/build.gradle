@@ -121,6 +121,8 @@ dependencies {
 
     //realam-recycler
     implementation "io.realm:android-adapters:$rootProject.realmRecyclerVersion"
+
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.4'
 }
 
 apply plugin: 'realm-android' //this is for realm

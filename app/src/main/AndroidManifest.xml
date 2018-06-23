@@ -43,6 +43,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
+            android:name=".components.penduduk.DetailPendudukActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity
             android:name=".components.petani.ListPetaniActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
