@@ -30,6 +30,7 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.Sort;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
@@ -41,7 +42,10 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
     Realm realm;
 
     private final String mJenisCRU = "penduduk";
+
     private List<PendudukRealm> listpenduduk = Collections.EMPTY_LIST;
+    List<Penduduk> listPendudukRealm = Collections.EMPTY_LIST;
+
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     PendudukAdapter pendudukAdapter;
     RecyclerView.LayoutManager linearLayoutManager;
@@ -81,6 +85,10 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((MainApplication) getApplication())
+                .getComponent()
+                .inject(this);
 
         setContentView(R.layout.activity_listpenduduk);
         ButterKnife.bind(this);
@@ -204,5 +212,9 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
             Log.e("list penduduk ",listPendudukRealm.get(0).toString());
             showRealmData(""+listPendudukRealm.size()).show();
         }
+    }
+
+    private Snackbar showRealmData(String message) {
+        return Snackbar.make(coordinatorLayout, "Anda memiliki data penduduk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
     }
 }

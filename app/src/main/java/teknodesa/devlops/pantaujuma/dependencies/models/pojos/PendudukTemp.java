@@ -1,50 +1,55 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
-import java.util.Objects;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
-
 /**
  * Created by Roy Deddy Tobing on 4/4/2018.
  */
 
-public class Penduduk extends RealmObject{
-    @PrimaryKey
+public class PendudukTemp {
     private int idPenduduk;
-    private String NIK;
-    private String foto;
-    private String namaDepan;
-    private String namaBelakang;
-    private String jenisKelamin;
-    private String tempatLahir;
-    private String tanggalLahir;
-    private String agama;
-    private String golonganDarah;
-    private String pekerjaan;
-    private String pendidikan;
-    private String alamat;
-    private String rt;
-    private String rw;
-    private String dusun;
-    private String desa;
-    private String kecamatan;
-    private String datiII;
-    private String provinsi;
-    private String noHP;
-    private String noTelp;
-    public RealmList<LahanRealm> daftarLahan;
-    private String status;
+    private String NIK = "-";
+    private String foto = "-";
+    private String namaDepan = "-";
+    private String namaBelakang = "-";
+    private String jenisKelamin = "-";
+    private String tempatLahir = "-";
+    private String tanggalLahir = "-";
+    private String agama = "-";
+    private String golonganDarah = "-";
+    private String pekerjaan = "-";
+    private String pendidikan = "-";
+    private String alamat = "-";
+    private String rt = "-";
+    private String rw = "-";
+    private String dusun = "-";
+    private String desa = "-";
+    private String kecamatan = "-";
+    private String datiII = "-";
+    private String provinsi = "-";
+    private String noHP = "-";
+    private String noTelp = "-";
     private int kodePos;
-    private String email;
+    private String email = "-";
+    private String status = "-";
 
-    public Penduduk() {
+    public PendudukTemp() {
     }
 
-    public Penduduk(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, RealmList<LahanRealm> daftarLahan, String status, int kodePos, String email) {
+    public PendudukTemp(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String status) {
+        this.NIK = NIK;
+        this.foto = foto;
+        this.namaDepan = namaDepan;
+        this.namaBelakang = namaBelakang;
+        this.jenisKelamin = jenisKelamin;
+        this.tempatLahir = tempatLahir;
+        this.tanggalLahir = tanggalLahir;
+        this.agama = agama;
+        this.golonganDarah = golonganDarah;
+        this.pekerjaan = pekerjaan;
+        this.pendidikan = pendidikan;
+        this.status = status;
+    }
+
+    public PendudukTemp(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, int kodePos, String email, String status) {
         this.NIK = NIK;
         this.foto = foto;
         this.namaDepan = namaDepan;
@@ -66,13 +71,13 @@ public class Penduduk extends RealmObject{
         this.provinsi = provinsi;
         this.noHP = noHP;
         this.noTelp = noTelp;
-        this.daftarLahan = daftarLahan;
-        this.status = status;
         this.kodePos = kodePos;
         this.email = email;
+        this.status = status;
     }
 
-    public Penduduk(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String status) {
+    public PendudukTemp(int idPenduduk, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, int kodePos, String email, String status) {
+        this.idPenduduk = idPenduduk;
         this.NIK = NIK;
         this.foto = foto;
         this.namaDepan = namaDepan;
@@ -84,52 +89,26 @@ public class Penduduk extends RealmObject{
         this.golonganDarah = golonganDarah;
         this.pekerjaan = pekerjaan;
         this.pendidikan = pendidikan;
-        this.status = status;
-    }
-
-    public Penduduk (PendudukRealm penduduk){
-        this.idPenduduk = penduduk.getIdPenduduk();
-        this.NIK = penduduk.getNIK();
-        this.foto = String.valueOf(penduduk.getFoto());
-        this.namaDepan = penduduk.getNamaDepan();
-        this.namaBelakang = penduduk.getNamaBelakang();
-        this.jenisKelamin = penduduk.getJenisKelamin();
-        this.tempatLahir = penduduk.getTempatLahir();
-        this.tanggalLahir = penduduk.getTanggalLahir();
-
-        this.agama = penduduk.getAgama();
-        this.golonganDarah = penduduk.getGolonganDarah();
-        this.pekerjaan = penduduk.getPekerjaan();
-        this.pendidikan = penduduk.getPendidikan();
-
-        this.alamat = penduduk.getAlamat();
-        this.rt = penduduk.getRt();
-        this.rw = penduduk.getRw();
-
-        this.dusun = penduduk.getDusun();
-        this.desa = penduduk.getDesa();
-        this.kecamatan = penduduk.getKecamatan();
-        this.datiII = penduduk.getDatiII();
-        this.provinsi = penduduk.getProvinsi();
-
+        this.alamat = alamat;
+        this.rt = rt;
+        this.rw = rw;
+        this.dusun = dusun;
+        this.desa = desa;
+        this.kecamatan = kecamatan;
+        this.datiII = datiII;
+        this.provinsi = provinsi;
         this.noHP = noHP;
         this.noTelp = noTelp;
-        this.status = status;
         this.kodePos = kodePos;
         this.email = email;
-
-        this.noHP = penduduk.getNoHP();
-        this.noTelp = penduduk.getNoTelp();
-        this.status = penduduk.getStatus();
-        this.kodePos = penduduk.getKodePos();
-        this.email = penduduk.getEmail();
+        this.status = status;
     }
 
-    public int getIdPenduduk() {
+    public int getIdPendudukTemp() {
         return idPenduduk;
     }
 
-    public void setIdPenduduk(int idPenduduk) {
+    public void setIdPendudukTemp(int idPenduduk) {
         this.idPenduduk = idPenduduk;
     }
 
@@ -301,14 +280,6 @@ public class Penduduk extends RealmObject{
         this.noTelp = noTelp;
     }
 
-    public RealmList<LahanRealm> getDaftarLahan() {
-        return daftarLahan;
-    }
-
-    public void setDaftarLahan(RealmList<LahanRealm> daftarLahan) {
-        this.daftarLahan = daftarLahan;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -335,7 +306,7 @@ public class Penduduk extends RealmObject{
 
     @Override
     public String toString() {
-        return "PendudukRealm{" +
+        return "Penduduk{" +
                 "idPenduduk=" + idPenduduk +
                 ", NIK='" + NIK + '\'' +
                 ", foto='" + foto + '\'' +
@@ -358,48 +329,9 @@ public class Penduduk extends RealmObject{
                 ", provinsi='" + provinsi + '\'' +
                 ", noHP='" + noHP + '\'' +
                 ", noTelp='" + noTelp + '\'' +
-                ", daftarLahan=" + daftarLahan +
-                ", status='" + status + '\'' +
-                ", kodePos=" + kodePos +
+                ", kodePos='" + kodePos + '\'' +
                 ", email='" + email + '\'' +
+                ", status='" + status + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Penduduk penduduk = (Penduduk) o;
-        return idPenduduk == penduduk.idPenduduk &&
-                kodePos == penduduk.kodePos &&
-                Objects.equals(NIK, penduduk.NIK) &&
-                Objects.equals(foto, penduduk.foto) &&
-                Objects.equals(namaDepan, penduduk.namaDepan) &&
-                Objects.equals(namaBelakang, penduduk.namaBelakang) &&
-                Objects.equals(jenisKelamin, penduduk.jenisKelamin) &&
-                Objects.equals(tempatLahir, penduduk.tempatLahir) &&
-                Objects.equals(tanggalLahir, penduduk.tanggalLahir) &&
-                Objects.equals(agama, penduduk.agama) &&
-                Objects.equals(golonganDarah, penduduk.golonganDarah) &&
-                Objects.equals(pekerjaan, penduduk.pekerjaan) &&
-                Objects.equals(pendidikan, penduduk.pendidikan) &&
-                Objects.equals(alamat, penduduk.alamat) &&
-                Objects.equals(rt, penduduk.rt) &&
-                Objects.equals(rw, penduduk.rw) &&
-                Objects.equals(dusun, penduduk.dusun) &&
-                Objects.equals(desa, penduduk.desa) &&
-                Objects.equals(kecamatan, penduduk.kecamatan) &&
-                Objects.equals(datiII, penduduk.datiII) &&
-                Objects.equals(provinsi, penduduk.provinsi) &&
-                Objects.equals(noHP, penduduk.noHP) &&
-                Objects.equals(noTelp, penduduk.noTelp) &&
-                Objects.equals(daftarLahan, penduduk.daftarLahan) &&
-                Objects.equals(status, penduduk.status) &&
-                Objects.equals(email, penduduk.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPenduduk, NIK, foto, namaDepan, namaBelakang, jenisKelamin, tempatLahir, tanggalLahir, agama, golonganDarah, pekerjaan, pendidikan, alamat, rt, rw, dusun, desa, kecamatan, datiII, provinsi, noHP, noTelp, daftarLahan, status, kodePos, email);
     }
 }
