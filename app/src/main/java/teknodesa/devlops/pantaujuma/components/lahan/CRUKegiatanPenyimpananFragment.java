@@ -5,11 +5,29 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 
-public class CRUKegiatanPenyimpananFragment extends Fragment {
+public class CRUKegiatanPenyimpananFragment extends Fragment  implements LahanContract.ViewController<LahanRealm>, LahanContract.View{
+    @BindView(R.id.input_tanggalmasuk)
+    EditText input_tanggalmasuk;
+
+    @BindView(R.id.input_tanggalkeluar)
+    EditText input_tanggalkeluar;
+
+    @BindView(R.id.input_masakegiatan)
+    EditText input_masakegiatan;
+
+    @BindView(R.id.input_cara)
+    EditText input_cara;
+
+    @BindView(R.id.input_jumlah)
+    EditText input_jumlah;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -18,5 +36,36 @@ public class CRUKegiatanPenyimpananFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         return v;
+    }
+
+    @Override
+    public LahanRealm getUIData() {
+        String strTanggalMasuk = input_tanggalmasuk.getText().toString();
+        String strTanggalKeluar = input_tanggalkeluar.getText().toString();
+        String strMasaKegiatan = input_masakegiatan.getText().toString();
+        String strCara = input_cara.getText().toString();
+        String strJumlah = input_jumlah.getText().toString();
+
+        LahanRealm uiItem = new LahanRealm();
+        return null;
+    }
+
+    @Override
+    public void saveData(String tipe) {
+        LahanContract.Controller<LahanRealm> mController = new LahanController(this);
+        LahanRealm uiItem = getUIData();
+
+        if(tipe.equals("insert")){
+            mController.addItem(uiItem);
+        }else{
+            if(tipe.equals("update")){
+                //TODO: implement this
+            }
+        }
+    }
+
+    @Override
+    public void showNotification(String title, String header, String message) {
+        //TODO: implement this
     }
 }
