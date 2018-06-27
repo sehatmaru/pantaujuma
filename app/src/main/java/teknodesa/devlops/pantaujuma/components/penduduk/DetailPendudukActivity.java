@@ -4,21 +4,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class DetailPendudukActivity extends AppCompatActivity {
 
     @Inject
     Realm realm;
+
+    @BindView(R.id.btnEdit)
+    Button btnEdit;
+
+    @BindView(R.id.btnHapus)
+    Button btnHapus;
 
     @BindView(R.id.nik)
     TextView nik;
@@ -50,7 +60,20 @@ public class DetailPendudukActivity extends AppCompatActivity {
     @BindView(R.id.kelurahan)
     TextView kelurahan;
 
+    @OnClick(R.id.btnEdit)
+    void clickEdit() {
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
+    }
+
+
+    @OnClick(R.id.btnHapus)
+    void clickHapus() {
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "delete", itemDetail));
+    }
+
+
     private PendudukRealm dataPenduduk;
+    private Penduduk itemDetail;
 
     private static int idPenduduk;
     public static Intent createIntent(Context context, int id) {
@@ -68,13 +91,14 @@ public class DetailPendudukActivity extends AppCompatActivity {
                 .inject(this);
 
         ButterKnife.bind(this);
+
         takedata();
     }
     private void takedata(){
         realm.beginTransaction();
-        dataPenduduk = realm.where(PendudukRealm.class).equalTo("id", idPenduduk).findFirst();
+        dataPenduduk = realm.where(PendudukRealm.class).equalTo("idPenduduk", idPenduduk).findFirst();
+        itemDetail = new Penduduk(dataPenduduk);
         realm.commitTransaction();
-
 
         setdata();
     }

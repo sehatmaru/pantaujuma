@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.petani;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -73,6 +74,31 @@ public class ListPetaniRepository implements CRUDContract.Repository<PetaniRealm
                     mController.responseCRUD(false, "create");
                 }
 
+            }
+        });
+    }
+
+    @Override
+    public void setItemDeleted(int idItem) {
+        Log.e("Error", "Masuk setItemDeleted success");
+        PetaniRealm deletedItem = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findFirst();
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                //deletedItem.setDeleted(true);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                // Transaction was a success.
+                mController.responseCRUD(true, "delete");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                // Transaction failed and was automatically canceled.
+                mController.responseCRUD(false, "delete");
             }
         });
     }

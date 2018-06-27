@@ -16,6 +16,7 @@ import teknodesa.devlops.pantaujuma.components.home.HomeJumaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;

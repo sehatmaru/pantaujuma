@@ -1,6 +1,9 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmResults;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 
@@ -8,9 +11,9 @@ public class PendudukController implements PendudukContract.Controller<PendudukR
     PendudukContract.View mView;
     PendudukContract.Repository<PendudukRealm> mRepository;
 
-    public PendudukController(PendudukContract.View mView){
+    public PendudukController(PendudukContract.View mView, @NonNull AppComponent appComponent){
         this.mView = mView;
-        this.mRepository = new PendudukRepository(this);
+        this.mRepository = new PendudukRepository(this, appComponent);
     }
 
     @Override
@@ -26,6 +29,11 @@ public class PendudukController implements PendudukContract.Controller<PendudukR
     @Override
     public void deleteItem(int idItem) {
         mRepository.deleteItem(idItem);
+    }
+
+    @Override
+    public void setItemDeleted(int idItem) {
+        mRepository.setItemDeleted(idItem);
     }
 
     @Override

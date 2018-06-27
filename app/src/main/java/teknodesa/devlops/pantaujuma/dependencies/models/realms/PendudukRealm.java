@@ -37,11 +37,12 @@ public class PendudukRealm extends RealmObject {
     private String status;
     private int kodePos;
     private String email;
+    private boolean isDeleted;
 
     public PendudukRealm() {
     }
 
-    public PendudukRealm(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, RealmList<LahanRealm> daftarLahan, String status, int kodePos, String email) {
+    public PendudukRealm(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, RealmList<LahanRealm> daftarLahan, String status, int kodePos, String email, boolean isDeleted) {
         this.NIK = NIK;
         this.foto = foto;
         this.namaDepan = namaDepan;
@@ -67,6 +68,7 @@ public class PendudukRealm extends RealmObject {
         this.status = status;
         this.kodePos = kodePos;
         this.email = email;
+        this.isDeleted = isDeleted;
     }
 
     public int getIdPenduduk() {
@@ -277,6 +279,14 @@ public class PendudukRealm extends RealmObject {
         this.email = email;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "PendudukRealm{" +
@@ -306,6 +316,7 @@ public class PendudukRealm extends RealmObject {
                 ", status='" + status + '\'' +
                 ", kodePos=" + kodePos +
                 ", email='" + email + '\'' +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }

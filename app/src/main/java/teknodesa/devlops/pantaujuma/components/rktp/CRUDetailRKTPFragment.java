@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.rktp;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +79,7 @@ public class CRUDetailRKTPFragment extends Fragment implements PetaniContract.Vi
     }
 
     @Override
-    public void saveData(String tipe) {
+    public void saveData(String tipe, Parcelable itemData) {
         PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this);
         PetaniRealm uiItem = getUIData();
 

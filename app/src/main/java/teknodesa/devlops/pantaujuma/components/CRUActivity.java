@@ -122,8 +122,8 @@ public class CRUActivity extends AppCompatActivity {
             btnAction.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     switch (mJenisCRU){
-                        case "penduduk": cruPendudukFragment.getUIData(); break;
-                        case "petani": cruPetaniFragment.getUIData(); break;
+                        case "penduduk": cruPendudukFragment.saveData(mAction, mData); break;
+                        case "petani": cruPetaniFragment.saveData(mAction, mData); break;
                     }
                     // Code here executes on main thread after user presses button
                 }

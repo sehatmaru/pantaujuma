@@ -1,11 +1,14 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import teknodesa.devlops.pantaujuma.MainApplication;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
@@ -15,8 +18,9 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
 
     private PendudukContract.Controller mController;
 
-    public PendudukRepository(PendudukContract.Controller mController) {
+    public PendudukRepository(PendudukContract.Controller mController, @NonNull AppComponent appComponent) {
         this.mController = mController;
+        appComponent.inject(this);
     }
 
     @Override
@@ -44,7 +48,7 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
 
     @Override
     public void updateItem(int idItem, PendudukRealm item) {
-        Log.e("Error", "Masuk addItem success");
+        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
@@ -54,13 +58,13 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
             @Override
             public void onSuccess() {
                 // Transaction was a success.
-                mController.responseCRUD(true, "create");
+                mController.responseCRUD(true, "update");
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
                 // Transaction failed and was automatically canceled.
-                mController.responseCRUD(false, "create");
+                mController.responseCRUD(false, "update");
             }
         });
     }
@@ -76,6 +80,31 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
             public void execute(Realm realm) {
                 // remove single match
                 results.deleteFirstFromRealm();
+            }
+        });
+    }
+
+    @Override
+    public void setItemDeleted(int idItem) {
+        Log.e("Error", "Masuk setItemDeleted success");
+        PendudukRealm deletedItem = realm.where(PendudukRealm.class).equalTo("idPenduduk", idItem).findFirst();
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                deletedItem.setDeleted(true);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                // Transaction was a success.
+                mController.responseCRUD(true, "delete");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                // Transaction failed and was automatically canceled.
+                mController.responseCRUD(false, "delete");
             }
         });
     }

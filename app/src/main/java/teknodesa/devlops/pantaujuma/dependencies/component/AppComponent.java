@@ -19,6 +19,8 @@ import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukRepository;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petani.ListPetaniActivity;
@@ -59,9 +61,11 @@ public interface AppComponent {
     void inject(SplashscreenController controller);
     void inject(RegisterController controller);
     void inject(LoginController controller);
+    void inject(PendudukController controller);
 
     //Repository
     void inject(ListPetaniRepository repository);
+    void inject(PendudukRepository repository);
 
     //Activity
     void inject(SplashscreenActivity activity);

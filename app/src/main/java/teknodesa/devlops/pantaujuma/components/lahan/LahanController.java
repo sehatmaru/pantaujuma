@@ -28,6 +28,11 @@ public class LahanController implements LahanContract.Controller<LahanRealm> {
     }
 
     @Override
+    public void setItemDeleted(int idItem) {
+        mRepository.setItemDeleted(idItem);
+    }
+
+    @Override
     public void responseCRUD(boolean status, String type) {
         if (status == true) {
             switch (type) {

@@ -78,4 +78,29 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
             }
         });
     }
+
+    @Override
+    public void setItemDeleted(int idItem) {
+        Log.e("Error", "Masuk setItemDeleted success");
+        LahanRealm deletedItem = realm.where(LahanRealm.class).equalTo("idPetani", idItem).findFirst();
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                //deletedItem.setDeleted(true);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                // Transaction was a success.
+                mController.responseCRUD(true, "delete");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                // Transaction failed and was automatically canceled.
+                mController.responseCRUD(false, "delete");
+            }
+        });
+    }
 }

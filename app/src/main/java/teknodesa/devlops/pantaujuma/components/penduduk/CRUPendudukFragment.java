@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,15 +18,24 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmModel;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<PendudukRealm>, PendudukContract.View{
+    @Inject
+    Realm realm;
+
+    private AppComponent appComponent;
     FragmentActivity activity;
 
     BiodataFragment biodataFragment;
@@ -41,6 +51,8 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+
+        appComponent = ((MainApplication) getActivity().getApplication()).getComponent();
         ((MainApplication) getActivity().getApplication())
                 .getComponent()
                 .inject(this);
@@ -123,21 +135,30 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         newRealmItem.setNoHP(newAlamat.getNoHP());
         newRealmItem.setNoTelp(newAlamat.getNoTelp());
 
+        newRealmItem.setDeleted(false);
+
         String hh = newPenduduk.toString();
+        hh = hh + " - "+newAlamat.toString();
         Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
-        return null;
+        return newRealmItem;
     }
 
     @Override
-    public void saveData(String tipe) {
-        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this);
+    public void saveData(String tipe, Parcelable itemData) {
+        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this, appComponent);
         PendudukRealm uiItem = getUIData();
 
         if(tipe.equals("insert")){
             mController.addItem(uiItem);
         }else{
             if(tipe.equals("update")){
-                //TODO: implement this
+                int idItem = ((Penduduk) itemData).getIdPenduduk();
+                mController.updateItem(idItem, uiItem);
+            }else{
+                if(tipe.equals("delete")){
+                    int idItem = ((Penduduk) itemData).getIdPenduduk();
+                    mController.setItemDeleted(idItem);
+                }
             }
         }
     }
