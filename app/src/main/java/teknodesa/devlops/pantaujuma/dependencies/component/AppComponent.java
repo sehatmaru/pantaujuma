@@ -38,8 +38,6 @@ import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.ListRKTPActivity;
 import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
-import teknodesa.devlops.pantaujuma.components.signup.RegisterActivity;
-import teknodesa.devlops.pantaujuma.components.signup.RegisterController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenActivity;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
@@ -61,7 +59,6 @@ public interface AppComponent {
 
     //Controllers
     void inject(SplashscreenController controller);
-    void inject(RegisterController controller);
     void inject(LoginController controller);
     void inject(PendudukController controller);
 
@@ -72,7 +69,6 @@ public interface AppComponent {
     //Activity
     void inject(SplashscreenActivity activity);
     void inject(LoginActivity activity);
-    void inject(RegisterActivity activity);
     void inject(MainActivity activity);
     void inject(CRUActivity activity);
     void inject(ListPendudukActivity activity);
