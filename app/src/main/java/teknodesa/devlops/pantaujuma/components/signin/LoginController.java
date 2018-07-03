@@ -28,39 +28,18 @@ public class LoginController implements LoginContract.Controller {
 
     private LoginContract.View views;
 
-    private FirebaseAuth mAuth;
-    private Context mContext;
     public LoginController(@NonNull AppComponent appComponent) {
         appComponent.inject(this);
-        mAuth = FirebaseAuth.getInstance();
     }
 
-
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
-    }
-
-    public void setView(LoginContract.View view,Context mContext){
+    public void setView(LoginContract.View view){
         views = view;
-        this.mContext =mContext;
     }
 
     @Override
     public void loginUser(LoginModel loginModel) {
-        mAuth.signInWithEmailAndPassword(loginModel.getEmail(),loginModel.getPassword())
-                .addOnCompleteListener((Activity) mContext, task -> {
-
-                    if (!task.isSuccessful()) {
-                        views.loginFailed("Error :"+task.getException().getMessage());
-                    } else {
-                        LoginModel log = new LoginModel(loginModel.getEmail(), mAuth.getCurrentUser().getUid());
-                        mService.instanceClass(this);
-                        mService.loginUser(log);
-                    }
-                });
+        mService.instanceClass(this);
+        mService.loginUser(loginModel);
     }
 
     @Override
@@ -70,7 +49,6 @@ public class LoginController implements LoginContract.Controller {
 
     @Override
     public void loginFailed(String message) {
-        mAuth.signOut();
         views.loginFailed(message);
     }
 }

@@ -23,7 +23,6 @@ import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
-import teknodesa.devlops.pantaujuma.components.signup.RegisterController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
@@ -68,11 +67,6 @@ public class AppModule {
         return new SplashscreenController(app.getComponent());
     }
 
-    @Provides
-    @Singleton
-    RegisterController registerController() {
-        return new RegisterController(app.getComponent());
-    }
 
     @Provides
     @Singleton

@@ -1,6 +1,5 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
-import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 

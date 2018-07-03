@@ -35,16 +35,14 @@ public class SplashscreenActivity extends BaseActivity implements SplashscreenCo
                 .inject(this);
         ButterKnife.bind(this);
         splashController.setView(this);
-        checkSesion();
+        showLoading();
+        checkNetwork();
     }
-    private void checkSesion(){
-
-        if(isNetworkConnected()){
-            showLoading();
-           // splashController.getPromotion();
-        }else{
+    private void checkNetwork(){
+        if(!isNetworkConnected()){
             onError(getString(R.string.network_error));
         }
+        splashController.checkSession();
     }
 
     @Override

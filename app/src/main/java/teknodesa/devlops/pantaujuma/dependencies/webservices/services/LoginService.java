@@ -53,7 +53,7 @@ public class LoginService implements LoginContract.Repository {
                             realmuser.insertOrUpdate(response.body().getData());
                         });
                         realm.commitTransaction();
-                        controller.loginSuccess("Welcome To Onan");
+                        controller.loginSuccess("Welcome");
                     }else
                         controller.loginFailed(response.body().getMessage());
                 }else{

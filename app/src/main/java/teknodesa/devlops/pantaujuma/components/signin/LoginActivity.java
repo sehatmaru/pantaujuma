@@ -17,8 +17,6 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.MainActivity;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
-import teknodesa.devlops.pantaujuma.components.resetpassword.ResetPasswordActivity;
-import teknodesa.devlops.pantaujuma.components.signup.RegisterActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View{
@@ -29,12 +27,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     TextInputEditText etEmail;
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
-    @BindView(R.id.btn_reset_password)
-    Button btnReset;
-    @OnClick(R.id.btn_reset_password)
-    void resetClicked(){
-        startActivity(ResetPasswordActivity.createIntent(getApplicationContext()));
-    }
+
     @BindView(R.id.btnLogin)
     Button btnLogin;
     @OnClick(R.id.btnLogin)
@@ -45,7 +38,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
             if(isNetworkConnected()){
                 showLoading();
                 LoginModel loginModel = new LoginModel(etEmail.getText().toString(),etPassword.getText().toString());
-                loginController.setView(this,this);
+                loginController.setView(this);
                 loginController.loginUser(loginModel);
             }else {
                 onError("No Internet Connection");
@@ -54,13 +47,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     }
 
-    @BindView(R.id.btnRegister)
-    Button btnRegister;
-    @OnClick(R.id.btnRegister)
-    void registerClicked(){
-        startActivity(RegisterActivity.createIntent(getApplicationContext()));
-        overridePendingTransition(R.transition.fade_in, R.transition.transition_do_nothing);
-    }
     public static Intent createIntent(Context context) {
         return new Intent(context, LoginActivity.class);
     }
@@ -77,6 +63,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     @Override
     public void loginSuccess(String message) {
+        hideLoading();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         startActivity(MainActivity.createIntent(getApplicationContext()));
         overridePendingTransition(R.transition.fade_out, R.transition.transition_do_nothing);
