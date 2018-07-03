@@ -1,9 +1,9 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.app.Activity;
+
 import android.support.annotation.NonNull;
 
-import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
