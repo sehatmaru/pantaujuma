@@ -82,6 +82,23 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
     }
 
     @Override
+    public void setUIData(Parcelable uiData) {/*
+        Penduduk theUIData = (Penduduk) uiData;
+        input_alamat.setText(theUIData.getAlamat());
+        input_rt.setText(theUIData.getRt());
+        input_rw.setText(theUIData.getRw());
+        input_dusun.setText(theUIData.getDusun());
+        input_desa.setText(theUIData.getDesa());
+        input_kecamatan.setText(theUIData.getKecamatan());
+        input_datiii.setText(theUIData.getDatiII());
+        input_provinsi.setText(theUIData.getProvinsi());
+        input_kodepos.setText(theUIData.getKodePos());
+        input_email.setText(theUIData.getEmail());
+        input_hp.setText(theUIData.getNoHP());
+        input_telp.setText(theUIData.getNoTelp());*/
+    }
+
+    @Override
     public void saveData(String tipe, Parcelable itemData) {
         //not implemented yet
     }

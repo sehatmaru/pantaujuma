@@ -99,6 +99,7 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
             public void onSuccess() {
                 // Transaction was a success.
                 mController.responseCRUD(true, "delete");
+                deletedItem.toString();
             }
         }, new Realm.Transaction.OnError() {
             @Override

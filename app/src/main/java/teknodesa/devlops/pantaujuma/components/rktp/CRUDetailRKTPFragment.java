@@ -79,6 +79,11 @@ public class CRUDetailRKTPFragment extends Fragment implements PetaniContract.Vi
     }
 
     @Override
+    public void setUIData(Parcelable uiData) {
+
+    }
+
+    @Override
     public void saveData(String tipe, Parcelable itemData) {
         PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this);
         PetaniRealm uiItem = getUIData();

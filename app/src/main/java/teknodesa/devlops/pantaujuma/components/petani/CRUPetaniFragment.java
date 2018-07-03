@@ -101,6 +101,11 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
     }
 
     @Override
+    public void setUIData(Parcelable uiData) {
+
+    }
+
+    @Override
     public void saveData(String tipe, Parcelable itemData) {
         PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this);
         PetaniRealm uiItem = getUIData();

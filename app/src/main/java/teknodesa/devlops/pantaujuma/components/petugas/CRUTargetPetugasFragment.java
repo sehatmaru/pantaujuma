@@ -67,6 +67,11 @@ public class CRUTargetPetugasFragment extends Fragment implements LahanContract.
     }
 
     @Override
+    public void setUIData(Parcelable uiData) {
+
+    }
+
+    @Override
     public void saveData(String tipe, Parcelable itemData) {
         LahanContract.Controller<LahanRealm> mController = new LahanController(this);
         LahanRealm uiItem = getUIData();

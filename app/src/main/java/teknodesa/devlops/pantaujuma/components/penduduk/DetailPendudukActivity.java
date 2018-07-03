@@ -1,7 +1,9 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,10 +18,12 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class DetailPendudukActivity extends AppCompatActivity {
+    private AppComponent appComponent;
 
     @Inject
     Realm realm;
@@ -68,7 +72,9 @@ public class DetailPendudukActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnHapus)
     void clickHapus() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "delete", itemDetail));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
+        builder.setNegativeButton("Tidak", dialogClickListener).show();
     }
 
 
@@ -86,21 +92,20 @@ public class DetailPendudukActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_penduduk);
 
         //TODO: change this to Fragment
+        appComponent = ((MainApplication) getApplication()).getComponent();
         ((MainApplication) getApplication())
                 .getComponent()
                 .inject(this);
+        takedata();
 
         ButterKnife.bind(this);
-
-        takedata();
+        setdata();
     }
     private void takedata(){
         realm.beginTransaction();
         dataPenduduk = realm.where(PendudukRealm.class).equalTo("idPenduduk", idPenduduk).findFirst();
         itemDetail = new Penduduk(dataPenduduk);
         realm.commitTransaction();
-
-        setdata();
     }
     private void setdata(){
         nik.setText(dataPenduduk.getNIK());
@@ -122,4 +127,21 @@ public class DetailPendudukActivity extends AppCompatActivity {
         }
 
     }
+
+    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    //Yes button clicked
+                    CRUPendudukFragment.setDeletedData(itemDetail, appComponent);
+                    startActivity(ListPendudukActivity.createIntent(getApplicationContext()));
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    //No button clicked
+                    break;
+            }
+        }
+    };
 }

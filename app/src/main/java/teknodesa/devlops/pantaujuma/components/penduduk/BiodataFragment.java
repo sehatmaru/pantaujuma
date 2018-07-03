@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -248,6 +249,11 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
         Penduduk newItem = new Penduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin, strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strStatus, isDeleted);
 
         return newItem;
+    }
+
+    @Override
+    public void setUIData(Parcelable uiData) {
+        //Toast.makeText(getContext(), "BiodataFragment: "+uiData.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

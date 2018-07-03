@@ -48,6 +48,11 @@ public class CRUKegiatanPencangkulanFragment extends Fragment  implements LahanC
     }
 
     @Override
+    public void setUIData(Parcelable uiData) {
+
+    }
+
+    @Override
     public void saveData(String tipe, Parcelable itemData) {
         LahanContract.Controller<LahanRealm> mController = new LahanController(this);
         LahanRealm uiItem = getUIData();

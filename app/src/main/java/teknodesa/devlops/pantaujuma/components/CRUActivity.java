@@ -35,6 +35,8 @@ import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class CRUActivity extends AppCompatActivity {
     private String mJenisCRU;
@@ -77,6 +79,7 @@ public class CRUActivity extends AppCompatActivity {
         mIntent.putExtra("jenisCRU", mJenisCRU);
         mIntent.putExtra("action", mAction);
         mIntent.putExtra("data", mData);
+
         return mIntent;
     }
 
@@ -101,7 +104,7 @@ public class CRUActivity extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             this.mJenisCRU = bundle.getString("jenisCRU");
             this.mAction = bundle.getString("action");
-            this.mData = mData;
+            this.mData = bundle.getParcelable("data");
             //Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
 
             switch (mJenisCRU){
@@ -117,6 +120,23 @@ public class CRUActivity extends AppCompatActivity {
                 case "alsintan": replaceFragment(cruAlsintanFragment); break;
                 case "harga": replaceFragment(cruHargaFragment); break;
                 case "survei": replaceFragment(cruSurveiFragment); break;
+            }
+
+            if(mAction.equals("update")){
+                switch (mJenisCRU){
+                    case "penduduk": Parcelable horas = mData; cruPendudukFragment.setUIData(horas); break;
+                    case "petani": replaceFragment(cruPetaniFragment); break;
+                    case "poktan": replaceFragment(cruPoktanFragment); break;
+                    case "rdk": replaceFragment(cruRDKFragment); break;
+                    case "rdkk": replaceFragment(cruRDKKPupukSubsidiFragment); break;
+                    case "rktp": replaceFragment(cruRKTPFragment); break;
+                    case "target": replaceFragment(cruTargetPetugasFragment); break;
+                    case "lahan": replaceFragment(cruLahanFragment); break;
+                    case "komoditas": replaceFragment(cruKomoditasFragment); break;
+                    case "alsintan": replaceFragment(cruAlsintanFragment); break;
+                    case "harga": replaceFragment(cruHargaFragment); break;
+                    case "survei": replaceFragment(cruSurveiFragment); break;
+                }
             }
 
             btnAction.setOnClickListener(new View.OnClickListener() {

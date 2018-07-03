@@ -15,6 +15,8 @@ import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.home.HomeJumaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
@@ -93,6 +95,14 @@ public class AppModule {
     @Provides
     @Singleton
     HomeJumaFragment provideHomeJumaFragment(){return new HomeJumaFragment();}
+
+    @Provides
+    @Singleton
+    BiodataFragment provideBiodataFragment(){return new BiodataFragment();}
+
+    @Provides
+    @Singleton
+    AlamatFragment provideAlamatFragment(){return new AlamatFragment();}
 
     @Provides
     @Singleton
