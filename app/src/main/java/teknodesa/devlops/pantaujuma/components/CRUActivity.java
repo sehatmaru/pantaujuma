@@ -39,9 +39,9 @@ import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class CRUActivity extends AppCompatActivity {
-    private String mJenisCRU;
-    private String mAction;
-    private Parcelable mData;
+    static String mJenisCRU;
+    static String mAction;
+    static Parcelable mData;
 
     @Inject
     CRUPendudukFragment cruPendudukFragment;
@@ -75,12 +75,10 @@ public class CRUActivity extends AppCompatActivity {
     Button btnAction;
 
     public static Intent createIntent(Context context, String mJenisCRU, String mAction, Parcelable mData) {
-        Intent mIntent = new Intent(context, CRUActivity.class);
-        mIntent.putExtra("jenisCRU", mJenisCRU);
-        mIntent.putExtra("action", mAction);
-        mIntent.putExtra("data", mData);
-
-        return mIntent;
+        CRUActivity.mJenisCRU = mJenisCRU;
+        CRUActivity.mAction = mAction;
+        CRUActivity.mData = mData;
+        return new Intent(context, CRUActivity.class);
     }
 
     @Override
@@ -124,7 +122,7 @@ public class CRUActivity extends AppCompatActivity {
 
             if(mAction.equals("update")){
                 switch (mJenisCRU){
-                    case "penduduk": Parcelable horas = mData; cruPendudukFragment.setUIData(horas); break;
+                    case "penduduk": cruPendudukFragment.setUIData(); break;
                     case "petani": replaceFragment(cruPetaniFragment); break;
                     case "poktan": replaceFragment(cruPoktanFragment); break;
                     case "rdk": replaceFragment(cruRDKFragment); break;

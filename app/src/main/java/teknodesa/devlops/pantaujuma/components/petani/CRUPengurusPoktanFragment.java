@@ -61,7 +61,7 @@ public class CRUPengurusPoktanFragment extends Fragment implements PetaniContrac
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

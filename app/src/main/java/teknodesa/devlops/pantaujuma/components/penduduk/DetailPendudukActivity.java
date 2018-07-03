@@ -67,6 +67,7 @@ public class DetailPendudukActivity extends AppCompatActivity {
     @OnClick(R.id.btnEdit)
     void clickEdit() {
         startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
+
     }
 
 

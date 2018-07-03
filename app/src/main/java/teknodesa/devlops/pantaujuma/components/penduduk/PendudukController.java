@@ -1,5 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import io.realm.RealmResults;
@@ -63,5 +64,6 @@ public class PendudukController implements PendudukContract.Controller<PendudukR
                     break;
             }
         }
+        //(Activity)mView.startActivity(KelahiranActivity.createIntent(getApplicationContext()));
     }
 }

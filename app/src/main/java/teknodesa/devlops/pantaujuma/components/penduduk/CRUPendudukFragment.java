@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -138,16 +139,19 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
 
         String hh = newPenduduk.toString();
         hh = hh + " - "+newAlamat.toString();
-        Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
         return newRealmItem;
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
+        /*Penduduk a = (Penduduk) uiData;
+        Log.d("horassana", uiData.toString());
         //Toast.makeText(getActivity(), "HORAS: "+uiData.toString(), Toast.LENGTH_SHORT).show();
-          if(biodataFragment!=null){biodataFragment.setUIData(uiData);}
+          //if(biodataFragment!=null){biodataFragment.setUIData(uiData);}
 
-        alamatFragment.setUIData(uiData);
+        biodataFragment.setUIData(uiData);
+        //alamatFragment.setUIData(uiData);*/
     }
 
     public static void setDeletedData(Parcelable itemData, AppComponent appComp) {

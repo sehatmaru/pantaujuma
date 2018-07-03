@@ -67,7 +67,7 @@ public class CRUTargetPetugasFragment extends Fragment implements LahanContract.
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

@@ -82,7 +82,7 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {/*
+    public void setUIData() {/*
         Penduduk theUIData = (Penduduk) uiData;
         input_alamat.setText(theUIData.getAlamat());
         input_rt.setText(theUIData.getRt());

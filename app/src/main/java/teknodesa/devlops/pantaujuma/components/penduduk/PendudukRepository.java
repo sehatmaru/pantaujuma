@@ -26,24 +26,16 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
     @Override
     public void addItem(PendudukRealm item) {
         Log.e("Error", "Masuk addItem success");
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                PendudukRealm pendudukRealm = bgRealm.copyToRealm(item);
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                // Transaction was a success.
-                mController.responseCRUD(true, "create");
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                // Transaction failed and was automatically canceled.
-                mController.responseCRUD(false, "create");
-            }
+        realm.beginTransaction();
+        realm.executeTransactionAsync(realmIns -> {
+                realmIns.insertOrUpdate(item);
+        }, () -> {
+            mController.responseCRUD(true, "create");
+        },(Throwable throwable)->{
+            Log.e("eror",throwable.getMessage().toString());
+            mController.responseCRUD(false, "create");
         });
+        realm.commitTransaction();
     }
 
     @Override

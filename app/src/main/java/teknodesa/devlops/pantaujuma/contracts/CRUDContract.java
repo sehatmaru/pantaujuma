@@ -25,7 +25,7 @@ public class CRUDContract {
 
     public interface ViewController<U>{
         U getUIData();
-        void setUIData(Parcelable uiData);
+        void setUIData();
         void saveData(String tipe, Parcelable itemData); //update;insert
     }
 
