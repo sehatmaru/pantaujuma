@@ -1,33 +1,30 @@
-package teknodesa.devlops.pantaujuma.components.petani;
+package teknodesa.devlops.pantaujuma.components.lahan;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.contracts.CRUDContract;
-import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 
-public class ListPetaniRepository implements CRUDContract.Repository<PetaniRealm> {
-    private ListPetaniController mController;
-
+public class LahanRepository implements LahanContract.Repository<LahanRealm> {
     @Inject
     Realm realm;
 
-    public ListPetaniRepository(ListPetaniController mController, @NonNull AppComponent appComponent) {
+    private LahanContract.Controller mController;
+
+    public LahanRepository(LahanContract.Controller mController) {
         this.mController = mController;
-        appComponent.inject(this);
     }
 
     @Override
-    public void addItem(PetaniRealm item) {
+    public void addItem(LahanRealm item) {
+        Log.e("Error", "Masuk addItem success");
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
-                PetaniRealm newItem = realm.copyToRealm(item);
+                LahanRealm LahanRealm = bgRealm.copyToRealm(item);
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override
@@ -45,35 +42,39 @@ public class ListPetaniRepository implements CRUDContract.Repository<PetaniRealm
     }
 
     @Override
-    public void updateItem(int idItem, PetaniRealm item) {
-        realm.executeTransaction(new Realm.Transaction() {
+    public void updateItem(int idItem, LahanRealm item) {
+        Log.e("Error", "Masuk addItem success");
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
-            public void execute(Realm realm) {
-                PetaniRealm updatedItem = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findFirst();
-                updatedItem.setBiodata(item.getBiodata());
-                updatedItem.setFoto(item.getFoto());
-                updatedItem.setDeskripsi(item.getDeskripsi());
-                updatedItem.setStatus(item.getStatus());
+            public void execute(Realm bgRealm) {
+                bgRealm.insertOrUpdate(item);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                // Transaction was a success.
+                mController.responseCRUD(true, "create");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                // Transaction failed and was automatically canceled.
+                mController.responseCRUD(false, "create");
             }
         });
     }
 
     @Override
     public void deleteItem(int idItem) {
-        // obtain the results of a query
-        final RealmResults<PetaniRealm> results = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findAll();
+    // obtain the results of a query
+        final RealmResults<LahanRealm> results = realm.where(LahanRealm.class).equalTo("idLahan", idItem).findAll();
 
-        // All changes to data must happen in a transaction
+    // All changes to data must happen in a transaction
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 // remove single match
-                if (results.deleteFirstFromRealm()) {
-                    mController.responseCRUD(true, "create");
-                } else {
-                    mController.responseCRUD(false, "create");
-                }
-
+                results.deleteFirstFromRealm();
             }
         });
     }
@@ -81,7 +82,7 @@ public class ListPetaniRepository implements CRUDContract.Repository<PetaniRealm
     @Override
     public void setItemDeleted(int idItem) {
         Log.e("Error", "Masuk setItemDeleted success");
-        PetaniRealm deletedItem = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findFirst();
+        LahanRealm deletedItem = realm.where(LahanRealm.class).equalTo("idPetani", idItem).findFirst();
 
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override

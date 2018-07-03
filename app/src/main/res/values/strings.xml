@@ -25,6 +25,8 @@
 
     <!--CRU Action-->
     <string name="simpan">Simpan Data</string>
+    <string name="edit">Edit Data</string>
+    <string name="delete">Hapus Data</string>
     <string name="update">Update Data</string>
 
     <!--RDK-->

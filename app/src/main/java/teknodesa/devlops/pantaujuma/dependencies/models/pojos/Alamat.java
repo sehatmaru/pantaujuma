@@ -132,4 +132,22 @@ public class Alamat {
     public void setNoTelp(String noTelp) {
         this.noTelp = noTelp;
     }
+
+    @Override
+    public String toString() {
+        return "Alamat{" +
+                "alamat='" + alamat + '\'' +
+                ", rt='" + rt + '\'' +
+                ", rw='" + rw + '\'' +
+                ", dusun='" + dusun + '\'' +
+                ", desa='" + desa + '\'' +
+                ", kecamatan='" + kecamatan + '\'' +
+                ", datiII='" + datiII + '\'' +
+                ", provinsi='" + provinsi + '\'' +
+                ", kodePos=" + kodePos +
+                ", email='" + email + '\'' +
+                ", noHP='" + noHP + '\'' +
+                ", noTelp='" + noTelp + '\'' +
+                '}';
+    }
 }

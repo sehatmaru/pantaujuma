@@ -7,6 +7,9 @@ package teknodesa.devlops.pantaujuma.contracts;
  */
 
 
+import android.os.Parcelable;
+
+import io.realm.RealmModel;
 import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
@@ -22,13 +25,15 @@ public class CRUDContract {
 
     public interface ViewController<U>{
         U getUIData();
-        void saveData(String tipe); //update;insert
+        void setUIData(Parcelable uiData);
+        void saveData(String tipe, Parcelable itemData); //update;insert
     }
 
     public interface Controller<U> {
         void addItem(U item);
         void updateItem(int idItem, U item);
         void deleteItem(int idItem);
+        void setItemDeleted(int idItem);
 
         void responseCRUD(boolean status, String type); //dipanggil setelah data sudah diterima dari  Repository
     }
@@ -37,5 +42,6 @@ public class CRUDContract {
         void addItem(U item);
         void updateItem(int idItem, U item);
         void deleteItem(int idItem);
+        void setItemDeleted(int idItem);
     }
 }

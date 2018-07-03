@@ -44,7 +44,7 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
     private final String mJenisCRU = "penduduk";
 
     private List<PendudukRealm> listpenduduk = Collections.EMPTY_LIST;
-    List<Penduduk> listPendudukRealm = Collections.EMPTY_LIST;
+    List<PendudukRealm> listPendudukRealm = Collections.EMPTY_LIST;
 
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     PendudukAdapter pendudukAdapter;
@@ -75,7 +75,7 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
 
     @OnClick(R.id.fabTambah)
     void clickCheckOut() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "create", null));
+        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "insert", null));
     }
 
     public static Intent createIntent(Context context) {
@@ -96,7 +96,7 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         realm.beginTransaction();
-        listPendudukRealm = realm.where(Penduduk.class).findAll();
+        listPendudukRealm = realm.where(PendudukRealm.class).findAll();
         realm.commitTransaction();
 
         realm.beginTransaction();

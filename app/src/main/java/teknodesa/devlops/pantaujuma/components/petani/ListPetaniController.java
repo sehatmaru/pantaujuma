@@ -24,6 +24,11 @@ public class ListPetaniController implements CRUDContract.Controller<PetaniRealm
     }
 
     @Override
+    public void setItemDeleted(int idItem) {
+        mRepository.setItemDeleted(idItem);
+    }
+
+    @Override
     public void responseCRUD(boolean status, String type) {
         mView.showNotification("title", "header", "berhasil");
     }

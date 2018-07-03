@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,19 +18,32 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmModel;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<PendudukRealm>, PendudukContract.View{
+    @Inject
+    Realm realm;
+
+    private AppComponent appComponent;
     FragmentActivity activity;
 
+    @Inject
     BiodataFragment biodataFragment;
+
+    @Inject
     AlamatFragment alamatFragment;
+
     ViewPagerAdapter adapter;
 
     @BindView(R.id.tabs)
@@ -41,6 +55,8 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+
+        appComponent = ((MainApplication) getActivity().getApplication()).getComponent();
         ((MainApplication) getActivity().getApplication())
                 .getComponent()
                 .inject(this);
@@ -57,8 +73,6 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         setupTabIcons();
         viewPager.setCurrentItem(0);
         //viewPager.getCurrentItem();
-
-        //Penduduk newItem = new Penduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin, strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strAlamat, strRt, strRw, strDusun, strDesa, strKecamatan, strDatiII, strProvinsi, strNoHP, strNoTelp, strStatus);
 
         return v;
     }
@@ -78,9 +92,6 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     }
 
     private void setViewpager() {
-        biodataFragment = new BiodataFragment();
-        alamatFragment = new AlamatFragment();
-
         adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
         adapter.addFragment(biodataFragment);
@@ -123,21 +134,39 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         newRealmItem.setNoHP(newAlamat.getNoHP());
         newRealmItem.setNoTelp(newAlamat.getNoTelp());
 
+        newRealmItem.setDeleted(false);
+
         String hh = newPenduduk.toString();
+        hh = hh + " - "+newAlamat.toString();
         Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
-        return null;
+        return newRealmItem;
     }
 
     @Override
-    public void saveData(String tipe) {
-        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this);
+    public void setUIData(Parcelable uiData) {
+        //Toast.makeText(getActivity(), "HORAS: "+uiData.toString(), Toast.LENGTH_SHORT).show();
+          if(biodataFragment!=null){biodataFragment.setUIData(uiData);}
+
+        alamatFragment.setUIData(uiData);
+    }
+
+    public static void setDeletedData(Parcelable itemData, AppComponent appComp) {
+        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(new CRUPendudukFragment(), appComp);
+        int idItem = ((Penduduk) itemData).getIdPenduduk();
+        mController.setItemDeleted(idItem);
+    }
+
+    @Override
+    public void saveData(String tipe, Parcelable itemData) {
+        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this, appComponent);
         PendudukRealm uiItem = getUIData();
 
         if(tipe.equals("insert")){
             mController.addItem(uiItem);
         }else{
             if(tipe.equals("update")){
-                //TODO: implement this
+                int idItem = ((Penduduk) itemData).getIdPenduduk();
+                mController.updateItem(idItem, uiItem);
             }
         }
     }
@@ -166,13 +195,5 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         public void addFragment(Fragment fragment) {
             mFragmentList.add(fragment);
         }
-    }
-
-    public void replaceFragment(Fragment fragment) {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.viewPager, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.commit();
     }
 }

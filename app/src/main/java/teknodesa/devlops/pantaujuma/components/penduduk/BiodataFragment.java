@@ -3,6 +3,7 @@ package teknodesa.devlops.pantaujuma.components.penduduk;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -242,14 +244,20 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
         String strPekerjaan = input_pekerjaan.getSelectedItem().toString();
         String strPendidikan = input_pendidikan.getSelectedItem().toString();
         String strStatus = "aktif";
+        boolean isDeleted = false;
 
-        Penduduk newItem = new Penduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin, strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strStatus);
+        Penduduk newItem = new Penduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin, strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strStatus, isDeleted);
 
         return newItem;
     }
 
     @Override
-    public void saveData(String tipe) {
+    public void setUIData(Parcelable uiData) {
+        //Toast.makeText(getContext(), "BiodataFragment: "+uiData.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void saveData(String tipe, Parcelable itemData) {
         //not implemented yet
     }
 }

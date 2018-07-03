@@ -1,8 +1,8 @@
-package teknodesa.devlops.pantaujuma.components.petani;
+package teknodesa.devlops.pantaujuma.components.lahan;
 
 import teknodesa.devlops.pantaujuma.contracts.CRUDContract;
 
-public class PetaniContract {
+public class LahanContract {
     public interface View extends CRUDContract.View{
 
     }

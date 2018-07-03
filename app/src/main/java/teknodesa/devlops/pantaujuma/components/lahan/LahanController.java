@@ -1,28 +1,24 @@
-package teknodesa.devlops.pantaujuma.components.penduduk;
+package teknodesa.devlops.pantaujuma.components.lahan;
 
-
-import android.support.annotation.NonNull;
-
-import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 
-public class PendudukController implements PendudukContract.Controller<PendudukRealm> {
-    PendudukContract.View mView;
-    PendudukContract.Repository<PendudukRealm> mRepository;
+public class LahanController implements LahanContract.Controller<LahanRealm> {
+    LahanContract.View mView;
+    LahanContract.Repository<LahanRealm> mRepository;
 
-    public PendudukController(PendudukContract.View mView, @NonNull AppComponent appComponent){
+    public LahanController(LahanContract.View mView){
         this.mView = mView;
-        this.mRepository = new PendudukRepository(this, appComponent);
+        this.mRepository = new LahanRepository(this);
     }
 
     @Override
-    public void addItem(PendudukRealm item) {
+    public void addItem(LahanRealm item) {
         mRepository.addItem(item);
     }
 
     @Override
-    public void updateItem(int idItem, PendudukRealm item) {
+    public void updateItem(int idItem, LahanRealm item) {
         mRepository.updateItem(idItem, item);
     }
 

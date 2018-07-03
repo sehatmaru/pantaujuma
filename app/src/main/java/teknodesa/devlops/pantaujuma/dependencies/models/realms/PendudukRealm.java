@@ -3,6 +3,7 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 
 /**
@@ -37,11 +38,52 @@ public class PendudukRealm extends RealmObject {
     private String status;
     private int kodePos;
     private String email;
+    private boolean isDeleted;
 
     public PendudukRealm() {
     }
 
-    public PendudukRealm(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, RealmList<LahanRealm> daftarLahan, String status, int kodePos, String email) {
+    public PendudukRealm (Penduduk penduduk){
+        this.idPenduduk = penduduk.getIdPenduduk();
+        this.NIK = penduduk.getNIK();
+        this.foto = String.valueOf(penduduk.getFoto());
+        this.namaDepan = penduduk.getNamaDepan();
+        this.namaBelakang = penduduk.getNamaBelakang();
+        this.jenisKelamin = penduduk.getJenisKelamin();
+        this.tempatLahir = penduduk.getTempatLahir();
+        this.tanggalLahir = penduduk.getTanggalLahir();
+
+        this.agama = penduduk.getAgama();
+        this.golonganDarah = penduduk.getGolonganDarah();
+        this.pekerjaan = penduduk.getPekerjaan();
+        this.pendidikan = penduduk.getPendidikan();
+
+        this.alamat = penduduk.getAlamat();
+        this.rt = penduduk.getRt();
+        this.rw = penduduk.getRw();
+
+        this.dusun = penduduk.getDusun();
+        this.desa = penduduk.getDesa();
+        this.kecamatan = penduduk.getKecamatan();
+        this.datiII = penduduk.getDatiII();
+        this.provinsi = penduduk.getProvinsi();
+
+        this.noHP = noHP;
+        this.noTelp = noTelp;
+        this.status = status;
+        this.kodePos = kodePos;
+        this.email = email;
+
+        this.noHP = penduduk.getNoHP();
+        this.noTelp = penduduk.getNoTelp();
+        this.status = penduduk.getStatus();
+        this.kodePos = penduduk.getKodePos();
+        this.email = penduduk.getEmail();
+
+        this.isDeleted = penduduk.isDeleted();
+    }
+
+    public PendudukRealm(String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, RealmList<LahanRealm> daftarLahan, String status, int kodePos, String email, boolean isDeleted) {
         this.NIK = NIK;
         this.foto = foto;
         this.namaDepan = namaDepan;
@@ -67,6 +109,7 @@ public class PendudukRealm extends RealmObject {
         this.status = status;
         this.kodePos = kodePos;
         this.email = email;
+        this.isDeleted = isDeleted;
     }
 
     public int getIdPenduduk() {
@@ -277,6 +320,14 @@ public class PendudukRealm extends RealmObject {
         this.email = email;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "PendudukRealm{" +
@@ -306,6 +357,7 @@ public class PendudukRealm extends RealmObject {
                 ", status='" + status + '\'' +
                 ", kodePos=" + kodePos +
                 ", email='" + email + '\'' +
+                ", isDeleted=" + isDeleted +
                 '}';
     }
 }

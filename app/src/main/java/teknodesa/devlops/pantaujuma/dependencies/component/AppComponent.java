@@ -16,9 +16,13 @@ import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.ListKomoditasActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
+import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukRepository;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petani.ListPetaniActivity;
@@ -56,9 +60,11 @@ public interface AppComponent {
     //Controllers
     void inject(SplashscreenController controller);
     void inject(LoginController controller);
+    void inject(PendudukController controller);
 
     //Repository
     void inject(ListPetaniRepository repository);
+    void inject(PendudukRepository repository);
 
     //Activity
     void inject(SplashscreenActivity activity);
@@ -94,4 +100,6 @@ public interface AppComponent {
     void inject(CRUAlsintanFragment fragment);
     void inject(CRUHargaFragment fragment);
     void inject(CRUSurveiFragment fragment);
+    void inject(BiodataFragment fragment);
+    void inject(AlamatFragment fragment);
 }
