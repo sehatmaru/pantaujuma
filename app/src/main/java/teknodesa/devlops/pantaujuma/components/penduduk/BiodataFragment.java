@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Agama;
@@ -65,12 +68,22 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
     @BindView(R.id.input_tempatlahir)
     EditText input_tempatlahir;
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MainApplication) getActivity().getApplication())
+                .getComponent()
+                .inject(this);
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myCalendar = Calendar.getInstance();
 
-        View v = inflater.inflate(R.layout.fragment_biopenduduk, container, false);
+        View v = inflater.inflate(R.layout.fragment_biopenduduk, null);
         ButterKnife.bind(this, v);
 
         input_golongandarah.setAdapter(new ArrayAdapter<GolonganDarah>(getActivity(), R.layout.spinner_item, GolonganDarah.values()) {
@@ -225,6 +238,12 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setUIData();
+    }
+
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -256,7 +275,10 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
     @Override
     public void setUIData() {
         Penduduk theUIData = (Penduduk) CRUActivity.mData;
-        input_nik.setText (theUIData.getNIK()+ "");
+        //Toast.makeText(CRUActivity.mContext.getApplicationContext(), theUIData.toString(), Toast.LENGTH_SHORT).show();
+        input_nik.setText (theUIData.getNIK().toString()+"");
+        Log.e("nikdata",theUIData.getNIK()+ " ----------------");
+        Toast.makeText(CRUActivity.mContext.getApplicationContext(), input_nik.getText()+" - horas", Toast.LENGTH_SHORT).show();
 
         input_namadepan.setText  (theUIData.getNamaDepan()+ "");
         input_namabelakang.setText  (theUIData.getNamaBelakang()+ "");

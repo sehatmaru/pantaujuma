@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
@@ -52,17 +54,30 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
     @BindView(R.id.input_telp)
     EditText input_telp;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MainApplication) getActivity().getApplication())
+                .getComponent()
+                .inject(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_alamat, container, false);
+        View v = inflater.inflate(R.layout.fragment_alamat, null);
         ButterKnife.bind(this, v);
 
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setUIData();
+    }
+    
     @Override
     public Alamat getUIData() {
         String strAlamat = input_alamat.getText().toString();

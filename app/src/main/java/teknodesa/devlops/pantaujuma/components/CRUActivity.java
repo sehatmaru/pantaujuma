@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -27,7 +25,6 @@ import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
-import teknodesa.devlops.pantaujuma.components.petani.CRUPengurusPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
@@ -35,8 +32,6 @@ import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class CRUActivity extends AppCompatActivity {
     public static String mJenisCRU;
@@ -137,7 +132,7 @@ public class CRUActivity extends AppCompatActivity {
         if (CRUActivity.mAction.equals("update")) {
             switch (CRUActivity.mJenisCRU) {
                 case "penduduk":
-                    cruPendudukFragment.setUIData();
+                    replaceFragment(cruPendudukFragment);
                     break;
                 case "petani":
                     replaceFragment(cruPetaniFragment);

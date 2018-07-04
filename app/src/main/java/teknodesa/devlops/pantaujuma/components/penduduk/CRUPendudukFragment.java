@@ -79,6 +79,13 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        setUIData();
+    }
+
+
     private void setupTabIcons() {
         //Pager Biodata
         TextView tabPenduduk = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
