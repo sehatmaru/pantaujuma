@@ -11,7 +11,9 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 
 public class AlamatFragment extends Fragment implements PendudukContract.ViewController<Alamat>{
     @BindView(R.id.input_alamat)
@@ -82,20 +84,20 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
     }
 
     @Override
-    public void setUIData() {/*
-        Penduduk theUIData = (Penduduk) uiData;
-        input_alamat.setText(theUIData.getAlamat());
-        input_rt.setText(theUIData.getRt());
-        input_rw.setText(theUIData.getRw());
-        input_dusun.setText(theUIData.getDusun());
-        input_desa.setText(theUIData.getDesa());
-        input_kecamatan.setText(theUIData.getKecamatan());
-        input_datiii.setText(theUIData.getDatiII());
-        input_provinsi.setText(theUIData.getProvinsi());
-        input_kodepos.setText(theUIData.getKodePos());
-        input_email.setText(theUIData.getEmail());
-        input_hp.setText(theUIData.getNoHP());
-        input_telp.setText(theUIData.getNoTelp());*/
+    public void setUIData() {
+        Penduduk theUIData = (Penduduk) CRUActivity.mData;
+        input_alamat.setText(theUIData.getAlamat()+ "");
+        input_rt.setText(theUIData.getRt()+ "");
+        input_rw.setText(theUIData.getRw()+ "");
+        input_dusun.setText(theUIData.getDusun()+ "");
+        input_desa.setText(theUIData.getDesa()+ "");
+        input_kecamatan.setText(theUIData.getKecamatan()+ "");
+        input_datiii.setText(theUIData.getDatiII()+ "");
+        input_provinsi.setText(theUIData.getProvinsi()+ "");
+        input_kodepos.setText(theUIData.getKodePos()+ "");
+        input_email.setText(theUIData.getEmail()+ "");
+        input_hp.setText(theUIData.getNoHP()+ "");
+        input_telp.setText(theUIData.getNoTelp()+ "");
     }
 
     @Override

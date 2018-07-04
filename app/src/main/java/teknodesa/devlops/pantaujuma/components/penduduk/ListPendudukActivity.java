@@ -76,6 +76,7 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
     @OnClick(R.id.fabTambah)
     void clickCheckOut() {
         startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "insert", null));
+        finish();
     }
 
     public static Intent createIntent(Context context) {
@@ -109,7 +110,6 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
 
         checkDataRealm();
         setDataPenduduk();
-
     }
 
     private void populateInitialData(){
@@ -199,7 +199,6 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_eidu, menu);
         return true;
-
     }
 
     private void setDataPenduduk(){

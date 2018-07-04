@@ -1,5 +1,8 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Pendidikan {
     CHOOSE("Pendidikan"),
     BELUM_SEKOLAH("Tidak/Belum Sekolah"),
@@ -14,6 +17,16 @@ public enum Pendidikan {
     STRATA_III("Strata III");
 
     private String opsi;
+    private static final Map<String, Pendidikan> map = new HashMap<>();
+    static {
+        for (Pendidikan en : values()) {
+            map.put(en.toString(), en);
+        }
+    }
+
+    public static Pendidikan valueFor(String name) {
+        return map.get(name);
+    }
 
     Pendidikan(String opsi) {
         this.opsi = opsi;

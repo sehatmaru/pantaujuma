@@ -27,12 +27,13 @@ import io.realm.Realm;
 import io.realm.RealmModel;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
-public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<PendudukRealm>, PendudukContract.View{
+public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<Penduduk>, PendudukContract.View {
     @Inject
     Realm realm;
 
@@ -104,11 +105,11 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     }
 
     @Override
-    public PendudukRealm getUIData() {
+    public Penduduk getUIData() {
         Penduduk newPenduduk = biodataFragment.getUIData();
         Alamat newAlamat = alamatFragment.getUIData();
 
-        PendudukRealm newRealmItem = new PendudukRealm();
+        Penduduk newRealmItem = new Penduduk();
 
         newRealmItem.setNIK(newPenduduk.getNIK());
         newRealmItem.setNamaDepan(newPenduduk.getNamaDepan());
@@ -138,37 +139,41 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         newRealmItem.setDeleted(false);
 
         String hh = newPenduduk.toString();
-        hh = hh + " - "+newAlamat.toString();
+        hh = hh + " - " + newAlamat.toString();
         //Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
         return newRealmItem;
     }
 
     @Override
     public void setUIData() {
-        /*Penduduk a = (Penduduk) uiData;
-        Log.d("horassana", uiData.toString());
-        //Toast.makeText(getActivity(), "HORAS: "+uiData.toString(), Toast.LENGTH_SHORT).show();
-          //if(biodataFragment!=null){biodataFragment.setUIData(uiData);}
+        if (biodataFragment != null) {
+            biodataFragment.setUIData();
+        } else {
+            Toast.makeText(CRUActivity.mContext, "biodata", Toast.LENGTH_SHORT).show();
+        }
 
-        biodataFragment.setUIData(uiData);
-        //alamatFragment.setUIData(uiData);*/
+        if (alamatFragment != null) {
+            alamatFragment.setUIData();
+        } else {
+            Toast.makeText(CRUActivity.mContext, "alamat", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static void setDeletedData(Parcelable itemData, AppComponent appComp) {
-        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(new CRUPendudukFragment(), appComp);
+        PendudukContract.Controller<Penduduk> mController = new PendudukController(new CRUPendudukFragment(), appComp);
         int idItem = ((Penduduk) itemData).getIdPenduduk();
         mController.setItemDeleted(idItem);
     }
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
-        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this, appComponent);
-        PendudukRealm uiItem = getUIData();
+        PendudukContract.Controller<Penduduk> mController = new PendudukController(this, appComponent);
+        Penduduk uiItem = getUIData();
 
-        if(tipe.equals("insert")){
+        if (tipe.equals("insert")) {
             mController.addItem(uiItem);
-        }else{
-            if(tipe.equals("update")){
+        } else {
+            if (tipe.equals("update")) {
                 int idItem = ((Penduduk) itemData).getIdPenduduk();
                 mController.updateItem(idItem, uiItem);
             }
@@ -177,7 +182,8 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
 
     @Override
     public void showNotification(String title, String header, String message) {
-
+        Toast.makeText(CRUActivity.mContext, message, Toast.LENGTH_SHORT).show();
+        startActivity(ListPendudukActivity.createIntent(CRUActivity.mContext));
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -186,6 +192,7 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
+
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);

@@ -22,6 +22,7 @@ import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukRepository;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
@@ -46,7 +47,6 @@ import teknodesa.devlops.pantaujuma.dependencies.modules.AppModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
-import teknodesa.devlops.pantaujuma.dependencies.webservices.services.RegisterService;
 
 @Singleton
 @Component(modules = {AppModule.class, RealmModule.class, WebServiceModule.class})
@@ -55,7 +55,6 @@ public interface AppComponent {
 
     //Service
     void inject(LoginService service);
-    void inject(RegisterService service);
 
     //Controllers
     void inject(SplashscreenController controller);
@@ -102,4 +101,5 @@ public interface AppComponent {
     void inject(CRUSurveiFragment fragment);
     void inject(BiodataFragment fragment);
     void inject(AlamatFragment fragment);
+    void inject(PendudukFragment fragment);
 }
