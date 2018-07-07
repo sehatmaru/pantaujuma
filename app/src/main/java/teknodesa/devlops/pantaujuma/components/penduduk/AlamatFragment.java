@@ -2,6 +2,7 @@ package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,14 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
         ButterKnife.bind(this, v);
 
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //Toast.makeText(getContext(), "BiodataFragment: "+uiData.toString(), Toast.LENGTH_SHORT).show();
+        input_alamat = (EditText) getActivity().findViewById(R.id.input_alamat);
+//        tvSwitch = (TextView) getActivity().findViewById(R.id.tvSwitch);
     }
 
     @Override

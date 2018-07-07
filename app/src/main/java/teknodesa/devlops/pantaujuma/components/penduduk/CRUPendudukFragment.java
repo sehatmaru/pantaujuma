@@ -2,6 +2,7 @@ package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +62,17 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         ((MainApplication) getActivity().getApplication())
                 .getComponent()
                 .inject(this);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        biodataFragment = new BiodataFragment();
+        alamatFragment = new AlamatFragment();
+
+        Toast.makeText(getActivity(), "Masuk Form", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -145,9 +158,9 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     @Override
     public void setUIData(Parcelable uiData) {
         //Toast.makeText(getActivity(), "HORAS: "+uiData.toString(), Toast.LENGTH_SHORT).show();
-          if(biodataFragment!=null){biodataFragment.setUIData(uiData);}
+          //if(biodataFragment!=null){biodataFragment.setUIData(uiData);}
 
-        alamatFragment.setUIData(uiData);
+        //alamatFragment.setUIData(uiData);
     }
 
     public static void setDeletedData(Parcelable itemData, AppComponent appComp) {

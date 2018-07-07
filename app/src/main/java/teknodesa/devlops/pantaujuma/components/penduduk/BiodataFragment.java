@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -21,6 +24,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Agama;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.GolonganDarah;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.JenisKelamin;
@@ -223,6 +227,16 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
         return v;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //Toast.makeText(getContext(), "BiodataFragment: "+uiData.toString(), Toast.LENGTH_SHORT).show();
+        input_nik = (EditText) getActivity().findViewById(R.id.input_nik);
+//        tvSwitch = (TextView) getActivity().findViewById(R.id.tvSwitch);
+
+        setUIData();
+    }
+
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -253,6 +267,7 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
 
     @Override
     public void setUIData(Parcelable uiData) {
+        input_nik.setText("barlang");
         //Toast.makeText(getContext(), "BiodataFragment: "+uiData.toString(), Toast.LENGTH_SHORT).show();
     }
 
