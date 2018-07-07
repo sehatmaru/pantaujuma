@@ -52,7 +52,7 @@ public class CRUKegiatanPersemaianFragment extends Fragment  implements LahanCon
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

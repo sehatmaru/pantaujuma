@@ -65,7 +65,7 @@ public class CRUKegiatanPemanenanFragment extends Fragment implements LahanContr
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

@@ -13,7 +13,7 @@ public class SplashscreenContract {
     }
 
     public interface Controller {
-        void isLogin();
+        void checkSession();
     }
     public interface Repository {
     }

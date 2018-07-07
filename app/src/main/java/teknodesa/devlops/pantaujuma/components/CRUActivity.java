@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -27,7 +25,6 @@ import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
-import teknodesa.devlops.pantaujuma.components.petani.CRUPengurusPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
@@ -35,13 +32,12 @@ import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
 public class CRUActivity extends AppCompatActivity {
-    private String mJenisCRU;
-    private String mAction;
-    private Parcelable mData;
+    public static String mJenisCRU;
+    public static String mAction;
+    public static Parcelable mData;
+    public static Context mContext;
 
     @Inject
     CRUPendudukFragment cruPendudukFragment;
@@ -75,12 +71,12 @@ public class CRUActivity extends AppCompatActivity {
     Button btnAction;
 
     public static Intent createIntent(Context context, String mJenisCRU, String mAction, Parcelable mData) {
-        Intent mIntent = new Intent(context, CRUActivity.class);
-        mIntent.putExtra("jenisCRU", mJenisCRU);
-        mIntent.putExtra("action", mAction);
-        mIntent.putExtra("data", mData);
+        CRUActivity.mJenisCRU = mJenisCRU;
+        CRUActivity.mAction = mAction;
+        CRUActivity.mData = mData;
+        CRUActivity.mContext = context;
 
-        return mIntent;
+        return new Intent(context, CRUActivity.class);
     }
 
     @Override
@@ -94,69 +90,100 @@ public class CRUActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        /**
-         * Kita cek apakah ada Bundle atau tidak
-         */
-        if (getIntent().getExtras() != null) {
-            /**
-             * Jika Bundle ada, ambil data dari Bundle
-             */
-            Bundle bundle = getIntent().getExtras();
-            this.mJenisCRU = bundle.getString("jenisCRU");
-            this.mAction = bundle.getString("action");
-            this.mData = bundle.getParcelable("data");
-            //Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
-
-            switch (mJenisCRU){
-                case "penduduk": replaceFragment(cruPendudukFragment); break;
-                case "petani": replaceFragment(cruPetaniFragment); break;
-                case "poktan": replaceFragment(cruPoktanFragment); break;
-                case "rdk": replaceFragment(cruRDKFragment); break;
-                case "rdkk": replaceFragment(cruRDKKPupukSubsidiFragment); break;
-                case "rktp": replaceFragment(cruRKTPFragment); break;
-                case "target": replaceFragment(cruTargetPetugasFragment); break;
-                case "lahan": replaceFragment(cruLahanFragment); break;
-                case "komoditas": replaceFragment(cruKomoditasFragment); break;
-                case "alsintan": replaceFragment(cruAlsintanFragment); break;
-                case "harga": replaceFragment(cruHargaFragment); break;
-                case "survei": replaceFragment(cruSurveiFragment); break;
-            }
-
-            if(mAction.equals("update")){
-                switch (mJenisCRU){
-                    case "penduduk": Parcelable horas = mData; cruPendudukFragment.setUIData(horas); break;
-                    case "petani": replaceFragment(cruPetaniFragment); break;
-                    case "poktan": replaceFragment(cruPoktanFragment); break;
-                    case "rdk": replaceFragment(cruRDKFragment); break;
-                    case "rdkk": replaceFragment(cruRDKKPupukSubsidiFragment); break;
-                    case "rktp": replaceFragment(cruRKTPFragment); break;
-                    case "target": replaceFragment(cruTargetPetugasFragment); break;
-                    case "lahan": replaceFragment(cruLahanFragment); break;
-                    case "komoditas": replaceFragment(cruKomoditasFragment); break;
-                    case "alsintan": replaceFragment(cruAlsintanFragment); break;
-                    case "harga": replaceFragment(cruHargaFragment); break;
-                    case "survei": replaceFragment(cruSurveiFragment); break;
-                }
-            }
-
-            btnAction.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    switch (mJenisCRU){
-                        case "penduduk": cruPendudukFragment.saveData(mAction, mData); break;
-                        case "petani": cruPetaniFragment.saveData(mAction, mData); break;
-                    }
-                    // Code here executes on main thread after user presses button
-                }
-            });
-        } else {
-            /**
-             * Apabila Bundle tidak ada, ambil dari Intent
-             */
-            this.mJenisCRU = "-";
-            this.mAction = "-";
-            this.mData = null;
-            //Toast.makeText(getApplicationContext(),"masuk: "+mJenisCRU,Toast.LENGTH_LONG).show();
+        switch (CRUActivity.mJenisCRU) {
+            case "penduduk":
+                replaceFragment(cruPendudukFragment);
+                break;
+            case "petani":
+                replaceFragment(cruPetaniFragment);
+                break;
+            case "poktan":
+                replaceFragment(cruPoktanFragment);
+                break;
+            case "rdk":
+                replaceFragment(cruRDKFragment);
+                break;
+            case "rdkk":
+                replaceFragment(cruRDKKPupukSubsidiFragment);
+                break;
+            case "rktp":
+                replaceFragment(cruRKTPFragment);
+                break;
+            case "target":
+                replaceFragment(cruTargetPetugasFragment);
+                break;
+            case "lahan":
+                replaceFragment(cruLahanFragment);
+                break;
+            case "komoditas":
+                replaceFragment(cruKomoditasFragment);
+                break;
+            case "alsintan":
+                replaceFragment(cruAlsintanFragment);
+                break;
+            case "harga":
+                replaceFragment(cruHargaFragment);
+                break;
+            case "survei":
+                replaceFragment(cruSurveiFragment);
+                break;
         }
+
+/*        if (CRUActivity.mAction.equals("update")) {
+            switch (CRUActivity.mJenisCRU) {
+                case "penduduk":
+                    replaceFragment(cruPendudukFragment);
+                    break;
+                case "petani":
+                    replaceFragment(cruPetaniFragment);
+                    break;
+                case "poktan":
+                    replaceFragment(cruPoktanFragment);
+                    break;
+                case "rdk":
+                    replaceFragment(cruRDKFragment);
+                    break;
+                case "rdkk":
+                    replaceFragment(cruRDKKPupukSubsidiFragment);
+                    break;
+                case "rktp":
+                    replaceFragment(cruRKTPFragment);
+                    break;
+                case "target":
+                    replaceFragment(cruTargetPetugasFragment);
+                    break;
+                case "lahan":
+                    replaceFragment(cruLahanFragment);
+                    break;
+                case "komoditas":
+                    replaceFragment(cruKomoditasFragment);
+                    break;
+                case "alsintan":
+                    replaceFragment(cruAlsintanFragment);
+                    break;
+                case "harga":
+                    replaceFragment(cruHargaFragment);
+                    break;
+                case "survei":
+                    replaceFragment(cruSurveiFragment);
+                    break;
+            }
+        }*/
+
+        btnAction.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                switch (CRUActivity.mJenisCRU) {
+                    case "penduduk":
+                        cruPendudukFragment.saveData(mAction, mData);
+                        break;
+                    case "petani":
+                        cruPetaniFragment.saveData(mAction, mData);
+                        break;
+                }
+                // Code here executes on main thread after user presses button
+                finish();
+            }
+        });
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }

@@ -67,8 +67,8 @@ public class DetailPendudukActivity extends AppCompatActivity {
     @OnClick(R.id.btnEdit)
     void clickEdit() {
         startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
+        finish();
     }
-
 
     @OnClick(R.id.btnHapus)
     void clickHapus() {
@@ -76,7 +76,6 @@ public class DetailPendudukActivity extends AppCompatActivity {
         builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
         builder.setNegativeButton("Tidak", dialogClickListener).show();
     }
-
 
     private PendudukRealm dataPenduduk;
     private Penduduk itemDetail;

@@ -79,7 +79,7 @@ public class CRUDetailRKTPFragment extends Fragment implements PetaniContract.Vi
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

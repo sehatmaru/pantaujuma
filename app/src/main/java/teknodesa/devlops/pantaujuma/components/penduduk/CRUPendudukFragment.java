@@ -10,10 +10,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +28,16 @@ import io.realm.Realm;
 import io.realm.RealmModel;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 
-public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<PendudukRealm>, PendudukContract.View{
+public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<Penduduk>, PendudukContract.View {
+    Penduduk newPenduduk = null;
+    Alamat newAlamat = null;
+
     @Inject
     Realm realm;
 
@@ -65,17 +69,6 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        biodataFragment = new BiodataFragment();
-        alamatFragment = new AlamatFragment();
-
-        Toast.makeText(getActivity(), "Masuk Form", Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -88,6 +81,25 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         //viewPager.getCurrentItem();
 
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        biodataFragment = new BiodataFragment();
+        alamatFragment = new AlamatFragment();
+
+        if(CRUActivity.mAction.equals("insert")){
+            newPenduduk = biodataFragment.getUIData();
+            newAlamat = alamatFragment.getUIData();
+
+            getUIData();
+        }else {
+            if(CRUActivity.mAction.equals("update")){
+                setUIData();
+            }
+        }
     }
 
     private void setupTabIcons() {
@@ -116,11 +128,9 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     }
 
     @Override
-    public PendudukRealm getUIData() {
-        Penduduk newPenduduk = biodataFragment.getUIData();
-        Alamat newAlamat = alamatFragment.getUIData();
+    public Penduduk getUIData() {
 
-        PendudukRealm newRealmItem = new PendudukRealm();
+        Penduduk newRealmItem = new Penduduk();
 
         newRealmItem.setNIK(newPenduduk.getNIK());
         newRealmItem.setNamaDepan(newPenduduk.getNamaDepan());
@@ -150,34 +160,41 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         newRealmItem.setDeleted(false);
 
         String hh = newPenduduk.toString();
-        hh = hh + " - "+newAlamat.toString();
-        Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
+        hh = hh + " - " + newAlamat.toString();
+        //Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
         return newRealmItem;
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
-        //Toast.makeText(getActivity(), "HORAS: "+uiData.toString(), Toast.LENGTH_SHORT).show();
-          //if(biodataFragment!=null){biodataFragment.setUIData(uiData);}
+    public void setUIData() {
+        /*if (biodataFragment != null) {
+            biodataFragment.setUIData();
+        } else {
+            Toast.makeText(CRUActivity.mContext, "biodata", Toast.LENGTH_SHORT).show();
+        }
 
-        //alamatFragment.setUIData(uiData);
+        if (alamatFragment != null) {
+            alamatFragment.setUIData();
+        } else {
+            Toast.makeText(CRUActivity.mContext, "alamat", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
     public static void setDeletedData(Parcelable itemData, AppComponent appComp) {
-        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(new CRUPendudukFragment(), appComp);
+        PendudukContract.Controller<Penduduk> mController = new PendudukController(new CRUPendudukFragment(), appComp);
         int idItem = ((Penduduk) itemData).getIdPenduduk();
         mController.setItemDeleted(idItem);
     }
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
-        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this, appComponent);
-        PendudukRealm uiItem = getUIData();
+        PendudukContract.Controller<Penduduk> mController = new PendudukController(this, appComponent);
+        Penduduk uiItem = getUIData();
 
-        if(tipe.equals("insert")){
+        if (tipe.equals("insert")) {
             mController.addItem(uiItem);
-        }else{
-            if(tipe.equals("update")){
+        } else {
+            if (tipe.equals("update")) {
                 int idItem = ((Penduduk) itemData).getIdPenduduk();
                 mController.updateItem(idItem, uiItem);
             }
@@ -186,7 +203,8 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
 
     @Override
     public void showNotification(String title, String header, String message) {
-
+        Toast.makeText(CRUActivity.mContext, message, Toast.LENGTH_SHORT).show();
+        startActivity(ListPendudukActivity.createIntent(CRUActivity.mContext));
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -195,6 +213,7 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
+
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);

@@ -48,7 +48,7 @@ public class CRUKegiatanPencangkulanFragment extends Fragment  implements LahanC
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

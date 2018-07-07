@@ -1,5 +1,8 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum GolonganDarah {
     CHOOSE("Golongan Darah"),
     A("A"),
@@ -17,6 +20,16 @@ public enum GolonganDarah {
     TIDAK_TAHU("Tidak Tahu");
 
     private String opsi;
+    private static final Map<String, GolonganDarah> map = new HashMap<>();
+    static {
+        for (GolonganDarah en : values()) {
+            map.put(en.toString(), en);
+        }
+    }
+
+    public static GolonganDarah valueFor(String name) {
+        return map.get(name);
+    }
 
     GolonganDarah(String opsi) {
         this.opsi = opsi;

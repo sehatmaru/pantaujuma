@@ -53,7 +53,7 @@ public class CRUKegiatanPembersihanPanenFragment extends Fragment implements Lah
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

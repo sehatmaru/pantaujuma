@@ -89,7 +89,7 @@ public class DetailLahanFragment extends Fragment  implements LahanContract.View
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

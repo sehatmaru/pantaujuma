@@ -103,7 +103,7 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements LahanContra
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

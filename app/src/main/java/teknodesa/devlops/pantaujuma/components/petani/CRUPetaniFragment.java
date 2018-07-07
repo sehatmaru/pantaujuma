@@ -101,7 +101,7 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

@@ -5,7 +5,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +17,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Agama;
@@ -67,12 +69,22 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
     @BindView(R.id.input_tempatlahir)
     EditText input_tempatlahir;
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MainApplication) getActivity().getApplication())
+                .getComponent()
+                .inject(this);
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myCalendar = Calendar.getInstance();
 
-        View v = inflater.inflate(R.layout.fragment_biopenduduk, container, false);
+        View v = inflater.inflate(R.layout.fragment_biopenduduk, null);
         ButterKnife.bind(this, v);
 
         input_golongandarah.setAdapter(new ArrayAdapter<GolonganDarah>(getActivity(), R.layout.spinner_item, GolonganDarah.values()) {
@@ -230,10 +242,8 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //Toast.makeText(getContext(), "BiodataFragment: "+uiData.toString(), Toast.LENGTH_SHORT).show();
-        input_nik = (EditText) getActivity().findViewById(R.id.input_nik);
-//        tvSwitch = (TextView) getActivity().findViewById(R.id.tvSwitch);
 
+        input_nik = (EditText) getActivity().findViewById(R.id.input_nik);
         setUIData();
     }
 
@@ -266,9 +276,58 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
-        input_nik.setText("barlang");
-        //Toast.makeText(getContext(), "BiodataFragment: "+uiData.toString(), Toast.LENGTH_SHORT).show();
+    public void setUIData() {
+        Penduduk theUIData = (Penduduk) CRUActivity.mData;
+        //Toast.makeText(CRUActivity.mContext.getApplicationContext(), theUIData.toString(), Toast.LENGTH_SHORT).show();
+        input_nik.setText (theUIData.getNIK().toString()+"");
+        Log.e("nikdata",theUIData.getNIK()+ " ----------------");
+        Toast.makeText(CRUActivity.mContext.getApplicationContext(), input_nik.getText()+" - horas", Toast.LENGTH_SHORT).show();
+/*
+        input_namadepan.setText  (theUIData.getNamaDepan()+ "");
+        input_namabelakang.setText  (theUIData.getNamaBelakang()+ "");
+
+        ArrayAdapter<JenisKelamin> aJK = new ArrayAdapter<JenisKelamin>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, JenisKelamin.values());
+        input_jeniskelamin.setAdapter(aJK);
+        String valJK = theUIData.getJenisKelamin();
+        if (valJK != null) {
+            int spinnerPosition = aJK.getPosition(JenisKelamin.valueFor(valJK));
+            input_jeniskelamin.setSelection(spinnerPosition);
+        }
+
+        input_tempatlahir.setText  (theUIData.getTempatLahir()+ "");
+        input_tanggallahir.setText  (theUIData.getTanggalLahir()+ "");
+
+        ArrayAdapter<Agama> aAgama = new ArrayAdapter<Agama>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Agama.values());
+        input_agama.setAdapter(aAgama);
+        String valAgama = theUIData.getAgama();
+        if (valAgama != null) {
+            int spinnerPosition = aAgama.getPosition(Agama.valueFor(valAgama));
+            input_agama.setSelection(spinnerPosition);
+        }
+
+        ArrayAdapter<GolonganDarah> aGolonganDarah = new ArrayAdapter<GolonganDarah>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, GolonganDarah.values());
+        input_golongandarah.setAdapter(aGolonganDarah);
+        String valGolDarah = theUIData.getGolonganDarah();
+        if (valGolDarah != null) {
+            int spinnerPosition = aGolonganDarah.getPosition(GolonganDarah.valueFor(valGolDarah));
+            input_golongandarah.setSelection(spinnerPosition);
+        }
+
+        ArrayAdapter<Pekerjaan> aPekerjaan = new ArrayAdapter<Pekerjaan>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Pekerjaan.values());
+        input_pekerjaan.setAdapter(aPekerjaan);
+        String valPekerjaan = theUIData.getPekerjaan();
+        if (valPekerjaan != null) {
+            int spinnerPosition = aPekerjaan.getPosition(Pekerjaan.valueFor(valPekerjaan));
+            input_pekerjaan.setSelection(spinnerPosition);
+        }
+
+        ArrayAdapter<Pendidikan> aPendidikan = new ArrayAdapter<Pendidikan>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Pendidikan.values());
+        input_pendidikan.setAdapter(aPendidikan);
+        String valPendidikan = theUIData.getGolonganDarah();
+        if (valPendidikan != null) {
+            int spinnerPosition = aPendidikan.getPosition(Pendidikan.valueFor(valPendidikan));
+            input_pendidikan.setSelection(spinnerPosition);
+        }*/
     }
 
     @Override

@@ -2,17 +2,20 @@ package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.MainApplication;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
-public class PendudukRepository implements PendudukContract.Repository<PendudukRealm> {
+public class PendudukRepository implements PendudukContract.Repository<Penduduk> {
     @Inject
     Realm realm;
 
@@ -24,35 +27,37 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
     }
 
     @Override
-    public void addItem(PendudukRealm item) {
+    public void addItem(Penduduk item) {
         Log.e("Error", "Masuk addItem success");
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                PendudukRealm pendudukRealm = bgRealm.copyToRealm(item);
+        realm.beginTransaction();
+        realm.executeTransactionAsync(realmIns -> {
+            Number currentIdNum = realmIns.where(PendudukRealm.class).max("idPenduduk");
+            int nextId;
+            if(currentIdNum == null) {
+                nextId = 1;
+            } else {
+                nextId = currentIdNum.intValue() + 1;
             }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                // Transaction was a success.
-                mController.responseCRUD(true, "create");
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                // Transaction failed and was automatically canceled.
-                mController.responseCRUD(false, "create");
-            }
+            PendudukRealm newData = new PendudukRealm(item);
+            newData.setIdPenduduk(nextId);
+            realmIns.insertOrUpdate(newData);
+        }, () -> {
+            mController.responseCRUD(true, "create");
+        },(Throwable throwable)->{
+            Toast.makeText(CRUActivity.mContext, throwable.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            mController.responseCRUD(false, "create");
         });
+        realm.commitTransaction();
     }
 
     @Override
-    public void updateItem(int idItem, PendudukRealm item) {
+    public void updateItem(int idItem, Penduduk item) {
         Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
-                bgRealm.insertOrUpdate(item);
+                PendudukRealm updatedData = new PendudukRealm(item);
+                bgRealm.insertOrUpdate(updatedData);
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

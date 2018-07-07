@@ -18,7 +18,7 @@ import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
-import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
@@ -26,11 +26,9 @@ import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
-import teknodesa.devlops.pantaujuma.components.signup.RegisterController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
-import teknodesa.devlops.pantaujuma.dependencies.webservices.services.RegisterService;
 
 @Module
 public class AppModule {
@@ -54,12 +52,6 @@ public class AppModule {
     ///////////////////////Services
     @Provides
     @Singleton
-    RegisterService registerService() {
-        return new RegisterService(app.getComponent());
-    }
-
-    @Provides
-    @Singleton
     LoginService loginService() {
         return new LoginService(app.getComponent());
     }
@@ -71,11 +63,6 @@ public class AppModule {
         return new SplashscreenController(app.getComponent());
     }
 
-    @Provides
-    @Singleton
-    RegisterController registerController() {
-        return new RegisterController(app.getComponent());
-    }
 
     @Provides
     @Singleton
@@ -83,14 +70,16 @@ public class AppModule {
         return new LoginController(app.getComponent());
     }
 
-
-    ///////////////////////Activities
-
+    ///////////////////////Activities///
 
     /////Fragments
     @Provides
     @Singleton
     HomeFragment provideHomeFragment(){return new HomeFragment();}
+
+    @Provides
+    @Singleton
+    PendudukFragment providePendudukFragment(){return new PendudukFragment();}
 
     @Provides
     @Singleton

@@ -16,35 +16,35 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
  * Created by Roy Deddy Tobing on 4/4/2018.
  */
 
-public class Penduduk implements RealmModel, Parcelable {
+public class Penduduk implements Parcelable {
     @PrimaryKey
     private int idPenduduk;
-    private String NIK;
-    private String foto;
-    private String namaDepan;
-    private String namaBelakang;
-    private String jenisKelamin;
-    private String tempatLahir;
-    private String tanggalLahir;
-    private String agama;
-    private String golonganDarah;
-    private String pekerjaan;
-    private String pendidikan;
-    private String alamat;
-    private String rt;
-    private String rw;
-    private String dusun;
-    private String desa;
-    private String kecamatan;
-    private String datiII;
-    private String provinsi;
-    private String noHP;
-    private String noTelp;
-    public RealmList<LahanRealm> daftarLahan;
-    private String status;
-    private int kodePos;
-    private String email;
-    private boolean isDeleted;
+    private String NIK = "-";
+    private String foto = "-";
+    private String namaDepan = "-";
+    private String namaBelakang = "-";
+    private String jenisKelamin = "-";
+    private String tempatLahir = "-";
+    private String tanggalLahir = "-";
+    private String agama = "-";
+    private String golonganDarah = "-";
+    private String pekerjaan = "-";
+    private String pendidikan = "-";
+    private String alamat = "-";
+    private String rt = "-";
+    private String rw = "-";
+    private String dusun = "-";
+    private String desa = "-";
+    private String kecamatan = "-";
+    private String datiII = "-";
+    private String provinsi = "-";
+    private String noHP = "-";
+    private String noTelp = "-";
+    public RealmList<LahanRealm> daftarLahan = null;
+    private String status = "-";
+    private int kodePos = 0;
+    private String email= "-";
+    private boolean isDeleted= false;
 
     public Penduduk() {
     }

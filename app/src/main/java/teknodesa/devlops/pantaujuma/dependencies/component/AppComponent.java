@@ -22,6 +22,7 @@ import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
+import teknodesa.devlops.pantaujuma.components.penduduk.PendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukRepository;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
@@ -38,8 +39,6 @@ import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.ListRKTPActivity;
 import teknodesa.devlops.pantaujuma.components.signin.LoginActivity;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
-import teknodesa.devlops.pantaujuma.components.signup.RegisterActivity;
-import teknodesa.devlops.pantaujuma.components.signup.RegisterController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenActivity;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
@@ -48,7 +47,6 @@ import teknodesa.devlops.pantaujuma.dependencies.modules.AppModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
-import teknodesa.devlops.pantaujuma.dependencies.webservices.services.RegisterService;
 
 @Singleton
 @Component(modules = {AppModule.class, RealmModule.class, WebServiceModule.class})
@@ -57,11 +55,9 @@ public interface AppComponent {
 
     //Service
     void inject(LoginService service);
-    void inject(RegisterService service);
 
     //Controllers
     void inject(SplashscreenController controller);
-    void inject(RegisterController controller);
     void inject(LoginController controller);
     void inject(PendudukController controller);
 
@@ -72,7 +68,6 @@ public interface AppComponent {
     //Activity
     void inject(SplashscreenActivity activity);
     void inject(LoginActivity activity);
-    void inject(RegisterActivity activity);
     void inject(MainActivity activity);
     void inject(CRUActivity activity);
     void inject(ListPendudukActivity activity);
@@ -106,4 +101,5 @@ public interface AppComponent {
     void inject(CRUSurveiFragment fragment);
     void inject(BiodataFragment fragment);
     void inject(AlamatFragment fragment);
+    void inject(PendudukFragment fragment);
 }

@@ -52,7 +52,7 @@ public class CRUKegiatanPenyimpananFragment extends Fragment  implements LahanCo
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 

@@ -72,7 +72,7 @@ public class CRUPoktanFragment extends Fragment implements LahanContract.ViewCon
     }
 
     @Override
-    public void setUIData(Parcelable uiData) {
+    public void setUIData() {
 
     }
 
