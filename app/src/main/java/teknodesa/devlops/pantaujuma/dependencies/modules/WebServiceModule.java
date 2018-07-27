@@ -16,8 +16,8 @@ import teknodesa.devlops.pantaujuma.dependencies.webservices.PantauJumaAPI;
  */
 @Module
 public class WebServiceModule {
-    public static final String ENDPOINT = "http://onanapi.marthinpsrb.com/";
-    public static final String ACCESS_TOKEN_TEMP = "dev_onan";
+    public static final String ENDPOINT = "http://pantaujuma.teknodesa.id/";
+    public static final String ACCESS_TOKEN_TEMP = "dev_pjapi";
 
     @Singleton
     @Provides

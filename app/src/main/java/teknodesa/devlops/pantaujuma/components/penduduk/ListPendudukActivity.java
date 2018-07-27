@@ -1,5 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,15 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
@@ -33,18 +35,23 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
+import teknodesa.devlops.pantaujuma.components.adapter.PendudukAdapter;
+import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukTempRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
-public class ListPendudukActivity extends AppCompatActivity  implements PendudukAdapter.OnClickPendudukListener{
+public class ListPendudukActivity extends BaseActivity implements PendudukAdapter.OnClickPendudukListener,GetPendudukContract.View{
     @Inject
     Realm realm;
+
+    @Inject
+    GetPendudukController mController;
 
     private final String mJenisCRU = "penduduk";
 
     private List<PendudukRealm> listpenduduk = Collections.EMPTY_LIST;
-    List<PendudukRealm> listPendudukRealm = Collections.EMPTY_LIST;
+    List<PendudukTempRealm> listPendudukRealm = Collections.EMPTY_LIST;
 
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     PendudukAdapter pendudukAdapter;
@@ -79,6 +86,9 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
         finish();
     }
 
+    private ProgressDialog progressdialog;
+    static int counter=0;
+    static int hasilList =0;
     public static Intent createIntent(Context context) {
         return new Intent(context, ListPendudukActivity.class);
     }
@@ -93,11 +103,13 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
 
         setContentView(R.layout.activity_listpenduduk);
         ButterKnife.bind(this);
+        mController.setView(this);
+        progressdialog = new ProgressDialog(getApplicationContext());
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         realm.beginTransaction();
-        listPendudukRealm = realm.where(PendudukRealm.class).findAll();
+        listPendudukRealm = realm.where(PendudukTempRealm.class).findAll();
         realm.commitTransaction();
 
         realm.beginTransaction();
@@ -201,6 +213,68 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_sync){
+            syncDialog();
+            return true;
+        }
+        if (id == R.id.action_download){
+            if(isNetworkConnected()){
+                createDownloadDialog();
+            }else {
+                createSnackbar("Koneksi Tidak Tersedia").show();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void createDownloadDialog() {
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_download)
+                .content(R.string.content_download)
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .onPositive((dialog1, which) -> {
+                    mController.getAllPenduduk();
+                    updateLayout(Konstanta.LAYOUT_LOADING);
+                })
+                .onNegative((dialog1, which) -> {
+
+                })
+                .build();
+        dialog.show();
+    }
+
+
+    private void syncDialog() {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_sync)
+                .content(R.string.content_sync)
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .onPositive((dialog1, which) -> {
+                    progressdialog.show();
+                    progressdialog.setCancelable(false);
+                    progressdialog.setCanceledOnTouchOutside(false);
+                    startSync();
+                })
+                .onNegative((dialog1, which) -> {
+
+                })
+                .build();
+        dialog.show();
+    }
+
+    private void startSync(){
+        counter=0;
+        mController.saveData(listPendudukRealm);
+    }
+
     private void setDataPenduduk(){
         totalPerempuan.setText("Perempuan :"+ perempuan);
         totalLaki.setText("Laki-Laki :"+ lakiLaki);
@@ -215,5 +289,34 @@ public class ListPendudukActivity extends AppCompatActivity  implements Penduduk
 
     private Snackbar showRealmData(String message) {
         return Snackbar.make(coordinatorLayout, "Anda memiliki data penduduk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+    }
+
+    @Override
+    public void getAllPendudukSuccess(List<PendudukRealm> allPenduduk) {
+        populateInitialData();
+    }
+
+    @Override
+    public void getAllPendudukFailed(String message) {
+        createSnackbar(message).show();
+        updateLayout(Konstanta.LAYOUT_ERROR);
+    }
+
+    @Override
+    public void saveDataSuccess(String message) {
+        counter++;
+        Log.e("hasil","counter"+counter+" list"+listPendudukRealm.size());
+        if(counter == hasilList){
+            progressdialog.dismiss();
+            mController.getAllPenduduk();
+            updateLayout(Konstanta.LAYOUT_LOADING);
+        }
+
+
+    }
+
+    @Override
+    public void saveDataFailed(String message) {
+        progressdialog.dismiss();
     }
 }

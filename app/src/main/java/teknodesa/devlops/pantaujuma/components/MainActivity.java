@@ -20,13 +20,7 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
-import teknodesa.devlops.pantaujuma.components.home.HomeJumaFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
-import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
-import teknodesa.devlops.pantaujuma.components.petani.CRUPengurusPoktanFragment;
-import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
-import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
-import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 
 public class MainActivity extends AppCompatActivity {
     /*@BindView(R.id.message)
@@ -36,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Inject
     HomeFragment homeFragment;
+
     @Inject
-    HomeJumaFragment homePetaniFragment;
+    AkunFragment akunFragment;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -55,10 +50,6 @@ public class MainActivity extends AppCompatActivity {
                     //mTextMessage.setText(R.string.title_home);
                     replaceFragment(homeFragment);
                     return true;
-                case R.id.navigation_juma:
-                    //mTextMessage.setText(R.string.title_juma);
-                    replaceFragment(homePetaniFragment);
-                    return true;
                 case R.id.navigation_komoditas:
                     //mTextMessage.setText(R.string.title_post);
                     //replaceFragment(cruLahanFragment);
@@ -69,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_profil:
                     //mTextMessage.setText(R.string.title_profil);
-                    //replaceFragment(cruPengurusPoktanFragment);
+                    replaceFragment(akunFragment);
                     return true;
             }
             return false;

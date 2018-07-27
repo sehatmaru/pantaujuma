@@ -10,8 +10,8 @@ import teknodesa.devlops.pantaujuma.components.alsintan.CRUAlsintanFragment;
 import teknodesa.devlops.pantaujuma.components.alsintan.ListAlsintanActivity;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.harga.ListHargaActivity;
+import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
-import teknodesa.devlops.pantaujuma.components.home.HomeJumaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.ListKomoditasActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
@@ -20,6 +20,7 @@ import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
+import teknodesa.devlops.pantaujuma.components.penduduk.GetPendudukController;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukController;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukFragment;
@@ -31,6 +32,8 @@ import teknodesa.devlops.pantaujuma.components.petani.ListPetaniRepository;
 import teknodesa.devlops.pantaujuma.components.petani.ListPoktanActivity;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.ListTargetActivity;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
+import teknodesa.devlops.pantaujuma.components.profile.ProfileController;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
@@ -46,7 +49,9 @@ import teknodesa.devlops.pantaujuma.components.survei.ListSurveiActivity;
 import teknodesa.devlops.pantaujuma.dependencies.modules.AppModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
 @Singleton
 @Component(modules = {AppModule.class, RealmModule.class, WebServiceModule.class})
@@ -55,15 +60,20 @@ public interface AppComponent {
 
     //Service
     void inject(LoginService service);
+    void inject(GetPendudukService service);
 
     //Controllers
     void inject(SplashscreenController controller);
     void inject(LoginController controller);
     void inject(PendudukController controller);
+    void inject(ProfileController controller);
+    void inject(HomeController controller);
+    void inject(GetPendudukController controller);
 
     //Repository
     void inject(ListPetaniRepository repository);
     void inject(PendudukRepository repository);
+    void inject(PromoService repository);
 
     //Activity
     void inject(SplashscreenActivity activity);
@@ -86,7 +96,6 @@ public interface AppComponent {
 
     //fragment
     void inject(HomeFragment fragment);
-    void inject(HomeJumaFragment fragment);
     void inject(CRUPendudukFragment fragment);
     void inject(CRUPetaniFragment fragment);
     void inject(CRUPoktanFragment fragment);
@@ -102,4 +111,6 @@ public interface AppComponent {
     void inject(BiodataFragment fragment);
     void inject(AlamatFragment fragment);
     void inject(PendudukFragment fragment);
+    void inject(AkunFragment fragment);
+
 }

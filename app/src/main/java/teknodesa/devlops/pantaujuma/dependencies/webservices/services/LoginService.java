@@ -12,6 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import teknodesa.devlops.pantaujuma.components.signin.LoginContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseLogin;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
@@ -48,9 +49,14 @@ public class LoginService implements LoginContract.Repository {
 
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
+                        UserDB userDB = new UserDB(response.body().getId(),response.body().getUsername(),response.body().getNamaLengkap(),
+                                response.body().getPhoneNumber(),response.body().getProfilImage(),response.body().getNamaDesa(),
+                                response.body().getEmail(),response.body().getRoleName(),response.body().getKeyRole(),
+                                response.body().getAttributeTable(),response.body().getAttributeValue());
+
                         realm.beginTransaction();
                         realm.executeTransactionAsync(realmuser -> {
-                            realmuser.insertOrUpdate(response.body().getData());
+                            realmuser.insertOrUpdate(userDB);
                         });
                         realm.commitTransaction();
                         controller.loginSuccess("Welcome");

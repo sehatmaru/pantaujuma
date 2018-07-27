@@ -12,33 +12,31 @@ public class UserDB extends RealmObject {
     private String id;
     private String username;
     private String namaLengkap;
-    private String password;
-    private String email;
-    private String lastLogin;
-    private String createdAt;
-    private String updatedAt;
-    private String authKey;
-    private String passwordHash;
-    private String passwordReset;
-    private String userRole;
-    private int deleted;
     private String phoneNumber;
-    private String profileImage;
+    private String profilImage;
+    private String namaDesa;
+    private String email;
+    private String roleName;
+    private String keyRole;
+    private String attributeTable;
+    private String attributeValue;
 
-    public String getProfileImage() {
-        return profileImage;
+    public UserDB() {
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
+    public UserDB(String id, String username, String namaLengkap, String phoneNumber, String profilImage,
+                  String namaDesa, String email, String roleName, String keyRole, String attributeTable, String attributeValue) {
+        this.id = id;
+        this.username = username;
+        this.namaLengkap = namaLengkap;
         this.phoneNumber = phoneNumber;
+        this.profilImage = profilImage;
+        this.namaDesa = namaDesa;
+        this.email = email;
+        this.roleName = roleName;
+        this.keyRole = keyRole;
+        this.attributeTable = attributeTable;
+        this.attributeValue = attributeValue;
     }
 
     public String getId() {
@@ -65,12 +63,28 @@ public class UserDB extends RealmObject {
         this.namaLengkap = namaLengkap;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getProfilImage() {
+        return profilImage;
+    }
+
+    public void setProfilImage(String profilImage) {
+        this.profilImage = profilImage;
+    }
+
+    public String getNamaDesa() {
+        return namaDesa;
+    }
+
+    public void setNamaDesa(String namaDesa) {
+        this.namaDesa = namaDesa;
     }
 
     public String getEmail() {
@@ -81,67 +95,35 @@ public class UserDB extends RealmObject {
         this.email = email;
     }
 
-    public String getLastLogin() {
-        return lastLogin;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setLastLogin(String lastLogin) {
-        this.lastLogin = lastLogin;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getKeyRole() {
+        return keyRole;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setKeyRole(String keyRole) {
+        this.keyRole = keyRole;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getAttributeTable() {
+        return attributeTable;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setAttributeTable(String attributeTable) {
+        this.attributeTable = attributeTable;
     }
 
-    public String getAuthKey() {
-        return authKey;
+    public String getAttributeValue() {
+        return attributeValue;
     }
 
-    public void setAuthKey(String authKey) {
-        this.authKey = authKey;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getPasswordReset() {
-        return passwordReset;
-    }
-
-    public void setPasswordReset(String passwordReset) {
-        this.passwordReset = passwordReset;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
+    public void setAttributeValue(String attributeValue) {
+        this.attributeValue = attributeValue;
     }
 }

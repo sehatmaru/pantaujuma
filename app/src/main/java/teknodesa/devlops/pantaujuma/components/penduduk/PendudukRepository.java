@@ -38,9 +38,9 @@ public class PendudukRepository implements PendudukContract.Repository<Penduduk>
             } else {
                 nextId = currentIdNum.intValue() + 1;
             }
-            PendudukRealm newData = new PendudukRealm(item);
-            newData.setIdPenduduk(nextId);
-            realmIns.insertOrUpdate(newData);
+//            PendudukRealm newData = new PendudukRealm(item);
+//            newData.setHashId(nextId);
+//            realmIns.insertOrUpdate(newData);
         }, () -> {
             mController.responseCRUD(true, "create");
         },(Throwable throwable)->{
@@ -56,8 +56,8 @@ public class PendudukRepository implements PendudukContract.Repository<Penduduk>
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
-                PendudukRealm updatedData = new PendudukRealm(item);
-                bgRealm.insertOrUpdate(updatedData);
+//                PendudukRealm updatedData = new PendudukRealm(item);
+//                bgRealm.insertOrUpdate(updatedData);
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

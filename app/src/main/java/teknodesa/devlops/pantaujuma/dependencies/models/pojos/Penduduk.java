@@ -96,7 +96,7 @@ public class Penduduk implements Parcelable {
     }
 
     public Penduduk (PendudukRealm penduduk){
-        this.idPenduduk = penduduk.getIdPenduduk();
+        this.idPenduduk = penduduk.getHashId();
         this.NIK = penduduk.getNIK();
         this.foto = String.valueOf(penduduk.getFoto());
         this.namaDepan = penduduk.getNamaDepan();

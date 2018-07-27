@@ -23,6 +23,11 @@
     <string name="judul_pd">Silahkan Menunggu....</string>
     <string name="pd_judul_registrasi">Registrasi....</string>
 
+    <string name="content_logout">Apakah anda yakin ingin keluar?</string>
+    <string name="title_logout">Logout</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+
     <!--CRU Action-->
     <string name="simpan">Simpan Data</string>
     <string name="edit">Edit Data</string>
@@ -181,5 +186,18 @@
     <string name="action_read_next">Baca Nanti</string>
     <string name="backdrop_title">LOVE MUSIC</string>
     <string name="backdrop_subtitle">This season top 20 albums</string>
+
+    <!--Slider-->
+    <string name="txt_image_slider">Image Slideshow</string>
+    <string name="time_out">Time Out</string>
+    <string name="error_occured">Error Occurred</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+
+
+    <string name="title_download">Download Data</string>
+    <string name="content_download">Apakah anda yakin download file baru?</string>
+
+    <string name="title_sync">Sinkronisasi Data</string>
+    <string name="content_sync">Apakah anda yakin Sinkronisasi Data?</string>
 
 </resources>

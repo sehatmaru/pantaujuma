@@ -3,6 +3,7 @@ package teknodesa.devlops.pantaujuma.components.splashscreen;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 import javax.inject.Inject;
@@ -39,20 +40,28 @@ public class SplashscreenActivity extends BaseActivity implements SplashscreenCo
         checkNetwork();
     }
     private void checkNetwork(){
-        if(!isNetworkConnected()){
+        if(isNetworkConnected()){
+            showLoading();
+            splashController.getPromotion();
+        }else{
             onError(getString(R.string.network_error));
         }
-        splashController.checkSession();
     }
 
     @Override
     public void sessionUser(boolean result) {
         //false means user is not login
+        Log.e("hasil result",result+" test");
         hideLoading();
         if (result)
             startActivity(MainActivity.createIntent(getApplicationContext()));
         else
             startActivity(LoginActivity.createIntent(getApplicationContext()));
+    }
+
+    @Override
+    public void resultPromotion(String message) {
+        splashController.checkSession();
     }
 
     @Override

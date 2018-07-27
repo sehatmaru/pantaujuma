@@ -1,4 +1,4 @@
-package teknodesa.devlops.pantaujuma.components.penduduk;
+package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -50,7 +50,7 @@ public class PendudukAdapter extends RecyclerView.Adapter<PendudukAdapter.MyView
         holder.textjk.setText(penduduk.getJenisKelamin());
         holder.textttl.setText(penduduk.getTempatLahir()+", "+penduduk.getTanggalLahir());
         holder.cardview.setOnClickListener(view -> {
-            onClicPenduduk.OnClickPenduduk(penduduk.getIdPenduduk());
+            onClicPenduduk.OnClickPenduduk(penduduk.getHashId());
         });
 
     }

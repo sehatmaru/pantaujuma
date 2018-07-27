@@ -11,24 +11,29 @@ import dagger.Provides;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.components.alsintan.CRUAlsintanFragment;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
+import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
-import teknodesa.devlops.pantaujuma.components.home.HomeJumaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.GetPendudukController;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
+import teknodesa.devlops.pantaujuma.components.profile.ProfileController;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
 @Module
 public class AppModule {
@@ -56,11 +61,37 @@ public class AppModule {
         return new LoginService(app.getComponent());
     }
 
+    @Provides
+    @Singleton
+    PromoService promoService() {
+        return new PromoService(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetPendudukService getPendudukService() {
+        return new GetPendudukService(app.getComponent());
+    }
+
+
+
     ///////////////////////Controllers
+    @Provides
+    @Singleton
+    GetPendudukController getPendudukController() {
+        return new GetPendudukController(app.getComponent());
+    }
+
     @Provides
     @Singleton
     SplashscreenController splashController() {
         return new SplashscreenController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    ProfileController profileController() {
+        return new ProfileController(app.getComponent());
     }
 
 
@@ -70,6 +101,12 @@ public class AppModule {
         return new LoginController(app.getComponent());
     }
 
+    @Provides
+    @Singleton
+    HomeController homeController() {
+        return new HomeController(app.getComponent());
+    }
+
     ///////////////////////Activities///
 
     /////Fragments
@@ -77,14 +114,14 @@ public class AppModule {
     @Singleton
     HomeFragment provideHomeFragment(){return new HomeFragment();}
 
+
     @Provides
     @Singleton
     PendudukFragment providePendudukFragment(){return new PendudukFragment();}
 
     @Provides
     @Singleton
-    HomeJumaFragment provideHomeJumaFragment(){return new HomeJumaFragment();}
-
+    AkunFragment akunFragment(){return new AkunFragment();}
     @Provides
     @Singleton
     BiodataFragment provideBiodataFragment(){return new BiodataFragment();}

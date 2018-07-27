@@ -11,8 +11,6 @@ public class LahanRealm extends RealmObject {
     @PrimaryKey
     private int idLahan;
 
-    @LinkingObjects("daftarLahan")
-    public final RealmResults<PendudukRealm> pemilik = null;
     private String nama;
     private String alamat;
     private String rt;
@@ -69,9 +67,6 @@ public class LahanRealm extends RealmObject {
         this.idLahan = idLahan;
     }
 
-    public RealmResults<PendudukRealm> getPemilik() {
-        return pemilik;
-    }
 
     public String getNama() {
         return nama;

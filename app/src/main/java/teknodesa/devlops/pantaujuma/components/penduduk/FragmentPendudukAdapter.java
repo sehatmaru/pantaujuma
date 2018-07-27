@@ -48,7 +48,7 @@ public class FragmentPendudukAdapter extends RecyclerView.Adapter<FragmentPendud
         PendudukRealm penduduk = listData.get(position);
         holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
         holder.textnik.setText("NIK : "+penduduk.getNIK());
-        holder.cardview.setOnClickListener(view -> { onClicPenduduk.OnClickPenduduk(penduduk.getIdPenduduk(),penduduk.getNamaDepan()+" "+penduduk.getNamaBelakang());});
+        holder.cardview.setOnClickListener(view -> { onClicPenduduk.OnClickPenduduk(penduduk.getHashId(),penduduk.getNamaDepan()+" "+penduduk.getNamaBelakang());});
 
     }
 

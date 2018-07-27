@@ -4,14 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_export"
-        android:orderInCategory="300"
-        android:title="Export"
-        app:showAsAction="always" />
+        android:id="@+id/action_sync"
+        android:orderInCategory="200"
+        android:title="Synchronization"
+        app:showAsAction="always"
+        android:icon="@drawable/icons_ync"/>
+
     <item
-        android:id="@+id/action_import"
-        android:orderInCategory="300"
-        android:title="Import"
-        app:showAsAction="always" />
+        android:id="@+id/action_download"
+        android:orderInCategory="100"
+        android:title="Synchronization"
+        app:showAsAction="always"
+        android:icon="@drawable/icons_download"/>
 
 </menu>
