@@ -19,8 +19,8 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.BiodataPenduduk;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 public class DetailPendudukActivity extends AppCompatActivity {
     private AppComponent appComponent;
@@ -66,7 +66,7 @@ public class DetailPendudukActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEdit)
     void clickEdit() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
+//        startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
         finish();
     }
 
@@ -78,10 +78,9 @@ public class DetailPendudukActivity extends AppCompatActivity {
     }
 
     private PendudukRealm dataPenduduk;
-    private Penduduk itemDetail;
 
-    private static int idPenduduk;
-    public static Intent createIntent(Context context, int id) {
+    private static String idPenduduk;
+    public static Intent createIntent(Context context, String id) {
         idPenduduk =id;
         return new Intent(context, DetailPendudukActivity.class);
     }
@@ -102,8 +101,7 @@ public class DetailPendudukActivity extends AppCompatActivity {
     }
     private void takedata(){
         realm.beginTransaction();
-        dataPenduduk = realm.where(PendudukRealm.class).equalTo("idPenduduk", idPenduduk).findFirst();
-        itemDetail = new Penduduk(dataPenduduk);
+        dataPenduduk = realm.where(PendudukRealm.class).equalTo("hashId", idPenduduk).findFirst();
         realm.commitTransaction();
     }
     private void setdata(){
@@ -133,7 +131,7 @@ public class DetailPendudukActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-                    CRUPendudukFragment.setDeletedData(itemDetail, appComponent);
+//                    CRUPendudukFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListPendudukActivity.createIntent(getApplicationContext()));
                     break;
 

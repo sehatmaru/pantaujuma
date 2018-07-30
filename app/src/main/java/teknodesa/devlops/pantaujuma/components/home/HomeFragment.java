@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     @Inject
     HomeController mController;
 
-    //Penduduk
+    //BiodataPenduduk
     @BindView(R.id.btnPenduduk)
     Button btnPenduduk;
     @OnClick(R.id.btnPenduduk)
@@ -114,13 +114,7 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     void clickListLahan(){
         startActivity(ListLahanActivity.createIntent(getContext()));
     }
-    //Komoditas
-    @BindView(R.id.btnKomoditas)
-            Button btnKomoditas;
-    @OnClick(R.id.btnKomoditas)
-    void clickListKomoditas(){
-        startActivity(ListKomoditasActivity.createIntent(getContext()));
-    }
+
     //Alsintan
     @BindView(R.id.btnAlsintan)
     Button btnAlsintan;

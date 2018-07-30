@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 /**
  * Created by Marthin on 10/13/2017.
@@ -32,7 +32,7 @@ public class PendudukAdapter extends RecyclerView.Adapter<PendudukAdapter.MyView
     }
 
     public interface OnClickPendudukListener {
-        void OnClickPenduduk(int idPenduduk);
+        void OnClickPenduduk(String idPenduduk);
     }
 
     @Override

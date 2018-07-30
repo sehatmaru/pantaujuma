@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 public class PetaniRealm extends RealmObject implements Parcelable {
     @PrimaryKey

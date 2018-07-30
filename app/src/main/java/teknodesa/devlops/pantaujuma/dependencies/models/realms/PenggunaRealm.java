@@ -2,6 +2,7 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.PetugasRealm;
 
 public class PenggunaRealm extends RealmObject {

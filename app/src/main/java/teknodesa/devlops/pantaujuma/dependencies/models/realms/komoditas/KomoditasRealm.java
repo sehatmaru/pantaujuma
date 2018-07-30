@@ -1,11 +1,11 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms;
+package teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class KomoditasRealm extends RealmObject {
     @PrimaryKey
-    private int idKomoditas;
+    private int hashId;
     private String nama;
     private String kategori;
     private String deskripsi;
@@ -14,20 +14,20 @@ public class KomoditasRealm extends RealmObject {
     public KomoditasRealm() {
     }
 
-    public KomoditasRealm(int idKomoditas, String nama, String kategori, String deskripsi, String gambar) {
-        this.idKomoditas = idKomoditas;
+    public KomoditasRealm(int hashId, String nama, String kategori, String deskripsi, String gambar) {
+        this.hashId = hashId;
         this.nama = nama;
         this.kategori = kategori;
         this.deskripsi = deskripsi;
         this.gambar = gambar;
     }
 
-    public int getIdKomoditas() {
-        return idKomoditas;
+    public int getHashId() {
+        return hashId;
     }
 
-    public void setIdKomoditas(int idKomoditas) {
-        this.idKomoditas = idKomoditas;
+    public void setHashId(int hashId) {
+        this.hashId = hashId;
     }
 
     public String getNama() {

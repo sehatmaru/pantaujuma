@@ -2,8 +2,7 @@ package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import java.util.List;
 
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukTempRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 /**
  * Created by Marthin on 7/10/2018.
@@ -20,16 +19,16 @@ public class GetPendudukContract {
 
     public interface Controller {
         void getAllPenduduk();
-        void saveData(List<PendudukTempRealm> allPen);
+        void saveData(List<PendudukRealm> allPen);
         void getAllPendudukSuccess(List<PendudukRealm> allPenduduk);
         void getAllPendudukFailed(String message);
-        void saveDataSuccess(String message, PendudukTempRealm pendudukTempRealm);
+        void saveDataSuccess(String message, PendudukRealm pendudukTempRealm);
         void saveDataFailed(String message);
-        void deleteFromRealm(PendudukTempRealm pendudukTempRealm);
+        void updateDataRealm(PendudukRealm pendudukTempRealm);
     }
 
     public interface Repository{
         void getAllPenduduk(int idDesa);
-        void saveData(List<PendudukTempRealm> allPen);
+        void saveData(List<PendudukRealm> allPen);
     }
 }

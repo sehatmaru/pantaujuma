@@ -167,7 +167,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/desa"
-                    android:singleLine="true" />
+                    android:editable="false"
+                    android:singleLine="false" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
@@ -197,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:hint="@string/kecamatan"
+                    android:editable="false"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -226,6 +228,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/datiII"
+                    android:editable="false"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -255,6 +258,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/provinsi"
+                    android:editable="false"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -280,6 +284,7 @@
                 android:layout_weight="3">
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/input_kodepos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

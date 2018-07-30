@@ -16,7 +16,7 @@
     <string name="harga">Harga</string>
     <string name="survei">Survei</string>
     <string name="lahan">Lahan</string>
-    <string name="penduduk">Penduduk</string>
+    <string name="biodataPenduduk">Penduduk</string>
     <string name="targetPetugas">Target</string>
 
     <!--Progress dialog-->
@@ -70,7 +70,7 @@
     <string name="penanggungJawab">Penanggung Jawab</string>
     <string name="pelaksana">Pelaksana</string>
 
-    <!--Add Penduduk-->
+    <!--BiodataPendudukuduk-->
     <string name="nik">NIK</string>
     <string name="namaDepan">Nama Depan</string>
     <string name="namaBelakang">Nama Belakang</string>
@@ -199,5 +199,8 @@
 
     <string name="title_sync">Sinkronisasi Data</string>
     <string name="content_sync">Apakah anda yakin Sinkronisasi Data?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

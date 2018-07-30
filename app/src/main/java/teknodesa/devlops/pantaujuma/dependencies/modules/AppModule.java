@@ -14,6 +14,7 @@ import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
+import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
@@ -32,6 +33,7 @@ import teknodesa.devlops.pantaujuma.components.signin.LoginController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
@@ -73,9 +75,19 @@ public class AppModule {
         return new GetPendudukService(app.getComponent());
     }
 
-
+    @Provides
+    @Singleton
+    KomoditasService komoditasService() {
+        return new KomoditasService(app.getComponent());
+    }
 
     ///////////////////////Controllers
+    @Provides
+    @Singleton
+    KomoditasController komoditasController() {
+        return new KomoditasController(app.getComponent());
+    }
+
     @Provides
     @Singleton
     GetPendudukController getPendudukController() {

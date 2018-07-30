@@ -1,12 +1,10 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 public class PendudukSelectRepository implements PendudukSelectContract.Repository<PendudukRealm> {
     @Inject

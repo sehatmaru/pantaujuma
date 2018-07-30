@@ -4,7 +4,7 @@ import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.annotations.LinkingObjects;
 import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomoditasRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 
 public class SasaranIntensifikasiRDKRealm extends RealmObject {
     @PrimaryKey

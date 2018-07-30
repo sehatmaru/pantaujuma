@@ -129,60 +129,18 @@ public class CRUActivity extends AppCompatActivity {
                 break;
         }
 
-/*        if (CRUActivity.mAction.equals("update")) {
+
+        btnAction.setOnClickListener(v -> {
             switch (CRUActivity.mJenisCRU) {
                 case "penduduk":
-                    replaceFragment(cruPendudukFragment);
+                    cruPendudukFragment.saveData(mAction, mData);
                     break;
                 case "petani":
-                    replaceFragment(cruPetaniFragment);
-                    break;
-                case "poktan":
-                    replaceFragment(cruPoktanFragment);
-                    break;
-                case "rdk":
-                    replaceFragment(cruRDKFragment);
-                    break;
-                case "rdkk":
-                    replaceFragment(cruRDKKPupukSubsidiFragment);
-                    break;
-                case "rktp":
-                    replaceFragment(cruRKTPFragment);
-                    break;
-                case "target":
-                    replaceFragment(cruTargetPetugasFragment);
-                    break;
-                case "lahan":
-                    replaceFragment(cruLahanFragment);
-                    break;
-                case "komoditas":
-                    replaceFragment(cruKomoditasFragment);
-                    break;
-                case "alsintan":
-                    replaceFragment(cruAlsintanFragment);
-                    break;
-                case "harga":
-                    replaceFragment(cruHargaFragment);
-                    break;
-                case "survei":
-                    replaceFragment(cruSurveiFragment);
+                    cruPetaniFragment.saveData(mAction, mData);
                     break;
             }
-        }*/
-
-        btnAction.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                switch (CRUActivity.mJenisCRU) {
-                    case "penduduk":
-                        cruPendudukFragment.saveData(mAction, mData);
-                        break;
-                    case "petani":
-                        cruPetaniFragment.saveData(mAction, mData);
-                        break;
-                }
-                // Code here executes on main thread after user presses button
-                finish();
-            }
+            // Code here executes on main thread after user presses button
+            finish();
         });
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

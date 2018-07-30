@@ -10,9 +10,8 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukTempRealm;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 
 /**
@@ -73,7 +72,7 @@ public class GetPendudukController implements GetPendudukContract.Controller {
     }
 
     @Override
-    public void saveData(List<PendudukTempRealm> allPen) {
+    public void saveData(List<PendudukRealm> allPen) {
         mService.saveData(allPen);
     }
 
@@ -88,9 +87,11 @@ public class GetPendudukController implements GetPendudukContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,PendudukTempRealm pendudukTempRealm) {
+    public void saveDataSuccess(String message,PendudukRealm pendudukTempRealm) {
         realm.beginTransaction();
-        pendudukTempRealm.deleteFromRealm();
+        realm.executeTransactionAsync(realmuser -> {
+            realmuser.insertOrUpdate(pendudukTempRealm);
+        });
         realm.commitTransaction();
 
         views.saveDataSuccess(message);
@@ -102,11 +103,10 @@ public class GetPendudukController implements GetPendudukContract.Controller {
     }
 
     @Override
-    public void deleteFromRealm(PendudukTempRealm pendudukTempRealm) {
-        realm.beginTransaction();
-        pendudukTempRealm.deleteFromRealm();
-        realm.commitTransaction();
+    public void updateDataRealm(PendudukRealm pendudukTempRealm) {
+
     }
+
 
 
 }

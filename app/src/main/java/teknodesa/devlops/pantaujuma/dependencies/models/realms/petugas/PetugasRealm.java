@@ -2,7 +2,7 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 public class PetugasRealm extends RealmObject {
     @PrimaryKey

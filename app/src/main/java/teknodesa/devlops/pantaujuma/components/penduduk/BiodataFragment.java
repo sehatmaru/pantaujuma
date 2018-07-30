@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
@@ -32,27 +30,27 @@ import teknodesa.devlops.pantaujuma.dependencies.models.enums.GolonganDarah;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.JenisKelamin;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Pekerjaan;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Pendidikan;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.BiodataPenduduk;
 
-public class BiodataFragment extends Fragment implements PendudukContract.ViewController<Penduduk> {
+public class BiodataFragment extends Fragment implements PendudukContract.ViewController<BiodataPenduduk> {
     Calendar myCalendar;
 
     DatePickerDialog.OnDateSetListener date;
 
-    @BindView(R.id.input_golongandarah)
-    Spinner input_golongandarah;
+    @BindView(R.id.spinnerJK)
+    Spinner spinnerJK;
 
-    @BindView(R.id.input_agama)
-    Spinner input_agama;
+    @BindView(R.id.spinnerAgama)
+    Spinner spinnerAgama;
 
-    @BindView(R.id.input_jeniskelamin)
-    Spinner input_jeniskelamin;
+    @BindView(R.id.spinnerGolonganDarah)
+    Spinner spinnerGolonganDarah;
 
-    @BindView(R.id.input_pendidikan)
-    Spinner input_pendidikan;
+    @BindView(R.id.spinnerPendidikan)
+    Spinner spinnerPendidikan;
 
-    @BindView(R.id.input_pekerjaan)
-    Spinner input_pekerjaan;
+    @BindView(R.id.spinnerPekerjaan)
+    Spinner spinnerPekerjaan;
 
     @BindView(R.id.input_tanggallahir)
     EditText input_tanggallahir;
@@ -87,148 +85,8 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
         View v = inflater.inflate(R.layout.fragment_biopenduduk, null);
         ButterKnife.bind(this, v);
 
-        input_golongandarah.setAdapter(new ArrayAdapter<GolonganDarah>(getActivity(), R.layout.spinner_item, GolonganDarah.values()) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
-                } else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        });
-
-        input_agama.setAdapter(new ArrayAdapter<Agama>(getActivity(), R.layout.spinner_item, Agama.values()) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
-                } else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        });
-
-        input_jeniskelamin.setAdapter(new ArrayAdapter<JenisKelamin>(getActivity(), R.layout.spinner_item, JenisKelamin.values()) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
-                } else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        });
-
-        input_pendidikan.setAdapter(new ArrayAdapter<Pendidikan>(getActivity(), R.layout.spinner_item, Pendidikan.values()) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
-                } else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        });
-
-        input_pekerjaan.setAdapter(new ArrayAdapter<Pekerjaan>(getActivity(), R.layout.spinner_item, Pekerjaan.values()) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
-                } else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        });
-
-        date = (view, year, monthOfYear, dayOfMonth) -> {
-            // TODO Auto-generated method stub
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
-        };
+        setAdapter();
+        setDate();
 
         input_tanggallahir.setOnClickListener(view -> {
             new DatePickerDialog(getContext(), date, myCalendar
@@ -242,9 +100,16 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        input_nik = (EditText) getActivity().findViewById(R.id.input_nik);
-        setUIData();
+        input_nik = getActivity().findViewById(R.id.input_nik);
+        spinnerJK = getActivity().findViewById(R.id.spinnerJK);
+        spinnerAgama = getActivity().findViewById(R.id.spinnerAgama);
+        spinnerGolonganDarah = getActivity().findViewById(R.id.spinnerGolonganDarah);
+        spinnerPendidikan = getActivity().findViewById(R.id.spinnerPendidikan);
+        spinnerPekerjaan = getActivity().findViewById(R.id.spinnerPekerjaan);
+        input_tanggallahir = getActivity().findViewById(R.id.input_tanggallahir);
+        input_namadepan = getActivity().findViewById(R.id.input_namadepan);
+        input_namabelakang = getActivity().findViewById(R.id.input_namabelakang);
+        input_tempatlahir = getActivity().findViewById(R.id.input_tempatlahir);
     }
 
     private void updateLabel() {
@@ -255,83 +120,227 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
     }
 
     @Override
-    public Penduduk getUIData() {
+    public BiodataPenduduk getUIData() {
         String strNIK = input_nik.getText().toString();
         String strFoto = "-";
         String strNamaDepan = input_namadepan.getText().toString();
         String strNamaBelakang = input_namabelakang.getText().toString();
-        String strJenisKelamin = input_jeniskelamin.getSelectedItem().toString();
+        String strJenisKelamin = spinnerJK.getSelectedItem().toString();
         String strTempatLahir = input_tempatlahir.getText().toString();
         String strTanggalLahir = input_tanggallahir.getText().toString();
-        String strAgama = input_agama.getSelectedItem().toString();
-        String strGolonganDarah = input_golongandarah.getSelectedItem().toString();
-        String strPekerjaan = input_pekerjaan.getSelectedItem().toString();
-        String strPendidikan = input_pendidikan.getSelectedItem().toString();
+        String strAgama = spinnerAgama.getSelectedItem().toString();
+        String strGolonganDarah = spinnerGolonganDarah.getSelectedItem().toString();
+        String strPekerjaan = spinnerPekerjaan.getSelectedItem().toString();
+        String strPendidikan = spinnerPendidikan.getSelectedItem().toString();
         String strStatus = "aktif";
-        boolean isDeleted = false;
 
-        Penduduk newItem = new Penduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin, strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strStatus, isDeleted);
-
+        BiodataPenduduk newItem = new BiodataPenduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin,
+                strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strStatus);
         return newItem;
     }
 
     @Override
     public void setUIData() {
-        Penduduk theUIData = (Penduduk) CRUActivity.mData;
-        //Toast.makeText(CRUActivity.mContext.getApplicationContext(), theUIData.toString(), Toast.LENGTH_SHORT).show();
+        BiodataPenduduk theUIData = (BiodataPenduduk) CRUActivity.mData;
+
         input_nik.setText (theUIData.getNIK().toString()+"");
-        Log.e("nikdata",theUIData.getNIK()+ " ----------------");
-        Toast.makeText(CRUActivity.mContext.getApplicationContext(), input_nik.getText()+" - horas", Toast.LENGTH_SHORT).show();
-/*
+
+
         input_namadepan.setText  (theUIData.getNamaDepan()+ "");
         input_namabelakang.setText  (theUIData.getNamaBelakang()+ "");
 
         ArrayAdapter<JenisKelamin> aJK = new ArrayAdapter<JenisKelamin>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, JenisKelamin.values());
-        input_jeniskelamin.setAdapter(aJK);
+        spinnerJK.setAdapter(aJK);
         String valJK = theUIData.getJenisKelamin();
         if (valJK != null) {
             int spinnerPosition = aJK.getPosition(JenisKelamin.valueFor(valJK));
-            input_jeniskelamin.setSelection(spinnerPosition);
+            spinnerJK.setSelection(spinnerPosition);
         }
 
         input_tempatlahir.setText  (theUIData.getTempatLahir()+ "");
         input_tanggallahir.setText  (theUIData.getTanggalLahir()+ "");
 
         ArrayAdapter<Agama> aAgama = new ArrayAdapter<Agama>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Agama.values());
-        input_agama.setAdapter(aAgama);
+        spinnerAgama.setAdapter(aAgama);
         String valAgama = theUIData.getAgama();
         if (valAgama != null) {
             int spinnerPosition = aAgama.getPosition(Agama.valueFor(valAgama));
-            input_agama.setSelection(spinnerPosition);
+            spinnerAgama.setSelection(spinnerPosition);
         }
 
         ArrayAdapter<GolonganDarah> aGolonganDarah = new ArrayAdapter<GolonganDarah>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, GolonganDarah.values());
-        input_golongandarah.setAdapter(aGolonganDarah);
+        spinnerGolonganDarah.setAdapter(aGolonganDarah);
         String valGolDarah = theUIData.getGolonganDarah();
         if (valGolDarah != null) {
             int spinnerPosition = aGolonganDarah.getPosition(GolonganDarah.valueFor(valGolDarah));
-            input_golongandarah.setSelection(spinnerPosition);
+            spinnerGolonganDarah.setSelection(spinnerPosition);
         }
 
         ArrayAdapter<Pekerjaan> aPekerjaan = new ArrayAdapter<Pekerjaan>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Pekerjaan.values());
-        input_pekerjaan.setAdapter(aPekerjaan);
+        spinnerPekerjaan.setAdapter(aPekerjaan);
         String valPekerjaan = theUIData.getPekerjaan();
         if (valPekerjaan != null) {
             int spinnerPosition = aPekerjaan.getPosition(Pekerjaan.valueFor(valPekerjaan));
-            input_pekerjaan.setSelection(spinnerPosition);
+            spinnerPekerjaan.setSelection(spinnerPosition);
         }
 
         ArrayAdapter<Pendidikan> aPendidikan = new ArrayAdapter<Pendidikan>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Pendidikan.values());
-        input_pendidikan.setAdapter(aPendidikan);
+        spinnerPendidikan.setAdapter(aPendidikan);
         String valPendidikan = theUIData.getGolonganDarah();
         if (valPendidikan != null) {
             int spinnerPosition = aPendidikan.getPosition(Pendidikan.valueFor(valPendidikan));
-            input_pendidikan.setSelection(spinnerPosition);
-        }*/
+            spinnerPendidikan.setSelection(spinnerPosition);
+        }
     }
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
         //not implemented yet
+    }
+
+    private void setDate(){
+        date = (view, year, monthOfYear, dayOfMonth) -> {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        };
+    }
+    private void setAdapter(){
+        spinnerGolonganDarah.setAdapter(new ArrayAdapter<GolonganDarah>(getActivity(), R.layout.spinner_item, GolonganDarah.values()) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        });
+
+        spinnerAgama.setAdapter(new ArrayAdapter<Agama>(getActivity(), R.layout.spinner_item, Agama.values()) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        });
+
+        spinnerJK.setAdapter(new ArrayAdapter<JenisKelamin>(getActivity(), R.layout.spinner_item, JenisKelamin.values()) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        });
+
+        spinnerPendidikan.setAdapter(new ArrayAdapter<Pendidikan>(getActivity(), R.layout.spinner_item, Pendidikan.values()) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        });
+
+        spinnerPekerjaan.setAdapter(new ArrayAdapter<Pekerjaan>(getActivity(), R.layout.spinner_item, Pekerjaan.values()) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        });
     }
 }

@@ -1,11 +1,13 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
+
 /**
  * Created by Marthin on 7/11/2018.
  */
 
 public class PendudukBody {
-    private int hashId;
+    private String hashId;
     private String NIK;
     private String foto;
     private String namaDepan;
@@ -30,13 +32,17 @@ public class PendudukBody {
     private String status;
     private int kodePos;
     private String email;
-    private boolean isDeleted;
     private int idDesa;
 
     public PendudukBody() {
     }
 
-    public PendudukBody(int hashId, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, String status, int kodePos, String email, boolean isDeleted, int idDesa) {
+
+
+    public PendudukBody(String hashId, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin,
+                        String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan,
+                        String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan,
+                        String datiII, String provinsi, String noHP, String noTelp, String status, int kodePos, String email, int idDesa) {
         this.hashId = hashId;
         this.NIK = NIK;
         this.foto = foto;
@@ -62,15 +68,14 @@ public class PendudukBody {
         this.status = status;
         this.kodePos = kodePos;
         this.email = email;
-        this.isDeleted = isDeleted;
         this.idDesa = idDesa;
     }
 
-    public int getHashId() {
+    public String getHashId() {
         return hashId;
     }
 
-    public void setHashId(int hashId) {
+    public void setHashId(String hashId) {
         this.hashId = hashId;
     }
 
@@ -266,19 +271,43 @@ public class PendudukBody {
         this.email = email;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
     public int getIdDesa() {
         return idDesa;
     }
 
     public void setIdDesa(int idDesa) {
         this.idDesa = idDesa;
+    }
+
+    @Override
+    public String toString() {
+        return "PendudukBody{" +
+                "hashId='" + hashId + '\'' +
+                ", NIK='" + NIK + '\'' +
+                ", foto='" + foto + '\'' +
+                ", namaDepan='" + namaDepan + '\'' +
+                ", namaBelakang='" + namaBelakang + '\'' +
+                ", jenisKelamin='" + jenisKelamin + '\'' +
+                ", tempatLahir='" + tempatLahir + '\'' +
+                ", tanggalLahir='" + tanggalLahir + '\'' +
+                ", agama='" + agama + '\'' +
+                ", golonganDarah='" + golonganDarah + '\'' +
+                ", pekerjaan='" + pekerjaan + '\'' +
+                ", pendidikan='" + pendidikan + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", rt='" + rt + '\'' +
+                ", rw='" + rw + '\'' +
+                ", dusun='" + dusun + '\'' +
+                ", desa='" + desa + '\'' +
+                ", kecamatan='" + kecamatan + '\'' +
+                ", datiII='" + datiII + '\'' +
+                ", provinsi='" + provinsi + '\'' +
+                ", noHP='" + noHP + '\'' +
+                ", noTelp='" + noTelp + '\'' +
+                ", status='" + status + '\'' +
+                ", kodePos=" + kodePos +
+                ", email='" + email + '\'' +
+                ", idDesa=" + idDesa +
+                '}';
     }
 }

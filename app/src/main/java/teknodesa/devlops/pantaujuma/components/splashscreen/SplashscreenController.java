@@ -5,6 +5,7 @@ import org.greenrobot.eventbus.EventBus;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
@@ -45,6 +46,11 @@ public class SplashscreenController implements SplashscreenContract.Controller {
         if(user == null){
             views.sessionUser(false);
         }else{
+            AkunFragment.desaUser = user.getNamaDesa();
+            AkunFragment.kabupatenKotaUser = user.getKabupatenKota();
+            AkunFragment.provinsiUser =user.getProvinsi();
+            AkunFragment.kecamatanUser = user.getKecamatan();
+            AkunFragment.idDesa = Integer.valueOf(user.getAttributeValue());
             views.sessionUser(true);
         }
     }

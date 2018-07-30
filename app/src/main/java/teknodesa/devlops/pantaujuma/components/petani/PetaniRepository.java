@@ -42,7 +42,7 @@ public class PetaniRepository implements PetaniContract.Repository<PetaniRealm> 
     }
 
     @Override
-    public void updateItem(int idItem, PetaniRealm item) {
+    public void updateItem(String idItem, PetaniRealm item) {
         Log.e("Error", "Masuk addItem success");
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -65,7 +65,7 @@ public class PetaniRepository implements PetaniContract.Repository<PetaniRealm> 
     }
 
     @Override
-    public void deleteItem(int idItem) {
+    public void deleteItem(String idItem) {
     // obtain the results of a query
         final RealmResults<PetaniRealm> results = realm.where(PetaniRealm.class).equalTo("idPenduduk", idItem).findAll();
 
@@ -80,7 +80,7 @@ public class PetaniRepository implements PetaniContract.Repository<PetaniRealm> 
     }
 
     @Override
-    public void setItemDeleted(int idItem) {
+    public void setItemDeleted(String idItem) {
         Log.e("Error", "Masuk setItemDeleted success");
         PetaniRealm deletedItem = realm.where(PetaniRealm.class).equalTo("idPetani", idItem).findFirst();
 

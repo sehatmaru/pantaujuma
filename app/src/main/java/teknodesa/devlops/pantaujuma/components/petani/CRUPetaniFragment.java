@@ -76,7 +76,7 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
 
         btnPenduduk.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Penduduk", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "BiodataPenduduk", Toast.LENGTH_SHORT).show();
                 //switch (mJenisCRU){
                     //case "penduduk": cruPendudukFragment.getUIData(); break;
                    // case "petani": cruPetaniFragment.getUIData(); break;

@@ -2,8 +2,7 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import lombok.Data;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomoditasRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 
 public class KegiatanPemanenanRealm extends RealmObject {
     @PrimaryKey

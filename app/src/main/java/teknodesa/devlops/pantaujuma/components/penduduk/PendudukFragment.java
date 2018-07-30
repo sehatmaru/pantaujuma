@@ -22,7 +22,7 @@ import io.realm.Sort;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 /**
  * Created by Marthin on 10/14/2017.
@@ -53,7 +53,7 @@ public class PendudukFragment extends DialogFragment implements FragmentPenduduk
                 .inject(this);
 
         MaterialDialog builder = new MaterialDialog.Builder(getActivity())
-                .title("Cari Penduduk")
+                .title("Cari BiodataPenduduk")
                 .customView(v,false)
                 .build();
 
@@ -134,7 +134,7 @@ public class PendudukFragment extends DialogFragment implements FragmentPenduduk
     }
 
     @Override
-    public void OnClickPenduduk(int idPenduduk, String nama) {
+    public void OnClickPenduduk(String idPenduduk, String nama) {
         /*TambahPendudukActivity callingActivity = (TambahPendudukActivity)getActivity();
 
         callingActivity.onUserSelectValue(ket,idPenduduk,nama);

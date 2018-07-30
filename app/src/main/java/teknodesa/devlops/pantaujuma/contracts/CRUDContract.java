@@ -31,17 +31,17 @@ public class CRUDContract {
 
     public interface Controller<U> {
         void addItem(U item);
-        void updateItem(int idItem, U item);
-        void deleteItem(int idItem);
-        void setItemDeleted(int idItem);
+        void updateItem(String idItem, U item);
+        void deleteItem(String idItem);
+        void setItemDeleted(String idItem);
 
         void responseCRUD(boolean status, String type); //dipanggil setelah data sudah diterima dari  Repository
     }
 
     public interface Repository<U> {
         void addItem(U item);
-        void updateItem(int idItem, U item);
-        void deleteItem(int idItem);
-        void setItemDeleted(int idItem);
+        void updateItem(String idItem, U item);
+        void deleteItem(String idItem);
+        void setItemDeleted(String idItem);
     }
 }

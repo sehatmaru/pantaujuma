@@ -14,17 +14,17 @@ public class ListPetaniController implements CRUDContract.Controller<PetaniRealm
     }
 
     @Override
-    public void updateItem(int idItem, PetaniRealm item) {
+    public void updateItem(String idItem, PetaniRealm item) {
         mRepository.updateItem(idItem, item);
     }
 
     @Override
-    public void deleteItem(int idItem) {
+    public void deleteItem(String idItem) {
         mRepository.deleteItem(idItem);
     }
 
     @Override
-    public void setItemDeleted(int idItem) {
+    public void setItemDeleted(String idItem) {
         mRepository.setItemDeleted(idItem);
     }
 

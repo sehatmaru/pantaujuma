@@ -11,14 +11,15 @@ import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.Alamat;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.BiodataPenduduk;
 
 public class AlamatFragment extends Fragment implements PendudukContract.ViewController<Alamat>{
+
     @BindView(R.id.input_alamat)
     EditText input_alamat;
 
@@ -69,16 +70,35 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
 
         View v = inflater.inflate(R.layout.fragment_alamat, null);
         ButterKnife.bind(this, v);
-
+        setData();
         return v;
+    }
+
+    private void setData(){
+        input_desa.setText(AkunFragment.desaUser);
+        input_kecamatan.setText(AkunFragment.kecamatanUser);
+        input_datiii.setText(AkunFragment.kabupatenKotaUser);
+        input_provinsi.setText(AkunFragment.provinsiUser);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        input_alamat = (EditText) getActivity().findViewById(R.id.input_alamat);
-        setUIData();
+        input_alamat = getActivity().findViewById(R.id.input_alamat);
+        input_rt= getActivity().findViewById(R.id.input_rt);
+        input_rw= getActivity().findViewById(R.id.input_rw);
+        input_dusun= getActivity().findViewById(R.id.input_dusun);
+        input_desa= getActivity().findViewById(R.id.input_desa);
+        input_kecamatan= getActivity().findViewById(R.id.input_kecamatan);
+        input_datiii= getActivity().findViewById(R.id.input_datiii);
+        input_provinsi= getActivity().findViewById(R.id.input_provinsi);
+        input_kodepos= getActivity().findViewById(R.id.input_kodepos);
+        input_email= getActivity().findViewById(R.id.input_email);
+        input_hp= getActivity().findViewById(R.id.input_hp);
+        input_telp= getActivity().findViewById(R.id.input_telp);
+        setData();
+
     }
     
     @Override
@@ -103,9 +123,9 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
 
     @Override
     public void setUIData() {
-        Penduduk theUIData = (Penduduk) CRUActivity.mData;
+        Alamat theUIData = (Alamat) CRUActivity.mData;
         input_alamat.setText(theUIData.getAlamat()+ "");
-        /*input_rt.setText(theUIData.getRt()+ "");
+        input_rt.setText(theUIData.getRt()+ "");
         input_rw.setText(theUIData.getRw()+ "");
         input_dusun.setText(theUIData.getDusun()+ "");
         input_desa.setText(theUIData.getDesa()+ "");
@@ -115,7 +135,7 @@ public class AlamatFragment extends Fragment implements PendudukContract.ViewCon
         input_kodepos.setText(theUIData.getKodePos()+ "");
         input_email.setText(theUIData.getEmail()+ "");
         input_hp.setText(theUIData.getNoHP()+ "");
-        input_telp.setText(theUIData.getNoTelp()+ "");*/
+        input_telp.setText(theUIData.getNoTelp()+ "");
     }
 
     @Override

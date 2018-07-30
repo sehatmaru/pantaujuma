@@ -1,22 +1,20 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
-import android.app.Activity;
-
 import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 
-public class PendudukController implements PendudukContract.Controller<Penduduk> {
+public class PendudukController implements PendudukContract.Controller<PendudukRealm> {
     @Inject
     Realm realm;
 
     PendudukContract.View mView;
-    PendudukContract.Repository<Penduduk> mRepository;
+    PendudukContract.Repository<PendudukRealm> mRepository;
 
     public PendudukController(PendudukContract.View mView, @NonNull AppComponent appComponent){
         appComponent.inject(this);
@@ -25,22 +23,22 @@ public class PendudukController implements PendudukContract.Controller<Penduduk>
     }
 
     @Override
-    public void addItem(Penduduk item) {
+    public void addItem(PendudukRealm item) {
         mRepository.addItem(item);
     }
 
     @Override
-    public void updateItem(int idItem, Penduduk item) {
+    public void updateItem(String idItem, PendudukRealm item) {
         mRepository.updateItem(idItem, item);
     }
 
     @Override
-    public void deleteItem(int idItem) {
+    public void deleteItem(String idItem) {
         mRepository.deleteItem(idItem);
     }
 
     @Override
-    public void setItemDeleted(int idItem) {
+    public void setItemDeleted(String idItem) {
         mRepository.setItemDeleted(idItem);
     }
 

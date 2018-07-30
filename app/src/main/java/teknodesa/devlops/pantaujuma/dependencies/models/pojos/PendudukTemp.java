@@ -306,7 +306,7 @@ public class PendudukTemp {
 
     @Override
     public String toString() {
-        return "Penduduk{" +
+        return "BiodataPenduduk{" +
                 "idPenduduk=" + idPenduduk +
                 ", NIK='" + NIK + '\'' +
                 ", foto='" + foto + '\'' +

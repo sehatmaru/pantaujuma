@@ -1,8 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
-import teknodesa.devlops.pantaujuma.utils.Pesan;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 public class PendudukSelectController implements PendudukSelectContract.Controller<PendudukRealm> {
     PendudukSelectContract.View mView;

@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
+import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     AkunFragment akunFragment;
 
+    @Inject
+    KomoditasFragment komoditasFragment;
     private boolean doubleBackToExitPressedOnce = false;
 
     public static Intent createIntent(Context context) {
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_komoditas:
                     //mTextMessage.setText(R.string.title_post);
-                    //replaceFragment(cruLahanFragment);
+                    replaceFragment(komoditasFragment);
                     return true;
                 case R.id.navigation_post:
                     //mTextMessage.setText(R.string.title_post);

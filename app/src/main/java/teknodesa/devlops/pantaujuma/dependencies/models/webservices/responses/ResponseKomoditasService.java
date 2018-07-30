@@ -2,16 +2,17 @@ package teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses;
 
 import java.util.List;
 
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 
 /**
- * Created by Marthin on 7/10/2018.
+ * Created by Marthin on 7/30/2018.
  */
 
-public class ResponsePenduduk {
+public class ResponseKomoditasService {
+
     private boolean success;
     private String message;
-    private List<PendudukRealm> penduduk;
+    private List<KomoditasRealm> data;
 
     public boolean isSuccess() {
         return success;
@@ -29,11 +30,11 @@ public class ResponsePenduduk {
         this.message = message;
     }
 
-    public List<PendudukRealm> getPenduduk() {
-        return penduduk;
+    public List<KomoditasRealm> getData() {
+        return data;
     }
 
-    public void setPenduduk(List<PendudukRealm> penduduk) {
-        this.penduduk = penduduk;
+    public void setData(List<KomoditasRealm> data) {
+        this.data = data;
     }
 }

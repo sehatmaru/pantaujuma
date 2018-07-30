@@ -4,12 +4,12 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
- * Created by Marthin on 7/10/2018.
+ * Created by Roy Deddy Tobing on 4/4/2018.
  */
 
-public class PendudukTempRealm extends RealmObject {
+public class PendudukRealm extends RealmObject {
     @PrimaryKey
-    private int hashId;
+    private String hashId;
     private String NIK;
     private String foto;
     private String namaDepan;
@@ -34,15 +34,44 @@ public class PendudukTempRealm extends RealmObject {
     private String status;
     private int kodePos;
     private String email;
-    private boolean isDeleted;
     private int idDesa;
+    private int isSync;
 
 
-    public PendudukTempRealm() {
+    public PendudukRealm() {
     }
 
+    public PendudukRealm(PendudukRealm pendudukRealm, int isSync) {
+        this.hashId = pendudukRealm.getHashId();
+        this.NIK = pendudukRealm.getNIK();
+        this.foto = pendudukRealm.getFoto();
+        this.namaDepan = pendudukRealm.getNamaDepan();
+        this.namaBelakang = pendudukRealm.getNamaBelakang();
+        this.jenisKelamin = pendudukRealm.getJenisKelamin();
+        this.tempatLahir = pendudukRealm.getTempatLahir();
+        this.tanggalLahir = pendudukRealm.getTanggalLahir();
+        this.agama = pendudukRealm.getAgama();
+        this.golonganDarah = pendudukRealm.getGolonganDarah();
+        this.pekerjaan = pendudukRealm.getPekerjaan();
+        this.pendidikan = pendudukRealm.getPendidikan();
+        this.alamat = pendudukRealm.getAlamat();
+        this.rt = pendudukRealm.getRt();
+        this.rw = pendudukRealm.getRw();
+        this.dusun = pendudukRealm.getDusun();
+        this.desa = pendudukRealm.getDesa();
+        this.kecamatan = pendudukRealm.getKecamatan();
+        this.datiII = pendudukRealm.getDatiII();
+        this.provinsi = pendudukRealm.getProvinsi();
+        this.noHP = pendudukRealm.getNoHP();
+        this.noTelp = pendudukRealm.getNoTelp();
+        this.status = pendudukRealm.getStatus();
+        this.kodePos = pendudukRealm.getKodePos();
+        this.email = pendudukRealm.getEmail();
+        this.idDesa = pendudukRealm.getIdDesa();
+        this.isSync = isSync;
+    }
 
-    public PendudukTempRealm(int hashId, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, String status, int kodePos, String email, boolean isDeleted, int idDesa) {
+    public PendudukRealm(String hashId, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin, String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan, String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String noHP, String noTelp, String status, int kodePos, String email, int idDesa) {
         this.hashId = hashId;
         this.NIK = NIK;
         this.foto = foto;
@@ -68,15 +97,22 @@ public class PendudukTempRealm extends RealmObject {
         this.status = status;
         this.kodePos = kodePos;
         this.email = email;
-        this.isDeleted = isDeleted;
         this.idDesa = idDesa;
     }
 
-    public int getHashId() {
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
+    }
+
+    public String getHashId() {
         return hashId;
     }
 
-    public void setHashId(int hashId) {
+    public void setHashId(String hashId) {
         this.hashId = hashId;
     }
 
@@ -281,13 +317,6 @@ public class PendudukTempRealm extends RealmObject {
         this.email = email;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
 
     @Override
     public String toString() {
@@ -317,8 +346,8 @@ public class PendudukTempRealm extends RealmObject {
                 ", status='" + status + '\'' +
                 ", kodePos=" + kodePos +
                 ", email='" + email + '\'' +
-                ", isDeleted=" + isDeleted +
                 ", idDesa=" + idDesa +
+                ", isSync=" + isSync+
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk;
 
 /**
  * Created by Roy Deddy Tobing on 4/4/2018.

@@ -10,6 +10,7 @@ import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.signin.LoginContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -51,9 +52,15 @@ public class LoginService implements LoginContract.Repository {
                     if(response.body().isSuccess()){
                         UserDB userDB = new UserDB(response.body().getId(),response.body().getUsername(),response.body().getNamaLengkap(),
                                 response.body().getPhoneNumber(),response.body().getProfilImage(),response.body().getNamaDesa(),
+                                response.body().getKecamatan(),response.body().getProvinsi(),response.body().getKabupatenKota(),
                                 response.body().getEmail(),response.body().getRoleName(),response.body().getKeyRole(),
                                 response.body().getAttributeTable(),response.body().getAttributeValue());
 
+                        AkunFragment.desaUser = response.body().getNamaDesa();
+                        AkunFragment.kabupatenKotaUser = response.body().getKabupatenKota();
+                        AkunFragment.provinsiUser = response.body().getProvinsi();
+                        AkunFragment.kecamatanUser = response.body().getKecamatan();
+                        AkunFragment.idDesa = Integer.valueOf(response.body().getAttributeValue());
                         realm.beginTransaction();
                         realm.executeTransactionAsync(realmuser -> {
                             realmuser.insertOrUpdate(userDB);

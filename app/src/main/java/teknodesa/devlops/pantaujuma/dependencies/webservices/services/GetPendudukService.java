@@ -13,7 +13,7 @@ import retrofit2.Response;
 import teknodesa.devlops.pantaujuma.components.penduduk.GetPendudukContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PendudukBody;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukTempRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponsePenduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseSaveData;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
@@ -52,28 +52,11 @@ public class GetPendudukService implements GetPendudukContract.Repository {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
                         Log.e("hasilpenduduk",response.body().getPenduduk().size()+" ini");
-                        realm.executeTransactionAsync(new Realm.Transaction() {
-                            @Override
-                            public void execute(Realm bgRealm) {
-                                bgRealm.insertOrUpdate(response.body().getPenduduk());
-                            }
-                        }, new Realm.Transaction.OnSuccess() {
-                            @Override
-                            public void onSuccess() {
-                                // Transaction was a success.
-                                Log.e("getpenduduksukses","done");
-                                controller.getAllPendudukSuccess(response.body().getPenduduk());
-                            }
-                        }, new Realm.Transaction.OnError() {
-                            @Override
-                            public void onError(Throwable error) {
-                                // Transaction failed and was automatically canceled.
-//                                mController.responseCRUD(false, "create");
-                                Log.e("getpendudukeror",error.getMessage());
-                            }
+                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getPenduduk()), () -> {
+                            controller.getAllPendudukSuccess(response.body().getPenduduk());
+                        }, error -> {
+                            Log.e("getpendudukeror",error.getMessage());
                         });
-
-
                     }else
                         controller.getAllPendudukFailed(response.body().getMessage());
                 }else{
@@ -91,21 +74,20 @@ public class GetPendudukService implements GetPendudukContract.Repository {
     }
 
     @Override
-    public void saveData(List<PendudukTempRealm> allPen) {
-        Log.e("penduduk service",allPen.size()+"size ");
+    public void saveData(List<PendudukRealm> allPen) {
         for(int i=0; i < allPen.size();i++ ){
-            PendudukTempRealm pendudukTempRealm = allPen.get(i);
-
-            PendudukBody pendudukBody = new PendudukBody(
-                    pendudukTempRealm.getHashId(),pendudukTempRealm.getNIK(),pendudukTempRealm.getFoto(),
+            PendudukRealm pendudukTempRealm = allPen.get(i);
+            realm.beginTransaction();
+            pendudukTempRealm.setIsSync(1);
+            realm.commitTransaction();
+            PendudukBody pendudukBody = new PendudukBody(pendudukTempRealm.getHashId(),pendudukTempRealm.getNIK(),"",
                     pendudukTempRealm.getNamaDepan(),pendudukTempRealm.getNamaBelakang(),pendudukTempRealm.getJenisKelamin(),
                     pendudukTempRealm.getTempatLahir(),pendudukTempRealm.getTanggalLahir(),pendudukTempRealm.getAgama(),
                     pendudukTempRealm.getGolonganDarah(),pendudukTempRealm.getPekerjaan(),pendudukTempRealm.getPendidikan(),
                     pendudukTempRealm.getAlamat(),pendudukTempRealm.getRt(),pendudukTempRealm.getRw(),pendudukTempRealm.getDusun(),
-                    pendudukTempRealm.getDesa(), pendudukTempRealm.getKecamatan(),pendudukTempRealm.getDatiII(),
-                    pendudukTempRealm.getProvinsi(),pendudukTempRealm.getNoHP(),pendudukTempRealm.getNoTelp(),
-                    pendudukTempRealm.getStatus(),pendudukTempRealm.getKodePos(),pendudukTempRealm.getEmail(),
-                    pendudukTempRealm.isDeleted(),pendudukTempRealm.getIdDesa());
+                    pendudukTempRealm.getDesa(),pendudukTempRealm.getKecamatan(),pendudukTempRealm.getDatiII(),pendudukTempRealm.getProvinsi(),
+                    pendudukTempRealm.getNoHP(),pendudukTempRealm.getNoTelp(),pendudukTempRealm.getStatus(),pendudukTempRealm.getKodePos(),
+                    pendudukTempRealm.getEmail(),pendudukTempRealm.getIdDesa());
 
             Log.e("penduduk service",pendudukBody.toString());
             Call<ResponseSaveData> call = sisApi.insertPenduduk(WebServiceModule.ACCESS_TOKEN_TEMP,pendudukBody);
@@ -114,13 +96,14 @@ public class GetPendudukService implements GetPendudukContract.Repository {
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-                            Log.e("penduduk service",allPen.size()+"true");
+
                             controller.saveDataSuccess("Success",pendudukTempRealm);
                         }else {
-                            controller.saveDataFailed("Failed");
+                            controller.saveDataFailed("Failed"+response.body().getMessage());
                         }
 
                     }else{
+                        Log.e("penduduk service","Error3"+response.toString());
                         controller.saveDataFailed("Failed");
                     }
                 }
@@ -132,9 +115,7 @@ public class GetPendudukService implements GetPendudukContract.Repository {
                     t.printStackTrace();
                 }
             });
-            //deleteData(allPen.get(i));
         }
-        //controller.saveDataSuccess("Sinkronisasi data selesai");
     }
 
 }

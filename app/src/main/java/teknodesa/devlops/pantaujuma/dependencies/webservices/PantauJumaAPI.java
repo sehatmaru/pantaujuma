@@ -8,6 +8,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PendudukBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseLogin;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponsePenduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponsePromo;
@@ -28,6 +29,9 @@ public interface PantauJumaAPI {
     @GET("penduduk/viewAllPenduduk/{idDesa}")
     Call<ResponsePenduduk> getAllPenduduk(@Header("Authorization") String token, @Path("idDesa") int idDesa);
 
+    @GET("komoditas/getAllKomoditas")
+    Call<ResponseKomoditasService> getAllKomoditas(@Header("Authorization") String token);
+
     @POST("penduduk/insertPenduduk")
-    Call<ResponseSaveData> insertPenduduk(@Header("Authorization") String token, @Body PendudukBody pendudukTempRealm);
+    Call<ResponseSaveData> insertPenduduk(@Header("Authorization") String token, @Body PendudukBody pendudukBody);
 }

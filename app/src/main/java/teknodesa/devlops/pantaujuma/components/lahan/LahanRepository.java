@@ -42,7 +42,7 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
     }
 
     @Override
-    public void updateItem(int idItem, LahanRealm item) {
+    public void updateItem(String idItem, LahanRealm item) {
         Log.e("Error", "Masuk addItem success");
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -65,7 +65,7 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
     }
 
     @Override
-    public void deleteItem(int idItem) {
+    public void deleteItem(String idItem) {
     // obtain the results of a query
         final RealmResults<LahanRealm> results = realm.where(LahanRealm.class).equalTo("idLahan", idItem).findAll();
 
@@ -80,7 +80,7 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
     }
 
     @Override
-    public void setItemDeleted(int idItem) {
+    public void setItemDeleted(String idItem) {
         Log.e("Error", "Masuk setItemDeleted success");
         LahanRealm deletedItem = realm.where(LahanRealm.class).equalTo("idPetani", idItem).findFirst();
 

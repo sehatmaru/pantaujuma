@@ -89,6 +89,11 @@ public class AkunFragment extends Fragment implements ProfileContract.View{
     private String idUser;
     private UserDB userDB;
 
+    public static String kecamatanUser;
+    public static String kabupatenKotaUser;
+    public static String desaUser;
+    public static String provinsiUser;
+    public static int idDesa;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

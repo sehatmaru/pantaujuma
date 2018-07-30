@@ -1,8 +1,5 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses;
 
-import java.util.List;
-
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserRealm;
 
 /**
  * Created by Marthin on 2/23/2018.
@@ -16,12 +13,40 @@ public class ResponseLogin {
     private String namaLengkap;
     private String phoneNumber;
     private String profilImage;
+
     private String namaDesa;
+    private String kecamatan;
+    private String provinsi;
+    private String kabupatenKota;
     private String email;
     private String roleName;
     private String keyRole;
     private String attributeTable;
     private String attributeValue;
+
+    public String getKecamatan() {
+        return kecamatan;
+    }
+
+    public void setKecamatan(String kecamatan) {
+        this.kecamatan = kecamatan;
+    }
+
+    public String getProvinsi() {
+        return provinsi;
+    }
+
+    public void setProvinsi(String provinsi) {
+        this.provinsi = provinsi;
+    }
+
+    public String getKabupatenKota() {
+        return kabupatenKota;
+    }
+
+    public void setKabupatenKota(String kabupatenKota) {
+        this.kabupatenKota = kabupatenKota;
+    }
 
     public boolean isSuccess() {
         return success;

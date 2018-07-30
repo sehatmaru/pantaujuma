@@ -8,14 +8,12 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.BiodataPenduduk;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
-public class PendudukRepository implements PendudukContract.Repository<Penduduk> {
+public class PendudukRepository implements PendudukContract.Repository<PendudukRealm> {
     @Inject
     Realm realm;
 
@@ -27,20 +25,11 @@ public class PendudukRepository implements PendudukContract.Repository<Penduduk>
     }
 
     @Override
-    public void addItem(Penduduk item) {
+    public void addItem(PendudukRealm item) {
         Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
-            Number currentIdNum = realmIns.where(PendudukRealm.class).max("idPenduduk");
-            int nextId;
-            if(currentIdNum == null) {
-                nextId = 1;
-            } else {
-                nextId = currentIdNum.intValue() + 1;
-            }
-//            PendudukRealm newData = new PendudukRealm(item);
-//            newData.setHashId(nextId);
-//            realmIns.insertOrUpdate(newData);
+            realmIns.insertOrUpdate(item);
         }, () -> {
             mController.responseCRUD(true, "create");
         },(Throwable throwable)->{
@@ -51,33 +40,23 @@ public class PendudukRepository implements PendudukContract.Repository<Penduduk>
     }
 
     @Override
-    public void updateItem(int idItem, Penduduk item) {
+    public void updateItem(String idItem, PendudukRealm item) {
         Log.e("Error", "Masuk updateItem success");
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-//                PendudukRealm updatedData = new PendudukRealm(item);
-//                bgRealm.insertOrUpdate(updatedData);
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                // Transaction was a success.
-                mController.responseCRUD(true, "update");
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                // Transaction failed and was automatically canceled.
-                mController.responseCRUD(false, "update");
-            }
+        realm.executeTransactionAsync(bgRealm -> {
+                bgRealm.insertOrUpdate(item);
+        }, () -> {
+            // Transaction was a success.
+            mController.responseCRUD(true, "update");
+        }, error -> {
+            // Transaction failed and was automatically canceled.
+            mController.responseCRUD(false, "update");
         });
     }
 
     @Override
-    public void deleteItem(int idItem) {
+    public void deleteItem(String idItem) {
     // obtain the results of a query
-        final RealmResults<PendudukRealm> results = realm.where(PendudukRealm.class).equalTo("idPenduduk", idItem).findAll();
+        final RealmResults<PendudukRealm> results = realm.where(PendudukRealm.class).equalTo("hashId", idItem).findAll();
 
     // All changes to data must happen in a transaction
         realm.executeTransaction(new Realm.Transaction() {
@@ -90,28 +69,10 @@ public class PendudukRepository implements PendudukContract.Repository<Penduduk>
     }
 
     @Override
-    public void setItemDeleted(int idItem) {
+    public void setItemDeleted(String idItem) {
         Log.e("Error", "Masuk setItemDeleted success");
-        PendudukRealm deletedItem = realm.where(PendudukRealm.class).equalTo("idPenduduk", idItem).findFirst();
+        PendudukRealm deletedItem = realm.where(PendudukRealm.class).equalTo("hashId", idItem).findFirst();
 
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                deletedItem.setDeleted(true);
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                // Transaction was a success.
-                mController.responseCRUD(true, "delete");
-                deletedItem.toString();
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                // Transaction failed and was automatically canceled.
-                mController.responseCRUD(false, "delete");
-            }
-        });
+
     }
 }

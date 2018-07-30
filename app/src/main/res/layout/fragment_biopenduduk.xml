@@ -111,7 +111,7 @@
                 app:srcCompat="@drawable/formitem" />
 
             <Spinner
-                android:id="@+id/input_jeniskelamin"
+                android:id="@+id/spinnerJK"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3" />
@@ -198,7 +198,7 @@
                 app:srcCompat="@drawable/formitem" />
 
             <Spinner
-                android:id="@+id/input_agama"
+                android:id="@+id/spinnerAgama"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3" />
@@ -219,7 +219,7 @@
                 app:srcCompat="@drawable/formitem" />
 
             <Spinner
-                android:id="@+id/input_golongandarah"
+                android:id="@+id/spinnerGolonganDarah"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3" />
@@ -240,7 +240,7 @@
                 app:srcCompat="@drawable/formitem" />
 
             <Spinner
-                android:id="@+id/input_pendidikan"
+                android:id="@+id/spinnerPendidikan"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3" />
@@ -261,7 +261,7 @@
                 app:srcCompat="@drawable/formitem" />
 
             <Spinner
-                android:id="@+id/input_pekerjaan"
+                android:id="@+id/spinnerPekerjaan"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3" />

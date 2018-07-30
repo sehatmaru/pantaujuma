@@ -37,8 +37,7 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PendudukAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukTempRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class ListPendudukActivity extends BaseActivity implements PendudukAdapter.OnClickPendudukListener,GetPendudukContract.View{
@@ -51,7 +50,7 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     private final String mJenisCRU = "penduduk";
 
     private List<PendudukRealm> listpenduduk = Collections.EMPTY_LIST;
-    List<PendudukTempRealm> listPendudukRealm = Collections.EMPTY_LIST;
+    private List<PendudukRealm> listpendudukNotSync = Collections.EMPTY_LIST;
 
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     PendudukAdapter pendudukAdapter;
@@ -87,12 +86,11 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     }
 
     private ProgressDialog progressdialog;
-    static int counter=0;
-    static int hasilList =0;
+    static int counter;
     public static Intent createIntent(Context context) {
         return new Intent(context, ListPendudukActivity.class);
     }
-
+    static int hasilList =0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,18 +101,21 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
 
         setContentView(R.layout.activity_listpenduduk);
         ButterKnife.bind(this);
+        counter=0;
         mController.setView(this);
-        progressdialog = new ProgressDialog(getApplicationContext());
+        progressdialog = new ProgressDialog(this);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         realm.beginTransaction();
-        listPendudukRealm = realm.where(PendudukTempRealm.class).findAll();
+        listpendudukNotSync = realm.where(PendudukRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
 
+        hasilList = listpendudukNotSync.size();
         realm.beginTransaction();
-        lakiLaki = realm.where(PendudukRealm.class).equalTo("jenisKelamin","Laki-Laki").findAll().size();
+        lakiLaki = realm.where(PendudukRealm.class).equalTo("jenisKelamin","Laki-laki").findAll().size();
         perempuan = realm.where(PendudukRealm.class).equalTo("jenisKelamin","Perempuan").findAll().size();
+
         realm.commitTransaction();
         spinner.setVisibility(View.VISIBLE);
 
@@ -129,7 +130,7 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
             listpenduduk = realm1.copyFromRealm(realm1.where(PendudukRealm.class).sort("namaDepan", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listpenduduk.isEmpty()) {
-                Log.e("List Penduduk","ini hasil"+listpenduduk.size());
+                Log.e("List BiodataPenduduk","ini hasil"+listpenduduk.size());
 
                 pendudukAdapter = new PendudukAdapter(getApplicationContext(), listpenduduk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(pendudukAdapter);
@@ -150,11 +151,11 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
                 rcList.setVisibility(View.VISIBLE);
                 break;
             case Konstanta.LAYOUT_EMPTY:
-                createSnackbar(Konstanta.LAYOUT_EMPTY).show();
+                onError(Konstanta.LAYOUT_EMPTY);
                 spinner.setText("{fa-info 200%}  No data found");
                 break;
             case Konstanta.LAYOUT_ERROR:
-                createSnackbar(Konstanta.LAYOUT_ERROR).show();
+                onError(Konstanta.LAYOUT_ERROR);
                 spinner.setText("{fa-info 200%} Error");
                 break;
             case Konstanta.LAYOUT_LOADING:
@@ -202,7 +203,7 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     }
 
     @Override
-    public void OnClickPenduduk(int idPenduduk) {
+    public void OnClickPenduduk(String idPenduduk) {
         startActivity(DetailPendudukActivity.createIntent(getApplicationContext(),idPenduduk));
     }
 
@@ -218,7 +219,11 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
         int id = item.getItemId();
 
         if (id == R.id.action_sync){
-            syncDialog();
+            if(isNetworkConnected()){
+                syncDialog();
+            }else {
+                createSnackbar("Koneksi Tidak Tersedia").show();
+            }
             return true;
         }
         if (id == R.id.action_download){
@@ -272,7 +277,7 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
 
     private void startSync(){
         counter=0;
-        mController.saveData(listPendudukRealm);
+        mController.saveData(listpendudukNotSync);
     }
 
     private void setDataPenduduk(){
@@ -281,9 +286,8 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     }
 
     private void checkDataRealm(){
-        if(listPendudukRealm.size() > 0){
-            Log.e("list penduduk ",listPendudukRealm.get(0).toString());
-            showRealmData(""+listPendudukRealm.size()).show();
+        if(hasilList > 0){
+            showRealmData(""+hasilList).show();
         }
     }
 
@@ -305,11 +309,12 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil","counter"+counter+" list"+listPendudukRealm.size());
+        Log.e("hasil","counter"+counter+" list"+hasilList);
         if(counter == hasilList){
             progressdialog.dismiss();
             mController.getAllPenduduk();
             updateLayout(Konstanta.LAYOUT_LOADING);
+            this.recreate();
         }
 
 
@@ -318,5 +323,6 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     @Override
     public void saveDataFailed(String message) {
         progressdialog.dismiss();
+        onError(message);
     }
 }

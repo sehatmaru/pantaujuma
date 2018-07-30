@@ -13,6 +13,8 @@ import teknodesa.devlops.pantaujuma.components.harga.ListHargaActivity;
 import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
+import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
+import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.ListKomoditasActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
@@ -50,6 +52,7 @@ import teknodesa.devlops.pantaujuma.dependencies.modules.AppModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
@@ -69,11 +72,13 @@ public interface AppComponent {
     void inject(ProfileController controller);
     void inject(HomeController controller);
     void inject(GetPendudukController controller);
+    void inject(KomoditasController controller);
 
     //Repository
     void inject(ListPetaniRepository repository);
     void inject(PendudukRepository repository);
     void inject(PromoService repository);
+    void inject(KomoditasService repository);
 
     //Activity
     void inject(SplashscreenActivity activity);
@@ -112,5 +117,6 @@ public interface AppComponent {
     void inject(AlamatFragment fragment);
     void inject(PendudukFragment fragment);
     void inject(AkunFragment fragment);
+    void inject(KomoditasFragment fragment);
 
 }

@@ -15,6 +15,9 @@ public class UserDB extends RealmObject {
     private String phoneNumber;
     private String profilImage;
     private String namaDesa;
+    private String kecamatan;
+    private String provinsi;
+    private String kabupatenKota;
     private String email;
     private String roleName;
     private String keyRole;
@@ -25,18 +28,46 @@ public class UserDB extends RealmObject {
     }
 
     public UserDB(String id, String username, String namaLengkap, String phoneNumber, String profilImage,
-                  String namaDesa, String email, String roleName, String keyRole, String attributeTable, String attributeValue) {
+                  String namaDesa, String kecamatan, String provinsi, String kabupatenKota, String email,
+                  String roleName, String keyRole, String attributeTable, String attributeValue) {
         this.id = id;
         this.username = username;
         this.namaLengkap = namaLengkap;
         this.phoneNumber = phoneNumber;
         this.profilImage = profilImage;
         this.namaDesa = namaDesa;
+        this.kecamatan = kecamatan;
+        this.provinsi = provinsi;
+        this.kabupatenKota = kabupatenKota;
         this.email = email;
         this.roleName = roleName;
         this.keyRole = keyRole;
         this.attributeTable = attributeTable;
         this.attributeValue = attributeValue;
+    }
+
+    public String getKabupatenKota() {
+        return kabupatenKota;
+    }
+
+    public void setKabupatenKota(String kabupatenKota) {
+        this.kabupatenKota = kabupatenKota;
+    }
+
+    public String getKecamatan() {
+        return kecamatan;
+    }
+
+    public void setKecamatan(String kecamatan) {
+        this.kecamatan = kecamatan;
+    }
+
+    public String getProvinsi() {
+        return provinsi;
+    }
+
+    public void setProvinsi(String provinsi) {
+        this.provinsi = provinsi;
     }
 
     public String getId() {

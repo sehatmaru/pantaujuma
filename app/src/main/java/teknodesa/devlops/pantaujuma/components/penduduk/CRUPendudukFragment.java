@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,25 +16,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
-import io.realm.RealmModel;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Alamat;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Penduduk;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.Alamat;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.BiodataPenduduk;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
-public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<Penduduk>, PendudukContract.View {
-    Penduduk newPenduduk = null;
+public class CRUPendudukFragment extends Fragment implements PendudukContract.ViewController<PendudukRealm>, PendudukContract.View {
+
+    BiodataPenduduk biodataPenduduk = null;
     Alamat newAlamat = null;
 
     @Inject
@@ -57,15 +60,14 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
 
         appComponent = ((MainApplication) getActivity().getApplication()).getComponent();
-        ((MainApplication) getActivity().getApplication())
-                .getComponent()
-                .inject(this);
+        appComponent.inject(this);
     }
 
     @Override
@@ -74,7 +76,8 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
 
         View v = inflater.inflate(R.layout.fragment_crupenduduk, container, false);
         ButterKnife.bind(this, v);
-
+        biodataFragment = new BiodataFragment();
+        alamatFragment = new AlamatFragment();
         setViewpager();
         setupTabIcons();
         viewPager.setCurrentItem(0);
@@ -87,18 +90,10 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        biodataFragment = new BiodataFragment();
-        alamatFragment = new AlamatFragment();
 
-        if(CRUActivity.mAction.equals("insert")){
-            newPenduduk = biodataFragment.getUIData();
-            newAlamat = alamatFragment.getUIData();
 
-            getUIData();
-        }else {
-            if(CRUActivity.mAction.equals("update")){
-                setUIData();
-            }
+        if(CRUActivity.mAction.equals("update")){
+            setUIData();
         }
     }
 
@@ -128,22 +123,23 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     }
 
     @Override
-    public Penduduk getUIData() {
+    public PendudukRealm getUIData() {
 
-        Penduduk newRealmItem = new Penduduk();
-
-        newRealmItem.setNIK(newPenduduk.getNIK());
-        newRealmItem.setNamaDepan(newPenduduk.getNamaDepan());
-        newRealmItem.setNamaBelakang(newPenduduk.getNamaBelakang());
-        newRealmItem.setJenisKelamin(newPenduduk.getJenisKelamin());
-        newRealmItem.setTempatLahir(newPenduduk.getTempatLahir());
-        newRealmItem.setTanggalLahir(newPenduduk.getTanggalLahir());
-        newRealmItem.setAgama(newPenduduk.getAgama());
-        newRealmItem.setGolonganDarah(newPenduduk.getGolonganDarah());
-        newRealmItem.setPekerjaan(newPenduduk.getPekerjaan());
-        newRealmItem.setPendidikan(newPenduduk.getPendidikan());
-        newRealmItem.setStatus(newPenduduk.getStatus());
-
+        biodataPenduduk = biodataFragment.getUIData();
+        newAlamat = alamatFragment.getUIData();
+        PendudukRealm newRealmItem = new PendudukRealm();
+        newRealmItem.setHashId(getSaltString());
+        newRealmItem.setNIK(biodataPenduduk.getNIK());
+        newRealmItem.setNamaDepan(biodataPenduduk.getNamaDepan());
+        newRealmItem.setNamaBelakang(biodataPenduduk.getNamaBelakang());
+        newRealmItem.setJenisKelamin(biodataPenduduk.getJenisKelamin());
+        newRealmItem.setTempatLahir(biodataPenduduk.getTempatLahir());
+        newRealmItem.setTanggalLahir(biodataPenduduk.getTanggalLahir());
+        newRealmItem.setAgama(biodataPenduduk.getAgama());
+        newRealmItem.setGolonganDarah(biodataPenduduk.getGolonganDarah());
+        newRealmItem.setPekerjaan(biodataPenduduk.getPekerjaan());
+        newRealmItem.setPendidikan(biodataPenduduk.getPendidikan());
+        newRealmItem.setStatus(biodataPenduduk.getStatus());
         newRealmItem.setAlamat(newAlamat.getAlamat());
         newRealmItem.setRt(newAlamat.getRt());
         newRealmItem.setRw(newAlamat.getRw());
@@ -156,12 +152,11 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         newRealmItem.setEmail(newAlamat.getEmail());
         newRealmItem.setNoHP(newAlamat.getNoHP());
         newRealmItem.setNoTelp(newAlamat.getNoTelp());
+        newRealmItem.setIsSync(0);
+        newRealmItem.setIdDesa(AkunFragment.idDesa);
 
-        newRealmItem.setDeleted(false);
 
-        String hh = newPenduduk.toString();
-        hh = hh + " - " + newAlamat.toString();
-        //Toast.makeText(getContext(), hh, Toast.LENGTH_SHORT).show();
+        Log.e("penduduk",newRealmItem.toString());
         return newRealmItem;
     }
 
@@ -181,21 +176,21 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     }
 
     public static void setDeletedData(Parcelable itemData, AppComponent appComp) {
-        PendudukContract.Controller<Penduduk> mController = new PendudukController(new CRUPendudukFragment(), appComp);
-        int idItem = ((Penduduk) itemData).getIdPenduduk();
+        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(new CRUPendudukFragment(), appComp);
+        String idItem = ((PendudukRealm) itemData).getHashId();
         mController.setItemDeleted(idItem);
     }
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
-        PendudukContract.Controller<Penduduk> mController = new PendudukController(this, appComponent);
-        Penduduk uiItem = getUIData();
+        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this, appComponent);
+        PendudukRealm uiItem = getUIData();
 
         if (tipe.equals("insert")) {
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-                int idItem = ((Penduduk) itemData).getIdPenduduk();
+                String idItem = ((PendudukRealm) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
             }
         }
@@ -227,5 +222,16 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         public void addFragment(Fragment fragment) {
             mFragmentList.add(fragment);
         }
+    }
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        return timeStamp + "" + salt.toString();
     }
 }
