@@ -6,19 +6,19 @@ import io.realm.annotations.PrimaryKey;
 
 public class LahanRealm extends RealmObject {
     @PrimaryKey
-    private int idLahan;
-
+    private String hashId;
+    private String pemilik;
     private String nama;
     private String alamat;
     private String rt;
     private String rw;
     private String dusun;
     private String desa;
-    private String kecamatan;
+    private String namaKecamatan;
     private String datiII;
     private String provinsi;
-    private String longitude;
-    private String latitude;
+    private double longitude;
+    private double latitude;
     private String luas;
     private String batasTimur;
     private String batasBarat;
@@ -27,20 +27,23 @@ public class LahanRealm extends RealmObject {
     private String deskripsi;
     private int status;
     private String gambar;
-    public RealmList<RiwayatLahanRealm> riwayatLahan;
 
     public LahanRealm() {
     }
 
-    public LahanRealm(int idLahan, String nama, String alamat, String rt, String rw, String dusun, String desa, String kecamatan, String datiII, String provinsi, String longitude, String latitude, String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara, String deskripsi, int status, String gambar, RealmList<RiwayatLahanRealm> riwayatLahan) {
-        this.idLahan = idLahan;
+    public LahanRealm(String hashId, String pemilik, String nama, String alamat, String rt, String rw, String dusun,
+                      String desa, String namaKecamatan, String datiII, String provinsi, double longitude, double latitude,
+                      String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara, String deskripsi,
+                      int status, String gambar) {
+        this.hashId = hashId;
+        this.pemilik = pemilik;
         this.nama = nama;
         this.alamat = alamat;
         this.rt = rt;
         this.rw = rw;
         this.dusun = dusun;
         this.desa = desa;
-        this.kecamatan = kecamatan;
+        this.namaKecamatan = namaKecamatan;
         this.datiII = datiII;
         this.provinsi = provinsi;
         this.longitude = longitude;
@@ -53,17 +56,23 @@ public class LahanRealm extends RealmObject {
         this.deskripsi = deskripsi;
         this.status = status;
         this.gambar = gambar;
-        this.riwayatLahan = riwayatLahan;
     }
 
-    public int getIdLahan() {
-        return idLahan;
+    public String getHashId() {
+        return hashId;
     }
 
-    public void setIdLahan(int idLahan) {
-        this.idLahan = idLahan;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
+    public String getPemilik() {
+        return pemilik;
+    }
+
+    public void setPemilik(String pemilik) {
+        this.pemilik = pemilik;
+    }
 
     public String getNama() {
         return nama;
@@ -113,12 +122,12 @@ public class LahanRealm extends RealmObject {
         this.desa = desa;
     }
 
-    public String getKecamatan() {
-        return kecamatan;
+    public String getNamaKecamatan() {
+        return namaKecamatan;
     }
 
-    public void setKecamatan(String kecamatan) {
-        this.kecamatan = kecamatan;
+    public void setNamaKecamatan(String namaKecamatan) {
+        this.namaKecamatan = namaKecamatan;
     }
 
     public String getDatiII() {
@@ -137,19 +146,19 @@ public class LahanRealm extends RealmObject {
         this.provinsi = provinsi;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -215,13 +224,5 @@ public class LahanRealm extends RealmObject {
 
     public void setGambar(String gambar) {
         this.gambar = gambar;
-    }
-
-    public RealmList<RiwayatLahanRealm> getRiwayatLahan() {
-        return riwayatLahan;
-    }
-
-    public void setRiwayatLahan(RealmList<RiwayatLahanRealm> riwayatLahan) {
-        this.riwayatLahan = riwayatLahan;
     }
 }

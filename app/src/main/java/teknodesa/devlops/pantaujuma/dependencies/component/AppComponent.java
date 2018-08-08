@@ -18,6 +18,8 @@ import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.ListKomoditasActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
+import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasActivity;
+import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasController;
 import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
@@ -53,6 +55,7 @@ import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
@@ -73,12 +76,14 @@ public interface AppComponent {
     void inject(HomeController controller);
     void inject(GetPendudukController controller);
     void inject(KomoditasController controller);
+    void inject(ListLahanKomoditasController controller);
 
     //Repository
     void inject(ListPetaniRepository repository);
     void inject(PendudukRepository repository);
     void inject(PromoService repository);
     void inject(KomoditasService repository);
+    void inject(ListLahanKomoditasService repository);
 
     //Activity
     void inject(SplashscreenActivity activity);
@@ -98,6 +103,7 @@ public interface AppComponent {
     void inject(ListHargaActivity activity);
     void inject(ListSurveiActivity activity);
     void inject(DetailPendudukActivity activity);
+    void inject(ListLahanKomoditasActivity activity);
 
     //fragment
     void inject(HomeFragment fragment);

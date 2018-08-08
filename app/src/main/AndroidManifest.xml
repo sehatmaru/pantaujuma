@@ -95,7 +95,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_reset_password"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".components.lahan.ListLahanKomditasActivity"></activity>
+        <activity android:name=".components.lahan.ListLahanKomoditasActivity"></activity>
     </application>
 
 </manifest>

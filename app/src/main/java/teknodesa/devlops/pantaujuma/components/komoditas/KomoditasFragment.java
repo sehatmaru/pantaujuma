@@ -40,6 +40,7 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.KomoditasAdapter;
+import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
@@ -69,6 +70,7 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
     RecyclerView recyclerView;
 
     private ProgressDialog progressdialog;
+
     private List<KomoditasRealm> listData = Collections.EMPTY_LIST;
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     KomoditasAdapter pendudukAdapter;
@@ -230,7 +232,7 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
 
     @Override
     public void OnClickKomoditas(KomoditasRealm komoditasRealm) {
-
+        startActivity(ListLahanKomoditasActivity.createIntent(getActivity().getApplicationContext(),komoditasRealm));
     }
     private Boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager

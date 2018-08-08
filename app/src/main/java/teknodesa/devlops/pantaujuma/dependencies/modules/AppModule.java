@@ -15,7 +15,9 @@ import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
+import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
+import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasController;
 import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
@@ -34,6 +36,7 @@ import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenControll
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
@@ -57,6 +60,12 @@ public class AppModule {
     }
 
     ///////////////////////Services
+    @Provides
+    @Singleton
+    ListLahanKomoditasService listLahanKomoditasService() {
+        return new ListLahanKomoditasService(app.getComponent());
+    }
+
     @Provides
     @Singleton
     LoginService loginService() {
@@ -119,9 +128,19 @@ public class AppModule {
         return new HomeController(app.getComponent());
     }
 
+    @Provides
+    @Singleton
+    ListLahanKomoditasController listLahanKomoditasController() {
+        return new ListLahanKomoditasController(app.getComponent());
+    }
+
     ///////////////////////Activities///
 
     /////Fragments
+    @Provides
+    @Singleton
+    KomoditasFragment komoditasFragment(){return new KomoditasFragment();}
+
     @Provides
     @Singleton
     HomeFragment provideHomeFragment(){return new HomeFragment();}
