@@ -86,9 +86,10 @@ public class AkunFragment extends Fragment implements ProfileContract.View{
     TextView phoneNumber;
 
     Context mContext;
-    private String idUser;
+    //private String idUser;
     private UserDB userDB;
 
+    public static String idUser;
     public static String kecamatanUser;
     public static String kabupatenKotaUser;
     public static String desaUser;

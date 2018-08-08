@@ -5,7 +5,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class KomoditasRealm extends RealmObject {
     @PrimaryKey
-    private int hashId;
+    private String hashId;
     private String nama;
     private String kategori;
     private String deskripsi;
@@ -14,7 +14,7 @@ public class KomoditasRealm extends RealmObject {
     public KomoditasRealm() {
     }
 
-    public KomoditasRealm(int hashId, String nama, String kategori, String deskripsi, String gambar) {
+    public KomoditasRealm(String hashId, String nama, String kategori, String deskripsi, String gambar) {
         this.hashId = hashId;
         this.nama = nama;
         this.kategori = kategori;
@@ -22,11 +22,11 @@ public class KomoditasRealm extends RealmObject {
         this.gambar = gambar;
     }
 
-    public int getHashId() {
+    public String getHashId() {
         return hashId;
     }
 
-    public void setHashId(int hashId) {
+    public void setHashId(String hashId) {
         this.hashId = hashId;
     }
 

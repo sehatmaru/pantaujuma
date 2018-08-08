@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,9 +14,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/formitem" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_nikanggota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3">
+
+                    <EditText
+                        android:id="@+id/input_nikanggota"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:hint="@string/nik"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnPetaniAnggota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="..." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -27,128 +67,58 @@
                 app:srcCompat="@drawable/formitem" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_namapoktan"
+                android:id="@+id/input_layout_namadepananggota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3">
 
                 <EditText
-                    android:id="@+id/input_namapoktan"
+                    android:id="@+id/input_namadepananggota"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:hint="@string/namaPoktan"
+                    android:hint="@string/namaDepan"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnPoktan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="..." />
-    </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/formitem" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/formitem" />
+
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_nik"
+                android:id="@+id/input_layout_namabelakanganggota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9">
+                android:layout_weight="3">
 
                 <EditText
-                    android:id="@+id/input_nik"
+                    android:id="@+id/input_namabelakanganggota"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:hint="@string/nik"
+                    android:hint="@string/namaBelakang"
                     android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout></LinearLayout>
-
-            <Button
-                android:id="@+id/btnPetani"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:text="..." />
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/formitem" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_namadepan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3">
-
-            <EditText
-                android:id="@+id/input_namadepan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:hint="@string/namaDepan"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout></LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/formitem" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_namabelakang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3">
-
-            <EditText
-                android:id="@+id/input_namabelakang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:hint="@string/namaBelakang"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -163,73 +133,26 @@
                     android:id="@+id/input_layout_tanggalmasuk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5pt"
                     android:layout_weight="3">
 
                     <EditText
                         android:id="@+id/input_tanggalmasuk"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
+                        android:editable="false"
                         android:hint="@string/tanggalMasuk"
-                        android:inputType="date" />
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnTanggalMasuk"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/formitem" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_tanggalkeluar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5pt"
-                    android:layout_weight="3">
-
-                    <EditText
-                        android:id="@+id/input_tanggalkeluar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="@string/tanggalKeluar"
-                        android:inputType="date" />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
+                android:text="..." />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/formitem" />
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/input_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/status"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout></LinearLayout>
+    </LinearLayout>
+
 </ScrollView>

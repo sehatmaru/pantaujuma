@@ -9,9 +9,6 @@ public class DetailRiwayatPertanianRealm extends RealmObject {
     @PrimaryKey
     private int idDetailRiwayatPertanian;
 
-    @LinkingObjects("detailKegiatan")
-    public final RealmResults<RiwayatLahanRealm> riwayat = null;
-
     private String tanggalMulaiKegiatan;
     private String tanggalAkhirKegiatan;
     private String masaKegiatan; //PRATANAM, TANAM, PANEN, PASCAPANEN
@@ -40,10 +37,6 @@ public class DetailRiwayatPertanianRealm extends RealmObject {
 
     public void setIdDetailRiwayatPertanian(int idDetailRiwayatPertanian) {
         this.idDetailRiwayatPertanian = idDetailRiwayatPertanian;
-    }
-
-    public RealmResults<RiwayatLahanRealm> getRiwayat() {
-        return riwayat;
     }
 
     public String getTanggalMulaiKegiatan() {

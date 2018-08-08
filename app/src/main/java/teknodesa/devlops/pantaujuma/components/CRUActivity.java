@@ -1,6 +1,5 @@
 package teknodesa.devlops.pantaujuma.components;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -26,8 +24,8 @@ import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
-import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.CRUPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
@@ -137,6 +135,15 @@ public class CRUActivity extends AppCompatActivity {
                     break;
                 case "petani":
                     cruPetaniFragment.saveData(mAction, mData);
+                    break;
+                case "poktan":
+                    cruPoktanFragment.saveData(mAction, mData);
+                    break;
+                case "target":
+                    cruTargetPetugasFragment.saveData(mAction, mData);
+                    break;
+                case "rdkk":
+                    cruRDKKPupukSubsidiFragment.saveData(mAction, mData);
                     break;
             }
             // Code here executes on main thread after user presses button

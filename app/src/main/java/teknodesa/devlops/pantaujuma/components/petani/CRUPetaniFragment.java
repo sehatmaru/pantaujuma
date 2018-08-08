@@ -3,7 +3,11 @@ package teknodesa.devlops.pantaujuma.components.petani;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +18,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.searchpenduduk.SearchPendudukFragment;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Status;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
-
-public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewController<PetaniRealm>, PetaniContract.View{
+public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewController<PetaniRealm>, PetaniContract.View, SearchPendudukFragment.OnClickPendudukListener {
     @BindView(R.id.input_status)
     Spinner input_status;
 
@@ -39,6 +54,27 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
 
     @BindView(R.id.btnPenduduk)
     Button btnPenduduk;
+    @OnClick(R.id.btnPenduduk)
+    void clickPilihPenduduk() {
+        SearchPendudukFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
+    }
+
+    private String nik;
+    private String namaDepan;
+    private String namaBelakang;
+    private String biodata;
+
+    private AppComponent appComponent;
+    FragmentActivity activity;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = getActivity();
+
+        appComponent = ((MainApplication) getActivity().getApplication()).getComponent();
+        appComponent.inject(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,30 +110,38 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
             }
         });
 
-        btnPenduduk.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "BiodataPenduduk", Toast.LENGTH_SHORT).show();
-                //switch (mJenisCRU){
-                    //case "penduduk": cruPendudukFragment.getUIData(); break;
-                   // case "petani": cruPetaniFragment.getUIData(); break;
-                //}
-                // Code here executes on main thread after user presses button
-            }
-        });
-
         return v;
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if(CRUActivity.mAction.equals("update")){
+            setUIData();
+        }
+    }
+
+    @Override
     public PetaniRealm getUIData() {
-        String strNIK = input_nik.getText().toString();
-        String strNamaDepan = input_namadepan.getText().toString();
-        String strNamaBelakang = input_namabelakang.getText().toString();
-        String strDeskripsi = input_deskripsi.getText().toString();
+        String strDeskripsi = (input_deskripsi.getText().toString() == null) ? "-" : input_deskripsi.getText().toString();
         String strStatus = input_status.getSelectedItem().toString();
 
-        PetaniRealm uiItem = new PetaniRealm();
-        return null;
+        PetaniRealm newRealmItem = new PetaniRealm();
+        newRealmItem.setHashId(getSaltString());
+        newRealmItem.setDeskripsi(strDeskripsi);
+        newRealmItem.setStatus(strStatus);
+        newRealmItem.setBiodata(biodata);
+
+        return newRealmItem;
+    }
+
+    @Override
+    public void OnClickPenduduk(String idPenduduk, String namaDepan, String namaBelakang, String nik) {
+        input_nik.setText(nik);
+        input_namadepan.setText(namaDepan);
+        input_namabelakang.setText(namaBelakang);
+        biodata = idPenduduk;
     }
 
     @Override
@@ -107,20 +151,56 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
-        PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this);
+        PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this, appComponent);
         PetaniRealm uiItem = getUIData();
 
-        if(tipe.equals("insert")){
+        if (tipe.equals("insert")) {
             mController.addItem(uiItem);
-        }else{
-            if(tipe.equals("update")){
-                //TODO: implement this
+        } else {
+            if (tipe.equals("update")) {
+                String idItem = ((PendudukRealm) itemData).getHashId();
+                mController.updateItem(idItem, uiItem);
             }
         }
     }
 
     @Override
     public void showNotification(String title, String header, String message) {
-        //TODO: implement this
+        Toast.makeText(CRUActivity.mContext, message, Toast.LENGTH_SHORT).show();
+        startActivity(ListPetaniActivity.createIntent(CRUActivity.mContext));
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment) {
+            mFragmentList.add(fragment);
+        }
+    }
+
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        return timeStamp + "" + salt.toString();
     }
 }

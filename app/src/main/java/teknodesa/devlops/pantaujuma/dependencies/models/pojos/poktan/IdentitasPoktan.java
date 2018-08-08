@@ -1,43 +1,32 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms.petani;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos.poktan;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+/**
+ * Created by Sehat MT Samosir on 8/2/2018.
+ */
 
-public class PoktanRealm extends RealmObject {
-    @PrimaryKey
-    private int idPoktan;
+public class IdentitasPoktan {
+
     private String nama;
     private String desa;
     private String kecamatan;
     private String tanggalDidirikan;
     private String alamat;
-    private String noHP;
+    private String noHp;
     private String noTelp;
     private String deskripsi;
-    private int status;
 
-    public PoktanRealm() {
+    public IdentitasPoktan() {
     }
 
-    public PoktanRealm(int idPoktan, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, int status) {
-        this.idPoktan = idPoktan;
+    public IdentitasPoktan(String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHp, String noTelp, String deskripsi) {
         this.nama = nama;
         this.desa = desa;
         this.kecamatan = kecamatan;
         this.tanggalDidirikan = tanggalDidirikan;
         this.alamat = alamat;
-        this.noHP = noHP;
+        this.noHp = noHp;
         this.noTelp = noTelp;
         this.deskripsi = deskripsi;
-        this.status = status;
-    }
-
-    public int getIdPoktan() {
-        return idPoktan;
-    }
-
-    public void setIdPoktan(int idPoktan) {
-        this.idPoktan = idPoktan;
     }
 
     public String getNama() {
@@ -80,12 +69,12 @@ public class PoktanRealm extends RealmObject {
         this.alamat = alamat;
     }
 
-    public String getNoHP() {
-        return noHP;
+    public String getNoHp() {
+        return noHp;
     }
 
-    public void setNoHP(String noHP) {
-        this.noHP = noHP;
+    public void setNoHp(String noHp) {
+        this.noHp = noHp;
     }
 
     public String getNoTelp() {
@@ -102,13 +91,5 @@ public class PoktanRealm extends RealmObject {
 
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 }

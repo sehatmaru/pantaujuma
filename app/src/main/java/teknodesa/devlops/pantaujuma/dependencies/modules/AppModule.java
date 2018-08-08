@@ -24,8 +24,12 @@ import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.GetPendudukController;
 import teknodesa.devlops.pantaujuma.components.penduduk.PendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
-import teknodesa.devlops.pantaujuma.components.petani.CRUPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.petani.GetPetaniController;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.CRUPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.form.AnggotaPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.form.IdentitasPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.form.PengurusPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.profile.ProfileController;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
@@ -35,6 +39,7 @@ import teknodesa.devlops.pantaujuma.components.signin.LoginController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPetaniService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
@@ -86,6 +91,12 @@ public class AppModule {
 
     @Provides
     @Singleton
+    GetPetaniService getPetaniService() {
+        return new GetPetaniService(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
     KomoditasService komoditasService() {
         return new KomoditasService(app.getComponent());
     }
@@ -126,6 +137,12 @@ public class AppModule {
     @Singleton
     HomeController homeController() {
         return new HomeController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetPetaniController getPetaniController() {
+        return new GetPetaniController(app.getComponent());
     }
 
     @Provides
@@ -188,6 +205,18 @@ public class AppModule {
     @Provides
     @Singleton
     CRUTargetPetugasFragment provideCRUTargetPetugasFragment(){return new CRUTargetPetugasFragment();}
+
+    @Provides
+    @Singleton
+    IdentitasPoktanFragment provideIdentitasPoktanFragment(){return new IdentitasPoktanFragment();}
+
+    @Provides
+    @Singleton
+    AnggotaPoktanFragment provideAnggotaPoktanFragment(){return new AnggotaPoktanFragment();}
+
+    @Provides
+    @Singleton
+    PengurusPoktanFragment providePengurusPoktanFragment(){return new PengurusPoktanFragment();}
 
     @Provides
     @Singleton

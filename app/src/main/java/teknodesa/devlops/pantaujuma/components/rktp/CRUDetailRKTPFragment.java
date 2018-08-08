@@ -85,11 +85,11 @@ public class CRUDetailRKTPFragment extends Fragment implements PetaniContract.Vi
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
-        PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this);
+        //PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this);
         PetaniRealm uiItem = getUIData();
 
         if(tipe.equals("insert")){
-            mController.addItem(uiItem);
+            //mController.addItem(uiItem);
         }else{
             if(tipe.equals("update")){
                 //TODO: implement this

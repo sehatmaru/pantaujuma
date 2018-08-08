@@ -1,16 +1,25 @@
 package teknodesa.devlops.pantaujuma.components.petani;
 
-import io.realm.RealmResults;
+import android.support.annotation.NonNull;
+
+import javax.inject.Inject;
+
+import io.realm.Realm;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 
 public class PetaniController implements PetaniContract.Controller<PetaniRealm> {
+    @Inject
+    Realm realm;
+
     PetaniContract.View mView;
     PetaniContract.Repository<PetaniRealm> mRepository;
 
-    public PetaniController(PetaniContract.View mView){
+    public PetaniController(PetaniContract.View mView, @NonNull AppComponent appComponent){
+        appComponent.inject(this);
         this.mView = mView;
-        this.mRepository = new PetaniRepository(this);
+        this.mRepository = new PetaniRepository(this, appComponent);
     }
 
     @Override

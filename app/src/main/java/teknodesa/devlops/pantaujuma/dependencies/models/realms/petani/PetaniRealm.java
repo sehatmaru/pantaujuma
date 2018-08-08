@@ -1,72 +1,51 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.realms.petani;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
-public class PetaniRealm extends RealmObject implements Parcelable {
+public class PetaniRealm extends RealmObject {
     @PrimaryKey
-    private int idPetani;
-    private PendudukRealm biodata;
-    private String foto;
+    private String hashId;
+    private String biodata;
     private String deskripsi;
-    private int status;
+    private String status;
+    private String idDesa;
+    private int isSync;
 
     public PetaniRealm() {
     }
 
-    public PetaniRealm(int idPetani, PendudukRealm biodata, String foto, String deskripsi, int status) {
-        this.idPetani = idPetani;
+    public PetaniRealm(PetaniRealm petaniRealm) {
+        this.hashId = petaniRealm.getHashId();
+        this.biodata = petaniRealm.getBiodata();
+        this.deskripsi = petaniRealm.getDeskripsi();
+        this.status = petaniRealm.getStatus();
+        this.isSync = petaniRealm.getIsSync();
+    }
+
+    public PetaniRealm(String hashId, String biodata, String deskripsi, String status, String idDesa, int isSync) {
+        this.hashId = hashId;
         this.biodata = biodata;
-        this.foto = foto;
         this.deskripsi = deskripsi;
         this.status = status;
+        this.idDesa = idDesa;
+        this.isSync = isSync;
     }
 
-    protected PetaniRealm(Parcel in) {
-        idPetani = in.readInt();
-        foto = in.readString();
-        deskripsi = in.readString();
-        status = in.readInt();
+    public String getHashId() {
+        return hashId;
     }
 
-    public static final Creator<PetaniRealm> CREATOR = new Creator<PetaniRealm>() {
-        @Override
-        public PetaniRealm createFromParcel(Parcel in) {
-            return new PetaniRealm(in);
-        }
-
-        @Override
-        public PetaniRealm[] newArray(int size) {
-            return new PetaniRealm[size];
-        }
-    };
-
-    public int getIdPetani() {
-        return idPetani;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
-    public void setIdPetani(int idPetani) {
-        this.idPetani = idPetani;
-    }
-
-    public PendudukRealm getBiodata() {
+    public String getBiodata() {
         return biodata;
     }
 
-    public void setBiodata(PendudukRealm biodata) {
+    public void setBiodata(String biodata) {
         this.biodata = biodata;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public String getDeskripsi() {
@@ -77,26 +56,39 @@ public class PetaniRealm extends RealmObject implements Parcelable {
         this.deskripsi = deskripsi;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(String idDesa) {
+        this.idDesa = idDesa;
+    }
+
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(this.idPetani);
-        parcel.writeValue(biodata);
-        parcel.writeString(foto);
-        parcel.writeString(deskripsi);
-        parcel.writeInt(status);
-
+    public String toString() {
+        return "PetaniRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", biodata='" + biodata + '\'' +
+                ", deskripsi='" + deskripsi + '\'' +
+                ", status='" + status + '\'' +
+                ", idDesa='" + idDesa + '\'' +
+                ", isSync=" + isSync +
+                '}';
     }
 }

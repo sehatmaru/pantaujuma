@@ -2,15 +2,16 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PenggunaRealm;
 
 public class TargetPetugas extends RealmObject {
     @PrimaryKey
-    private int idTargetPetugas;
-    private PenggunaRealm pengguna;
+    private String hashId;
+    private String petugas;
     private int tahun;
-    private KomoditasRealm komoditas;
+    private String komoditas;
     private float luasTanam;
     private float luasPanen;
     private float sasaranProduksi;
@@ -20,9 +21,21 @@ public class TargetPetugas extends RealmObject {
     public TargetPetugas() {
     }
 
-    public TargetPetugas(int idTargetPetugas, PenggunaRealm pengguna, int tahun, KomoditasRealm komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
-        this.idTargetPetugas = idTargetPetugas;
-        this.pengguna = pengguna;
+    public TargetPetugas(TargetPetugas targetPetugas){
+        this.hashId = targetPetugas.getHashId();
+        this.petugas = targetPetugas.petugas;
+        this.tahun = targetPetugas.getTahun();
+        this.komoditas = targetPetugas.komoditas;
+        this.luasTanam = targetPetugas.getLuasTanam();
+        this.luasPanen = targetPetugas.getLuasPanen();
+        this.sasaranProduksi = targetPetugas.getSasaranProduksi();
+        this.sasaranProduktifitas = targetPetugas.getSasaranProduktifitas();
+        this.keterangan = targetPetugas.getKeterangan();
+    }
+
+    public TargetPetugas(String hashId, String petugas, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
+        this.hashId = hashId;
+        this.petugas = petugas;
         this.tahun = tahun;
         this.komoditas = komoditas;
         this.luasTanam = luasTanam;
@@ -32,20 +45,20 @@ public class TargetPetugas extends RealmObject {
         this.keterangan = keterangan;
     }
 
-    public int getIdTargetPetugas() {
-        return idTargetPetugas;
+    public String getHashId() {
+        return hashId;
     }
 
-    public void setIdTargetPetugas(int idTargetPetugas) {
-        this.idTargetPetugas = idTargetPetugas;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
-    public PenggunaRealm getPengguna() {
-        return pengguna;
+    public String getPetugas() {
+        return petugas;
     }
 
-    public void setPengguna(PenggunaRealm pengguna) {
-        this.pengguna = pengguna;
+    public void setPetugas(String petugas) {
+        this.petugas = petugas;
     }
 
     public int getTahun() {
@@ -56,11 +69,11 @@ public class TargetPetugas extends RealmObject {
         this.tahun = tahun;
     }
 
-    public KomoditasRealm getKomoditas() {
+    public String getKomoditas() {
         return komoditas;
     }
 
-    public void setKomoditas(KomoditasRealm komoditas) {
+    public void setKomoditas(String komoditas) {
         this.komoditas = komoditas;
     }
 
@@ -102,5 +115,20 @@ public class TargetPetugas extends RealmObject {
 
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
+    }
+
+    @Override
+    public String toString() {
+        return "TargetPetugas{" +
+                "hashId='" + hashId + '\'' +
+                ", petugas='" + petugas + '\'' +
+                ", tahun=" + tahun +
+                ", komoditas='" + komoditas + '\'' +
+                ", luasTanam=" + luasTanam +
+                ", luasPanen=" + luasPanen +
+                ", sasaranProduksi=" + sasaranProduksi +
+                ", sasaranProduktifitas=" + sasaranProduktifitas +
+                ", keterangan='" + keterangan + '\'' +
+                '}';
     }
 }

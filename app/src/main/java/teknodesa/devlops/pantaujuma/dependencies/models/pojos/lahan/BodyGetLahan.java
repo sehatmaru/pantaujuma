@@ -5,22 +5,22 @@ package teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan;
  */
 
 public class BodyGetLahan {
-    private int idKomoditas;
+    private String idKomoditas;
     private int idDesa;
 
     public BodyGetLahan() {
     }
 
-    public BodyGetLahan(int idKomoditas, int idDesa) {
+    public BodyGetLahan(String idKomoditas, int idDesa) {
         this.idKomoditas = idKomoditas;
         this.idDesa = idDesa;
     }
 
-    public int getIdKomoditas() {
+    public String getIdKomoditas() {
         return idKomoditas;
     }
 
-    public void setIdKomoditas(int idKomoditas) {
+    public void setIdKomoditas(String idKomoditas) {
         this.idKomoditas = idKomoditas;
     }
 

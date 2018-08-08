@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +19,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -31,13 +31,13 @@
                     app:srcCompat="@drawable/formitem" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_nik"
+                    android:id="@+id/input_layout_nikpengurus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3">
 
                     <EditText
-                        android:id="@+id/input_nik"
+                        android:id="@+id/input_nikpengurus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:editable="false"
@@ -47,10 +47,10 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnPetani"
+                android:id="@+id/btnPetaniPengurus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1"
+                android:layout_weight="1"
                 android:text="..." />
         </LinearLayout>
 
@@ -68,13 +68,13 @@
                 app:srcCompat="@drawable/formitem" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_namadepan"
+                android:id="@+id/input_layout_namadepanpengurus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3">
 
                 <EditText
-                    android:id="@+id/input_namadepan"
+                    android:id="@+id/input_namadepanpengurus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
@@ -97,13 +97,13 @@
                 app:srcCompat="@drawable/formitem" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_namabelakang"
+                android:id="@+id/input_layout_namabelakangpengurus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3">
 
                 <EditText
-                    android:id="@+id/input_namabelakang"
+                    android:id="@+id/input_namabelakangpengurus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
@@ -168,32 +168,5 @@
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/formitem" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3">
-
-                <EditText
-                    android:id="@+id/input_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/status"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>
