@@ -83,8 +83,6 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
                 .getComponent()
                 .inject(this);
 
-        String n = AkunFragment.idUser;
-
         setContentView(R.layout.activity_listtarget);
         ButterKnife.bind(this);
         counter = 0;

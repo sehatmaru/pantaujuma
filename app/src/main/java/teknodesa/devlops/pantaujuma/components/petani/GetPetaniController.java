@@ -65,7 +65,6 @@ public class GetPetaniController implements GetPetaniContract.Controller {
         if(res ==0 ){
             views.getAllPetaniFailed("Terjadi Kesalahan, Silahkan Logout dan login kembali");
         }else{
-
             mService.getAllPetani(res);
         }
     }

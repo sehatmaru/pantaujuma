@@ -56,14 +56,24 @@ import teknodesa.devlops.pantaujuma.components.poktan.form.PengurusPoktanFragmen
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.profile.ProfileController;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
+import teknodesa.devlops.pantaujuma.components.rdk.RDKController;
+import teknodesa.devlops.pantaujuma.components.rdk.RDKRepository;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKIrigasiFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKJadwalKegiatanFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKRencanaUmumFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKSasaranIntensifikasiFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.DetailRDKKActivity;
 import teknodesa.devlops.pantaujuma.components.rdkk.ListRDKKActivity;
 import teknodesa.devlops.pantaujuma.components.rdkk.RDKKController;
 import teknodesa.devlops.pantaujuma.components.rdkk.RDKKRepository;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
+import teknodesa.devlops.pantaujuma.components.rktp.DetailRKTPActivity;
 import teknodesa.devlops.pantaujuma.components.rktp.ListRKTPActivity;
+import teknodesa.devlops.pantaujuma.components.rktp.RKTPController;
+import teknodesa.devlops.pantaujuma.components.rktp.RKTPRepository;
 import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchTargetKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.searchpenduduk.SearchPendudukFragment;
@@ -206,4 +216,24 @@ public interface AppComponent {
     void inject(GetPetaniService getPetaniService);
 
     void inject(GetPetaniController getPetaniController);
+
+    void inject(RKTPRepository rktpRepository);
+
+    void inject(RKTPController rktpController);
+
+    void inject(DetailRKTPActivity detailRKTPActivity);
+
+    void inject(RDKIrigasiFragment rdkIrigasiFragment);
+
+    void inject(RDKJadwalKegiatanFragment rdkJadwalKegiatanFragment);
+
+    void inject(RDKRencanaUmumFragment rdkRencanaUmumFragment);
+
+    void inject(RDKSasaranIntensifikasiFragment rdkSasaranIntensifikasiFragment);
+
+    void inject(DetailRDKActivity detailRDKActivity);
+
+    void inject(RDKController rdkController);
+
+    void inject(RDKRepository rdkRepository);
 }

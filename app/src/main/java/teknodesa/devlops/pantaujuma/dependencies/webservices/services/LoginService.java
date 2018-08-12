@@ -56,6 +56,8 @@ public class LoginService implements LoginContract.Repository {
                                 response.body().getEmail(),response.body().getRoleName(),response.body().getKeyRole(),
                                 response.body().getAttributeTable(),response.body().getAttributeValue());
 
+                        AkunFragment.idUser = response.body().getId();
+                        AkunFragment.namaUser = response.body().getNamaLengkap();
                         AkunFragment.desaUser = response.body().getNamaDesa();
                         AkunFragment.kabupatenKotaUser = response.body().getKabupatenKota();
                         AkunFragment.provinsiUser = response.body().getProvinsi();

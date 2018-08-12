@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:layout_marginTop="50dp">
+
+                    <ImageView
+                        android:id="@+id/nameImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsuser"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataPetugas"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/nameImage"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/petugasrdktext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/petugas"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/petugasrdk"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/nameImage1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsuser"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataPoktan"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/nameImage1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/poktanrdktext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/namaPoktan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/poktanrdk"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/tanggal"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsmalefilled"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:id="@+id/datatangga"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/tanggal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tanggaltext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/tanggal"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tanggaldata"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/luassawah"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsdiabetesfilled"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataluassawah"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/luassawah"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/luassawahtext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/luasSawah"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/luassawahdata"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/keterangan"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconslovefilled"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataketerangan"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/keterangan"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/keterangantext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/keterangan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/keterangandata"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/namaIrigasitext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/namaIrigasi"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/namaIrigasi"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/deskripsiIrigasitext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/deskripsiIrigasi"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/deskripsiIrigasi"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/kegiatantext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/kegiatan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/kegiatan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tanggalKegiatantext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/tanggalKegiatan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tanggalKegiatan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/deskripsiKegiatantext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/deskripsiKegiatan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/deskripsikegiatan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/paketteknologitext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/paketTeknologi"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/paketteknologi"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/polatanamtext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/polaTanam"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/polatanam"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/jadwaltanamtext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/jadwalTanam"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/jadwaltanam"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/varietastext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/varietas"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/varietas"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sumberbenihtext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/sumberBenih"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/sumberbenih"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tabungananggotatext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/tabunganAnggota"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tabungananggota"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/iurananggotatext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/iuranAnggota"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/iurananggota"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/modalpemupukantext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/modalPemupukan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/modalpemupukan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/komoditassitext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/komoditasSI"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/komoditassi"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/targettext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/target"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/target"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/targethasiltext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/targetHasil"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/targethasil"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/komoditaspbtext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/komoditasPB"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/komoditaspb"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            android:text="@string/edit" />
+
+        <Button
+            android:id="@+id/btnHapus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            android:text="@string/delete" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

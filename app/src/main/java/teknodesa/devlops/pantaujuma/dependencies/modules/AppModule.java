@@ -33,6 +33,11 @@ import teknodesa.devlops.pantaujuma.components.poktan.form.PengurusPoktanFragmen
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.profile.ProfileController;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKIdentitasFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKIrigasiFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKJadwalKegiatanFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKRencanaUmumFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKSasaranIntensifikasiFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
@@ -193,6 +198,26 @@ public class AppModule {
     @Provides
     @Singleton
     CRURDKFragment provideCRURDKFragment(){return new CRURDKFragment();}
+
+    @Provides
+    @Singleton
+    RDKIdentitasFragment provideRDKIdentitasFragment(){return new RDKIdentitasFragment();}
+
+    @Provides
+    @Singleton
+    RDKIrigasiFragment provideRDKIrigasiFragment(){return new RDKIrigasiFragment();}
+
+    @Provides
+    @Singleton
+    RDKJadwalKegiatanFragment provideRDKJadwalKegiatanFragment(){return new RDKJadwalKegiatanFragment();}
+
+    @Provides
+    @Singleton
+    RDKRencanaUmumFragment provideRDKRencanaUmumFragment(){return new RDKRencanaUmumFragment();}
+
+    @Provides
+    @Singleton
+    RDKSasaranIntensifikasiFragment provideRDKSaranaIntensifikasiFragment(){return new RDKSasaranIntensifikasiFragment();}
 
     @Provides
     @Singleton

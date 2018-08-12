@@ -120,7 +120,6 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
         }, () -> {
             if (!listpetani.isEmpty()) {
                 Log.e("List Petani","ini hasil"+listpetani.size());
-
                 petaniAdapter = new PetaniAdapter(getApplicationContext(), listpetani,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(petaniAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);

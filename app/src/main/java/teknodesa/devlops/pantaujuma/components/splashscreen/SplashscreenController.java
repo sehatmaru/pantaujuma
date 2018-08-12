@@ -46,6 +46,7 @@ public class SplashscreenController implements SplashscreenContract.Controller {
         if(user == null){
             views.sessionUser(false);
         }else{
+            AkunFragment.namaUser = user.getNamaLengkap();
             AkunFragment.desaUser = user.getNamaDesa();
             AkunFragment.kabupatenKotaUser = user.getKabupatenKota();
             AkunFragment.provinsiUser =user.getProvinsi();

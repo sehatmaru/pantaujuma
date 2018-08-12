@@ -84,16 +84,6 @@ public class AnggotaPoktanFragment extends Fragment implements PoktanContract.Vi
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        input_nikanggota = getActivity().findViewById(R.id.input_nikanggota);
-        input_namadepananggota = getActivity().findViewById(R.id.input_namadepananggota);
-        input_namabelakanganggota = getActivity().findViewById(R.id.input_namabelakanganggota);
-        input_tanggalmasuk = getActivity().findViewById(R.id.input_tanggalmasuk);
-    }
-
-    @Override
     public AnggotaPoktan getUIData() {
         String strTanggalMasuk = (input_tanggalmasuk.getText().toString() == null) ? "-" : input_tanggalmasuk.getText().toString();
         String nik = (input_nikanggota.getText().toString() == null) ? "-" : input_nikanggota.getText().toString();

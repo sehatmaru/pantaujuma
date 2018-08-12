@@ -10,6 +10,7 @@ public class PetaniRealm extends RealmObject {
     private String deskripsi;
     private String status;
     private String idDesa;
+    private String foto;
     private int isSync;
 
     public PetaniRealm() {
@@ -20,15 +21,17 @@ public class PetaniRealm extends RealmObject {
         this.biodata = petaniRealm.getBiodata();
         this.deskripsi = petaniRealm.getDeskripsi();
         this.status = petaniRealm.getStatus();
+        this.foto = petaniRealm.getFoto();
         this.isSync = petaniRealm.getIsSync();
     }
 
-    public PetaniRealm(String hashId, String biodata, String deskripsi, String status, String idDesa, int isSync) {
+    public PetaniRealm(String hashId, String biodata, String deskripsi, String status, String idDesa, String foto, int isSync) {
         this.hashId = hashId;
         this.biodata = biodata;
         this.deskripsi = deskripsi;
         this.status = status;
         this.idDesa = idDesa;
+        this.foto = foto;
         this.isSync = isSync;
     }
 
@@ -72,6 +75,14 @@ public class PetaniRealm extends RealmObject {
         this.idDesa = idDesa;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public int getIsSync() {
         return isSync;
     }
@@ -88,6 +99,7 @@ public class PetaniRealm extends RealmObject {
                 ", deskripsi='" + deskripsi + '\'' +
                 ", status='" + status + '\'' +
                 ", idDesa='" + idDesa + '\'' +
+                ", foto='" + foto + '\'' +
                 ", isSync=" + isSync +
                 '}';
     }

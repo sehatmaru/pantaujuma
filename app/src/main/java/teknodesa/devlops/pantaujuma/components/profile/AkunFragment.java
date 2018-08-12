@@ -72,7 +72,6 @@ public class AkunFragment extends Fragment implements ProfileContract.View{
     @BindView(R.id.nameUser)
     TextView nameUser;
 
-
     @BindView(R.id.progressOnanPay)
     ProgressBar progressOnanPay;
 
@@ -90,6 +89,7 @@ public class AkunFragment extends Fragment implements ProfileContract.View{
     private UserDB userDB;
 
     public static String idUser;
+    public static String namaUser;
     public static String kecamatanUser;
     public static String kabupatenKotaUser;
     public static String desaUser;
@@ -127,8 +127,6 @@ public class AkunFragment extends Fragment implements ProfileContract.View{
         RealmResults<UserDB> users =realm.where(UserDB.class).findAll();
         users.deleteAllFromRealm();
         realm.commitTransaction();
-
-
 
         this.getActivity().finish();
         startActivity(LoginActivity.createIntent(getActivity().getApplicationContext()));

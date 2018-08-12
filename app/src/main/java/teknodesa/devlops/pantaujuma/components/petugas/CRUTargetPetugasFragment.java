@@ -101,30 +101,21 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
 
     @Override
     public TargetPetugas getUIData() {
-        String strTahun = "";
-        String strLuasTanam = "";
-        String strLuasPanen = "";
-        String strSasaranProduksi = "";
-        String strSasaranProduktifitas = "";
-        String strKeterangan = "";
-
-        try{
-            strTahun = (input_tahun.getText().toString() == null) ? "-" : input_tahun.getText().toString();
-            strLuasTanam = (input_luastanam.getText().toString() == null) ? "-" : input_luastanam.getText().toString();
-            strLuasPanen = (input_luaspanen.getText().toString() == null) ? "-" : input_luaspanen.getText().toString();
-            strSasaranProduksi = (input_sasaranproduksi.getText().toString() == null) ? "-" : input_sasaranproduksi.getText().toString();
-            strSasaranProduktifitas = (input_sasaranproduktifitas.getText().toString() == null) ? "-" : input_sasaranproduktifitas.getText().toString();
-            strKeterangan = (input_keterangan.getText().toString() == null) ? "-" : input_keterangan.getText().toString();
-        } catch (NullPointerException e){}
+        String strTahun = input_tahun.getText().toString();
+        String strLuasTanam = input_luastanam.getText().toString();
+        String strLuasPanen = input_luaspanen.getText().toString();
+        String strSasaranProduksi = input_sasaranproduksi.getText().toString();
+        String strSasaranProduktifitas = input_sasaranproduktifitas.getText().toString();
+        String strKeterangan = (input_keterangan.getText().toString() == null) ? "-" : input_keterangan.getText().toString();
 
         TargetPetugas newRealmItem = new TargetPetugas();
         newRealmItem.setHashId(getSaltString());
         newRealmItem.setKomoditas(komoditas);
-        newRealmItem.setTahun(Integer.parseInt(strTahun));
-        newRealmItem.setLuasTanam(Float.parseFloat(strLuasTanam));
-        newRealmItem.setLuasPanen(Float.parseFloat(strLuasPanen));
-        newRealmItem.setSasaranProduksi(Float.parseFloat(strSasaranProduksi));
-        newRealmItem.setSasaranProduktifitas(Float.parseFloat(strSasaranProduktifitas));
+        newRealmItem.setTahun(Integer.valueOf(strTahun));
+        newRealmItem.setLuasTanam(Float.valueOf(strLuasTanam));
+        newRealmItem.setLuasPanen(Float.valueOf(strLuasPanen));
+        newRealmItem.setSasaranProduksi(Float.valueOf(strSasaranProduksi));
+        newRealmItem.setSasaranProduktifitas(Float.valueOf(strSasaranProduktifitas));
         newRealmItem.setKeterangan(strKeterangan);
 
         return newRealmItem;

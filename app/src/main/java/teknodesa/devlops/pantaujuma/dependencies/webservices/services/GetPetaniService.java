@@ -44,28 +44,38 @@ public class GetPetaniService implements GetPetaniContract.Repository {
     private boolean res = false;
     @Override
     public void getAllPetani(int idDesa) {
-        Log.e("send","data comehere"+idDesa);
-        Call<ResponsePetani> call = sisApi.getAllPetani(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
+        Log.e("send","data comehere "+idDesa);
+        Call<ResponsePetani> call = sisApi.getAllPetani(WebServiceModule.ACCESS_TOKEN_TEMP, idDesa);
         call.enqueue(new Callback<ResponsePetani>() {
             @Override
             public void onResponse(Call<ResponsePetani> call, Response<ResponsePetani> response) {
+                Log.e("ONRESPONSE", "masuk ke onResponse");
                 if(response.isSuccessful()){
+                    Log.e("ISSUCCESSFULL", "masuk ke isSuccessful");
                     if(response.body().isSuccess()){
+                        Log.e("ISSUCCESS", "masuk ke isSuccess");
                         Log.e("hasilpetani",response.body().getData().size()+" ini");
                         realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
                             controller.getAllPetaniSuccess(response.body().getData());
+                            Log.e("executeTransactionAsync", "masuk ke realm");
+
                         }, error -> {
                             Log.e("getpetanieror",error.getMessage());
                         });
                     }else
                         controller.getAllPetaniFailed(response.body().getMessage());
+                    Log.e("getAllPetaniFailed", "masuk ke getAllPetaniFailed 1");
+
                 }else{
                     controller.getAllPetaniFailed("Server Error");
+                    Log.e("getAllPetaniFailed", "masuk ke getAllPetaniFailed 2");
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponsePetani> call, Throwable t) {
+                Log.e("FAILUEEEEEEERRRR", "masuk ke FAILUREEE");
                 Log.e("Failure", "onFailure");
                 controller.getAllPetaniFailed(t.getMessage());
                 t.printStackTrace();
@@ -78,10 +88,11 @@ public class GetPetaniService implements GetPetaniContract.Repository {
         for(int i=0; i < allPen.size();i++ ){
             PetaniRealm petaniTempRealm = allPen.get(i);
             realm.beginTransaction();
-            //petaniTempRealm.setIsSync(1);
+            petaniTempRealm.setIsSync(1);
             realm.commitTransaction();
             PetaniBody petaniBody = new PetaniBody(petaniTempRealm.getHashId(),petaniTempRealm.getBiodata(),
-                    petaniTempRealm.getStatus(),petaniTempRealm.getDeskripsi(),petaniTempRealm.getIdDesa());
+                    petaniTempRealm.getDeskripsi(),petaniTempRealm.getStatus(),petaniTempRealm.getFoto()
+                    ,petaniTempRealm.getIdDesa());
 
             Log.e("petani service",petaniBody.toString());
             Call<ResponseSaveData> call = sisApi.insertPetani(WebServiceModule.ACCESS_TOKEN_TEMP,petaniBody);

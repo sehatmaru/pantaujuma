@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/pickImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconschipcard"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:id="@+id/dataKomoditas"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/pickImage"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/poktanText"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Poktan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/poktan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/nameImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsuser"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataTahun"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/nameImage"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/LTText"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Tahun"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tahun"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/namettl"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsbirthdate"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataTujuan"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/namettl"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/LPText"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="tujuan"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tujuan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/namettl1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsbirthdate"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataSasaranProduksi"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/namettl1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/SPText"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Sasaran"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/sasaran"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/namettl2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsbirthdate"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataSasaranProduktifitas"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/namettl2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/SPTText"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Mssalsh"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/masalah"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/namettl3"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/iconsbirthdate"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataKeterangan"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/namettl3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/KText"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Materi"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/materi"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            android:text="@string/edit" />
+
+        <Button
+            android:id="@+id/btnHapus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark"
+            android:text="@string/delete" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

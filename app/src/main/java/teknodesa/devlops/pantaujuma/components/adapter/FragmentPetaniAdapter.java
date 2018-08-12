@@ -64,7 +64,7 @@ public class FragmentPetaniAdapter extends RecyclerView.Adapter<FragmentPetaniAd
 
         holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
         //holder.textname.setText(penduduk.getAlamat());
-        holder.textstatus.setText("NIK : "+petani.getStatus());
+        holder.textstatus.setText("NIK : "+penduduk.getNIK());
         holder.cardview.setOnClickListener(view -> { onClicPetani.OnClickPetani(petani.getHashId(), penduduk.getNamaDepan(), penduduk.getNamaBelakang(), penduduk.getNIK());});
     }
 

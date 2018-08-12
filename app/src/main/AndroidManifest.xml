@@ -62,7 +62,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".components.rdk.ListRDKActivity"
+            android:name=".components.rdk.DetailRDKActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".components.rktp.DetailRKTPActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -100,6 +104,9 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".components.rdkk.ListRDKKActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".components.rdk.ListRDKActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".components.resetpassword.ResetPasswordActivity"

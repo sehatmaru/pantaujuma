@@ -42,10 +42,9 @@ public interface PantauJumaAPI {
     @POST("lahan/getAllLahanKomoditas")
     Call<ResponseGetLahanKomoditas> getLahanByKomoditas(@Header("Authorization") String token, @Body BodyGetLahan bodyGetLahan);
 
-    @GET("petani/viewAllPetani/{idDesa}")
-    Call<ResponsePetani> getAllPetani(@Header("Authorization") String token, @Path("idDesa") int idDesa);
+    @GET("petani/getPetaniByDesa/{desa}")
+    Call<ResponsePetani> getAllPetani(@Header("Authorization") String token, @Path("desa") int idDesa);
 
     @POST("petani/insertPetani")
     Call<ResponseSaveData> insertPetani(@Header("Authorization") String token, @Body PetaniBody petaniBody);
-
 }
