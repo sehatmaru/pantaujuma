@@ -3,10 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://C:\Users\Marthin\Desktop\PantauJuma\PantauJumaMobile\PantauJuma.iml" filepath="C:\Users\Marthin\Desktop\PantauJuma\PantauJumaMobile\PantauJuma.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PantauJumaMobile.iml" filepath="$PROJECT_DIR$/PantauJumaMobile.iml" />
       <module fileurl="file://D:\Kuliah\Magang\Mobile\PantauJumaReal\pantaujuma\PantauJumaMobile.iml" filepath="D:\Kuliah\Magang\Mobile\PantauJumaReal\pantaujuma\PantauJumaMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://D:\Kuliah\Magang\Mobile\PantauJumaReal\pantaujuma\app\app.iml" filepath="D:\Kuliah\Magang\Mobile\PantauJumaReal\pantaujuma\app\app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pantaujuma.iml" filepath="$PROJECT_DIR$/pantaujuma.iml" />
+      <module fileurl="file://C:\Users\Marthin\Desktop\PantauJuma\PantauJumaMobile\pantaujuma.iml" filepath="C:\Users\Marthin\Desktop\PantauJuma\PantauJumaMobile\pantaujuma.iml" />
     </modules>
   </component>
 </project>
