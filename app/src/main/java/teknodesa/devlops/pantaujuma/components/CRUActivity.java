@@ -145,6 +145,12 @@ public class CRUActivity extends AppCompatActivity {
                 case "rdkk":
                     cruRDKKPupukSubsidiFragment.saveData(mAction, mData);
                     break;
+                case "rktp":
+                    cruRKTPFragment.saveData(mAction, mData);
+                    break;
+                case "rdk":
+                    cruRDKFragment.saveData(mAction, mData);
+                    break;
             }
             // Code here executes on main thread after user presses button
             finish();

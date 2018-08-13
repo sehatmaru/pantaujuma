@@ -1,37 +1,26 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk;
 
-import io.realm.RealmObject;
-import io.realm.RealmResults;
-import io.realm.annotations.LinkingObjects;
-import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
-
-public class RencanaUmumRDKRealm extends RealmObject {
-    @PrimaryKey
-    private int idRencanaUmumRDK;
-
-    @LinkingObjects("rencana")
-    private final RealmResults<RDKRealm> rdk = null;
-
+public class RencanaUmum {
+    private String hashId;
     private String paketTeknologi;
     private String polaTanam;
     private String jadwalTanam;
-    private KomoditasRealm komoditas;
+    private String komoditasRU;
     private String varietas;
     private String sumberBenih;
     private String tabunganAnggota;
     private String iuranAnggota;
     private String pemupukanModal;
 
-    public RencanaUmumRDKRealm() {
+    public RencanaUmum() {
     }
 
-    public RencanaUmumRDKRealm(int idRencanaUmumRDK, String paketTeknologi, String polaTanam, String jadwalTanam, KomoditasRealm komoditas, String varietas, String sumberBenih, String tabunganAnggota, String iuranAnggota, String pemupukanModal) {
-        this.idRencanaUmumRDK = idRencanaUmumRDK;
+    public RencanaUmum(String hashId, String paketTeknologi, String polaTanam, String jadwalTanam, String komoditasRU, String varietas, String sumberBenih, String tabunganAnggota, String iuranAnggota, String pemupukanModal) {
+        this.hashId = hashId;
         this.paketTeknologi = paketTeknologi;
         this.polaTanam = polaTanam;
         this.jadwalTanam = jadwalTanam;
-        this.komoditas = komoditas;
+        this.komoditasRU = komoditasRU;
         this.varietas = varietas;
         this.sumberBenih = sumberBenih;
         this.tabunganAnggota = tabunganAnggota;
@@ -39,16 +28,12 @@ public class RencanaUmumRDKRealm extends RealmObject {
         this.pemupukanModal = pemupukanModal;
     }
 
-    public int getIdRencanaUmumRDK() {
-        return idRencanaUmumRDK;
+    public String getHashId() {
+        return hashId;
     }
 
-    public void setIdRencanaUmumRDK(int idRencanaUmumRDK) {
-        this.idRencanaUmumRDK = idRencanaUmumRDK;
-    }
-
-    public RealmResults<RDKRealm> getRdk() {
-        return rdk;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
     public String getPaketTeknologi() {
@@ -75,12 +60,12 @@ public class RencanaUmumRDKRealm extends RealmObject {
         this.jadwalTanam = jadwalTanam;
     }
 
-    public KomoditasRealm getKomoditas() {
-        return komoditas;
+    public String getKomoditasRU() {
+        return komoditasRU;
     }
 
-    public void setKomoditas(KomoditasRealm komoditas) {
-        this.komoditas = komoditas;
+    public void setKomoditasRU(String komoditasRU) {
+        this.komoditasRU = komoditasRU;
     }
 
     public String getVarietas() {

@@ -10,6 +10,7 @@ public class TargetPetugas extends RealmObject {
     @PrimaryKey
     private String hashId;
     private String petugas;
+    private int idDesa;
     private int tahun;
     private String komoditas;
     private float luasTanam;
@@ -17,25 +18,29 @@ public class TargetPetugas extends RealmObject {
     private float sasaranProduksi;
     private float sasaranProduktifitas;
     private String keterangan;
+    private int isSync;
 
     public TargetPetugas() {
     }
 
-    public TargetPetugas(TargetPetugas targetPetugas){
+    public TargetPetugas(TargetPetugas targetPetugas, int isSync){
         this.hashId = targetPetugas.getHashId();
-        this.petugas = targetPetugas.petugas;
+        this.petugas = targetPetugas.getPetugas();
+        this.idDesa = targetPetugas.getIdDesa();
         this.tahun = targetPetugas.getTahun();
-        this.komoditas = targetPetugas.komoditas;
+        this.komoditas = targetPetugas.getKomoditas();
         this.luasTanam = targetPetugas.getLuasTanam();
         this.luasPanen = targetPetugas.getLuasPanen();
         this.sasaranProduksi = targetPetugas.getSasaranProduksi();
         this.sasaranProduktifitas = targetPetugas.getSasaranProduktifitas();
         this.keterangan = targetPetugas.getKeterangan();
+        this.isSync = isSync;
     }
 
-    public TargetPetugas(String hashId, String petugas, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
+    public TargetPetugas(String hashId, String petugas, int idDesa, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
         this.hashId = hashId;
         this.petugas = petugas;
+        this.idDesa = idDesa;
         this.tahun = tahun;
         this.komoditas = komoditas;
         this.luasTanam = luasTanam;
@@ -43,6 +48,14 @@ public class TargetPetugas extends RealmObject {
         this.sasaranProduksi = sasaranProduksi;
         this.sasaranProduktifitas = sasaranProduktifitas;
         this.keterangan = keterangan;
+    }
+
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
     }
 
     public String getHashId() {
@@ -59,6 +72,14 @@ public class TargetPetugas extends RealmObject {
 
     public void setPetugas(String petugas) {
         this.petugas = petugas;
+    }
+
+    public int getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(int idDesa) {
+        this.idDesa = idDesa;
     }
 
     public int getTahun() {
@@ -122,6 +143,7 @@ public class TargetPetugas extends RealmObject {
         return "TargetPetugas{" +
                 "hashId='" + hashId + '\'' +
                 ", petugas='" + petugas + '\'' +
+                ", idDesa=" + idDesa +
                 ", tahun=" + tahun +
                 ", komoditas='" + komoditas + '\'' +
                 ", luasTanam=" + luasTanam +

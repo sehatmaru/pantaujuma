@@ -20,7 +20,6 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.Komodit
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.TargetPetugas;
 
 public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHolder> {
-    private AppComponent appComponent;
 
     @Inject
     Realm realm;
@@ -56,7 +55,6 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         TargetPetugas targetPetugas = listData.get(position);
-//        holder.textkomoditas.setText(targetPetugas.getKomoditas());
 
         KomoditasRealm komoditasRealm = realm.where(KomoditasRealm.class)
                 .equalTo("hashId", targetPetugas.getKomoditas())

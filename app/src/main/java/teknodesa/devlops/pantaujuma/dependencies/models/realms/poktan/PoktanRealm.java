@@ -15,15 +15,18 @@ public class PoktanRealm extends RealmObject {
     private String noHP;
     private String noTelp;
     private String deskripsi;
+    private String statusPoktan;
 
     private String poktanAnggota;
     private String petaniAnggota;
     private String tanggalMasuk;
+    private String statusAnggota;
 
     private String poktanPengurus;
     private String petaniPengurus;
     private String jabatan;
     private String periode;
+    private String statusPengurus;
 
     private int idDesa;
     private int isSync;
@@ -49,6 +52,9 @@ public class PoktanRealm extends RealmObject {
         this.jabatan = poktanRealm.getJabatan();
         this.periode = poktanRealm.getPeriode();
         this.idDesa = poktanRealm.getIdDesa();
+        this.statusAnggota = poktanRealm.getStatusAnggota();
+        this.statusPengurus = poktanRealm.getStatusPengurus();
+        this.statusPengurus = poktanRealm.getStatusPengurus();
     }
 
     public PoktanRealm(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, String poktanAnggota, String petaniAnggota, String tanggalMasuk, String poktanPengurus, String petaniPengurus, String jabatan, String periode, int idDesa, int isSync) {
@@ -144,6 +150,14 @@ public class PoktanRealm extends RealmObject {
         this.deskripsi = deskripsi;
     }
 
+    public String getStatusPoktan() {
+        return statusPoktan;
+    }
+
+    public void setStatusPoktan(String statusPoktan) {
+        this.statusPoktan = statusPoktan;
+    }
+
     public String getPoktanAnggota() {
         return poktanAnggota;
     }
@@ -166,6 +180,14 @@ public class PoktanRealm extends RealmObject {
 
     public void setTanggalMasuk(String tanggalMasuk) {
         this.tanggalMasuk = tanggalMasuk;
+    }
+
+    public String getStatusAnggota() {
+        return statusAnggota;
+    }
+
+    public void setStatusAnggota(String statusAnggota) {
+        this.statusAnggota = statusAnggota;
     }
 
     public String getPoktanPengurus() {
@@ -200,6 +222,14 @@ public class PoktanRealm extends RealmObject {
         this.periode = periode;
     }
 
+    public String getStatusPengurus() {
+        return statusPengurus;
+    }
+
+    public void setStatusPengurus(String statusPengurus) {
+        this.statusPengurus = statusPengurus;
+    }
+
     public int getIdDesa() {
         return idDesa;
     }
@@ -228,13 +258,16 @@ public class PoktanRealm extends RealmObject {
                 ", noHP='" + noHP + '\'' +
                 ", noTelp='" + noTelp + '\'' +
                 ", deskripsi='" + deskripsi + '\'' +
+                ", statusPoktan='" + statusPoktan + '\'' +
                 ", poktanAnggota='" + poktanAnggota + '\'' +
                 ", petaniAnggota='" + petaniAnggota + '\'' +
                 ", tanggalMasuk='" + tanggalMasuk + '\'' +
+                ", statusAnggota='" + statusAnggota + '\'' +
                 ", poktanPengurus='" + poktanPengurus + '\'' +
                 ", petaniPengurus='" + petaniPengurus + '\'' +
                 ", jabatan='" + jabatan + '\'' +
                 ", periode='" + periode + '\'' +
+                ", statusPengurus='" + statusPengurus + '\'' +
                 ", idDesa=" + idDesa +
                 ", isSync=" + isSync +
                 '}';

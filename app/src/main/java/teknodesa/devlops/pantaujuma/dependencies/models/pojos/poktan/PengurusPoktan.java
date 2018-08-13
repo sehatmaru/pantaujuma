@@ -7,21 +7,24 @@ public class PengurusPoktan  {
     private String petani = null;
     private String jabatan = "-";
     private String periode = "-";
+    private String statusPengurus = "-";
 
     public PengurusPoktan() {
     }
 
-    public PengurusPoktan(String poktan, String petani, String jabatan, String periode) {
+    public PengurusPoktan(String poktan, String petani, String jabatan, String periode, String statusPengurus) {
         this.poktan = poktan;
         this.petani = petani;
         this.jabatan = jabatan;
         this.periode = periode;
+        this.statusPengurus = statusPengurus;
     }
 
-    public PengurusPoktan(String petani, String jabatan, String periode) {
+    public PengurusPoktan(String petani, String jabatan, String periode, String statusPengurus) {
         this.petani = petani;
         this.jabatan = jabatan;
         this.periode = periode;
+        this.statusPengurus = statusPengurus;
     }
 
     public String getPoktan() {
@@ -56,5 +59,11 @@ public class PengurusPoktan  {
         this.periode = periode;
     }
 
+    public String getStatusPengurus() {
+        return statusPengurus;
+    }
 
+    public void setStatusPengurus(String statusPengurus) {
+        this.statusPengurus = statusPengurus;
+    }
 }

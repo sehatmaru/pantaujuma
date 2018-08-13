@@ -156,13 +156,16 @@ public class CRUPoktanFragment extends Fragment implements PoktanContract.ViewCo
         newRealmItem.setNoHP(identitasData.getNoHp());
         newRealmItem.setNoTelp(identitasData.getNoTelp());
         newRealmItem.setDeskripsi(identitasData.getDeskripsi());
+        newRealmItem.setStatusPoktan(identitasData.getStatusPoktan());
         newRealmItem.setPoktanAnggota(hashId);
         newRealmItem.setPetaniAnggota(anggotaData.getPetani());
         newRealmItem.setTanggalMasuk(anggotaData.getTanggalMasuk());
+        newRealmItem.setStatusAnggota(anggotaData.getStatusAnggota());
         newRealmItem.setPoktanPengurus(hashId);
         newRealmItem.setPetaniPengurus(pengurusData.getPetani());
         newRealmItem.setJabatan(pengurusData.getJabatan());
         newRealmItem.setPeriode(pengurusData.getPeriode());
+        newRealmItem.setStatusPengurus(pengurusData.getStatusPengurus());
         newRealmItem.setIdDesa(AkunFragment.idDesa);
 
         Log.e("poktan",newRealmItem.toString());

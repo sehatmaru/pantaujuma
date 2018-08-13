@@ -1,17 +1,11 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
-import io.realm.RealmObject;
-import io.realm.RealmResults;
-import io.realm.annotations.LinkingObjects;
-import io.realm.annotations.PrimaryKey;
-
-public class DetailRKTPRealm extends RealmObject{
-    @PrimaryKey
-    private int idDetailRKTP;
-
-    @LinkingObjects("detailRKTP")
-    public final RealmResults<RKTPRealm> rktp = null;
-
+public class RKTPBody {
+    private String hashId;
+    private String petugas;
+    private int idDesa;
+    private String poktan;
+    private String tahun;
     private String tujuan;
     private String masalah;
     private String sasaran;
@@ -25,11 +19,15 @@ public class DetailRKTPRealm extends RealmObject{
     private String pelaksana;
     private String keterangan;
 
-    public DetailRKTPRealm() {
+    public RKTPBody() {
     }
 
-    public DetailRKTPRealm(int idDetailRKTP, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
-        this.idDetailRKTP = idDetailRKTP;
+    public RKTPBody(String hashId, String petugas, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
+        this.hashId = hashId;
+        this.petugas = petugas;
+        this.idDesa = idDesa;
+        this.poktan = poktan;
+        this.tahun = tahun;
         this.tujuan = tujuan;
         this.masalah = masalah;
         this.sasaran = sasaran;
@@ -44,16 +42,44 @@ public class DetailRKTPRealm extends RealmObject{
         this.keterangan = keterangan;
     }
 
-    public int getIdDetailRKTP() {
-        return idDetailRKTP;
+    public String getHashId() {
+        return hashId;
     }
 
-    public void setIdDetailRKTP(int idDetailRKTP) {
-        this.idDetailRKTP = idDetailRKTP;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
-    public RealmResults<RKTPRealm> getRktp() {
-        return rktp;
+    public String getPetugas() {
+        return petugas;
+    }
+
+    public void setPetugas(String petugas) {
+        this.petugas = petugas;
+    }
+
+    public int getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(int idDesa) {
+        this.idDesa = idDesa;
+    }
+
+    public String getPoktan() {
+        return poktan;
+    }
+
+    public void setPoktan(String poktan) {
+        this.poktan = poktan;
+    }
+
+    public String getTahun() {
+        return tahun;
+    }
+
+    public void setTahun(String tahun) {
+        this.tahun = tahun;
     }
 
     public String getTujuan() {

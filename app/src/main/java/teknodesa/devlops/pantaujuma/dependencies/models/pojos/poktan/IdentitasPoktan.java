@@ -14,11 +14,12 @@ public class IdentitasPoktan {
     private String noHp;
     private String noTelp;
     private String deskripsi;
+    private String statusPoktan;
 
     public IdentitasPoktan() {
     }
 
-    public IdentitasPoktan(String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHp, String noTelp, String deskripsi) {
+    public IdentitasPoktan(String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHp, String noTelp, String deskripsi, String statusPoktan) {
         this.nama = nama;
         this.desa = desa;
         this.kecamatan = kecamatan;
@@ -27,6 +28,7 @@ public class IdentitasPoktan {
         this.noHp = noHp;
         this.noTelp = noTelp;
         this.deskripsi = deskripsi;
+        this.statusPoktan = statusPoktan;
     }
 
     public String getNama() {
@@ -91,5 +93,13 @@ public class IdentitasPoktan {
 
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
+    }
+
+    public String getStatusPoktan() {
+        return statusPoktan;
+    }
+
+    public void setStatusPoktan(String statusPoktan) {
+        this.statusPoktan = statusPoktan;
     }
 }

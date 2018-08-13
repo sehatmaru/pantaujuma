@@ -13,8 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
@@ -37,13 +39,17 @@ import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
-public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClickRDKKListener {
+public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClickRDKKListener, GetRDKKContract.View {
     @Inject
     Realm realm;
+
+    @Inject
+    GetRDKKController mController;
 
     private final String mJenisCRU = "rdkk";
 
     private List<RDKKPupukSubsidiRealm> listrdkk = Collections.EMPTY_LIST;
+    private List<RDKKPupukSubsidiRealm> listrdkkNotSync = Collections.EMPTY_LIST;
 
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     RDKKAdapter rdkkAdapter;
@@ -87,12 +93,21 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
         setContentView(R.layout.activity_listrdkk);
         ButterKnife.bind(this);
         counter=0;
+        mController.setView(this);
+        progressdialog = new ProgressDialog(this);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
+        realm.beginTransaction();
+        listrdkkNotSync = realm.where(RDKKPupukSubsidiRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+
+        hasilList = listrdkkNotSync.size();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
+
+        checkDataRealm();
     }
 
     private void populateInitialData(){
@@ -182,5 +197,110 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_eidu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_sync){
+            if(isNetworkConnected()){
+                syncDialog();
+            }else {
+                createSnackbar("Koneksi Tidak Tersedia").show();
+            }
+            return true;
+        }
+        if (id == R.id.action_download){
+            if(isNetworkConnected()){
+                createDownloadDialog();
+            }else {
+                createSnackbar("Koneksi Tidak Tersedia").show();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void createDownloadDialog() {
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_download)
+                .content(R.string.content_download)
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .onPositive((dialog1, which) -> {
+                    mController.getAllRDKK();
+                    updateLayout(Konstanta.LAYOUT_LOADING);
+                })
+                .onNegative((dialog1, which) -> {
+
+                })
+                .build();
+        dialog.show();
+    }
+
+
+    private void syncDialog() {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_sync)
+                .content(R.string.content_sync)
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .onPositive((dialog1, which) -> {
+                    progressdialog.show();
+                    progressdialog.setCancelable(false);
+                    progressdialog.setCanceledOnTouchOutside(false);
+                    startSync();
+                })
+                .onNegative((dialog1, which) -> {
+
+                })
+                .build();
+        dialog.show();
+    }
+
+    private void startSync(){
+        counter=0;
+        mController.saveData(listrdkkNotSync);
+    }
+
+    private void setDataRDKK(){
+
+    }
+
+    private void checkDataRealm(){
+        if(hasilList > 0){
+            showRealmData(""+hasilList).show();
+        }
+    }
+
+    private Snackbar showRealmData(String message) {
+        return Snackbar.make(coordinatorLayout, "Anda memiliki data penduduk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+    }
+
+    public void getAllRDKKSuccess(List<RDKKPupukSubsidiRealm> allPenduduk) {
+        populateInitialData();
+    }
+
+    public void getAllRDKKFailed(String message) {
+        createSnackbar(message).show();
+        updateLayout(Konstanta.LAYOUT_ERROR);
+    }
+
+    public void saveDataSuccess(String message) {
+        counter++;
+        Log.e("hasil","counter"+counter+" list"+hasilList);
+        if(counter == hasilList){
+            progressdialog.dismiss();
+            mController.getAllRDKK();
+            updateLayout(Konstanta.LAYOUT_LOADING);
+            this.recreate();
+        }
+    }
+
+    public void saveDataFailed(String message) {
+        progressdialog.dismiss();
+        onError(message);
     }
 }

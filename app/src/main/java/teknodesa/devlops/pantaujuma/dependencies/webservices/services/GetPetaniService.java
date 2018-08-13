@@ -74,14 +74,14 @@ public class GetPetaniService implements GetPetaniContract.Repository {
     }
 
     @Override
-    public void saveData(List<PetaniRealm> allPen) {
-        for(int i=0; i < allPen.size();i++ ){
-            PetaniRealm petaniTempRealm = allPen.get(i);
+    public void saveData(List<PetaniRealm> allTar) {
+        for(int i=0; i < allTar.size();i++ ){
+            PetaniRealm petaniTempRealm = allTar.get(i);
             realm.beginTransaction();
-            //petaniTempRealm.setIsSync(1);
+            petaniTempRealm.setIsSync(1);
             realm.commitTransaction();
             PetaniBody petaniBody = new PetaniBody(petaniTempRealm.getHashId(),petaniTempRealm.getBiodata(),
-                    petaniTempRealm.getStatus(),petaniTempRealm.getDeskripsi(),petaniTempRealm.getIdDesa());
+                    petaniTempRealm.getDeskripsi(),petaniTempRealm.getStatus(),petaniTempRealm.getDeskripsi());
 
             Log.e("petani service",petaniBody.toString());
             Call<ResponseSaveData> call = sisApi.insertPetani(WebServiceModule.ACCESS_TOKEN_TEMP,petaniBody);

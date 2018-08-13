@@ -26,20 +26,35 @@ import teknodesa.devlops.pantaujuma.components.penduduk.PendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petani.GetPetaniController;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
+import teknodesa.devlops.pantaujuma.components.petugas.GetTargetController;
 import teknodesa.devlops.pantaujuma.components.poktan.CRUPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.GetPoktanController;
 import teknodesa.devlops.pantaujuma.components.poktan.form.AnggotaPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.poktan.form.IdentitasPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.poktan.form.PengurusPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.profile.ProfileController;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.GetRDKController;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKIdentitasFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKIrigasiFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKJadwalKegiatanFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKRencanaUmumFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.form.RDKSasaranIntensifikasiFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
+import teknodesa.devlops.pantaujuma.components.rdkk.GetRDKKController;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
+import teknodesa.devlops.pantaujuma.components.rktp.GetRKTPController;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
 import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPetaniService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPoktanService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRDKKService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRDKService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRKTPService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetTargetService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
@@ -97,6 +112,36 @@ public class AppModule {
 
     @Provides
     @Singleton
+    GetPoktanService getPoktanService() {
+        return new GetPoktanService(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetRKTPService getRKTPService() {
+        return new GetRKTPService(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetTargetService getTargetService() {
+        return new GetTargetService(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetRDKService getRDKService() {
+        return new GetRDKService(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetRDKKService getRDKKService() {
+        return new GetRDKKService(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
     KomoditasService komoditasService() {
         return new KomoditasService(app.getComponent());
     }
@@ -112,6 +157,36 @@ public class AppModule {
     @Singleton
     GetPendudukController getPendudukController() {
         return new GetPendudukController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetRDKController getRDKController() {
+        return new GetRDKController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetRDKKController getRDKKController() {
+        return new GetRDKKController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetPoktanController getPoktanController() {
+        return new GetPoktanController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetRKTPController getRKTPController() {
+        return new GetRKTPController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    GetTargetController getTargetController() {
+        return new GetTargetController(app.getComponent());
     }
 
     @Provides
@@ -193,6 +268,26 @@ public class AppModule {
     @Provides
     @Singleton
     CRURDKFragment provideCRURDKFragment(){return new CRURDKFragment();}
+
+    @Provides
+    @Singleton
+    RDKIdentitasFragment provideRDKIdentitasFragment(){return new RDKIdentitasFragment();}
+
+    @Provides
+    @Singleton
+    RDKIrigasiFragment provideRDKIrigasiFragment(){return new RDKIrigasiFragment();}
+
+    @Provides
+    @Singleton
+    RDKJadwalKegiatanFragment provideRDKJadwalKegiatanFragment(){return new RDKJadwalKegiatanFragment();}
+
+    @Provides
+    @Singleton
+    RDKRencanaUmumFragment provideRDKRencanaUmumFragment(){return new RDKRencanaUmumFragment();}
+
+    @Provides
+    @Singleton
+    RDKSasaranIntensifikasiFragment provideRDKSaranaIntensifikasiFragment(){return new RDKSasaranIntensifikasiFragment();}
 
     @Provides
     @Singleton

@@ -3,6 +3,7 @@ package teknodesa.devlops.pantaujuma.components.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.Sort;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 /**
  * Created by Marthin on 10/13/2017.
@@ -58,10 +62,9 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PetaniRealm petani = listData.get(position);
-
-        String biodata = petani.getBiodata();
-
-        PendudukRealm penduduk = realm.where(PendudukRealm.class).equalTo("hashId", biodata).findFirst();
+        PendudukRealm penduduk = realm.where(PendudukRealm.class)
+                .equalTo("hashId", petani.getBiodata())
+                .findFirst();
 
         holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
         holder.textnik.setText(penduduk.getNIK());

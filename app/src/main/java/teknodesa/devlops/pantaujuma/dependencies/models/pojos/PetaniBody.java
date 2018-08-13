@@ -6,6 +6,7 @@ public class PetaniBody {
     private String deskripsi;
     private String status;
     private String idDesa;
+    private String foto;
 
     public PetaniBody() {
     }
@@ -16,6 +17,15 @@ public class PetaniBody {
         this.deskripsi = deskripsi;
         this.status = status;
         this.idDesa = idDesa;
+    }
+
+    public PetaniBody(String hashId, String biodata, String deskripsi, String status, String foto, String idDesa) {
+        this.hashId = hashId;
+        this.biodata = biodata;
+        this.deskripsi = deskripsi;
+        this.status = status;
+        this.idDesa = idDesa;
+        this.foto = foto;
     }
 
     public String getHashId() {
@@ -48,5 +58,21 @@ public class PetaniBody {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(String idDesa) {
+        this.idDesa = idDesa;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }
