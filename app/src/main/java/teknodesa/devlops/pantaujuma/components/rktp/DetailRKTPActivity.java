@@ -49,6 +49,30 @@ public class DetailRKTPActivity extends AppCompatActivity {
     @BindView(R.id.materi)
     TextView materi;
 
+    @BindView(R.id.metode)
+    TextView metode;
+
+    @BindView(R.id.volume)
+    TextView volume;
+
+    @BindView(R.id.lokasi)
+    TextView lokasi;
+
+    @BindView(R.id.waktu)
+    TextView waktu;
+
+    @BindView(R.id.sumberBiaya)
+    TextView sumberBiaya;
+
+    @BindView(R.id.penanggungjawab)
+    TextView penanggungjawab;
+
+    @BindView(R.id.pelaksana)
+    TextView pelaksana;
+
+    @BindView(R.id.keterangan)
+    TextView keterangan;
+
     @OnClick(R.id.btnEdit)
     void clickEdit() {
 //        startActivity(CRUActivity.createIntent(getApplicationContext(), "petani", "update", itemDetail));
@@ -95,19 +119,20 @@ public class DetailRKTPActivity extends AppCompatActivity {
         realm.commitTransaction();
     }
     private void setdata(){
-        String strPoktan = (dataPoktan.getNama() == null) ? "-" : dataPoktan.getNama();
-        String strTahun = (dataRKTP.getTahun() == null) ? "-" : dataRKTP.getTahun();
-        String strTujuan = (dataRKTP.getTujuan() == null) ? "-" : dataRKTP.getTujuan();
-        String strMasalah = (dataRKTP.getMasalah() == null) ? "-" : dataRKTP.getMasalah();
-        String strSasaran = (dataRKTP.getSasaran() == null) ? "-" : dataRKTP.getSasaran();
-        String strMateri = (dataRKTP.getMateri() == null) ? "-" : dataRKTP.getMateri();
-
-        poktan.setText(strPoktan);
-        tahun.setText(strTahun);
-        tujuan.setText(strTujuan);
-        masalah.setText(strMasalah);
-        sasaran.setText(strSasaran);
-        materi.setText(strMateri);
+        poktan.setText(dataPoktan.getNama());
+        tahun.setText(dataRKTP.getTahun());
+        tujuan.setText(dataRKTP.getTujuan());
+        masalah.setText(dataRKTP.getMasalah());
+        sasaran.setText(dataRKTP.getSasaran());
+        materi.setText(dataRKTP.getMateri());
+        metode.setText(dataRKTP.getMetode());
+        volume.setText(dataRKTP.getVolume());
+        lokasi.setText(dataRKTP.getLokasi());
+        waktu.setText(dataRKTP.getWaktu());
+        sumberBiaya.setText(sumberBiaya.getText());
+        penanggungjawab.setText(dataRKTP.getPenanggungJawab());
+        pelaksana.setText(dataRKTP.getPelaksana());
+        keterangan.setText(dataRKTP.getKeterangan());
     }
 
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

@@ -106,7 +106,6 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
         realm.commitTransaction();
 
         hasilList = listpetaniNotSync.size();
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         spinner.setVisibility(View.VISIBLE);
 

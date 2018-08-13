@@ -1,13 +1,6 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.components.rktp.RKTPContract;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.PetugasRealm;
-
-public class RKTPRealm extends RealmObject {
-    @PrimaryKey
+public class RKTPBody {
     private String hashId;
     private String petugas;
     private int idDesa;
@@ -25,33 +18,11 @@ public class RKTPRealm extends RealmObject {
     private String penanggungJawab;
     private String pelaksana;
     private String keterangan;
-    private int isSync;
 
-    public RKTPRealm() {
+    public RKTPBody() {
     }
 
-    public RKTPRealm(RKTPRealm rktpRealm, int isSync) {
-        this.hashId = rktpRealm.getHashId();
-        this.petugas = rktpRealm.getPetugas();
-        this.idDesa = rktpRealm.getIdDesa();
-        this.poktan = rktpRealm.getPoktan();
-        this.tahun = rktpRealm.getTahun();
-        this.tujuan = rktpRealm.getTujuan();
-        this.masalah = rktpRealm.getMasalah();
-        this.sasaran = rktpRealm.getSasaran();
-        this.materi = rktpRealm.getMateri();
-        this.metode = rktpRealm.getMetode();
-        this.volume = rktpRealm.getVolume();
-        this.lokasi = rktpRealm.getLokasi();
-        this.waktu = rktpRealm.getWaktu();
-        this.sumberBiaya = rktpRealm.getSumberBiaya();
-        this.penanggungJawab = rktpRealm.getPenanggungJawab();
-        this.pelaksana = rktpRealm.getPelaksana();
-        this.keterangan = rktpRealm.getKeterangan();
-        this.isSync = isSync;
-    }
-
-    public RKTPRealm(String hashId, String petugas, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
+    public RKTPBody(String hashId, String petugas, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
         this.hashId = hashId;
         this.petugas = petugas;
         this.idDesa = idDesa;
@@ -69,14 +40,6 @@ public class RKTPRealm extends RealmObject {
         this.penanggungJawab = penanggungJawab;
         this.pelaksana = pelaksana;
         this.keterangan = keterangan;
-    }
-
-    public int getIsSync() {
-        return isSync;
-    }
-
-    public void setIsSync(int isSync) {
-        this.isSync = isSync;
     }
 
     public String getHashId() {
@@ -213,28 +176,5 @@ public class RKTPRealm extends RealmObject {
 
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
-    }
-
-    @Override
-    public String toString() {
-        return "RKTPRealm{" +
-                "hashId='" + hashId + '\'' +
-                ", petugas='" + petugas + '\'' +
-                ", idDesa=" + idDesa +
-                ", poktan='" + poktan + '\'' +
-                ", tahun='" + tahun + '\'' +
-                ", tujuan='" + tujuan + '\'' +
-                ", masalah='" + masalah + '\'' +
-                ", sasaran='" + sasaran + '\'' +
-                ", materi='" + materi + '\'' +
-                ", metode='" + metode + '\'' +
-                ", volume=" + volume +
-                ", lokasi='" + lokasi + '\'' +
-                ", waktu='" + waktu + '\'' +
-                ", sumberBiaya='" + sumberBiaya + '\'' +
-                ", penanggungJawab='" + penanggungJawab + '\'' +
-                ", pelaksana='" + pelaksana + '\'' +
-                ", keterangan='" + keterangan + '\'' +
-                '}';
     }
 }

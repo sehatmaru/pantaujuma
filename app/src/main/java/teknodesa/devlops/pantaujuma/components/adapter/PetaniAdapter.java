@@ -32,8 +32,6 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
     Realm realm;
 
     private List<PetaniRealm> listData;
-    private List<PendudukRealm> listPenduduk;
-    PendudukRealm penduduk;
     private LayoutInflater layoutInflater;
     public static Context mContext;
     private OnClickPetaniListener onClicPetani;
@@ -64,9 +62,9 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PetaniRealm petani = listData.get(position);
-        String biodata = petani.getBiodata();
-
-        PendudukRealm penduduk = realm.where(PendudukRealm.class).equalTo("hashId", biodata).findFirst();
+        PendudukRealm penduduk = realm.where(PendudukRealm.class)
+                .equalTo("hashId", petani.getBiodata())
+                .findFirst();
 
         holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
         holder.textnik.setText(penduduk.getNIK());

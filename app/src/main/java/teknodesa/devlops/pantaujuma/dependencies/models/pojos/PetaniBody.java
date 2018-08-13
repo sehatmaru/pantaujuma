@@ -11,6 +11,14 @@ public class PetaniBody {
     public PetaniBody() {
     }
 
+    public PetaniBody(String hashId, String biodata, String deskripsi, String status, String idDesa) {
+        this.hashId = hashId;
+        this.biodata = biodata;
+        this.deskripsi = deskripsi;
+        this.status = status;
+        this.idDesa = idDesa;
+    }
+
     public PetaniBody(String hashId, String biodata, String deskripsi, String status, String foto, String idDesa) {
         this.hashId = hashId;
         this.biodata = biodata;

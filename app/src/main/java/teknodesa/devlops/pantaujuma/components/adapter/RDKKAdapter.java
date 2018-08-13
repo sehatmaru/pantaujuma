@@ -68,7 +68,7 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
         PendudukRealm penduduk = realm.where(PendudukRealm.class).equalTo("hashId", biodata).findFirst();
 
         holder.textpoktan.setText(poktan.getNama());
-        holder.textpetani.setText(penduduk.getNamaDepan());
+        holder.textpetani.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
         holder.textkomoditas.setText(komoditas.getNama());
         holder.cardview.setOnClickListener(view -> {
             onClicRDKK.OnClickRDKK(rdkk.getHashId());

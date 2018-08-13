@@ -41,9 +41,9 @@ public class FragmentPoktanAdapter extends RecyclerView.Adapter<FragmentPoktanAd
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PoktanRealm poktan = listData.get(position);
+
         holder.textname.setText(poktan.getNama());
-        //holder.textnik.setText(poktan.getDesa());
-        holder.textnik.setText("");
+        holder.textnik.setText(poktan.getTanggalDidirikan());
         holder.cardview.setOnClickListener(view -> { onClicPoktan.OnClickPoktan(poktan.getHashId(),poktan.getNama(), poktan.getDeskripsi());});
 
     }

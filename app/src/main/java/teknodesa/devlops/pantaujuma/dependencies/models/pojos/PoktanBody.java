@@ -1,10 +1,9 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class PoktanRealm extends RealmObject {
-    @PrimaryKey
+public class PoktanBody {
     private String hashId;
 
     private String nama;
@@ -29,12 +28,11 @@ public class PoktanRealm extends RealmObject {
     private String statusPengurus;
 
     private int idDesa;
-    private int isSync;
 
-    public PoktanRealm() {
+    public PoktanBody() {
     }
 
-    public PoktanRealm(PoktanRealm poktanRealm) {
+    public PoktanBody(PoktanBody poktanRealm) {
         this.hashId = poktanRealm.getHashId();
         this.nama = poktanRealm.getNama();
         this.desa = poktanRealm.getDesa();
@@ -57,7 +55,7 @@ public class PoktanRealm extends RealmObject {
         this.statusPengurus = poktanRealm.getStatusPengurus();
     }
 
-    public PoktanRealm(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, String poktanAnggota, String petaniAnggota, String tanggalMasuk, String poktanPengurus, String petaniPengurus, String jabatan, String periode, int idDesa, int isSync) {
+    public PoktanBody(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, String statusPoktan, String poktanAnggota, String petaniAnggota, String tanggalMasuk, String statusAnggota, String poktanPengurus, String petaniPengurus, String jabatan, String periode, String statusPengurus, int idDesa) {
         this.hashId = hashId;
         this.nama = nama;
         this.desa = desa;
@@ -67,15 +65,17 @@ public class PoktanRealm extends RealmObject {
         this.noHP = noHP;
         this.noTelp = noTelp;
         this.deskripsi = deskripsi;
+        this.statusPoktan = statusPoktan;
         this.poktanAnggota = poktanAnggota;
         this.petaniAnggota = petaniAnggota;
         this.tanggalMasuk = tanggalMasuk;
+        this.statusAnggota = statusAnggota;
         this.poktanPengurus = poktanPengurus;
         this.petaniPengurus = petaniPengurus;
         this.jabatan = jabatan;
         this.periode = periode;
+        this.statusPengurus = statusPengurus;
         this.idDesa = idDesa;
-        this.isSync = isSync;
     }
 
     public String getHashId() {
@@ -236,40 +236,5 @@ public class PoktanRealm extends RealmObject {
 
     public void setIdDesa(int idDesa) {
         this.idDesa = idDesa;
-    }
-
-    public int getIsSync() {
-        return isSync;
-    }
-
-    public void setIsSync(int isSync) {
-        this.isSync = isSync;
-    }
-
-    @Override
-    public String toString() {
-        return "PoktanRealm{" +
-                "hashId='" + hashId + '\'' +
-                ", nama='" + nama + '\'' +
-                ", desa='" + desa + '\'' +
-                ", kecamatan='" + kecamatan + '\'' +
-                ", tanggalDidirikan='" + tanggalDidirikan + '\'' +
-                ", alamat='" + alamat + '\'' +
-                ", noHP='" + noHP + '\'' +
-                ", noTelp='" + noTelp + '\'' +
-                ", deskripsi='" + deskripsi + '\'' +
-                ", statusPoktan='" + statusPoktan + '\'' +
-                ", poktanAnggota='" + poktanAnggota + '\'' +
-                ", petaniAnggota='" + petaniAnggota + '\'' +
-                ", tanggalMasuk='" + tanggalMasuk + '\'' +
-                ", statusAnggota='" + statusAnggota + '\'' +
-                ", poktanPengurus='" + poktanPengurus + '\'' +
-                ", petaniPengurus='" + petaniPengurus + '\'' +
-                ", jabatan='" + jabatan + '\'' +
-                ", periode='" + periode + '\'' +
-                ", statusPengurus='" + statusPengurus + '\'' +
-                ", idDesa=" + idDesa +
-                ", isSync=" + isSync +
-                '}';
     }
 }

@@ -78,6 +78,7 @@ public class PengurusPoktanFragment extends Fragment implements PoktanContract.V
         String strJabatan = "";
         String strPeriode = "";
         String nik = "";
+        String status = "aktif";
 
         try {
             strJabatan = (input_jabatan.getText().toString() == null) ? "-" : input_jabatan.getText().toString();
@@ -87,7 +88,7 @@ public class PengurusPoktanFragment extends Fragment implements PoktanContract.V
 
         }
 
-        PengurusPoktan newItem = new PengurusPoktan(nik, strJabatan, strPeriode);
+        PengurusPoktan newItem = new PengurusPoktan(nik, strJabatan, strPeriode, status);
 
         return newItem;
     }

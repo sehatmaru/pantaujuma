@@ -16,7 +16,7 @@ public class RDKRealm extends RealmObject {
     private String kegiatan;
     private String tanggal;
     private String luasSawah;
-    private String 	keterangan;
+    private String keterangan;
 
     //Irigasi
     private String hashIdIrigasi;

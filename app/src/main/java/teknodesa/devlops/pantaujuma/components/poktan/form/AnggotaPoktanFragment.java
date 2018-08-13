@@ -87,8 +87,9 @@ public class AnggotaPoktanFragment extends Fragment implements PoktanContract.Vi
     public AnggotaPoktan getUIData() {
         String strTanggalMasuk = (input_tanggalmasuk.getText().toString() == null) ? "-" : input_tanggalmasuk.getText().toString();
         String nik = (input_nikanggota.getText().toString() == null) ? "-" : input_nikanggota.getText().toString();
+        String status = "aktif";
 
-        AnggotaPoktan newItem = new AnggotaPoktan(nik, strTanggalMasuk);
+        AnggotaPoktan newItem = new AnggotaPoktan(nik, strTanggalMasuk, status);
 
         return newItem;
     }

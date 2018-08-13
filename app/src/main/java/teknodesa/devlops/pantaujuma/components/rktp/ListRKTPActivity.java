@@ -14,8 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
@@ -38,17 +40,21 @@ import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp.RKTPRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
-public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClickRKTPListener {
+public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClickRKTPListener, GetRKTPContract.View {
     @Inject
     Realm realm;
 
     private final String mJenisCRU = "rktp";
 
     private List<RKTPRealm> listrktp = Collections.EMPTY_LIST;
+    private List<RKTPRealm> listrktpNotSync = Collections.EMPTY_LIST;
 
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     RKTPAdapter rktpAdapter;
     RecyclerView.LayoutManager linearLayoutManager;
+
+    @Inject
+    GetRKTPController mController;
 
     @BindView(R.id.coordinatorLayoutRKTP)
     CoordinatorLayout coordinatorLayout;
@@ -88,12 +94,21 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         setContentView(R.layout.activity_listrktp);
         ButterKnife.bind(this);
         counter=0;
+        mController.setView(this);
+        progressdialog = new ProgressDialog(this);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
+        realm.beginTransaction();
+        listrktpNotSync = realm.where(RKTPRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+
+        hasilList = listrktpNotSync.size();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
+
+        checkDataRealm();
     }
 
     private void populateInitialData(){
@@ -183,5 +198,110 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_eidu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_sync){
+            if(isNetworkConnected()){
+                syncDialog();
+            }else {
+                createSnackbar("Koneksi Tidak Tersedia").show();
+            }
+            return true;
+        }
+        if (id == R.id.action_download){
+            if(isNetworkConnected()){
+                createDownloadDialog();
+            }else {
+                createSnackbar("Koneksi Tidak Tersedia").show();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void createDownloadDialog() {
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_download)
+                .content(R.string.content_download)
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .onPositive((dialog1, which) -> {
+                    mController.getAllRKTP();
+                    updateLayout(Konstanta.LAYOUT_LOADING);
+                })
+                .onNegative((dialog1, which) -> {
+
+                })
+                .build();
+        dialog.show();
+    }
+
+
+    private void syncDialog() {
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_sync)
+                .content(R.string.content_sync)
+                .positiveText(R.string.yes)
+                .negativeText(R.string.no)
+                .onPositive((dialog1, which) -> {
+                    progressdialog.show();
+                    progressdialog.setCancelable(false);
+                    progressdialog.setCanceledOnTouchOutside(false);
+                    startSync();
+                })
+                .onNegative((dialog1, which) -> {
+
+                })
+                .build();
+        dialog.show();
+    }
+
+    private void startSync(){
+        counter=0;
+        mController.saveData(listrktpNotSync);
+    }
+
+    private void checkDataRealm(){
+        if(hasilList > 0){
+            showRealmData(""+hasilList).show();
+        }
+    }
+
+    private Snackbar showRealmData(String message) {
+        return Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+    }
+
+    @Override
+    public void getAllRKTPSuccess(List<RKTPRealm> allRKTP) {
+        populateInitialData();
+    }
+
+    @Override
+    public void getAllRKTPFailed(String message) {
+        createSnackbar(message).show();
+        updateLayout(Konstanta.LAYOUT_ERROR);
+    }
+
+    @Override
+    public void saveDataSuccess(String message) {
+        counter++;
+        Log.e("hasil","counter"+counter+" list"+hasilList);
+        if(counter == hasilList){
+            progressdialog.dismiss();
+            mController.getAllRKTP();
+            updateLayout(Konstanta.LAYOUT_LOADING);
+            this.recreate();
+        }
+    }
+
+    @Override
+    public void saveDataFailed(String message) {
+        progressdialog.dismiss();
+        onError(message);
     }
 }

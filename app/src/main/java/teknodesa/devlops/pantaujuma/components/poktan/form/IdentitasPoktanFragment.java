@@ -114,8 +114,9 @@ public class IdentitasPoktanFragment extends Fragment implements PoktanContract.
         String strKecamatan = (input_kecamatan.getText().toString() == null) ? "-" : input_kecamatan.getText().toString();
         String strNoHP = (input_hp.getText().toString() == null) ? "-" : input_hp.getText().toString();
         String strNoTelp = (input_telp.getText().toString() == null) ? "-" : input_telp.getText().toString();
+        String strStatus = "aktif";
 
-        IdentitasPoktan newItem = new IdentitasPoktan(strNamaPoktan, strDesa, strKecamatan, strTanggalDidirikan, strAlamat, strNoHP, strNoTelp, strDeskripsi);
+        IdentitasPoktan newItem = new IdentitasPoktan(strNamaPoktan, strDesa, strKecamatan, strTanggalDidirikan, strAlamat, strNoHP, strNoTelp, strDeskripsi, strStatus);
 
         return newItem;
     }

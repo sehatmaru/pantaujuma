@@ -11,10 +11,20 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import io.realm.Realm;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 
 public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
+
+    @Inject
+    Realm realm;
+
     private List<RDKRealm> listData;
     private LayoutInflater layoutInflater;
     public static Context mContext;
@@ -33,6 +43,10 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ((MainApplication) mContext.getApplicationContext())
+                .getComponent()
+                .inject(this);
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_rdk, parent, false);
         return new MyViewHolder(itemView);
@@ -41,15 +55,17 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         RDKRealm rdk = listData.get(position);
-        holder.textnama.setText(rdk.getNama());
-        holder.textkegiatan.setText(rdk.getKegiatanJK());
+
+        PoktanRealm poktan = realm.where(PoktanRealm.class)
+                .equalTo("hashId", rdk.getPoktan())
+                .findFirst();
+
+        holder.textnama.setText(poktan.getNama());
+        holder.textkegiatan.setText(rdk.getLuasSawah());
         holder.texttanggal.setText(rdk.getTanggal());
-        holder.textvarietas.setText(rdk.getVarietas());
-        holder.texttarget.setText(rdk.getTarget());
         holder.cardview.setOnClickListener(view -> {
             onClicRDK.OnClickRDK(rdk.getHashId());
         });
-
     }
 
     @Override
@@ -65,16 +81,12 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
         TextView textnama;
         TextView textkegiatan;
         TextView texttanggal;
-        TextView textvarietas;
-        TextView texttarget;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textnama = (TextView)itemView.findViewById(R.id.nama);
             textkegiatan = (TextView)itemView.findViewById(R.id.kegiatan);
             texttanggal = (TextView)itemView.findViewById(R.id.tanggal);
-            textvarietas = (TextView)itemView.findViewById(R.id.varietas);
-            texttarget = (TextView)itemView.findViewById(R.id.target);
             cardview = (CardView) itemView.findViewById(R.id.rdkCardView);
         }
     }

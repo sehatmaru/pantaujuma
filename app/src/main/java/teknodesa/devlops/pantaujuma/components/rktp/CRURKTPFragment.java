@@ -1,5 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.rktp;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -60,6 +62,20 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
 
     @BindView(R.id.input_waktu)
     EditText input_waktu;
+
+    @BindView(R.id.btnWaktu)
+    Button btnWaktu;
+    void setTanggal() {
+        final Calendar calendar = Calendar.getInstance();
+        int tanggal = calendar.get(Calendar.DAY_OF_MONTH),
+                bulan = calendar.get(Calendar.MONTH),
+                tahun = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
+            input_waktu.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+        }, tahun, bulan, tanggal);
+        datePickerDialog.show();
+    }
 
     @BindView(R.id.input_sumberbiaya)
     EditText input_sumberbiaya;

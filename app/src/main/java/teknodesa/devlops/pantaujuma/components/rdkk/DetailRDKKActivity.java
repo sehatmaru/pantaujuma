@@ -17,8 +17,11 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
 
@@ -34,17 +37,53 @@ public class DetailRDKKActivity extends AppCompatActivity {
     @BindView(R.id.btnHapus)
     Button btnHapus;
 
-    @BindView(R.id.nama)
-    TextView nama;
+    @BindView(R.id.poktan)
+    TextView poktan;
 
-    @BindView(R.id.desa)
-    TextView desa;
+    @BindView(R.id.petani)
+    TextView petani;
 
     @BindView(R.id.komoditas)
     TextView komoditas;
 
-    @BindView(R.id.deskripsi)
-    TextView deskripsi;
+    @BindView(R.id.pupuk)
+    TextView pupuk;
+
+    @BindView(R.id.januari)
+    TextView januari;
+
+    @BindView(R.id.februari)
+    TextView februari;
+
+    @BindView(R.id.maret)
+    TextView maret;
+
+    @BindView(R.id.april)
+    TextView april;
+
+    @BindView(R.id.mei)
+    TextView mei;
+
+    @BindView(R.id.juni)
+    TextView juni;
+
+    @BindView(R.id.juli)
+    TextView juli;
+
+    @BindView(R.id.agustus)
+    TextView agustus;
+
+    @BindView(R.id.september)
+    TextView september;
+
+    @BindView(R.id.oktober)
+    TextView oktober;
+
+    @BindView(R.id.november)
+    TextView november;
+
+    @BindView(R.id.desember)
+    TextView desember;
 
     @OnClick(R.id.btnEdit)
 
@@ -62,11 +101,15 @@ public class DetailRDKKActivity extends AppCompatActivity {
 
     private RDKKPupukSubsidiRealm dataRDKK;
     PoktanRealm dataPoktan;
+    PetaniRealm dataPetani;
+    PendudukRealm dataPenduduk;
     KomoditasRealm dataKomoditas;
 
     private static String idRDKK;
     static String idPoktan;
     static String idKomoditas;
+    static String idPetani;
+    static String idPenduduk;
 
     public static Intent createIntent(Context context, String id) {
         idRDKK = id;
@@ -92,16 +135,32 @@ public class DetailRDKKActivity extends AppCompatActivity {
         dataRDKK = realm.where(RDKKPupukSubsidiRealm.class).equalTo("hashId", idRDKK).findFirst();
         idPoktan = dataRDKK.getPoktan();
         idKomoditas = dataRDKK.getKomoditas();
+        idPetani = dataRDKK.getPetani();
         dataKomoditas = realm.where(KomoditasRealm.class).equalTo("hashId", idKomoditas).findFirst();
         dataPoktan = realm.where(PoktanRealm.class).equalTo("hashId", idPoktan).findFirst();
+        dataPetani = realm.where(PetaniRealm.class).equalTo("hashId", idKomoditas).findFirst();
+        idPenduduk = dataPetani.getBiodata();
+        dataPenduduk = realm.where(PendudukRealm.class).equalTo("hashId", idPenduduk).findFirst();
         realm.commitTransaction();
     }
 
     private void setdata(){
-        nama.setText(dataPoktan.getNama());
-        desa.setText(dataPoktan.getDesa());
+        poktan.setText(dataPoktan.getNama());
+        petani.setText(dataPenduduk.getNamaDepan()+" "+ dataPenduduk.getNamaBelakang());
         komoditas.setText(dataKomoditas.getNama());
-        deskripsi.setText(dataPoktan.getDeskripsi());
+        pupuk.setText(dataRDKK.getPupuk());
+        januari.setText(Float.toString(dataRDKK.getButuhJanuari()));
+        februari.setText(Float.toString(dataRDKK.getButuhFebruari()));
+        maret.setText(Float.toString(dataRDKK.getButuhMaret()));
+        april.setText(Float.toString(dataRDKK.getButuhApril()));
+        mei.setText(Float.toString(dataRDKK.getButuhMei()));
+        juni.setText(Float.toString(dataRDKK.getButuhJuni()));
+        juli.setText(Float.toString(dataRDKK.getButuhJuli()));
+        agustus.setText(Float.toString(dataRDKK.getButuhAgustus()));
+        september.setText(Float.toString(dataRDKK.getButuhSeptember()));
+        oktober.setText(Float.toString(dataRDKK.getButuhOktober()));
+        november.setText(Float.toString(dataRDKK.getButuhNovember()));
+        desember.setText(Float.toString(dataRDKK.getButuhDesember()));
     }
 
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
