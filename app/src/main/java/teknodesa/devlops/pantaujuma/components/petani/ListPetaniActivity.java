@@ -101,18 +101,18 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-        realm.beginTransaction();
-        listpetaniNotSync = realm.where(PetaniRealm.class).equalTo("isSync",0).findAll();
-        realm.commitTransaction();
-
-        hasilList = listpetaniNotSync.size();
-
+        getNotSync();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
-        checkDataRealm();
-    }
 
+    }
+    private void getNotSync(){
+        realm.beginTransaction();
+        listpetaniNotSync = realm.where(PetaniRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+        hasilList = listpetaniNotSync.size();
+    }
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listpetani = realm1.copyFromRealm(realm1.where(PetaniRealm.class).sort("isSync",Sort.ASCENDING).findAll());
@@ -123,6 +123,8 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(petaniAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
+                getNotSync();
+                checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
             }else {

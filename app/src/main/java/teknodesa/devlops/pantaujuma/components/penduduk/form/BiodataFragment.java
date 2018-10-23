@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -194,6 +195,19 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
         BiodataPenduduk newItem = new BiodataPenduduk(strNIK, strFoto, strNamaDepan, strNamaBelakang, strJenisKelamin,
                 strTempatLahir, strTanggalLahir, strAgama, strGolonganDarah, strPekerjaan, strPendidikan, strStatus);
         return newItem;
+    }
+    void setSpinnerSelection(String data, List<String> sources, Spinner spinner){
+        int i = 0;
+        for (String source : sources){
+            if (i < sources.size()){
+                if (source.equals(data)){
+                    spinner.setSelection(i);
+                }
+                i++;
+            } else {
+                spinner.setSelection(0);
+            }
+        }
     }
 
     @Override

@@ -92,6 +92,12 @@ public class CRUPetaniFragment extends Fragment implements
         View v = inflater.inflate(R.layout.fragment_crupetani, container, false);
         ButterKnife.bind(this, v);
 
+
+        setAdapter();
+        return v;
+    }
+
+    private void setAdapter(){
         input_status.setAdapter(new ArrayAdapter<Status>(getActivity(), R.layout.spinner_item, Status.values()) {
             @Override
             public boolean isEnabled(int position) {
@@ -118,8 +124,6 @@ public class CRUPetaniFragment extends Fragment implements
                 return view;
             }
         });
-
-        return v;
     }
 
     @Override
@@ -128,6 +132,20 @@ public class CRUPetaniFragment extends Fragment implements
 
         if(CRUActivity.mAction.equals("update")){
             setUIData();
+        }
+    }
+
+    void setSpinnerSelection(String data, String[] sources, Spinner spinner){
+        int i = 0;
+        for (String source : sources){
+            if (i < sources.length){
+                if (source.equals(data)){
+                    spinner.setSelection(i);
+                }
+                i++;
+            } else {
+                spinner.setSelection(0);
+            }
         }
     }
 
@@ -162,10 +180,14 @@ public class CRUPetaniFragment extends Fragment implements
 
     @Override
     public void setUIData() {
+        setAdapter();
         input_nik.setText(DetailPetaniActivity.dataPenduduk.getNIK());
         input_namadepan.setText(DetailPetaniActivity.dataPenduduk.getNamaDepan());
         input_namabelakang.setText(DetailPetaniActivity.dataPenduduk.getNamaBelakang());
         input_deskripsi.setText(DetailPetaniActivity.dataPetani.getDeskripsi());
+        String[] sourcesStatus= {"Pilih salah satu", "Aktif", "Non-Aktif"};
+        setSpinnerSelection(DetailPetaniActivity.dataPetani.getStatus(),sourcesStatus,input_status);
+
     }
 
     @Override
