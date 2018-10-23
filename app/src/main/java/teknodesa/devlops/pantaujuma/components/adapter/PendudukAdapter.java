@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,10 +46,47 @@ public class PendudukAdapter extends RecyclerView.Adapter<PendudukAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PendudukRealm penduduk = listData.get(position);
-        holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
-        holder.textnik.setText(penduduk.getNIK());
-        holder.textjk.setText(penduduk.getJenisKelamin());
-        holder.textttl.setText(penduduk.getTempatLahir()+", "+penduduk.getTanggalLahir());
+        if(penduduk.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
+        }
+        if(penduduk.getNIK() == null || penduduk.getNIK().compareTo("")==0){
+            holder.textnik.setText("NIK : -");
+        }else{
+            holder.textnik.setText("NIK : "+penduduk.getNIK());
+        }
+
+        String namaDepan;
+        String namaBelakang;
+        if(penduduk.getNamaDepan() == null || penduduk.getNamaDepan().compareTo("")==0){
+            namaDepan="";
+        }else{
+            namaDepan = penduduk.getNamaDepan();
+        }
+        if(penduduk.getNamaBelakang() == null || penduduk.getNamaBelakang().compareTo("")==0){
+            namaBelakang="";
+        }else{
+            namaBelakang = penduduk.getNamaBelakang();
+        }
+        holder.textname.setText("Nama :"+namaDepan+" "+ namaBelakang);
+
+        if(penduduk.getJenisKelamin() == null || penduduk.getJenisKelamin().compareTo("")==0){
+            holder.textjk.setText("Jenis Kelamin : -");
+        }else{
+            holder.textjk.setText("Jenis Kelamin: "+penduduk.getJenisKelamin());
+        }
+        String tempatLahir;
+        String tanggalLahir;
+        if(penduduk.getTempatLahir() == null || penduduk.getTempatLahir().compareTo("")==0){
+            tempatLahir="";
+        }else{
+            tempatLahir = penduduk.getTempatLahir();
+        }
+        if(penduduk.getTanggalLahir() == null || penduduk.getTanggalLahir().compareTo("")==0){
+            tanggalLahir="";
+        }else{
+            tanggalLahir = penduduk.getTanggalLahir();
+        }
+        holder.textttl.setText("TTL : "+tempatLahir+", "+tanggalLahir);
         holder.cardview.setOnClickListener(view -> {
             onClicPenduduk.OnClickPenduduk(penduduk.getHashId());
         });

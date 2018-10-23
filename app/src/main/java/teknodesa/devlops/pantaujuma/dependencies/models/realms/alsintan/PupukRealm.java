@@ -3,29 +3,23 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+/**
+ * Created by Sehat MT Samosir on 8/20/2018.
+ */
+
 public class PupukRealm extends RealmObject {
     @PrimaryKey
-    private int idPupuk;
+    private String hashId;
     private String nama;
     private String jenis;
     private String deskripsi;
 
-    public PupukRealm() {
+    public String getHashId() {
+        return hashId;
     }
 
-    public PupukRealm(int idPupuk, String nama, String jenis, String deskripsi) {
-        this.idPupuk = idPupuk;
-        this.nama = nama;
-        this.jenis = jenis;
-        this.deskripsi = deskripsi;
-    }
-
-    public int getIdPupuk() {
-        return idPupuk;
-    }
-
-    public void setIdPupuk(int idPupuk) {
-        this.idPupuk = idPupuk;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
     public String getNama() {

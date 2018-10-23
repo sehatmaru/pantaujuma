@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -21,7 +22,9 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
+import teknodesa.devlops.pantaujuma.components.post.PostFragment;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
+import teknodesa.devlops.pantaujuma.components.signin.UserRealmController;
 
 public class MainActivity extends AppCompatActivity {
     /*@BindView(R.id.message)
@@ -37,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Inject
     KomoditasFragment komoditasFragment;
+
+    @Inject
+    PostFragment postFragment;
+
+    @Inject
+    UserRealmController userRealmController;
+
     private boolean doubleBackToExitPressedOnce = false;
 
     public static Intent createIntent(Context context) {
@@ -59,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_post:
                     //mTextMessage.setText(R.string.title_post);
-                    //replaceFragment(cruPoktanFragment);
+                    replaceFragment(postFragment);
                     return true;
                 case R.id.navigation_profil:
                     //mTextMessage.setText(R.string.title_profil);
@@ -80,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        Log.e("Hasil act", userRealmController.getUser().getEmail());
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         replaceFragment(homeFragment);

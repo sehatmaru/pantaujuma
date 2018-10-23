@@ -10,10 +10,12 @@ import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import teknodesa.devlops.pantaujuma.components.poktan.GetAnggotaPoktanContract;
 import teknodesa.devlops.pantaujuma.components.poktan.GetPoktanContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PoktanBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseAnggotaPoktan;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponsePoktan;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseSaveData;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
@@ -39,7 +41,6 @@ public class GetPoktanService implements GetPoktanContract.Repository {
     public void instanceClass(GetPoktanContract.Controller controller){
         this.controller = controller;
     }
-
 
     private boolean res = false;
     @Override
@@ -93,10 +94,7 @@ public class GetPoktanService implements GetPoktanContract.Repository {
             PoktanBody poktanBody = new PoktanBody(poktanTempRealm.getHashId(),poktanTempRealm.getNama(),
                     poktanTempRealm.getDesa(),poktanTempRealm.getKecamatan(),poktanTempRealm.getTanggalDidirikan(),
                     poktanTempRealm.getAlamat(), poktanTempRealm.getNoHP(), poktanTempRealm.getNoTelp(),
-                    poktanTempRealm.getDeskripsi(), poktanTempRealm.getStatusPoktan(), poktanTempRealm.getPoktanAnggota(),
-                    poktanTempRealm.getPetaniAnggota(), poktanTempRealm.getTanggalMasuk(), poktanTempRealm.getStatusAnggota(),
-                    poktanTempRealm.getPoktanPengurus(), poktanTempRealm.getPetaniPengurus(), poktanTempRealm.getJabatan(),
-                    poktanTempRealm.getPeriode(), poktanTempRealm.getStatusPengurus(),poktanTempRealm.getIdDesa());
+                    poktanTempRealm.getDeskripsi(), poktanTempRealm.getStatusPoktan(),poktanTempRealm.getIdDesa());
 
             Log.e("poktan service",poktanBody.toString());
             Call<ResponseSaveData> call = sisApi.insertPoktan(WebServiceModule.ACCESS_TOKEN_TEMP,poktanBody);
@@ -127,4 +125,32 @@ public class GetPoktanService implements GetPoktanContract.Repository {
         }
     }
 
+    public void getAllAnggotaPoktan(int idDesa){
+
+        Call<ResponseAnggotaPoktan> call = sisApi.getAllAnggotaPoktan(WebServiceModule.ACCESS_TOKEN_TEMP, idDesa);
+        call.enqueue(new Callback<ResponseAnggotaPoktan>() {
+            @Override
+            public void onResponse(Call<ResponseAnggotaPoktan> call, Response<ResponseAnggotaPoktan> response) {
+                if(response.isSuccessful()){
+                    if(response.body().isSuccess()){
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmpupuk -> {
+                            realmpupuk.insertOrUpdate(response.body().getData());
+                        });
+                        realm.commitTransaction();
+
+                        Log.e("dataAnggota", " berjumlah " + response.body().getData().size());
+                    }
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAnggotaPoktan> call, Throwable t) {
+
+                t.printStackTrace();
+            }
+        });
+    }
 }

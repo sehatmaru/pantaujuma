@@ -11,7 +11,7 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.Penduduk
 public class ResponsePenduduk {
     private boolean success;
     private String message;
-    private List<PendudukRealm> penduduk;
+    private List<PendudukRealm> data;
 
     public boolean isSuccess() {
         return success;
@@ -29,11 +29,11 @@ public class ResponsePenduduk {
         this.message = message;
     }
 
-    public List<PendudukRealm> getPenduduk() {
-        return penduduk;
+    public List<PendudukRealm> getData() {
+        return data;
     }
 
-    public void setPenduduk(List<PendudukRealm> penduduk) {
-        this.penduduk = penduduk;
+    public void setData(List<PendudukRealm> data) {
+        this.data = data;
     }
 }

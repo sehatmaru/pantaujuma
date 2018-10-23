@@ -76,7 +76,7 @@ public class GetTargetService implements GetTargetContract.Repository {
             realm.beginTransaction();
             targetTempRealm.setIsSync(1);
             realm.commitTransaction();
-            TargetPetugasBody targetPetugasBody = new TargetPetugasBody(targetTempRealm.getHashId(),targetTempRealm.getPetugas(),
+            TargetPetugasBody targetPetugasBody = new TargetPetugasBody(targetTempRealm.getHashId(),targetTempRealm.getIdUser(),
                     targetTempRealm.getIdDesa(),targetTempRealm.getTahun(),targetTempRealm.getKomoditas(),targetTempRealm.getLuasTanam(),
                     targetTempRealm.getLuasPanen(),targetTempRealm.getSasaranProduksi(),targetTempRealm.getSasaranProduktifitas(),targetTempRealm.getKeterangan());
 
@@ -89,8 +89,8 @@ public class GetTargetService implements GetTargetContract.Repository {
                         if(response.body().isSuccess()){
 
                             controller.saveDataSuccess("Success",targetTempRealm);
-                        }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+//                        }else {
+//                            controller.saveDataFailed("Failed"+response.body().getMessage());
                         }
 
                     }else{

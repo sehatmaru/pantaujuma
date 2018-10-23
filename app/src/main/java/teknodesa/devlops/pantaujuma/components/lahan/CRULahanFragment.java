@@ -18,13 +18,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.form.AlamatFragment;
 
 
 public class CRULahanFragment extends Fragment {
     DetailLahanFragment detailLahanFragment;
     AlamatFragment alamatFragment;
-    CRULahanFragment.ViewPagerAdapter adapter;
+    ViewPagerAdapter adapter;
 
     @BindView(R.id.tabs)
     TabLayout tabs;
@@ -62,7 +62,7 @@ public class CRULahanFragment extends Fragment {
         detailLahanFragment = new DetailLahanFragment();
         alamatFragment = new AlamatFragment();
 
-        adapter = new CRULahanFragment.ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
         adapter.addFragment(detailLahanFragment);
         adapter.addFragment(alamatFragment);

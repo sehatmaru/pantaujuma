@@ -1,13 +1,8 @@
 package teknodesa.devlops.pantaujuma.components.penduduk;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
@@ -26,21 +21,11 @@ public class GetPendudukController implements GetPendudukContract.Controller {
     @Inject
     Realm realm;
 
-    @Inject
-    EventBus mBus;
 
     private GetPendudukContract.View views;
 
     public GetPendudukController(@NonNull AppComponent appComponent) {
         appComponent.inject(this);
-    }
-
-
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
     }
 
     public void setView(GetPendudukContract.View view){
@@ -87,13 +72,7 @@ public class GetPendudukController implements GetPendudukContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,PendudukRealm pendudukTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(pendudukTempRealm);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

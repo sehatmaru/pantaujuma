@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanFragment;
-import teknodesa.devlops.pantaujuma.components.penduduk.AlamatFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.form.AlamatFragment;
 
 
 public class CRUSurveiFragment extends Fragment {

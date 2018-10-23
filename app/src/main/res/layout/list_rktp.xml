@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-
             <LinearLayout
                 android:id="@+id/dataLinearLayout"
                 android:layout_width="match_parent"
@@ -32,7 +31,6 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Cabe"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -42,7 +40,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="211132144512"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 

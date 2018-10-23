@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,8 +41,8 @@ public class GetPendudukService implements GetPendudukContract.Repository {
         this.controller = controller;
     }
 
+    public boolean insertPenduduk =true;
 
-    private boolean res = false;
     @Override
     public void getAllPenduduk(int idDesa) {
         Log.e("send","data comehere"+idDesa);
@@ -51,16 +52,20 @@ public class GetPendudukService implements GetPendudukContract.Repository {
             public void onResponse(Call<ResponsePenduduk> call, Response<ResponsePenduduk> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-                        Log.e("hasilpenduduk",response.body().getPenduduk().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getPenduduk()), () -> {
-                            controller.getAllPendudukSuccess(response.body().getPenduduk());
-                        }, error -> {
-                            Log.e("getpendudukeror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllPendudukFailed(response.body().getMessage());
+                        realm.beginTransaction();
+                        RealmResults<PendudukRealm> allPenduduks = realm.where(PendudukRealm.class).equalTo("isSync",1).findAll();
+                        allPenduduks.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllPendudukSuccess(response.body().getData());
+                    }else{
+                        controller.getAllPendudukFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllPendudukFailed("Server Error");
+                    controller.getAllPendudukFailed("Server Error "+response.message());
                 }
             }
 
@@ -77,44 +82,40 @@ public class GetPendudukService implements GetPendudukContract.Repository {
     public void saveData(List<PendudukRealm> allPen) {
         for(int i=0; i < allPen.size();i++ ){
             PendudukRealm pendudukTempRealm = allPen.get(i);
-            realm.beginTransaction();
-            pendudukTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            PendudukBody pendudukBody = new PendudukBody(pendudukTempRealm.getHashId(),pendudukTempRealm.getNIK(),"",
-                    pendudukTempRealm.getNamaDepan(),pendudukTempRealm.getNamaBelakang(),pendudukTempRealm.getJenisKelamin(),
-                    pendudukTempRealm.getTempatLahir(),pendudukTempRealm.getTanggalLahir(),pendudukTempRealm.getAgama(),
-                    pendudukTempRealm.getGolonganDarah(),pendudukTempRealm.getPekerjaan(),pendudukTempRealm.getPendidikan(),
-                    pendudukTempRealm.getAlamat(),pendudukTempRealm.getRt(),pendudukTempRealm.getRw(),pendudukTempRealm.getDusun(),
-                    pendudukTempRealm.getDesa(),pendudukTempRealm.getKecamatan(),pendudukTempRealm.getDatiII(),pendudukTempRealm.getProvinsi(),
-                    pendudukTempRealm.getNoHP(),pendudukTempRealm.getNoTelp(),pendudukTempRealm.getStatus(),pendudukTempRealm.getKodePos(),
-                    pendudukTempRealm.getEmail(),pendudukTempRealm.getIdDesa());
-
+            PendudukBody pendudukBody = new PendudukBody(pendudukTempRealm);
             Log.e("penduduk service",pendudukBody.toString());
+            final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertPenduduk(WebServiceModule.ACCESS_TOKEN_TEMP,pendudukBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",pendudukTempRealm);
+                            if (dataLoop == allPen.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertPenduduk =true;
                         }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                            insertPenduduk =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
 
                     }else{
-                        Log.e("penduduk service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                        insertPenduduk =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("penduduk service","error server"+t.getMessage());
-                    controller.saveDataFailed("Failed"+t.getMessage());
+                    insertPenduduk =false;
+                    controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertPenduduk){
+                break;
+            }
         }
     }
 

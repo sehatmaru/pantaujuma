@@ -21,6 +21,7 @@ import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.JadwalKegiatan;
 
@@ -81,7 +82,18 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         input_kegiatan = getActivity().findViewById(R.id.input_kegiatan);
         input_tanggalJK = getActivity().findViewById(R.id.input_tanggalJK);
         input_deskripsiJK= getActivity().findViewById(R.id.input_deskripsiJK);
-        setData();
+
+        if (CRUActivity.mAction == "update"){
+            setLayoutForEdit();
+        } else {
+            setData();
+        }
+    }
+
+    private void setLayoutForEdit() {
+        input_kegiatan.setText(DetailRDKActivity.dataRDK.getKegiatanJK());
+        input_tanggalJK.setText(DetailRDKActivity.dataRDK.getTanggalJK());
+        input_deskripsiJK.setText(DetailRDKActivity.dataRDK.getDeskripsiJK());
     }
 
     @Override

@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+
 public class PetaniBody {
     private String hashId;
     private String biodata;
@@ -11,21 +13,14 @@ public class PetaniBody {
     public PetaniBody() {
     }
 
-    public PetaniBody(String hashId, String biodata, String deskripsi, String status, String idDesa) {
-        this.hashId = hashId;
-        this.biodata = biodata;
-        this.deskripsi = deskripsi;
-        this.status = status;
-        this.idDesa = idDesa;
-    }
 
-    public PetaniBody(String hashId, String biodata, String deskripsi, String status, String foto, String idDesa) {
-        this.hashId = hashId;
-        this.biodata = biodata;
-        this.deskripsi = deskripsi;
-        this.status = status;
-        this.idDesa = idDesa;
-        this.foto = foto;
+    public PetaniBody(PetaniRealm data) {
+        this.hashId = data.getHashId();
+        this.biodata = data.getBiodata();
+        this.deskripsi = data.getDeskripsi();
+        this.status = data.getStatus();
+        this.idDesa = data.getIdDesa();
+        this.foto = data.getFoto();
     }
 
     public String getHashId() {
@@ -74,5 +69,17 @@ public class PetaniBody {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    @Override
+    public String toString() {
+        return "PetaniBody{" +
+                "hashId='" + hashId + '\'' +
+                ", biodata='" + biodata + '\'' +
+                ", deskripsi='" + deskripsi + '\'' +
+                ", status='" + status + '\'' +
+                ", idDesa='" + idDesa + '\'' +
+                ", foto='" + foto + '\'' +
+                '}';
     }
 }

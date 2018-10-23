@@ -28,13 +28,13 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
     private List<RDKRealm> listData;
     private LayoutInflater layoutInflater;
     public static Context mContext;
-    private OnClickRDKListener onClicRDK;
+    private RDKAdapter.OnClickRDKListener onClicRDK;
 
-    public RDKAdapter(Context context, List<RDKRealm> listData, OnClickRDKListener onClicRDK) {
-        mContext =context;
+    public RDKAdapter(Context context, List<RDKRealm> listData, RDKAdapter.OnClickRDKListener onClicRDK) {
+        mContext = context;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(context);
-        this.onClicRDK =onClicRDK;
+        this.onClicRDK = onClicRDK;
     }
 
     public interface OnClickRDKListener {
@@ -42,27 +42,29 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RDKAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ((MainApplication) mContext.getApplicationContext())
                 .getComponent()
                 .inject(this);
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_rdk, parent, false);
-        return new MyViewHolder(itemView);
+        return new RDKAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(RDKAdapter.MyViewHolder holder, int position) {
         RDKRealm rdk = listData.get(position);
+        String idpoktan = rdk.getPoktan();
 
-        PoktanRealm poktan = realm.where(PoktanRealm.class)
-                .equalTo("hashId", rdk.getPoktan())
-                .findFirst();
+        PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
 
-        holder.textnama.setText(poktan.getNama());
-        holder.textkegiatan.setText(rdk.getLuasSawah());
-        holder.texttanggal.setText(rdk.getTanggal());
+        try{
+            holder.textnama.setText(poktan.getNama());
+            holder.textkegiatan.setText(rdk.getLuasSawah());
+            holder.texttanggal.setText(rdk.getTanggal());
+        }catch (NullPointerException ex){}
+
         holder.cardview.setOnClickListener(view -> {
             onClicRDK.OnClickRDK(rdk.getHashId());
         });
@@ -90,7 +92,6 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
             cardview = (CardView) itemView.findViewById(R.id.rdkCardView);
         }
     }
-
     public void animateTo(List<RDKRealm> models) {
         applyAndAnimateRemovals(models);
         applyAndAnimateAdditions(models);
@@ -138,4 +139,3 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
         notifyItemRemoved(position);
     }
 }
-

@@ -4,14 +4,11 @@ import java.util.List;
 
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 
-/**
- * Created by Marthin on 7/10/2018.
- */
-
 public class GetRDKContract {
     public interface View {
         void getAllRDKSuccess(List<RDKRealm> allRDK);
         void getAllRDKFailed(String message);
+
         void saveDataSuccess(String message);
         void saveDataFailed(String message);
     }

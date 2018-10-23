@@ -37,15 +37,23 @@ import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PoktanAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.AnggotaPoktanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
-public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.OnClickPoktanListener, GetPoktanContract.View {
+public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.OnClickPoktanListener, GetPoktanContract.View, GetAnggotaPoktanContract.View, GetPengurusPoktanContract.View{
     @Inject
     Realm realm;
 
     @Inject
     GetPoktanController mController;
+
+    @Inject
+    GetAnggotaPoktanController aController;
+
+    @Inject
+    GetPengurusPoktanController pController;
 
     private final String mJenisCRU = "poktan";
 
@@ -95,6 +103,7 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
         ButterKnife.bind(this);
         counter=0;
         mController.setView(this);
+        aController.setView(this);
         progressdialog = new ProgressDialog(this);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -263,6 +272,8 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
     private void startSync(){
         counter=0;
         mController.saveData(listpoktanNotSync);
+        aController.saveData(CRUAnggotaPoktanFragment.listData);
+        pController.saveData(CRUPengurusPoktanFragment.listData);
     }
 
     private void checkDataRealm(){
@@ -284,6 +295,26 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
     public void getAllPoktanFailed(String message) {
         createSnackbar(message).show();
         updateLayout(Konstanta.LAYOUT_ERROR);
+    }
+
+    @Override
+    public void getAllAnggotaPoktanSuccess(List<AnggotaPoktanRealm> allAnggotaPoktan) {
+
+    }
+
+    @Override
+    public void getAllAnggotaPoktanFailed(String message) {
+
+    }
+
+    @Override
+    public void getAllPengurusPoktanSuccess(List<PengurusPoktanRealm> allPengurusPoktan) {
+
+    }
+
+    @Override
+    public void getAllPengurusPoktanFailed(String message) {
+
     }
 
     @Override

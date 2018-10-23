@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,8 +18,11 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RDKParcelable;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
@@ -103,7 +107,8 @@ public class DetailRDKActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEdit)
     void clickEdit() {
-//        startActivity(CRUActivity.createIntent(getApplicationContext(), "rdk", "update", itemDetail));
+        RDKParcelable rdkParcelable = new RDKParcelable(dataRDK);
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "rdk", "update", rdkParcelable));
         finish();
     }
 
@@ -114,10 +119,10 @@ public class DetailRDKActivity extends AppCompatActivity {
         builder.setNegativeButton("Tidak", dialogClickListener).show();
     }
 
-    private RDKRealm dataRDK;
-    private PoktanRealm dataPoktan;
-    private KomoditasRealm dataKomoditasSI;
-    private KomoditasRealm dataKomoditasRU;
+    public static RDKRealm dataRDK;
+    public static PoktanRealm dataPoktan;
+    public static KomoditasRealm dataKomoditasSI;
+    public static KomoditasRealm dataKomoditasRU;
 
     private static String idRDK;
     private static String idPoktan;
@@ -144,8 +149,10 @@ public class DetailRDKActivity extends AppCompatActivity {
     }
     private void takedata(){
         realm.beginTransaction();
+        Log.e("MISALNYA APA", " ini gimana " + idRDK);
         dataRDK = realm.where(RDKRealm.class).equalTo("hashId", idRDK).findFirst();
         idPoktan = dataRDK.getPoktan();
+        Log.e("MISALNYA APA", " ini " + dataRDK.toString());
         idKomoditasSI = dataRDK.getKomoditasSI();
         idKomoditasRU = dataRDK.getKomoditasRU();
 
@@ -157,7 +164,7 @@ public class DetailRDKActivity extends AppCompatActivity {
     }
     private void setdata(){
         try{
-            String strPetugasrdk = (AkunFragment.namaUser == null) ? "-" : AkunFragment.namaUser;
+            String strPetugasrdk = (getNamaUser() == null) ? "-" : getNamaUser();
             String strDescIrigasi = (dataRDK.getDeskripsiIrigasi() == null) ? "-" : dataRDK.getDeskripsiIrigasi();
             String strPoktanrdk = (dataRDK.getPoktan() == null) ? "-" : dataPoktan.getNama();
             String strTanggalData = (dataRDK.getTanggal() == null) ? "-" : dataRDK.getTanggal();
@@ -212,7 +219,7 @@ public class DetailRDKActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRURDKFragment.setDeletedData(itemDetail, appComponent);
+//                    CRULahanFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListRDKActivity.createIntent(getApplicationContext()));
                     break;
 
@@ -222,4 +229,21 @@ public class DetailRDKActivity extends AppCompatActivity {
             }
         }
     };
+
+    public String getNamaUser() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        String res;
+        if(user == null){
+            res = "";
+        }else{
+            try {
+                res = user.getNamaLengkap();
+            }catch (Exception e){
+                res = "";
+            }
+        }
+        return res;
+    }
 }

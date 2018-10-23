@@ -10,7 +10,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import io.realm.Realm;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp.RKTPRealm;
 
 public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> {
@@ -40,11 +45,18 @@ public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        RKTPRealm RKTPRealm = listData.get(position);
-        holder.textpenanggungjawab.setText(RKTPRealm.getPelaksana());
-        holder.texttujuan.setText(String.valueOf(RKTPRealm.getTujuan()));
+        RKTPRealm rktp = listData.get(position);
+
+        try{
+            holder.textpenanggungjawab.setText(rktp.getPenanggungJawab());
+            holder.texttujuan.setText(rktp.getTahun());
+            holder.texttanggal.setText(rktp.getWaktu());
+        } catch (NullPointerException e){
+
+        }
+
         holder.cardview.setOnClickListener(view -> {
-            onClicRKTP.OnClickRKTP(RKTPRealm.getHashId());
+            onClicRKTP.OnClickRKTP(rktp.getHashId());
         });
     }
 
@@ -60,11 +72,13 @@ public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textpenanggungjawab;
         TextView texttujuan;
+        TextView texttanggal;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textpenanggungjawab = (TextView)itemView.findViewById(R.id.penanggungjawab);
             texttujuan = (TextView)itemView.findViewById(R.id.tujuan);
+            texttanggal = (TextView) itemView.findViewById(R.id.tanggal);
             cardview = (CardView) itemView.findViewById(R.id.rktpCardView);
         }
     }

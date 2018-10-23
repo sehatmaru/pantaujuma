@@ -1,13 +1,13 @@
 package teknodesa.devlops.pantaujuma.components.splashscreen;
 
 import android.support.annotation.NonNull;
-import org.greenrobot.eventbus.EventBus;
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
+import teknodesa.devlops.pantaujuma.components.signin.LoginContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.PantauJumaAPI;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
 /**
@@ -17,10 +17,12 @@ import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoServi
 public class SplashscreenController implements SplashscreenContract.Controller {
 
     @Inject
-    PromoService mService;
+    PantauJumaAPI pjApi;
+
+    public LoginContract.Controller controller;
 
     @Inject
-    EventBus mBus;
+    PromoService mService;
 
     @Inject
     Realm realm;
@@ -36,8 +38,6 @@ public class SplashscreenController implements SplashscreenContract.Controller {
         views = view;
     }
 
-
-
     @Override
     public void checkSession() {
         realm.beginTransaction();
@@ -46,24 +46,23 @@ public class SplashscreenController implements SplashscreenContract.Controller {
         if(user == null){
             views.sessionUser(false);
         }else{
-            AkunFragment.namaUser = user.getNamaLengkap();
-            AkunFragment.desaUser = user.getNamaDesa();
-            AkunFragment.kabupatenKotaUser = user.getKabupatenKota();
-            AkunFragment.provinsiUser =user.getProvinsi();
-            AkunFragment.kecamatanUser = user.getKecamatan();
-            AkunFragment.idDesa = Integer.valueOf(user.getAttributeValue());
             views.sessionUser(true);
         }
     }
 
     @Override
-    public void getPromotion() {
+    public void getInitializeData() {
         mService.instanceClass(this);
-        mService.getPromotion();
+        mService.getInitializeData();
     }
 
     @Override
-    public void resultPromotion(String message) {
-        views.resultPromotion(message);
+    public void getInitializeDataSuccess(String message) {
+        views.getInitializeDataSuccess(message);
+    }
+
+    @Override
+    public void getInitializeDataFailed(String message) {
+        views.getInitializeDataFailed(message);
     }
 }

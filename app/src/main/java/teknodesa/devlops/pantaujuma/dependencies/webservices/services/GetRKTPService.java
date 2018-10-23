@@ -77,7 +77,7 @@ public class GetRKTPService implements GetRKTPContract.Repository {
             realm.beginTransaction();
             rktpTempRealm.setIsSync(1);
             realm.commitTransaction();
-            RKTPBody targetPetugasBody = new RKTPBody(rktpTempRealm.getHashId(), rktpTempRealm.getPetugas(),
+            RKTPBody targetPetugasBody = new RKTPBody(rktpTempRealm.getHashId(), rktpTempRealm.getIdUser(),
                     rktpTempRealm.getIdDesa(), rktpTempRealm.getPoktan(), rktpTempRealm.getTahun(), rktpTempRealm.getTujuan(), rktpTempRealm.getMasalah(),
                     rktpTempRealm.getSasaran(), rktpTempRealm.getMateri(), rktpTempRealm.getMetode(), rktpTempRealm.getVolume(), rktpTempRealm.getLokasi(), rktpTempRealm.getWaktu(),
                     rktpTempRealm.getSumberBiaya(), rktpTempRealm.getPenanggungJawab(), rktpTempRealm.getPelaksana(), rktpTempRealm.getKeterangan());

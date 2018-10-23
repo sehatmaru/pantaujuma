@@ -2,7 +2,7 @@ package teknodesa.devlops.pantaujuma.components.lahan;
 
 import java.util.List;
 
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.BodyGetLahan;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.RiwayatLahanRealm;
 
 /**

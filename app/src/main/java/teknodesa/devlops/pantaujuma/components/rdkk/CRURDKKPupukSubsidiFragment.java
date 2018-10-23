@@ -29,10 +29,11 @@ import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.searchpetani.SearchPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.searchpoktan.SearchPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.searchpupuk.SearchPupukFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
 
-public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContract.ViewController<RDKKPupukSubsidiRealm>, RDKKContract.View, SearchPoktanFragment.OnClickPoktanListener, SearchKomoditasFragment.OnClickKomoditasListener, SearchPetaniFragment.OnClickPetaniListener {
+public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContract.ViewController<RDKKPupukSubsidiRealm>, RDKKContract.View, SearchPoktanFragment.OnClickPoktanListener, SearchKomoditasFragment.OnClickKomoditasListener, SearchPetaniFragment.OnClickPetaniListener, SearchPupukFragment.OnClickPupukListener {
 
     @BindView(R.id.input_poktan)
     EditText input_poktan;
@@ -62,7 +63,7 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     Button btnPupuk;
     @OnClick(R.id.btnPupuk)
     void clickPilihPupuk() {
-        //SearchPupukFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
+        SearchPupukFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
 
     @BindView(R.id.input_petani)
@@ -148,7 +149,7 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     }
 
     @Override
-    public RDKKPupukSubsidiRealm getUIData() {;
+    public RDKKPupukSubsidiRealm getUIData() {
 
         String strJan = input_butuhjanuari.getText().toString();
         String strFeb = input_butuhfebruari.getText().toString();
@@ -187,7 +188,22 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
 
     @Override
     public void setUIData() {
-
+        input_poktan.setText(DetailRDKKActivity.dataPoktan.getNama());
+        input_petani.setText(DetailRDKKActivity.dataRDKK.getPetani());
+        input_komoditas.setText(DetailRDKKActivity.dataRDKK.getKomoditas());
+        input_pupuk.setText(DetailRDKKActivity.dataRDKK.getPupuk());
+        input_butuhjanuari.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhJanuari()));
+        input_butuhfebruari.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhFebruari()));
+        input_butuhmaret.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhMaret()));
+        input_butuhapril.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhApril()));
+        input_butuhmei.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhMei()));
+        input_butuhjuni.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhJuni()));
+        input_butuhjuli.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhJuli()));
+        input_butuhagustus.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhAgustus()));
+        input_butuhseptember.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhSeptember()));
+        input_butuhoktober.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhOktober()));
+        input_butuhnovember.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhNovember()));
+        input_butuhdesember.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhDesember()));
     }
 
     @Override
@@ -227,6 +243,12 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     public void OnClickKomoditas(String idKomoditas, String nama, String deskripsi) {
         input_komoditas.setText(nama);
         komoditas = idKomoditas;
+    }
+
+    @Override
+    public void OnClickPupuk(String idPupuk, String nama, String jenis, String deskripsi) {
+        pupuk = idPupuk;
+        input_pupuk.setText(nama);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

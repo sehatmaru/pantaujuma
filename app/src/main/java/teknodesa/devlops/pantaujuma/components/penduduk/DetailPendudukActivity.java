@@ -19,6 +19,7 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PendudukParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.BiodataPenduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
@@ -31,8 +32,6 @@ public class DetailPendudukActivity extends AppCompatActivity {
     @BindView(R.id.btnEdit)
     Button btnEdit;
 
-    @BindView(R.id.btnHapus)
-    Button btnHapus;
 
     @BindView(R.id.nik)
     TextView nik;
@@ -66,18 +65,14 @@ public class DetailPendudukActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEdit)
     void clickEdit() {
-//        startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
+        PendudukParcelable itemDetail = new PendudukParcelable(dataPenduduk);
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
         finish();
     }
 
-    @OnClick(R.id.btnHapus)
-    void clickHapus() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
-        builder.setNegativeButton("Tidak", dialogClickListener).show();
-    }
 
-    private PendudukRealm dataPenduduk;
+
+    public static PendudukRealm dataPenduduk;
 
     private static String idPenduduk;
     public static Intent createIntent(Context context, String id) {

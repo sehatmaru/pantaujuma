@@ -57,8 +57,8 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         RDKKPupukSubsidiRealm rdkk = listData.get(position);
         String idkomoditas = rdkk.getKomoditas();
-        String idpetani = rdkk.getPetani();
         String idpoktan = rdkk.getPoktan();
+        String idpetani = rdkk.getPetani();
 
         PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
         KomoditasRealm komoditas = realm.where(KomoditasRealm.class).equalTo("hashId", idkomoditas).findFirst();
@@ -66,10 +66,14 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
         String biodata = petani.getBiodata();
 
         PendudukRealm penduduk = realm.where(PendudukRealm.class).equalTo("hashId", biodata).findFirst();
+        try{
+            holder.textpoktan.setText(poktan.getNama());
+            holder.textpetani.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
+            holder.textkomoditas.setText(komoditas.getNama());
+        }catch (NullPointerException ex){
 
-        holder.textpoktan.setText(poktan.getNama());
-        holder.textpetani.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
-        holder.textkomoditas.setText(komoditas.getNama());
+        }
+
         holder.cardview.setOnClickListener(view -> {
             onClicRDKK.OnClickRDKK(rdkk.getHashId());
         });

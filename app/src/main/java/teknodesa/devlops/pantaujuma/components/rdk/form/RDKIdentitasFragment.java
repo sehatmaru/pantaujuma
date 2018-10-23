@@ -17,17 +17,22 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
+import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.components.searchpoktan.SearchPoktanFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Identitas;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 
 public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewController<Identitas>, RDKContract.View, SearchPoktanFragment.OnClickPoktanListener {
 
@@ -77,7 +82,8 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
         SearchPoktanFragment.keterangan = 1;
         SearchPoktanFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
-
+    @Inject
+    Realm realm;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,8 +104,23 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     }
 
     private void setData(){
-        input_idDesa.setText(AkunFragment.desaUser);
-        input_petugas.setText(AkunFragment.namaUser);
+        UserDB userDB = getData();
+        String namaDesa;
+        try {
+            namaDesa =  userDB.getNamaDesa();
+        }catch (Exception e){
+            namaDesa = "";
+        }
+
+        String namaPetugas;
+        try {
+            namaPetugas =  userDB.getNamaLengkap();
+        }catch (Exception e){
+            namaPetugas = "";
+        }
+
+        input_idDesa.setText(namaDesa);
+        input_petugas.setText(namaPetugas);
     }
 
     @Override
@@ -112,7 +133,45 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
         input_tanggal= getActivity().findViewById(R.id.input_tanggal);
         input_luasSawah = getActivity().findViewById(R.id.input_luasSawah);
         input_keterangan= getActivity().findViewById(R.id.input_keterangan);
-        setData();
+
+        if (CRUActivity.mAction == "update"){
+            setLayoutForEdit();
+        } else {
+            setData();
+        }
+    }
+    public UserDB getData() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        if(user == null){
+            return null;
+        }else{
+            return user;
+        }
+    }
+    private void setLayoutForEdit(){
+        UserDB userDB = getData();
+
+        String namaDesa;
+        try {
+            namaDesa =  userDB.getNamaDesa();
+        }catch (Exception e){
+            namaDesa = "";
+        }
+
+        String namaPetugas;
+        try {
+            namaPetugas =  userDB.getNamaLengkap();
+        }catch (Exception e){
+            namaPetugas = "";
+        }
+
+        input_idDesa.setText(namaDesa);
+        input_petugas.setText(namaPetugas);
+        input_tanggal.setText(DetailRDKActivity.dataRDK.getTanggal());
+        input_luasSawah.setText(DetailRDKActivity.dataRDK.getLuasSawah());
+        input_keterangan.setText(DetailRDKActivity.dataRDK.getKeterangan());
     }
 
     @Override

@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 
-public class CRUKegiatanPemanenanFragment extends Fragment implements LahanContract.ViewController<LahanRealm>, LahanContract.View{
+public class CRUKegiatanPemanenanFragment extends Fragment implements LahanContract.ViewController<LahanRealm>, LahanContract.View {
 
     @BindView(R.id.input_komoditas)
     EditText input_komoditas;

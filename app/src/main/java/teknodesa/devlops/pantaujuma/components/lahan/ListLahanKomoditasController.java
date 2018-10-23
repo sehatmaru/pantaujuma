@@ -1,15 +1,10 @@
 package teknodesa.devlops.pantaujuma.components.lahan;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.BodyGetLahan;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.RiwayatLahanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 
@@ -22,9 +17,6 @@ public class ListLahanKomoditasController implements ListLahanKomoditasContract.
     @Inject
     ListLahanKomoditasService mService;
 
-    @Inject
-    EventBus mBus;
-
     private ListLahanKomoditasContract.View views;
 
     public ListLahanKomoditasController(@NonNull AppComponent appComponent) {
@@ -35,10 +27,10 @@ public class ListLahanKomoditasController implements ListLahanKomoditasContract.
         views = view;
     }
 
+
     @Override
     public void getLahanKomoditas(BodyGetLahan bodyGetLahan) {
-        mService.instanceClass(this);
-        mService.getLahanKomoditas(bodyGetLahan);
+
     }
 
     @Override

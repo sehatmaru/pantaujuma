@@ -24,19 +24,30 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchpenduduk.SearchPendudukFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Status;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.petani.PetaniParcelable;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
-public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewController<PetaniRealm>, PetaniContract.View, SearchPendudukFragment.OnClickPendudukListener {
+public class CRUPetaniFragment extends Fragment implements
+        PetaniContract.ViewController<PetaniRealm>, PetaniContract.View, SearchPendudukFragment.OnClickPendudukListener {
+
+    @Inject
+    Realm realm;
+
     @BindView(R.id.input_status)
     Spinner input_status;
 
@@ -54,15 +65,13 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
 
     @BindView(R.id.btnPenduduk)
     Button btnPenduduk;
+
     @OnClick(R.id.btnPenduduk)
     void clickPilihPenduduk() {
         SearchPendudukFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
 
-    private String nik;
-    private String namaDepan;
-    private String namaBelakang;
-    private String biodata;
+    private String biodata = DetailPetaniActivity.idPenduduk;
 
     private AppComponent appComponent;
     FragmentActivity activity;
@@ -128,10 +137,17 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
         String strStatus = input_status.getSelectedItem().toString();
 
         PetaniRealm newRealmItem = new PetaniRealm();
-        newRealmItem.setHashId(getSaltString());
+
+        if (CRUActivity.mAction.equals("update")) {
+            newRealmItem.setHashId(DetailPetaniActivity.idPetani);
+        } else {
+            newRealmItem.setHashId(getSaltString());
+        }
         newRealmItem.setDeskripsi(strDeskripsi);
         newRealmItem.setStatus(strStatus);
         newRealmItem.setBiodata(biodata);
+        newRealmItem.setIdDesa(getIdDesa());
+        newRealmItem.setFoto("image.jpg");
 
         return newRealmItem;
     }
@@ -146,7 +162,10 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
 
     @Override
     public void setUIData() {
-
+        input_nik.setText(DetailPetaniActivity.dataPenduduk.getNIK());
+        input_namadepan.setText(DetailPetaniActivity.dataPenduduk.getNamaDepan());
+        input_namabelakang.setText(DetailPetaniActivity.dataPenduduk.getNamaBelakang());
+        input_deskripsi.setText(DetailPetaniActivity.dataPetani.getDeskripsi());
     }
 
     @Override
@@ -158,7 +177,7 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-                String idItem = ((PendudukRealm) itemData).getHashId();
+                String idItem = ((PetaniParcelable) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
             }
         }
@@ -202,5 +221,21 @@ public class CRUPetaniFragment extends Fragment implements PetaniContract.ViewCo
         }
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         return timeStamp + "" + salt.toString();
+    }
+    public String getIdDesa() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        String res;
+        if(user == null){
+            res = "";
+        }else{
+            try {
+                res = user.getAttributeValue();
+            }catch (Exception e){
+                res = "";
+            }
+        }
+        return res;
     }
 }

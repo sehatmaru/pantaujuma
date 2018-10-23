@@ -5,51 +5,65 @@ import io.realm.annotations.PrimaryKey;
 
 public class PostRealm extends RealmObject {
     @PrimaryKey
-    private int idPost;
-    private PenggunaRealm pengguna;
+    private String hashId;
+    private String idUser;
+    private String namaUser;
     private String judul;
     private String isi;
     private String tanggal;
     private String waktu;
     private String tipePost;
-    private String viewCount;
-    private String like;
-    private String dislike;
-    private String komentar;
+    private String nama;
+    private int viewCount;
+    private int likes;
+    private int dislike;
     private String thumbnail;
+    private int idDesa;
+    private int isSync;
 
     public PostRealm() {
     }
 
-    public PostRealm(int idPost, PenggunaRealm pengguna, String judul, String isi, String tanggal, String waktu, String tipePost, String viewCount, String like, String dislike, String komentar, String thumbnail) {
-        this.idPost = idPost;
-        this.pengguna = pengguna;
+    public PostRealm(String hashId, String idUser, String namaUser, String judul, String isi, String tanggal, String waktu, String tipePost, String nama, int viewCount, int likes, int dislike, String thumbnail, int idDesa, int isSync) {
+        this.hashId = hashId;
+        this.idUser = idUser;
+        this.namaUser = namaUser;
         this.judul = judul;
         this.isi = isi;
         this.tanggal = tanggal;
         this.waktu = waktu;
         this.tipePost = tipePost;
+        this.nama = nama;
         this.viewCount = viewCount;
-        this.like = like;
+        this.likes = likes;
         this.dislike = dislike;
-        this.komentar = komentar;
         this.thumbnail = thumbnail;
+        this.idDesa = idDesa;
+        this.isSync = isSync;
     }
 
-    public int getIdPost() {
-        return idPost;
+    public String getHashId() {
+        return hashId;
     }
 
-    public void setIdPost(int idPost) {
-        this.idPost = idPost;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
-    public PenggunaRealm getPengguna() {
-        return pengguna;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setPengguna(PenggunaRealm pengguna) {
-        this.pengguna = pengguna;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getNamaUser() {
+        return namaUser;
+    }
+
+    public void setNamaUser(String namaUser) {
+        this.namaUser = namaUser;
     }
 
     public String getJudul() {
@@ -92,36 +106,36 @@ public class PostRealm extends RealmObject {
         this.tipePost = tipePost;
     }
 
-    public String getViewCount() {
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public int getViewCount() {
         return viewCount;
     }
 
-    public void setViewCount(String viewCount) {
+    public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
 
-    public String getLike() {
-        return like;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setLike(String like) {
-        this.like = like;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
-    public String getDislike() {
+    public int getDislike() {
         return dislike;
     }
 
-    public void setDislike(String dislike) {
+    public void setDislike(int dislike) {
         this.dislike = dislike;
-    }
-
-    public String getKomentar() {
-        return komentar;
-    }
-
-    public void setKomentar(String komentar) {
-        this.komentar = komentar;
     }
 
     public String getThumbnail() {
@@ -130,5 +144,42 @@ public class PostRealm extends RealmObject {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public int getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(int idDesa) {
+        this.idDesa = idDesa;
+    }
+
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
+    }
+
+    @Override
+    public String toString() {
+        return "PostRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", idUser='" + idUser + '\'' +
+                ", namaUser='" + namaUser + '\'' +
+                ", judul='" + judul + '\'' +
+                ", isi='" + isi + '\'' +
+                ", tanggal='" + tanggal + '\'' +
+                ", waktu='" + waktu + '\'' +
+                ", tipePost='" + tipePost + '\'' +
+                ", nama='" + nama + '\'' +
+                ", viewCount=" + viewCount +
+                ", likes=" + likes +
+                ", dislike=" + dislike +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", idDesa=" + idDesa +
+                ", isSync=" + isSync +
+                '}';
     }
 }

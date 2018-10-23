@@ -2,7 +2,7 @@ package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
 public class RKTPBody {
     private String hashId;
-    private String petugas;
+    private String idUser;
     private int idDesa;
     private String poktan;
     private String tahun;
@@ -22,9 +22,9 @@ public class RKTPBody {
     public RKTPBody() {
     }
 
-    public RKTPBody(String hashId, String petugas, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
+    public RKTPBody(String hashId, String idUser, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
         this.hashId = hashId;
-        this.petugas = petugas;
+        this.idUser = idUser;
         this.idDesa = idDesa;
         this.poktan = poktan;
         this.tahun = tahun;
@@ -50,12 +50,12 @@ public class RKTPBody {
         this.hashId = hashId;
     }
 
-    public String getPetugas() {
-        return petugas;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setPetugas(String petugas) {
-        this.petugas = petugas;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public int getIdDesa() {

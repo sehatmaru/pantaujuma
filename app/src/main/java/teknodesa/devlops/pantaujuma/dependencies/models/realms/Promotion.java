@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.realms;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -9,7 +11,8 @@ import io.realm.annotations.PrimaryKey;
 
 public class Promotion extends RealmObject {
     @PrimaryKey
-    private int id;
+    @SerializedName("hashId")
+    private String id;
     private String imagePromotion;
     private String description;
     private String startPromo;
@@ -17,11 +20,11 @@ public class Promotion extends RealmObject {
     private String codePromo;
     private int activated;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

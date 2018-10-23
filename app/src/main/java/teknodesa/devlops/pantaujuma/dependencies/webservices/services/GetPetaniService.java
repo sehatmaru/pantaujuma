@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,26 +42,29 @@ public class GetPetaniService implements GetPetaniContract.Repository {
     }
 
 
-    private boolean res = false;
+    public boolean insertData =true;
     @Override
     public void getAllPetani(int idDesa) {
-        Log.e("send","data comehere"+idDesa);
-        Call<ResponsePetani> call = sisApi.getAllPetani(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
+        Call<ResponsePetani> call = sisApi.getAllPetani(WebServiceModule.ACCESS_TOKEN_TEMP, idDesa);
         call.enqueue(new Callback<ResponsePetani>() {
             @Override
             public void onResponse(Call<ResponsePetani> call, Response<ResponsePetani> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-                        Log.e("hasilpetani",response.body().getData().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllPetaniSuccess(response.body().getData());
-                        }, error -> {
-                            Log.e("getpetanieror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllPetaniFailed(response.body().getMessage());
+                        realm.beginTransaction();
+                        RealmResults<PetaniRealm> allPetani = realm.where(PetaniRealm.class).equalTo("isSync",1).findAll();
+                        allPetani.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllPetaniSuccess(response.body().getData());
+                    }else{
+                        controller.getAllPetaniFailed("Error "+response.body().getMessage());
+                    }
                 }else{
-                    controller.getAllPetaniFailed("Server Error");
+                    controller.getAllPetaniFailed("Server Error "+response.message());
                 }
             }
 
@@ -74,41 +78,42 @@ public class GetPetaniService implements GetPetaniContract.Repository {
     }
 
     @Override
-    public void saveData(List<PetaniRealm> allTar) {
-        for(int i=0; i < allTar.size();i++ ){
-            PetaniRealm petaniTempRealm = allTar.get(i);
-            realm.beginTransaction();
-            petaniTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            PetaniBody petaniBody = new PetaniBody(petaniTempRealm.getHashId(),petaniTempRealm.getBiodata(),
-                    petaniTempRealm.getDeskripsi(),petaniTempRealm.getStatus(),petaniTempRealm.getDeskripsi());
-
+    public void saveData(List<PetaniRealm> allPen) {
+        for(int i=0; i < allPen.size();i++ ){
+            PetaniRealm petaniTempRealm = allPen.get(i);
+            PetaniBody petaniBody = new PetaniBody(petaniTempRealm);
             Log.e("petani service",petaniBody.toString());
+            final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertPetani(WebServiceModule.ACCESS_TOKEN_TEMP,petaniBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",petaniTempRealm);
+                            if (dataLoop == allPen.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertData =true;
                         }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                            insertData =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
-
                     }else{
-                        Log.e("petani service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                        insertData =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("petani service","error server"+t.getMessage());
-                    controller.saveDataFailed("Failed"+t.getMessage());
+                    insertData =false;
+                    controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertData){
+                break;
+            }
         }
     }
 

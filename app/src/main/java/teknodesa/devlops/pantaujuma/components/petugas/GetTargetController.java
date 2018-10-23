@@ -1,13 +1,8 @@
 package teknodesa.devlops.pantaujuma.components.petugas;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -22,22 +17,12 @@ public class GetTargetController implements GetTargetContract.Controller {
     @Inject
     Realm realm;
 
-    @Inject
-    EventBus mBus;
-
     private GetTargetContract.View views;
 
     public GetTargetController(@NonNull AppComponent appComponent) {
         appComponent.inject(this);
     }
 
-
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
-    }
 
     public void setView(GetTargetContract.View view){
         mService.instanceClass(this);

@@ -17,6 +17,9 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.TargetParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.TargetPetugas;
 
@@ -33,6 +36,9 @@ public class DetailTargetActivity extends AppCompatActivity {
 
     @BindView(R.id.komoditas)
     TextView komoditas;
+
+    @BindView(R.id.tahunKerja)
+    TextView tahunKerja;
 
     @BindView(R.id.luasTanam)
     TextView luasTanam;
@@ -51,12 +57,13 @@ public class DetailTargetActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEdit)
     void clickEdit() {
-//        startActivity(CRUActivity.createIntent(getApplicationContext(), "petani", "update", itemDetail));
+        TargetParcelable targetParcelable = new TargetParcelable(dataTarget);
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "target", "update", targetParcelable));
         finish();
     }
 
-    private TargetPetugas dataTarget;
-    KomoditasRealm dataKomoditas;
+    public static TargetPetugas dataTarget;
+    public static KomoditasRealm dataKomoditas;
 
     private static String idTarget;
     static String idKomoditas;
@@ -96,6 +103,7 @@ public class DetailTargetActivity extends AppCompatActivity {
     }
     private void setdata(){
         komoditas.setText(dataKomoditas.getNama());
+        tahunKerja.setText(String.valueOf(dataTarget.getTahun()));
         luasTanam.setText(String.valueOf(dataTarget.getLuasTanam()));
         luasPanen.setText(String.valueOf(dataTarget.getLuasPanen()));
         sasaranProduksi.setText(String.valueOf(dataTarget.getSasaranProduksi()));

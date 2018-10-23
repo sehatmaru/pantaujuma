@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 
 /**
@@ -58,8 +59,8 @@ public class PoktanAdapter extends RecyclerView.Adapter<PoktanAdapter.MyViewHold
         PoktanRealm poktan = listData.get(position);
 
         holder.textnama.setText(poktan.getNama());
-        holder.textdesa.setText(poktan.getDesa());
-        holder.textnohp.setText(poktan.getDeskripsi());
+        holder.textdesa.setText("Didiikan: " + poktan.getTanggalDidirikan());
+        holder.textnohp.setText("Alamat: " + poktan.getAlamat());
         holder.cardview.setOnClickListener(view -> {
             onClicPoktan.OnClickPoktan(poktan.getHashId());
         });

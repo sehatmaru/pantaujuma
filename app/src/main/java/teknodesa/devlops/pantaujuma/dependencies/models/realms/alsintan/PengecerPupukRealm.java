@@ -3,36 +3,30 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+/**
+ * Created by Sehat MT Samosir on 8/20/2018.
+ */
+
 public class PengecerPupukRealm extends RealmObject {
     @PrimaryKey
-    private int idPengecerPupuk;
-    private PupukRealm pupuk;
+    private String hashId;
+    private String pupuk;
     private String harga;
     private String deskripsi;
 
-    public PengecerPupukRealm() {
+    public String getHashId() {
+        return hashId;
     }
 
-    public PengecerPupukRealm(int idPengecerPupuk, PupukRealm pupuk, String harga, String deskripsi) {
-        this.idPengecerPupuk = idPengecerPupuk;
-        this.pupuk = pupuk;
-        this.harga = harga;
-        this.deskripsi = deskripsi;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
-    public int getIdPengecerPupuk() {
-        return idPengecerPupuk;
-    }
-
-    public void setIdPengecerPupuk(int idPengecerPupuk) {
-        this.idPengecerPupuk = idPengecerPupuk;
-    }
-
-    public PupukRealm getPupuk() {
+    public String getPupuk() {
         return pupuk;
     }
 
-    public void setPupuk(PupukRealm pupuk) {
+    public void setPupuk(String pupuk) {
         this.pupuk = pupuk;
     }
 

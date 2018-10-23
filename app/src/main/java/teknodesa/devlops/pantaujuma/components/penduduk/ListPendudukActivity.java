@@ -16,16 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -55,6 +51,7 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     PendudukAdapter pendudukAdapter;
     RecyclerView.LayoutManager linearLayoutManager;
+
     private static int lakiLaki =0;
     private static int perempuan =0;
 
@@ -120,8 +117,6 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
-
-        checkDataRealm();
         setDataPenduduk();
     }
 
@@ -131,11 +126,11 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
         }, () -> {
             if (!listpenduduk.isEmpty()) {
                 Log.e("List BiodataPenduduk","ini hasil"+listpenduduk.size());
-
                 pendudukAdapter = new PendudukAdapter(getApplicationContext(), listpenduduk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(pendudukAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
+                checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
             }else {
@@ -308,16 +303,10 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
 
     @Override
     public void saveDataSuccess(String message) {
-        counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
-        if(counter == hasilList){
-            progressdialog.dismiss();
-            mController.getAllPenduduk();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
-
-
+        progressdialog.dismiss();
+        mController.getAllPenduduk();
+        updateLayout(Konstanta.LAYOUT_LOADING);
+        this.recreate();
     }
 
     @Override

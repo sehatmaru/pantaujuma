@@ -28,7 +28,6 @@ import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.ImageSlideAdapter;
-import teknodesa.devlops.pantaujuma.components.alsintan.ListAlsintanActivity;
 import teknodesa.devlops.pantaujuma.components.harga.ListHargaActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
@@ -114,13 +113,14 @@ public class HomeFragment extends Fragment implements HomeContract.View{
         startActivity(ListLahanActivity.createIntent(getContext()));
     }
 
-    //Alsintan
-    @BindView(R.id.btnAlsintan)
-    Button btnAlsintan;
-    @OnClick(R.id.btnAlsintan)
-    void clickListAlsintan(){
-        startActivity(ListAlsintanActivity.createIntent(getContext()));
-    }
+//    //Alsintan
+//    @BindView(R.id.btnAlsintan)
+//    Button btnAlsintan;
+//    @OnClick(R.id.btnAlsintan)
+//    void clickListAlsintan(){
+//        startActivity(ListAlsintanActivity.createIntent(getContext()));
+//    }
+
     //Harga
     @BindView(R.id.btnHarga)
     Button btnHarga;

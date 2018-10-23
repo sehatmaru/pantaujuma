@@ -23,7 +23,7 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="fill_parent"
-                android:layout_height="160dp" />
+                android:layout_height="205dp" />
 
             <teknodesa.devlops.pantaujuma.utils.pageindicator.CirclePageIndicator
                 android:id="@+id/indicator"

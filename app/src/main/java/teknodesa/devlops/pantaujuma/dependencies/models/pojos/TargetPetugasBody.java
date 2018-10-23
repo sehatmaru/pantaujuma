@@ -2,7 +2,7 @@ package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
 public class TargetPetugasBody {
     private String hashId;
-    private String petugas;
+    private String idUser;
     private int idDesa;
     private int tahun;
     private String komoditas;
@@ -16,9 +16,9 @@ public class TargetPetugasBody {
 
     }
 
-    public TargetPetugasBody(String hashId, String petugas, int idDesa, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
+    public TargetPetugasBody(String hashId, String idUser, int idDesa, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
         this.hashId = hashId;
-        this.petugas = petugas;
+        this.idUser = idUser;
         this.idDesa = idDesa;
         this.tahun = tahun;
         this.komoditas = komoditas;
@@ -37,12 +37,12 @@ public class TargetPetugasBody {
         this.hashId = hashId;
     }
 
-    public String getPetugas() {
-        return petugas;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setPetugas(String petugas) {
-        this.petugas = petugas;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public int getIdDesa() {
@@ -113,7 +113,7 @@ public class TargetPetugasBody {
     public String toString() {
         return "TargetPetugasBody{" +
                 "hashId='" + hashId + '\'' +
-                ", petugas='" + petugas + '\'' +
+                ", idUser='" + idUser + '\'' +
                 ", idDesa=" + idDesa +
                 ", tahun=" + tahun +
                 ", komoditas='" + komoditas + '\'' +

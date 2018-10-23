@@ -239,5 +239,15 @@
     <string name="targetHasil">Target Hasil Per Hektar</string>
     <string name="komoditasSI">Komoditas Sasaran Intensifikasi</string>
     <string name="komoditasPB">Komoditas Pupuk Bersubsidi</string>
+    <string name="namaAlat">Nama Alat</string>
+    <string name="pasar">Pasar</string>
+    <string name="satuan">Satuan</string>
+    <string name="anggota">Anggota</string>
+    <string name="tambahAnggota">Tambah Anggota</string>
+    <string name="pengurus">Pengurus</string>
+    <string name="submit">Submit</string>
+    <string name="judul">Judul</string>
+    <string name="isi">Isi</string>
+    <string name="tahun_kerja">Tahun Kerja</string>
 
 </resources>

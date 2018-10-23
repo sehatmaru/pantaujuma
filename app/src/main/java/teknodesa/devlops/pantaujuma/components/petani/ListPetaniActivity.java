@@ -115,7 +115,7 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listpetani = realm1.copyFromRealm(realm1.where(PetaniRealm.class).sort("biodata", Sort.ASCENDING).findAll());
+            listpetani = realm1.copyFromRealm(realm1.where(PetaniRealm.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listpetani.isEmpty()) {
                 Log.e("List Petani","ini hasil"+listpetani.size());
@@ -289,14 +289,10 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
 
     @Override
     public void saveDataSuccess(String message) {
-        counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
-        if(counter == hasilList){
-            progressdialog.dismiss();
-            mController.getAllPetani();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
+        progressdialog.dismiss();
+        mController.getAllPetani();
+        updateLayout(Konstanta.LAYOUT_LOADING);
+        this.recreate();
     }
 
     @Override

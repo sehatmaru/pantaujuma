@@ -21,7 +21,7 @@ public class GetPetaniContract {
         void saveData(List<PetaniRealm> allPen);
         void getAllPetaniSuccess(List<PetaniRealm> allPetani);
         void getAllPetaniFailed(String message);
-        void saveDataSuccess(String message, PetaniRealm petaniTempRealm);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(PetaniRealm petaniTempRealm);
     }

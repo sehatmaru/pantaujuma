@@ -2,8 +2,6 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import lombok.Data;
-
 public class KegiatanPembersihanLahanRealm extends RealmObject {
     @PrimaryKey
     private int idKegiatanPemanenan;

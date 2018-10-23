@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.splashscreen;
 
 
-import lombok.NonNull;
 
 /**
  * Created by Marthin on 2/11/2018.
@@ -10,15 +9,17 @@ import lombok.NonNull;
 public class SplashscreenContract {
     public interface View {
         void sessionUser(boolean result);
-        void resultPromotion(String message);
+        void getInitializeDataSuccess(String message);
+        void getInitializeDataFailed(String message);
     }
 
     public interface Controller {
         void checkSession();
-        void getPromotion();
-        void resultPromotion(String message);
+        void getInitializeData();
+        void getInitializeDataSuccess(String message);
+        void getInitializeDataFailed(String message);
     }
     public interface Repository {
-        void getPromotion();
+        void getInitializeData();
     }
 }

@@ -1,13 +1,8 @@
 package teknodesa.devlops.pantaujuma.components.petani;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -26,8 +21,6 @@ public class GetPetaniController implements GetPetaniContract.Controller {
     @Inject
     Realm realm;
 
-    @Inject
-    EventBus mBus;
 
     private GetPetaniContract.View views;
 
@@ -35,12 +28,6 @@ public class GetPetaniController implements GetPetaniContract.Controller {
         appComponent.inject(this);
     }
 
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
-    }
 
     public void setView(GetPetaniContract.View view){
         mService.instanceClass(this);
@@ -85,13 +72,7 @@ public class GetPetaniController implements GetPetaniContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,PetaniRealm petaniTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(petaniTempRealm);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

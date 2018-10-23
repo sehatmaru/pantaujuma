@@ -7,7 +7,7 @@ public class RDKKPupukSubsidiRealm extends RealmObject {
     @PrimaryKey
     private String hashId;
     private int idDesa;
-    private String petugas;
+    private String idUser;
     private String poktan;
     private String petani;
     private String komoditas;
@@ -29,33 +29,10 @@ public class RDKKPupukSubsidiRealm extends RealmObject {
     public RDKKPupukSubsidiRealm() {
     }
 
-    public RDKKPupukSubsidiRealm(RDKKPupukSubsidiRealm rdkkPupukSubsidiRealm) {
-        this.hashId = rdkkPupukSubsidiRealm.getHashId();
-        this.idDesa = rdkkPupukSubsidiRealm.getIdDesa();
-        this.petugas = rdkkPupukSubsidiRealm.getPetugas();
-        this.poktan = rdkkPupukSubsidiRealm.getPoktan();
-        this.petani = rdkkPupukSubsidiRealm.getPetani();
-        this.komoditas = rdkkPupukSubsidiRealm.getKomoditas();
-        this.pupuk = rdkkPupukSubsidiRealm.getPupuk();
-        this.butuhJanuari = rdkkPupukSubsidiRealm.getButuhJanuari();
-        this.butuhFebruari = rdkkPupukSubsidiRealm.getButuhFebruari();
-        this.butuhMaret = rdkkPupukSubsidiRealm.getButuhMaret();
-        this.butuhApril = rdkkPupukSubsidiRealm.getButuhApril();
-        this.butuhMei = rdkkPupukSubsidiRealm.getButuhMei();
-        this.butuhJuni = rdkkPupukSubsidiRealm.getButuhJuni();
-        this.butuhJuli = rdkkPupukSubsidiRealm.getButuhJuli();
-        this.butuhAgustus = rdkkPupukSubsidiRealm.getButuhAgustus();
-        this.butuhSeptember = rdkkPupukSubsidiRealm.getButuhSeptember();
-        this.butuhOktober = rdkkPupukSubsidiRealm.getButuhOktober();
-        this.butuhNovember = rdkkPupukSubsidiRealm.getButuhNovember();
-        this.butuhDesember = rdkkPupukSubsidiRealm.getButuhDesember();
-        this.isSync = rdkkPupukSubsidiRealm.getIsSync();
-    }
-
-    public RDKKPupukSubsidiRealm(String hashId, int idDesa, String petugas, String poktan, String petani, String komoditas, String pupuk, float butuhJanuari, float butuhFebruari, float butuhMaret, float butuhApril, float butuhMei, float butuhJuni, float butuhJuli, float butuhAgustus, float butuhSeptember, float butuhOktober, float butuhNovember, float butuhDesember, int isSync) {
+    public RDKKPupukSubsidiRealm(String hashId, int idDesa, String idUser, String poktan, String petani, String komoditas, String pupuk, float butuhJanuari, float butuhFebruari, float butuhMaret, float butuhApril, float butuhMei, float butuhJuni, float butuhJuli, float butuhAgustus, float butuhSeptember, float butuhOktober, float butuhNovember, float butuhDesember, int isSync) {
         this.hashId = hashId;
         this.idDesa = idDesa;
-        this.petugas = petugas;
+        this.idUser = idUser;
         this.poktan = poktan;
         this.petani = petani;
         this.komoditas = komoditas;
@@ -91,12 +68,12 @@ public class RDKKPupukSubsidiRealm extends RealmObject {
         this.idDesa = idDesa;
     }
 
-    public String getPetugas() {
-        return petugas;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setPetugas(String petugas) {
-        this.petugas = petugas;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getPoktan() {
@@ -240,7 +217,7 @@ public class RDKKPupukSubsidiRealm extends RealmObject {
         return "RDKKPupukSubsidiRealm{" +
                 "hashId='" + hashId + '\'' +
                 ", idDesa=" + idDesa +
-                ", petugas='" + petugas + '\'' +
+                ", idUser='" + idUser + '\'' +
                 ", poktan='" + poktan + '\'' +
                 ", petani='" + petani + '\'' +
                 ", komoditas='" + komoditas + '\'' +

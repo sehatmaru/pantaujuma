@@ -1,13 +1,8 @@
 package teknodesa.devlops.pantaujuma.components.komoditas;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
@@ -21,8 +16,6 @@ public class KomoditasController implements KomoditasContract.Controller {
     @Inject
     KomoditasService mService;
 
-    @Inject
-    EventBus mBus;
 
     private KomoditasContract.View views;
 

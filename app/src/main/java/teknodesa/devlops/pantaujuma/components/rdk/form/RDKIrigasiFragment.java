@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Irigasi;
 
@@ -52,10 +53,19 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
 
         input_nama = getActivity().findViewById(R.id.input_nama);
         input_deskripsiIrigasi= getActivity().findViewById(R.id.input_deskripsiIrigasi);
-        setData();
 
+        if (CRUActivity.mAction == "update"){
+            setLayoutForEdit();
+        } else {
+            setData();
+        }
     }
-    
+
+    private void setLayoutForEdit() {
+        input_nama.setText(DetailRDKActivity.dataRDK.getNama());
+        input_deskripsiIrigasi.setText(DetailRDKActivity.dataRDK.getDeskripsiIrigasi());
+    }
+
     @Override
     public Irigasi getUIData() {
         String strNama = (input_nama.getText().toString() == null) ? "-" : input_nama.getText().toString();

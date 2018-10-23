@@ -17,6 +17,7 @@ import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RencanaUmum;
@@ -93,8 +94,25 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
         input_tabungananggota = getActivity().findViewById(R.id.input_tabungananggota);
         input_iurananggota= getActivity().findViewById(R.id.input_iurananggota);
         input_pemupukanmodal = getActivity().findViewById(R.id.input_pemupukanmodal);
-        setData();
 
+        if (CRUActivity.mAction == "update"){
+            setLayoutForEdit();
+        } else {
+            setData();
+        }
+
+    }
+
+    private void setLayoutForEdit() {
+        input_paketteknologi.setText(DetailRDKActivity.dataRDK.getPaketTeknologi());
+        input_polatanam.setText(DetailRDKActivity.dataRDK.getPolaTanam());
+        input_jadwaltanam.setText(DetailRDKActivity.dataRDK.getJadwalTanam());
+        input_komoditas.setText(DetailRDKActivity.dataRDK.getKomoditasRU());
+        input_varietas.setText(DetailRDKActivity.dataRDK.getVarietas());
+        input_sumberbenih.setText(DetailRDKActivity.dataRDK.getSumberBenih());
+        input_tabungananggota.setText(DetailRDKActivity.dataRDK.getTabunganAnggota());
+        input_iurananggota.setText(DetailRDKActivity.dataRDK.getIuranAnggota());
+        input_pemupukanmodal.setText(DetailRDKActivity.dataRDK.getPemupukanModal());
     }
 
     @Override

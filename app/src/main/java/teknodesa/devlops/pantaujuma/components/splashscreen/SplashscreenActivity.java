@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RelativeLayout;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.R;
@@ -21,20 +19,15 @@ public class SplashscreenActivity extends BaseActivity implements SplashscreenCo
     @Inject
     SplashscreenController splashController;
 
-    @BindView(R.id.activity_splash_screen)
-    RelativeLayout relativeLayout;
-
     public static Intent createIntent(Context context) {
         return new Intent(context, SplashscreenActivity.class);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splashscreen);
         ((MainApplication) getApplication())
                 .getComponent()
                 .inject(this);
-        ButterKnife.bind(this);
         splashController.setView(this);
         showLoading();
         checkNetwork();
@@ -42,7 +35,7 @@ public class SplashscreenActivity extends BaseActivity implements SplashscreenCo
     private void checkNetwork(){
         if(isNetworkConnected()){
             showLoading();
-            splashController.getPromotion();
+            splashController.getInitializeData();
         }else{
             onError(getString(R.string.network_error));
         }
@@ -50,17 +43,21 @@ public class SplashscreenActivity extends BaseActivity implements SplashscreenCo
 
     @Override
     public void sessionUser(boolean result) {
-        //false means user is not login
-        Log.e("hasil result",result+" test");
         hideLoading();
-        if (result)
+        if (result){
             startActivity(MainActivity.createIntent(getApplicationContext()));
-        else
+        }else{
             startActivity(LoginActivity.createIntent(getApplicationContext()));
+        }
     }
 
     @Override
-    public void resultPromotion(String message) {
+    public void getInitializeDataSuccess(String message) {
+        splashController.checkSession();
+    }
+
+    @Override
+    public void getInitializeDataFailed(String message) {
         splashController.checkSession();
     }
 

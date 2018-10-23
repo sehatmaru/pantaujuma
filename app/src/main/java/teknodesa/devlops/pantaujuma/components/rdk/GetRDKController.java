@@ -1,34 +1,20 @@
 package teknodesa.devlops.pantaujuma.components.rdk;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
-import teknodesa.devlops.pantaujuma.components.rdk.GetRDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRDKService;
 
-/**
- * Created by Marthin on 7/10/2018.
- */
-
 public class GetRDKController implements GetRDKContract.Controller {
-
     @Inject
     GetRDKService mService;
 
     @Inject
     Realm realm;
-
-    @Inject
-    EventBus mBus;
 
     private GetRDKContract.View views;
 
@@ -36,12 +22,6 @@ public class GetRDKController implements GetRDKContract.Controller {
         appComponent.inject(this);
     }
 
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
-    }
 
     public void setView(GetRDKContract.View view){
         mService.instanceClass(this);
@@ -66,6 +46,7 @@ public class GetRDKController implements GetRDKContract.Controller {
         if(res ==0 ){
             views.getAllRDKFailed("Terjadi Kesalahan, Silahkan Logout dan login kembali");
         }else{
+
             mService.getAllRDK(res);
         }
     }

@@ -265,10 +265,6 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
         mController.saveData(listrdkkNotSync);
     }
 
-    private void setDataRDKK(){
-
-    }
-
     private void checkDataRealm(){
         if(hasilList > 0){
             showRealmData(""+hasilList).show();
@@ -276,18 +272,21 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data penduduk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        return Snackbar.make(coordinatorLayout, "Anda memiliki data RDKK "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
     }
 
+    @Override
     public void getAllRDKKSuccess(List<RDKKPupukSubsidiRealm> allPenduduk) {
         populateInitialData();
     }
 
+    @Override
     public void getAllRDKKFailed(String message) {
         createSnackbar(message).show();
         updateLayout(Konstanta.LAYOUT_ERROR);
     }
 
+    @Override
     public void saveDataSuccess(String message) {
         counter++;
         Log.e("hasil","counter"+counter+" list"+hasilList);
@@ -299,6 +298,7 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
         }
     }
 
+    @Override
     public void saveDataFailed(String message) {
         progressdialog.dismiss();
         onError(message);

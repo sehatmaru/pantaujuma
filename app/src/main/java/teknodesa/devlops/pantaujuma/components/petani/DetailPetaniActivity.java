@@ -17,7 +17,9 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.petani.PetaniParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
@@ -29,9 +31,6 @@ public class DetailPetaniActivity extends AppCompatActivity {
 
     @BindView(R.id.btnEdit)
     Button btnEdit;
-
-    @BindView(R.id.btnHapus)
-    Button btnHapus;
 
     @BindView(R.id.nik)
     TextView nik;
@@ -59,21 +58,15 @@ public class DetailPetaniActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEdit)
     void clickEdit() {
-//        startActivity(CRUActivity.createIntent(getApplicationContext(), "petani", "update", itemDetail));
+        PetaniParcelable petaniParcelable = new PetaniParcelable(dataPetani);
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "petani", "update", petaniParcelable));
         finish();
     }
 
-    @OnClick(R.id.btnHapus)
-    void clickHapus() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
-        builder.setNegativeButton("Tidak", dialogClickListener).show();
-    }
+    public static PetaniRealm dataPetani;
+    public static PendudukRealm dataPenduduk;
 
-    private PetaniRealm dataPetani;
-    PendudukRealm dataPenduduk;
-
-    private static String idPetani;
+    public static String idPetani;
     static String idPenduduk;
     public static Intent createIntent(Context context, String id) {
         idPetani = id;

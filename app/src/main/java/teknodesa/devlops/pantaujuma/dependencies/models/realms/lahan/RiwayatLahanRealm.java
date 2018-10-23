@@ -12,46 +12,29 @@ public class RiwayatLahanRealm extends RealmObject {
     @PrimaryKey
     private String hashId;
     private String idKomoditas;
-    private int idDesa;
     private String idLahan;
-    @SerializedName("nama")
-    private String namaPemilikLahan;
-    private String alamat;
-    private String tanggalMulai;
+    private String idPetani;
+    private String idKegiatan;
+    private int idDesa;
+    private String tanggalAwal;
     private String tanggalAkhir;
-    private String masaKegiatan;
-    private String gambar;
-    private String cara;
-    private double luas;
-    private double hasil;
-    private double jumlah;
-    private String sumber;
-    private String pupuk;
-    private String jumlahPupuk;
+    private String status;
+    private int isSync;
 
     public RiwayatLahanRealm() {
     }
 
-    public RiwayatLahanRealm(String hashId, String idKomoditas, int idDesa, String idLahan, String namaPemilikLahan,
-                             String alamat, String tanggalMulai, String tanggalAkhir, String masaKegiatan, String gambar,
-                             String cara, double luas, double hasil, double jumlah, String sumber, String pupuk, String jumlahPupuk) {
+    public RiwayatLahanRealm(String hashId, String idKomoditas, String idLahan, String idPetani, String idKegiatan, int idDesa, String tanggalAwal, String tanggalAkhir, String status, int isSync) {
         this.hashId = hashId;
         this.idKomoditas = idKomoditas;
-        this.idDesa = idDesa;
         this.idLahan = idLahan;
-        this.namaPemilikLahan = namaPemilikLahan;
-        this.alamat = alamat;
-        this.tanggalMulai = tanggalMulai;
+        this.idPetani = idPetani;
+        this.idKegiatan = idKegiatan;
+        this.idDesa = idDesa;
+        this.tanggalAwal = tanggalAwal;
         this.tanggalAkhir = tanggalAkhir;
-        this.masaKegiatan = masaKegiatan;
-        this.gambar = gambar;
-        this.cara = cara;
-        this.luas = luas;
-        this.hasil = hasil;
-        this.jumlah = jumlah;
-        this.sumber = sumber;
-        this.pupuk = pupuk;
-        this.jumlahPupuk = jumlahPupuk;
+        this.status = status;
+        this.isSync = isSync;
     }
 
     public String getHashId() {
@@ -70,14 +53,6 @@ public class RiwayatLahanRealm extends RealmObject {
         this.idKomoditas = idKomoditas;
     }
 
-    public int getIdDesa() {
-        return idDesa;
-    }
-
-    public void setIdDesa(int idDesa) {
-        this.idDesa = idDesa;
-    }
-
     public String getIdLahan() {
         return idLahan;
     }
@@ -86,28 +61,36 @@ public class RiwayatLahanRealm extends RealmObject {
         this.idLahan = idLahan;
     }
 
-    public String getNamaPemilikLahan() {
-        return namaPemilikLahan;
+    public String getIdPetani() {
+        return idPetani;
     }
 
-    public void setNamaPemilikLahan(String namaPemilikLahan) {
-        this.namaPemilikLahan = namaPemilikLahan;
+    public void setIdPetani(String idPetani) {
+        this.idPetani = idPetani;
     }
 
-    public String getAlamat() {
-        return alamat;
+    public String getIdKegiatan() {
+        return idKegiatan;
     }
 
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+    public void setIdKegiatan(String idKegiatan) {
+        this.idKegiatan = idKegiatan;
     }
 
-    public String getTanggalMulai() {
-        return tanggalMulai;
+    public int getIdDesa() {
+        return idDesa;
     }
 
-    public void setTanggalMulai(String tanggalMulai) {
-        this.tanggalMulai = tanggalMulai;
+    public void setIdDesa(int idDesa) {
+        this.idDesa = idDesa;
+    }
+
+    public String getTanggalAwal() {
+        return tanggalAwal;
+    }
+
+    public void setTanggalAwal(String tanggalAwal) {
+        this.tanggalAwal = tanggalAwal;
     }
 
     public String getTanggalAkhir() {
@@ -118,75 +101,35 @@ public class RiwayatLahanRealm extends RealmObject {
         this.tanggalAkhir = tanggalAkhir;
     }
 
-    public String getMasaKegiatan() {
-        return masaKegiatan;
+    public String getStatus() {
+        return status;
     }
 
-    public void setMasaKegiatan(String masaKegiatan) {
-        this.masaKegiatan = masaKegiatan;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getGambar() {
-        return gambar;
+    public int getIsSync() {
+        return isSync;
     }
 
-    public void setGambar(String gambar) {
-        this.gambar = gambar;
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
     }
 
-    public String getCara() {
-        return cara;
-    }
-
-    public void setCara(String cara) {
-        this.cara = cara;
-    }
-
-    public double getLuas() {
-        return luas;
-    }
-
-    public void setLuas(double luas) {
-        this.luas = luas;
-    }
-
-    public double getHasil() {
-        return hasil;
-    }
-
-    public void setHasil(double hasil) {
-        this.hasil = hasil;
-    }
-
-    public double getJumlah() {
-        return jumlah;
-    }
-
-    public void setJumlah(double jumlah) {
-        this.jumlah = jumlah;
-    }
-
-    public String getSumber() {
-        return sumber;
-    }
-
-    public void setSumber(String sumber) {
-        this.sumber = sumber;
-    }
-
-    public String getPupuk() {
-        return pupuk;
-    }
-
-    public void setPupuk(String pupuk) {
-        this.pupuk = pupuk;
-    }
-
-    public String getJumlahPupuk() {
-        return jumlahPupuk;
-    }
-
-    public void setJumlahPupuk(String jumlahPupuk) {
-        this.jumlahPupuk = jumlahPupuk;
+    @Override
+    public String toString() {
+        return "RiwayatLahanRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", idKomoditas='" + idKomoditas + '\'' +
+                ", idLahan='" + idLahan + '\'' +
+                ", idPetani='" + idPetani + '\'' +
+                ", idKegiatan='" + idKegiatan + '\'' +
+                ", idDesa=" + idDesa +
+                ", tanggalAwal='" + tanggalAwal + '\'' +
+                ", tanggalAkhir='" + tanggalAkhir + '\'' +
+                ", status='" + status + '\'' +
+                ", isSync=" + isSync +
+                '}';
     }
 }

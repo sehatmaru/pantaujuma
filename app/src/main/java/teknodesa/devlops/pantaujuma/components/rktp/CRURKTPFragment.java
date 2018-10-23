@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,20 +22,26 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.petugas.ListTargetActivity;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchpoktan.SearchPoktanFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RKTP;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp.RKTPRealm;
 
 public class CRURKTPFragment extends Fragment implements RKTPContract.ViewController<RKTPRealm>, RKTPContract.View, SearchPoktanFragment.OnClickPoktanListener {
+
+    @Inject
+    Realm realm;
 
     @BindView(R.id.input_tahun)
     EditText input_tahun;
@@ -63,8 +70,12 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
     @BindView(R.id.input_waktu)
     EditText input_waktu;
 
+    @BindView(R.id.input_keterangan)
+    EditText input_keterangan;
+
     @BindView(R.id.btnWaktu)
     Button btnWaktu;
+    @OnClick(R.id.btnWaktu)
     void setTanggal() {
         final Calendar calendar = Calendar.getInstance();
         int tanggal = calendar.get(Calendar.DAY_OF_MONTH),
@@ -95,16 +106,13 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         SearchPoktanFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
 
-    private String komoditas;
-
-    private String idUser;
-    private UserDB userDB;
-
     private AppComponent appComponent;
     FragmentActivity activity;
 
     @BindView(R.id.input_pelaksana)
     EditText input_pelaksana;
+
+    private String idPoktan = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,8 +129,35 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
 
         View v = inflater.inflate(R.layout.fragment_crurktp, container, false);
         ButterKnife.bind(this, v);
+        if(CRUActivity.mAction == "update"){
+            textForEdit();
+            idPoktan = DetailRKTPActivity.idPoktan;
+        }else{
+
+        }
 
         return v;
+    }
+
+    void textForEdit(){
+        try{
+            input_poktan.setText(DetailRKTPActivity.dataPoktan.getNama());
+            input_tahun.setText(DetailRKTPActivity.dataRKTP.getTahun());
+            input_tujuan.setText(DetailRKTPActivity.dataRKTP.getTujuan());
+            input_masalah.setText(DetailRKTPActivity.dataRKTP.getMasalah());
+            input_sasaran.setText(DetailRKTPActivity.dataRKTP.getSasaran());
+            input_materi.setText(DetailRKTPActivity.dataRKTP.getMateri());
+            input_metode.setText(DetailRKTPActivity.dataRKTP.getMetode());
+            input_volume.setText(DetailRKTPActivity.dataRKTP.getVolume());
+            input_lokasi.setText(DetailRKTPActivity.dataRKTP.getLokasi());
+            input_waktu.setText(DetailRKTPActivity.dataRKTP.getWaktu());
+            input_sumberbiaya.setText(DetailRKTPActivity.dataRKTP.getSumberBiaya());
+            input_penanggungjawab.setText(DetailRKTPActivity.dataRKTP.getPenanggungJawab());
+            input_pelaksana.setText(DetailRKTPActivity.dataRKTP.getPelaksana());
+            input_keterangan.setText(DetailRKTPActivity.dataRKTP.getKeterangan());
+        } catch (NullPointerException e){
+
+        }
     }
 
     @Override
@@ -139,13 +174,32 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         String strSumberBiaya = input_sumberbiaya.getText().toString();
         String strPenanggungJawab = input_penanggungjawab.getText().toString();
         String strPelaksana = input_pelaksana.getText().toString();
-
+        String strKeterangan = input_keterangan.getText().toString();
 
         RKTPRealm newRealmItem = new RKTPRealm();
-        PoktanRealm poktanRealm = new PoktanRealm();
 
-        newRealmItem.setHashId(getSaltString());
-        newRealmItem.setPoktan(poktanRealm.getHashId());
+        if(CRUActivity.mAction == "update"){
+            newRealmItem.setHashId(DetailRKTPActivity.dataRKTP.getHashId());
+        }else{
+            newRealmItem.setHashId(getSaltString());
+        }
+
+        UserDB userDB = getData();
+        int idDes;
+        try {
+            idDes =  Integer.valueOf(userDB.getAttributeValue());
+        }catch (Exception e){
+            idDes = 0;
+        }
+        String idUs;
+        try {
+            idUs =  userDB.getId();
+        }catch (Exception e){
+            idUs = "";
+        }
+        newRealmItem.setIdDesa(idDes);
+        newRealmItem.setIdUser(idUs);
+        newRealmItem.setPoktan(idPoktan);
         newRealmItem.setTujuan(strTujuan);
         newRealmItem.setTahun(strTahun);
         newRealmItem.setPelaksana(strPelaksana);
@@ -158,12 +212,16 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         newRealmItem.setMateri(strMateri);
         newRealmItem.setMetode(strMetode);
         newRealmItem.setVolume(strVolume);
+        newRealmItem.setKeterangan(strKeterangan);
+        newRealmItem.setIsSync(0);
+
         return newRealmItem;
     }
 
     @Override
     public void OnClickPoktan(String idKomoditas, String nama, String deskripsi) {
         input_poktan.setText(nama);
+        idPoktan = idKomoditas;
     }
 
     @Override
@@ -180,7 +238,7 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-                String idItem = ((PoktanRealm) itemData).getHashId();
+                String idItem = ((RKTP) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
             }
         }
@@ -225,4 +283,15 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         return timeStamp + "" + salt.toString();
     }
+    public UserDB getData() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        if(user == null){
+            return null;
+        }else{
+            return user;
+        }
+    }
+
 }

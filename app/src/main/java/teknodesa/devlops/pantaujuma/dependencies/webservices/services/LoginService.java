@@ -1,11 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
 import android.util.Log;
-
-import org.greenrobot.eventbus.EventBus;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,13 +52,6 @@ public class LoginService implements LoginContract.Repository {
                                 response.body().getEmail(),response.body().getRoleName(),response.body().getKeyRole(),
                                 response.body().getAttributeTable(),response.body().getAttributeValue());
 
-                        AkunFragment.idUser = response.body().getId();
-                        AkunFragment.namaUser = response.body().getNamaLengkap();
-                        AkunFragment.desaUser = response.body().getNamaDesa();
-                        AkunFragment.kabupatenKotaUser = response.body().getKabupatenKota();
-                        AkunFragment.provinsiUser = response.body().getProvinsi();
-                        AkunFragment.kecamatanUser = response.body().getKecamatan();
-                        AkunFragment.idDesa = Integer.valueOf(response.body().getAttributeValue());
                         realm.beginTransaction();
                         realm.executeTransactionAsync(realmuser -> {
                             realmuser.insertOrUpdate(userDB);
@@ -78,7 +67,6 @@ public class LoginService implements LoginContract.Repository {
 
             @Override
             public void onFailure(Call<ResponseLogin> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.loginFailed(t.getMessage());
                 t.printStackTrace();
             }

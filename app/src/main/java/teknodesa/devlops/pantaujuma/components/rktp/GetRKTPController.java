@@ -1,13 +1,8 @@
 package teknodesa.devlops.pantaujuma.components.rktp;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -22,21 +17,10 @@ public class GetRKTPController implements GetRKTPContract.Controller {
     @Inject
     Realm realm;
 
-    @Inject
-    EventBus mBus;
-
     private GetRKTPContract.View views;
 
     public GetRKTPController(@NonNull AppComponent appComponent) {
         appComponent.inject(this);
-    }
-
-
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
     }
 
     public void setView(GetRKTPContract.View view){

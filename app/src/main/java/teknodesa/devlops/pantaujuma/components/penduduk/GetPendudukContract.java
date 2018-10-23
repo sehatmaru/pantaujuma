@@ -22,7 +22,7 @@ public class GetPendudukContract {
         void saveData(List<PendudukRealm> allPen);
         void getAllPendudukSuccess(List<PendudukRealm> allPenduduk);
         void getAllPendudukFailed(String message);
-        void saveDataSuccess(String message, PendudukRealm pendudukTempRealm);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(PendudukRealm pendudukTempRealm);
     }

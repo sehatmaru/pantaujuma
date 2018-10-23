@@ -39,36 +39,33 @@ public class PendudukBody {
 
 
 
-    public PendudukBody(String hashId, String NIK, String foto, String namaDepan, String namaBelakang, String jenisKelamin,
-                        String tempatLahir, String tanggalLahir, String agama, String golonganDarah, String pekerjaan,
-                        String pendidikan, String alamat, String rt, String rw, String dusun, String desa, String kecamatan,
-                        String datiII, String provinsi, String noHP, String noTelp, String status, int kodePos, String email, int idDesa) {
-        this.hashId = hashId;
-        this.NIK = NIK;
-        this.foto = foto;
-        this.namaDepan = namaDepan;
-        this.namaBelakang = namaBelakang;
-        this.jenisKelamin = jenisKelamin;
-        this.tempatLahir = tempatLahir;
-        this.tanggalLahir = tanggalLahir;
-        this.agama = agama;
-        this.golonganDarah = golonganDarah;
-        this.pekerjaan = pekerjaan;
-        this.pendidikan = pendidikan;
-        this.alamat = alamat;
-        this.rt = rt;
-        this.rw = rw;
-        this.dusun = dusun;
-        this.desa = desa;
-        this.kecamatan = kecamatan;
-        this.datiII = datiII;
-        this.provinsi = provinsi;
-        this.noHP = noHP;
-        this.noTelp = noTelp;
-        this.status = status;
-        this.kodePos = kodePos;
-        this.email = email;
-        this.idDesa = idDesa;
+    public PendudukBody(PendudukRealm data) {
+        this.hashId = data.getHashId();
+        this.NIK = data.getNIK();
+        this.foto = data.getFoto();
+        this.namaDepan = data.getNamaDepan();
+        this.namaBelakang = data.getNamaBelakang();
+        this.jenisKelamin = data.getJenisKelamin();
+        this.tempatLahir = data.getTempatLahir();
+        this.tanggalLahir = data.getTanggalLahir();
+        this.agama = data.getAgama();
+        this.golonganDarah = data.getGolonganDarah();
+        this.pekerjaan = data.getPekerjaan();
+        this.pendidikan = data.getPendidikan();
+        this.alamat = data.getAlamat();
+        this.rt = data.getRt();
+        this.rw = data.getRw();
+        this.dusun = data.getDusun();
+        this.desa = data.getDesa();
+        this.kecamatan = data.getKecamatan();
+        this.datiII = data.getDatiII();
+        this.provinsi = data.getProvinsi();
+        this.noHP = data.getNoHP();
+        this.noTelp = data.getNoTelp();
+        this.status = data.getStatus();
+        this.kodePos = data.getKodePos();
+        this.email = data.getEmail();
+        this.idDesa = data.getIdDesa();
     }
 
     public String getHashId() {

@@ -3,17 +3,15 @@ package teknodesa.devlops.pantaujuma.components.lahan;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -29,14 +27,14 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
-import io.realm.Sort;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.LahanKomoditasAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.BodyGetLahan;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.RiwayatLahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
@@ -160,7 +158,7 @@ public class ListLahanKomoditasActivity extends BaseActivity implements ListLaha
         query = query.toLowerCase();
         final List<RiwayatLahanRealm> filteredList = new ArrayList<>();
         for (RiwayatLahanRealm konten : realm.where(RiwayatLahanRealm.class).findAll()) {
-            final String text = konten.getNamaPemilikLahan().toLowerCase();
+            final String text = konten.getIdKegiatan().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }
@@ -197,7 +195,7 @@ public class ListLahanKomoditasActivity extends BaseActivity implements ListLaha
                 .positiveText(R.string.yes)
                 .negativeText(R.string.no)
                 .onPositive((dialog1, which) -> {
-                    mController.getLahanKomoditas(new BodyGetLahan(komoditasRealm.getHashId(), AkunFragment.idDesa));
+                    mController.getLahanKomoditas(new BodyGetLahan(komoditasRealm.getHashId(), getIdDesa()));
                     updateLayout(Konstanta.LAYOUT_LOADING);
                 })
                 .onNegative((dialog1, which) -> {
@@ -219,6 +217,22 @@ public class ListLahanKomoditasActivity extends BaseActivity implements ListLaha
 
     @Override
     public void OnClickKomoditas(RiwayatLahanRealm riwayatLahanRealm) {
+    }
 
+    public String getIdDesa() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        String res;
+        if(user == null){
+            res = "";
+        }else{
+            try {
+                res = user.getAttributeValue();
+            }catch (Exception e){
+                res = "";
+            }
+        }
+        return res;
     }
 }

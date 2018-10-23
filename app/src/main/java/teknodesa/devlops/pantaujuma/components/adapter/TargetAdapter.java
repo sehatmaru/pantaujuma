@@ -3,6 +3,7 @@ package teknodesa.devlops.pantaujuma.components.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
                 .findFirst();
 
         holder.textkomoditas.setText(komoditasRealm.getNama());
-        holder.textsasaranproduksi.setText(String.valueOf(targetPetugas.getSasaranProduksi()));
+        holder.textketerangan.setText(targetPetugas.getKeterangan());
         holder.cardview.setOnClickListener(view -> {
             onClicTarget.OnClickTarget(targetPetugas.getHashId());
         });
@@ -78,12 +79,12 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textkomoditas;
-        TextView textsasaranproduksi;
+        TextView textketerangan;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textkomoditas = (TextView)itemView.findViewById(R.id.komoditas);
-            textsasaranproduksi = (TextView)itemView.findViewById(R.id.sasaranproduksi);
+            textketerangan = (TextView)itemView.findViewById(R.id.keterangan);
             cardview = (CardView) itemView.findViewById(R.id.targetCardView);
         }
     }

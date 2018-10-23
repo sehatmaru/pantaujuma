@@ -79,7 +79,7 @@ public class GetRDKKService implements GetRDKKContract.Repository {
             RDKKBody rdkkBody = new RDKKBody(
                     rdkkTempRealm.getHashId(),
                     rdkkTempRealm.getIdDesa(),
-                    rdkkTempRealm.getPetugas(),
+                    rdkkTempRealm.getIdUser(),
                     rdkkTempRealm.getPoktan(),
                     rdkkTempRealm.getPetani(),
                     rdkkTempRealm.getKomoditas(),

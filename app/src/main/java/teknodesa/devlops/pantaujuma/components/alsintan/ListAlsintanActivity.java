@@ -1,38 +1,10 @@
 package teknodesa.devlops.pantaujuma.components.alsintan;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.components.CRUActivity;
+/**
+ * Created by Sehat MT Samosir on 8/23/2018.
+ */
 
-public class ListAlsintanActivity extends AppCompatActivity {
-    private final String mJenisCRU = "alsintan";
-
-    @BindView(R.id.fabTambah)
-    FloatingActionButton fabTambah;
-
-    @OnClick(R.id.fabTambah)
-    void clickCheckOut() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "create", null));
-    }
-
-    public static Intent createIntent(Context context) {
-        return new Intent(context, ListAlsintanActivity.class);
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_listpetani);
-        ButterKnife.bind(this);
-    }
+public class ListAlsintanActivity extends BaseActivity{
 }

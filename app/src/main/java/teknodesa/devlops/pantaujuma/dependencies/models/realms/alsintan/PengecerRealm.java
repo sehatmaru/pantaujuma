@@ -3,9 +3,13 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+/**
+ * Created by Sehat MT Samosir on 8/20/2018.
+ */
+
 public class PengecerRealm extends RealmObject {
     @PrimaryKey
-    private int idPengecer;
+    private String hashId;
     private String nama;
     private String jenisPengecer;
     private String alamat;
@@ -13,25 +17,12 @@ public class PengecerRealm extends RealmObject {
     private String noHP;
     private String deskripsi;
 
-    public PengecerRealm() {
+    public String getHashId() {
+        return hashId;
     }
 
-    public PengecerRealm(int idPengecer, String nama, String jenisPengecer, String alamat, String noTelp, String noHP, String deskripsi) {
-        this.idPengecer = idPengecer;
-        this.nama = nama;
-        this.jenisPengecer = jenisPengecer;
-        this.alamat = alamat;
-        this.noTelp = noTelp;
-        this.noHP = noHP;
-        this.deskripsi = deskripsi;
-    }
-
-    public int getIdPengecer() {
-        return idPengecer;
-    }
-
-    public void setIdPengecer(int idPengecer) {
-        this.idPengecer = idPengecer;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
     }
 
     public String getNama() {

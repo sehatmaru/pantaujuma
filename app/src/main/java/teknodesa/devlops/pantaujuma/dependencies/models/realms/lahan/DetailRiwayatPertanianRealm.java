@@ -7,36 +7,57 @@ import io.realm.annotations.PrimaryKey;
 
 public class DetailRiwayatPertanianRealm extends RealmObject {
     @PrimaryKey
-    private int idDetailRiwayatPertanian;
-
+    private String hashId;
+    private String riwayat;
+    private int idDesa;
     private String tanggalMulaiKegiatan;
     private String tanggalAkhirKegiatan;
-    private String masaKegiatan; //PRATANAM, TANAM, PANEN, PASCAPANEN
-    private String kelompokKegiatan; //PEMBIBITAN, PENANAMAN, DLL
-    private int idKegiatan; //id dari kelompok kegiatan
+    private String masaKegiatan;
+    private String kelompokKegiatan;
+    private String hashKegiatan;
     private String deskripsi;
     private String gambar;
+    private int isSync;
 
     public DetailRiwayatPertanianRealm() {
     }
 
-    public DetailRiwayatPertanianRealm(int idDetailRiwayatPertanian, String tanggalMulaiKegiatan, String tanggalAkhirKegiatan, String masaKegiatan, String kelompokKegiatan, int idKegiatan, String deskripsi, String gambar) {
-        this.idDetailRiwayatPertanian = idDetailRiwayatPertanian;
+    public DetailRiwayatPertanianRealm(String hashId, String riwayat, int idDesa, String tanggalMulaiKegiatan, String tanggalAkhirKegiatan, String masaKegiatan, String kelompokKegiatan, String hashKegiatan, String deskripsi, String gambar, int isSync) {
+        this.hashId = hashId;
+        this.riwayat = riwayat;
+        this.idDesa = idDesa;
         this.tanggalMulaiKegiatan = tanggalMulaiKegiatan;
         this.tanggalAkhirKegiatan = tanggalAkhirKegiatan;
         this.masaKegiatan = masaKegiatan;
         this.kelompokKegiatan = kelompokKegiatan;
-        this.idKegiatan = idKegiatan;
+        this.hashKegiatan = hashKegiatan;
         this.deskripsi = deskripsi;
         this.gambar = gambar;
+        this.isSync = isSync;
     }
 
-    public int getIdDetailRiwayatPertanian() {
-        return idDetailRiwayatPertanian;
+    public String getHashId() {
+        return hashId;
     }
 
-    public void setIdDetailRiwayatPertanian(int idDetailRiwayatPertanian) {
-        this.idDetailRiwayatPertanian = idDetailRiwayatPertanian;
+    public void setHashId(String hashId) {
+        this.hashId = hashId;
+    }
+
+    public String getRiwayat() {
+        return riwayat;
+    }
+
+    public void setRiwayat(String riwayat) {
+        this.riwayat = riwayat;
+    }
+
+    public int getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(int idDesa) {
+        this.idDesa = idDesa;
     }
 
     public String getTanggalMulaiKegiatan() {
@@ -71,12 +92,12 @@ public class DetailRiwayatPertanianRealm extends RealmObject {
         this.kelompokKegiatan = kelompokKegiatan;
     }
 
-    public int getIdKegiatan() {
-        return idKegiatan;
+    public String getHashKegiatan() {
+        return hashKegiatan;
     }
 
-    public void setIdKegiatan(int idKegiatan) {
-        this.idKegiatan = idKegiatan;
+    public void setHashKegiatan(String hashKegiatan) {
+        this.hashKegiatan = hashKegiatan;
     }
 
     public String getDeskripsi() {
@@ -93,5 +114,30 @@ public class DetailRiwayatPertanianRealm extends RealmObject {
 
     public void setGambar(String gambar) {
         this.gambar = gambar;
+    }
+
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
+    }
+
+    @Override
+    public String toString() {
+        return "DetailRiwayatPertanianRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", riwayat='" + riwayat + '\'' +
+                ", idDesa=" + idDesa +
+                ", tanggalMulaiKegiatan='" + tanggalMulaiKegiatan + '\'' +
+                ", tanggalAkhirKegiatan='" + tanggalAkhirKegiatan + '\'' +
+                ", masaKegiatan='" + masaKegiatan + '\'' +
+                ", kelompokKegiatan='" + kelompokKegiatan + '\'' +
+                ", hashKegiatan='" + hashKegiatan + '\'' +
+                ", deskripsi='" + deskripsi + '\'' +
+                ", gambar='" + gambar + '\'' +
+                ", isSync=" + isSync +
+                '}';
     }
 }

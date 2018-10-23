@@ -7,8 +7,9 @@ import io.realm.annotations.PrimaryKey;
 public class LahanRealm extends RealmObject {
     @PrimaryKey
     private String hashId;
+    private int idDesa;
     private String pemilik;
-    private String nama;
+    private String namaPemilikLahan;
     private String alamat;
     private String rt;
     private String rw;
@@ -27,17 +28,16 @@ public class LahanRealm extends RealmObject {
     private String deskripsi;
     private int status;
     private String gambar;
+    private int isSync;
 
     public LahanRealm() {
     }
 
-    public LahanRealm(String hashId, String pemilik, String nama, String alamat, String rt, String rw, String dusun,
-                      String desa, String namaKecamatan, String datiII, String provinsi, double longitude, double latitude,
-                      String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara, String deskripsi,
-                      int status, String gambar) {
+    public LahanRealm(String hashId, int idDesa, String pemilik, String namaPemilikLahan, String alamat, String rt, String rw, String dusun, String desa, String namaKecamatan, String datiII, String provinsi, double longitude, double latitude, String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara, String deskripsi, int status, String gambar, int isSync) {
         this.hashId = hashId;
+        this.idDesa = idDesa;
         this.pemilik = pemilik;
-        this.nama = nama;
+        this.namaPemilikLahan = namaPemilikLahan;
         this.alamat = alamat;
         this.rt = rt;
         this.rw = rw;
@@ -56,6 +56,7 @@ public class LahanRealm extends RealmObject {
         this.deskripsi = deskripsi;
         this.status = status;
         this.gambar = gambar;
+        this.isSync = isSync;
     }
 
     public String getHashId() {
@@ -66,6 +67,14 @@ public class LahanRealm extends RealmObject {
         this.hashId = hashId;
     }
 
+    public int getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(int idDesa) {
+        this.idDesa = idDesa;
+    }
+
     public String getPemilik() {
         return pemilik;
     }
@@ -74,12 +83,12 @@ public class LahanRealm extends RealmObject {
         this.pemilik = pemilik;
     }
 
-    public String getNama() {
-        return nama;
+    public String getNamaPemilikLahan() {
+        return namaPemilikLahan;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setNamaPemilikLahan(String namaPemilikLahan) {
+        this.namaPemilikLahan = namaPemilikLahan;
     }
 
     public String getAlamat() {
@@ -224,5 +233,42 @@ public class LahanRealm extends RealmObject {
 
     public void setGambar(String gambar) {
         this.gambar = gambar;
+    }
+
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
+    }
+
+    @Override
+    public String toString() {
+        return "LahanRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", idDesa=" + idDesa +
+                ", pemilik='" + pemilik + '\'' +
+                ", namaPemilikLahan='" + namaPemilikLahan + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", rt='" + rt + '\'' +
+                ", rw='" + rw + '\'' +
+                ", dusun='" + dusun + '\'' +
+                ", desa='" + desa + '\'' +
+                ", namaKecamatan='" + namaKecamatan + '\'' +
+                ", datiII='" + datiII + '\'' +
+                ", provinsi='" + provinsi + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", luas='" + luas + '\'' +
+                ", batasTimur='" + batasTimur + '\'' +
+                ", batasBarat='" + batasBarat + '\'' +
+                ", batasSelatan='" + batasSelatan + '\'' +
+                ", batasUtara='" + batasUtara + '\'' +
+                ", deskripsi='" + deskripsi + '\'' +
+                ", status=" + status +
+                ", gambar='" + gambar + '\'' +
+                ", isSync=" + isSync +
+                '}';
     }
 }

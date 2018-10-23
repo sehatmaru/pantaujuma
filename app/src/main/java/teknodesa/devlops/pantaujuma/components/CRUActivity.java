@@ -18,14 +18,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.components.alsintan.CRUAlsintanFragment;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
-import teknodesa.devlops.pantaujuma.components.penduduk.CRUPendudukFragment;
+import teknodesa.devlops.pantaujuma.components.penduduk.form.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
-import teknodesa.devlops.pantaujuma.components.poktan.CRUPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.CRUAnggotaPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.CRUIdentitasPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.poktan.CRUPengurusPoktanFragment;
+import teknodesa.devlops.pantaujuma.components.post.CRUPostFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
@@ -42,7 +44,11 @@ public class CRUActivity extends AppCompatActivity {
     @Inject
     CRUPetaniFragment cruPetaniFragment;
     @Inject
-    CRUPoktanFragment cruPoktanFragment;
+    CRUIdentitasPoktanFragment cruIdentitasPoktanFragment;
+    @Inject
+    CRUAnggotaPoktanFragment cruAnggotaPoktanFragment;
+    @Inject
+    CRUPengurusPoktanFragment cruPengurusPoktanFragment;
     @Inject
     CRURDKFragment cruRDKFragment;
     @Inject
@@ -56,11 +62,11 @@ public class CRUActivity extends AppCompatActivity {
     @Inject
     CRUKomoditasFragment cruKomoditasFragment;
     @Inject
-    CRUAlsintanFragment cruAlsintanFragment;
-    @Inject
     CRUHargaFragment cruHargaFragment;
     @Inject
     CRUSurveiFragment cruSurveiFragment;
+    @Inject
+    CRUPostFragment cruPostFragment;
 
     @BindView(R.id.content)
     FrameLayout content;
@@ -96,7 +102,13 @@ public class CRUActivity extends AppCompatActivity {
                 replaceFragment(cruPetaniFragment);
                 break;
             case "poktan":
-                replaceFragment(cruPoktanFragment);
+                replaceFragment(cruIdentitasPoktanFragment);
+                break;
+            case "anggotapoktan":
+                replaceFragment(cruAnggotaPoktanFragment);
+                break;
+            case "penguruspoktan":
+                replaceFragment(cruPengurusPoktanFragment);
                 break;
             case "rdk":
                 replaceFragment(cruRDKFragment);
@@ -116,9 +128,6 @@ public class CRUActivity extends AppCompatActivity {
             case "komoditas":
                 replaceFragment(cruKomoditasFragment);
                 break;
-            case "alsintan":
-                replaceFragment(cruAlsintanFragment);
-                break;
             case "harga":
                 replaceFragment(cruHargaFragment);
                 break;
@@ -137,7 +146,13 @@ public class CRUActivity extends AppCompatActivity {
                     cruPetaniFragment.saveData(mAction, mData);
                     break;
                 case "poktan":
-                    cruPoktanFragment.saveData(mAction, mData);
+                    cruIdentitasPoktanFragment.saveData(mAction, mData);
+                    break;
+                case "anggotapoktan":
+                    cruAnggotaPoktanFragment.saveData(mAction, mData);
+                    break;
+                case "penguruspoktan":
+                    cruPengurusPoktanFragment.saveData(mAction, mData);
                     break;
                 case "target":
                     cruTargetPetugasFragment.saveData(mAction, mData);
@@ -150,6 +165,12 @@ public class CRUActivity extends AppCompatActivity {
                     break;
                 case "rdk":
                     cruRDKFragment.saveData(mAction, mData);
+                    break;
+                case "harga":
+                    cruHargaFragment.saveData(mAction, mData);
+                    break;
+                case "post":
+                    cruPostFragment.saveData(mAction, mData);
                     break;
             }
             // Code here executes on main thread after user presses button

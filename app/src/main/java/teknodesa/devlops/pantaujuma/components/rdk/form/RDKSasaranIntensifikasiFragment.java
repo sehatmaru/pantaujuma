@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.SasaranIntensifikasi;
@@ -67,8 +68,18 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
         input_komoditasSI = getActivity().findViewById(R.id.input_komoditasSI);
         input_target = getActivity().findViewById(R.id.input_target);
         input_targethasilperha= getActivity().findViewById(R.id.input_targethasilperha);
-        setData();
 
+        if (CRUActivity.mAction == "update"){
+            setLayoutForEdit();
+        } else {
+            setData();
+        }
+    }
+
+    private void setLayoutForEdit() {
+        input_komoditasSI.setText(DetailRDKActivity.dataRDK.getKomoditasSI());
+        input_target.setText(DetailRDKActivity.dataRDK.getTarget());
+        input_targethasilperha.setText(DetailRDKActivity.dataRDK.getTargetHasilPerHa());
     }
 
     @Override

@@ -21,6 +21,7 @@ public class PetaniRealm extends RealmObject {
         this.biodata = petaniRealm.getBiodata();
         this.deskripsi = petaniRealm.getDeskripsi();
         this.status = petaniRealm.getStatus();
+        this.idDesa = petaniRealm.getIdDesa();
         this.foto = petaniRealm.getFoto();
         this.isSync = petaniRealm.getIsSync();
     }

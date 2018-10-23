@@ -10,7 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.BodyGetLahan;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetLahanKomoditas;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.PantauJumaAPI;

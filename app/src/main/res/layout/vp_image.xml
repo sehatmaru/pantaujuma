@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/image_display"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:contentDescription="@string/txt_image_slider"
         android:scaleType="fitXY"/>
 

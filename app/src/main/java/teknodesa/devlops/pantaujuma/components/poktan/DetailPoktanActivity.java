@@ -17,7 +17,11 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Poktan;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 
 public class DetailPoktanActivity extends AppCompatActivity {
@@ -28,9 +32,6 @@ public class DetailPoktanActivity extends AppCompatActivity {
 
     @BindView(R.id.btnEdit)
     Button btnEdit;
-
-    @BindView(R.id.btnHapus)
-    Button btnHapus;
 
     @BindView(R.id.nama)
     TextView nama;
@@ -58,20 +59,26 @@ public class DetailPoktanActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEdit)
     void clickEdit() {
-    //startActivity(CRUActivity.createIntent(getApplicationContext(), "poktan", "update", itemDetail));
+        Poktan poktanObject = new Poktan(dataPoktan);
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "poktan", "update", poktanObject));
         finish();
     }
 
-    @OnClick(R.id.btnHapus)
-    void clickHapus() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
-        builder.setNegativeButton("Tidak", dialogClickListener).show();
+    @OnClick(R.id.btnAnggota)
+    void tambahAnggota() {
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "anggotapoktan", "insert", null));
+        finish();
     }
 
-    private PoktanRealm dataPoktan;
+    @OnClick(R.id.btnPengurus)
+    void tambahPengurus() {
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "penguruspoktan", "insert", null));
+        finish();
+    }
 
-    private static String idPoktan;
+    public static PoktanRealm dataPoktan;
+
+    public static String idPoktan;
 
     public static Intent createIntent(Context context, String id) {
         idPoktan = id;
@@ -100,7 +107,7 @@ public class DetailPoktanActivity extends AppCompatActivity {
 
     private void setdata(){
         nama.setText(dataPoktan.getNama());
-        desa.setText(dataPoktan.getDesa());
+        desa.setText(getNamaDesa());
         kecamatan.setText(dataPoktan.getKecamatan());
         tanggal.setText(dataPoktan.getTanggalDidirikan());
         alamat.setText(dataPoktan.getAlamat());
@@ -115,7 +122,7 @@ public class DetailPoktanActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRUPoktanFragment.setDeletedData(itemDetail, appComponent);
+//                    CRUAnggotaFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListPoktanActivity.createIntent(getApplicationContext()));
                     break;
 
@@ -125,4 +132,21 @@ public class DetailPoktanActivity extends AppCompatActivity {
             }
         }
     };
+
+    public String getNamaDesa() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        String res;
+        if(user == null){
+            res = "";
+        }else{
+            try {
+                res = user.getNamaDesa();
+            }catch (Exception e){
+                res = "";
+            }
+        }
+        return res;
+    }
 }

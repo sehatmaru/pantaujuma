@@ -2,12 +2,8 @@ package teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses;
 
 import java.util.List;
 
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 
-/**
- * Created by Marthin on 7/10/2018.
- */
 
 public class ResponseRDK {
     private boolean success;

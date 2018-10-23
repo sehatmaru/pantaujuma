@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RKTP;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp.RKTPRealm;
 
@@ -27,9 +30,6 @@ public class DetailRKTPActivity extends AppCompatActivity {
 
     @BindView(R.id.btnEdit)
     Button btnEdit;
-
-    @BindView(R.id.btnHapus)
-    Button btnHapus;
 
     @BindView(R.id.poktan)
     TextView poktan;
@@ -73,24 +73,20 @@ public class DetailRKTPActivity extends AppCompatActivity {
     @BindView(R.id.keterangan)
     TextView keterangan;
 
+    Parcelable itemData;
+
     @OnClick(R.id.btnEdit)
     void clickEdit() {
-//        startActivity(CRUActivity.createIntent(getApplicationContext(), "petani", "update", itemDetail));
+        RKTP rktpObject = new RKTP(dataRKTP);
+        startActivity(CRUActivity.createIntent(getApplicationContext(), "rktp", "update", rktpObject));
         finish();
     }
 
-    private RKTPRealm dataRKTP;
-    PoktanRealm dataPoktan;
+    public static RKTPRealm dataRKTP;
+    public static PoktanRealm dataPoktan;
 
     private static String idRKTP;
     static String idPoktan;
-
-    @OnClick(R.id.btnHapus)
-    void clickHapus() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
-        builder.setNegativeButton("Tidak", dialogClickListener).show();
-    }
 
     public static Intent createIntent(Context context, String id) {
         idRKTP =id;
@@ -129,7 +125,7 @@ public class DetailRKTPActivity extends AppCompatActivity {
         volume.setText(dataRKTP.getVolume());
         lokasi.setText(dataRKTP.getLokasi());
         waktu.setText(dataRKTP.getWaktu());
-        sumberBiaya.setText(sumberBiaya.getText());
+        sumberBiaya.setText(dataRKTP.getSumberBiaya());
         penanggungjawab.setText(dataRKTP.getPenanggungJawab());
         pelaksana.setText(dataRKTP.getPelaksana());
         keterangan.setText(dataRKTP.getKeterangan());

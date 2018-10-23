@@ -12,16 +12,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import teknodesa.devlops.pantaujuma.components.rdk.GetRDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKBody;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RDKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseRDK;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseSaveData;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.PantauJumaAPI;
-
-/**
- * Created by Marthin on 7/10/2018.
- */
 
 public class GetRDKService implements GetRDKContract.Repository {
     @Inject
@@ -74,27 +70,44 @@ public class GetRDKService implements GetRDKContract.Repository {
     }
 
     @Override
-    public void saveData(List<RDKRealm> allTar) {
-        for(int i=0; i < allTar.size();i++ ){
-            RDKRealm rdkTempRealm = allTar.get(i);
+    public void saveData(List<RDKRealm> allPen) {
+        for(int i=0; i < allPen.size();i++ ){
+            RDKRealm rdkTempRealm = allPen.get(i);
             realm.beginTransaction();
             rdkTempRealm.setIsSync(1);
             realm.commitTransaction();
-            RDKBody rdkBody = new RDKBody(rdkTempRealm.getHashId(),rdkTempRealm.getHashIdIdentitas(),
-                    rdkTempRealm.getPetugas(),rdkTempRealm.getPoktan(),rdkTempRealm.getIrigasi(),
-                    rdkTempRealm.getIntensifikasi(), rdkTempRealm.getRencana(), rdkTempRealm.getKegiatan(),
-                    rdkTempRealm.getTanggal(), rdkTempRealm.getLuasSawah(), rdkTempRealm.getKeterangan(),
-                    rdkTempRealm.getHashIdIrigasi(), rdkTempRealm.getNama(), rdkTempRealm.getDeskripsiIrigasi(),
-                    rdkTempRealm.getHashIdJadwal(), rdkTempRealm.getKegiatanJK(), rdkTempRealm.getTanggalJK(),
-                    rdkTempRealm.getDeskripsiJK(), rdkTempRealm.getHashIdRencana(), rdkTempRealm.getPaketTeknologi(),
-                    rdkTempRealm.getPolaTanam(), rdkTempRealm.getJadwalTanam(), rdkTempRealm.getKomoditasRU(),
-                    rdkTempRealm.getVarietas(), rdkTempRealm.getSumberBenih(), rdkTempRealm.getTabunganAnggota(),
-                    rdkTempRealm.getIuranAnggota(), rdkTempRealm.getPemupukanModal(), rdkTempRealm.getHashIdSasaran(),
-                    rdkTempRealm.getKomoditasSI(), rdkTempRealm.getTarget(), rdkTempRealm.getTargetHasilPerHa(),
-                    rdkTempRealm.getIdDesa());
+            RDKBody rdkBody = new RDKBody(
+                    rdkTempRealm.getHashId(),
+                    rdkTempRealm.getIdDesa(),
+                    rdkTempRealm.getIdUser(),
+                    rdkTempRealm.getPoktan(),
+                    rdkTempRealm.getIrigasi(),
+                    rdkTempRealm.getIntensifikasi(),
+                    rdkTempRealm.getRencana(),
+                    rdkTempRealm.getKegiatan(),
+                    rdkTempRealm.getTanggal(),
+                    rdkTempRealm.getLuasSawah(),
+                    rdkTempRealm.getKeterangan(),
+                    rdkTempRealm.getNama(),
+                    rdkTempRealm.getDeskripsiIrigasi(),
+                    rdkTempRealm.getKegiatanJK(),
+                    rdkTempRealm.getTanggalJK(),
+                    rdkTempRealm.getDeskripsiJK(),
+                    rdkTempRealm.getPaketTeknologi(),
+                    rdkTempRealm.getPolaTanam(),
+                    rdkTempRealm.getJadwalTanam(),
+                    rdkTempRealm.getKomoditasRU(),
+                    rdkTempRealm.getVarietas(),
+                    rdkTempRealm.getSumberBenih(),
+                    rdkTempRealm.getTabunganAnggota(),
+                    rdkTempRealm.getIuranAnggota(),
+                    rdkTempRealm.getPemupukanModal(),
+                    rdkTempRealm.getKomoditasSI(),
+                    rdkTempRealm.getTarget(),
+                    rdkTempRealm.getTargetHasilPerHa());
 
             Log.e("rdk service",rdkBody.toString());
-            Call<ResponseSaveData> call = sisApi.insertRdk(WebServiceModule.ACCESS_TOKEN_TEMP,rdkBody);
+            Call<ResponseSaveData> call = sisApi.insertRDK(WebServiceModule.ACCESS_TOKEN_TEMP,rdkBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {

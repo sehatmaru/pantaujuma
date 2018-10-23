@@ -9,7 +9,7 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.PetugasRe
 public class RKTPRealm extends RealmObject {
     @PrimaryKey
     private String hashId;
-    private String petugas;
+    private String idUser;
     private int idDesa;
     private String poktan;
     private String tahun;
@@ -32,7 +32,7 @@ public class RKTPRealm extends RealmObject {
 
     public RKTPRealm(RKTPRealm rktpRealm, int isSync) {
         this.hashId = rktpRealm.getHashId();
-        this.petugas = rktpRealm.getPetugas();
+        this.idUser = rktpRealm.getIdUser();
         this.idDesa = rktpRealm.getIdDesa();
         this.poktan = rktpRealm.getPoktan();
         this.tahun = rktpRealm.getTahun();
@@ -51,9 +51,9 @@ public class RKTPRealm extends RealmObject {
         this.isSync = isSync;
     }
 
-    public RKTPRealm(String hashId, String petugas, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
+    public RKTPRealm(String hashId, String idUser, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan, int isSync) {
         this.hashId = hashId;
-        this.petugas = petugas;
+        this.idUser = idUser;
         this.idDesa = idDesa;
         this.poktan = poktan;
         this.tahun = tahun;
@@ -69,6 +69,7 @@ public class RKTPRealm extends RealmObject {
         this.penanggungJawab = penanggungJawab;
         this.pelaksana = pelaksana;
         this.keterangan = keterangan;
+        this.isSync = isSync;
     }
 
     public int getIsSync() {
@@ -87,12 +88,12 @@ public class RKTPRealm extends RealmObject {
         this.hashId = hashId;
     }
 
-    public String getPetugas() {
-        return petugas;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setPetugas(String petugas) {
-        this.petugas = petugas;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public int getIdDesa() {
@@ -219,7 +220,7 @@ public class RKTPRealm extends RealmObject {
     public String toString() {
         return "RKTPRealm{" +
                 "hashId='" + hashId + '\'' +
-                ", petugas='" + petugas + '\'' +
+                ", idUser='" + idUser + '\'' +
                 ", idDesa=" + idDesa +
                 ", poktan='" + poktan + '\'' +
                 ", tahun='" + tahun + '\'' +
@@ -228,13 +229,14 @@ public class RKTPRealm extends RealmObject {
                 ", sasaran='" + sasaran + '\'' +
                 ", materi='" + materi + '\'' +
                 ", metode='" + metode + '\'' +
-                ", volume=" + volume +
+                ", volume='" + volume + '\'' +
                 ", lokasi='" + lokasi + '\'' +
                 ", waktu='" + waktu + '\'' +
                 ", sumberBiaya='" + sumberBiaya + '\'' +
                 ", penanggungJawab='" + penanggungJawab + '\'' +
                 ", pelaksana='" + pelaksana + '\'' +
                 ", keterangan='" + keterangan + '\'' +
+                ", isSync=" + isSync +
                 '}';
     }
 }

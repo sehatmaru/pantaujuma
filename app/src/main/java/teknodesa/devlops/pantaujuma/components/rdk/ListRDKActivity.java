@@ -39,7 +39,7 @@ import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
-public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickRDKListener, GetRDKContract.View {
+public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickRDKListener,GetRDKContract.View {
     @Inject
     Realm realm;
 
@@ -103,10 +103,11 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
         realm.commitTransaction();
 
         hasilList = listrdkNotSync.size();
-
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
+
+        checkDataRealm();
     }
 
     private void populateInitialData(){
@@ -188,7 +189,7 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
 
     @Override
     public void OnClickRDK(String idRDK) {
-        startActivity(DetailRDKActivity.createIntent(getApplicationContext(),idRDK));
+        startActivity(DetailRDKActivity.createIntent(getApplicationContext(), idRDK));
     }
 
     @Override
@@ -197,7 +198,6 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
         getMenuInflater().inflate(R.menu.menu_eidu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -240,6 +240,7 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
         dialog.show();
     }
 
+
     private void syncDialog() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .title(R.string.title_sync)
@@ -271,7 +272,7 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data rdk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        return Snackbar.make(coordinatorLayout, "Anda memiliki data RDK "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
     }
 
     @Override

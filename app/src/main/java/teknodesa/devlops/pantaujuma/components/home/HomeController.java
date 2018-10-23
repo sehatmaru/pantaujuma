@@ -1,13 +1,8 @@
 package teknodesa.devlops.pantaujuma.components.home;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.Promotion;
@@ -21,9 +16,6 @@ public class HomeController implements HomeContract.Controller {
 
     @Inject
     Realm realm;
-    @Inject
-    EventBus mBus;
-
     private HomeContract.View views;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -32,19 +24,9 @@ public class HomeController implements HomeContract.Controller {
 
     }
 
-
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
-    }
-
     public void setView(HomeContract.View view){
         views = view;
     }
-
-
 
     @Override
     public void getPromotion() {

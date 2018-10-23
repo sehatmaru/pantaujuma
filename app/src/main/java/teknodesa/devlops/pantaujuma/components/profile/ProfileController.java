@@ -1,11 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.profile;
 
 import android.support.annotation.NonNull;
-
-import org.greenrobot.eventbus.EventBus;
-
 import javax.inject.Inject;
-
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -19,8 +15,6 @@ public class ProfileController implements ProfileContract.Controller {
 
     @Inject
     Realm realm;
-    @Inject
-    EventBus mBus;
 
     private ProfileContract.View views;
 
@@ -30,20 +24,9 @@ public class ProfileController implements ProfileContract.Controller {
 
     }
 
-
-    public void onResume() {
-        mBus.register(this);
-    }
-    public void onPause(){
-        mBus.unregister(this);
-    }
-
     public void setView(ProfileContract.View view){
         views = view;
     }
-
-
-
 
     @Override
     public void getProfileUser() {

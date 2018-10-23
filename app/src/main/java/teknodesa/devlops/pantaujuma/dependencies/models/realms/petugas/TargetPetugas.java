@@ -9,7 +9,7 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.PenggunaRealm;
 public class TargetPetugas extends RealmObject {
     @PrimaryKey
     private String hashId;
-    private String petugas;
+    private String idUser;
     private int idDesa;
     private int tahun;
     private String komoditas;
@@ -25,7 +25,7 @@ public class TargetPetugas extends RealmObject {
 
     public TargetPetugas(TargetPetugas targetPetugas, int isSync){
         this.hashId = targetPetugas.getHashId();
-        this.petugas = targetPetugas.getPetugas();
+        this.idUser = targetPetugas.getIdUser();
         this.idDesa = targetPetugas.getIdDesa();
         this.tahun = targetPetugas.getTahun();
         this.komoditas = targetPetugas.getKomoditas();
@@ -37,9 +37,9 @@ public class TargetPetugas extends RealmObject {
         this.isSync = isSync;
     }
 
-    public TargetPetugas(String hashId, String petugas, int idDesa, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
+    public TargetPetugas(String hashId, String idUser, int idDesa, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
         this.hashId = hashId;
-        this.petugas = petugas;
+        this.idUser = idUser;
         this.idDesa = idDesa;
         this.tahun = tahun;
         this.komoditas = komoditas;
@@ -50,14 +50,6 @@ public class TargetPetugas extends RealmObject {
         this.keterangan = keterangan;
     }
 
-    public int getIsSync() {
-        return isSync;
-    }
-
-    public void setIsSync(int isSync) {
-        this.isSync = isSync;
-    }
-
     public String getHashId() {
         return hashId;
     }
@@ -66,12 +58,12 @@ public class TargetPetugas extends RealmObject {
         this.hashId = hashId;
     }
 
-    public String getPetugas() {
-        return petugas;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setPetugas(String petugas) {
-        this.petugas = petugas;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public int getIdDesa() {
@@ -138,11 +130,19 @@ public class TargetPetugas extends RealmObject {
         this.keterangan = keterangan;
     }
 
+    public int getIsSync() {
+        return isSync;
+    }
+
+    public void setIsSync(int isSync) {
+        this.isSync = isSync;
+    }
+
     @Override
     public String toString() {
         return "TargetPetugas{" +
                 "hashId='" + hashId + '\'' +
-                ", petugas='" + petugas + '\'' +
+                ", idUser='" + idUser + '\'' +
                 ", idDesa=" + idDesa +
                 ", tahun=" + tahun +
                 ", komoditas='" + komoditas + '\'' +
@@ -151,6 +151,7 @@ public class TargetPetugas extends RealmObject {
                 ", sasaranProduksi=" + sasaranProduksi +
                 ", sasaranProduktifitas=" + sasaranProduktifitas +
                 ", keterangan='" + keterangan + '\'' +
+                ", isSync=" + isSync +
                 '}';
     }
 }

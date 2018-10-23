@@ -40,8 +40,10 @@ import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Identitas;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Irigasi;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.JadwalKegiatan;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RDKParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RencanaUmum;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.SasaranIntensifikasi;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 
 public class CRURDKFragment extends Fragment implements RDKContract.ViewController<RDKRealm>, RDKContract.View {
@@ -77,6 +79,7 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     @BindView(R.id.tabs)
     TabLayout tabs;
+
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
@@ -178,26 +181,57 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         String hashIdSasaran = getSaltString();
 
         RDKRealm newRealmItem = new RDKRealm();
-        newRealmItem.setHashId(getSaltString());
-        newRealmItem.setHashIdIdentitas(hashIdIdentitas);
-        newRealmItem.setIdDesa(AkunFragment.idDesa);
-        newRealmItem.setPetugas(AkunFragment.idUser);
+
+        if (CRUActivity.mAction.equals("update")){
+            newRealmItem.setHashId(DetailRDKActivity.dataRDK.getHashId());
+            newRealmItem.setHashIdIdentitas(DetailRDKActivity.dataRDK.getHashIdIdentitas());
+            newRealmItem.setHashIdIrigasi(DetailRDKActivity.dataRDK.getHashIdIrigasi());
+            newRealmItem.setHashIdRencana(DetailRDKActivity.dataRDK.getHashIdRencana());
+            newRealmItem.setHashIdJadwal(DetailRDKActivity.dataRDK.getHashIdJadwal());
+            newRealmItem.setHashIdSasaran(DetailRDKActivity.dataRDK.getHashIdSasaran());
+
+            newRealmItem.setIrigasi(DetailRDKActivity.dataRDK.getIrigasi());
+            newRealmItem.setRencana(DetailRDKActivity.dataRDK.getRencana());
+            newRealmItem.setKegiatan(DetailRDKActivity.dataRDK.getKegiatan());
+            newRealmItem.setIntensifikasi(DetailRDKActivity.dataRDK.getIntensifikasi());
+
+        } else {
+            newRealmItem.setIrigasi(hashIdIrigasi);
+            newRealmItem.setRencana(hashIdRencana);
+            newRealmItem.setKegiatan(hashIdJadwal);
+            newRealmItem.setIntensifikasi(hashIdSasaran);
+
+            newRealmItem.setHashId(getSaltString());
+            newRealmItem.setHashIdIdentitas(hashIdIdentitas);
+            newRealmItem.setHashIdIrigasi(hashIdIrigasi);
+            newRealmItem.setHashIdRencana(hashIdRencana);
+            newRealmItem.setHashIdJadwal(hashIdJadwal);
+            newRealmItem.setHashIdSasaran(hashIdSasaran);
+        }
+        UserDB userDB = getData();
+        int idDes;
+        try {
+            idDes =  Integer.valueOf(userDB.getAttributeValue());
+        }catch (Exception e){
+            idDes = 0;
+        }
+        String idUs;
+        try {
+            idUs =  userDB.getId();
+        }catch (Exception e){
+            idUs = "";
+        }
+        newRealmItem.setIdDesa(idDes);
+        newRealmItem.setIdUser(idUs);
         newRealmItem.setPoktan(identitas.getPoktan());
-        newRealmItem.setIrigasi(hashIdIrigasi);
-        newRealmItem.setIntensifikasi(hashIdSasaran);
-        newRealmItem.setRencana(hashIdRencana);
-        newRealmItem.setKegiatan(hashIdJadwal);
         newRealmItem.setTanggal(identitas.getTanggal());
         newRealmItem.setLuasSawah(identitas.getLuasSawah());
         newRealmItem.setKeterangan(identitas.getKeterangan());
-        newRealmItem.setHashIdIrigasi(hashIdIrigasi);
         newRealmItem.setNama(irigasi.getNama());
         newRealmItem.setDeskripsiIrigasi(irigasi.getDeskripsiIrigasi());
-        newRealmItem.setHashIdJadwal(hashIdJadwal);
         newRealmItem.setKegiatanJK(jadwalKegiatan.getKegiatanJK());
         newRealmItem.setTanggalJK(jadwalKegiatan.getTanggalJK());
         newRealmItem.setDeskripsiJK(jadwalKegiatan.getDeskripsiJK());
-        newRealmItem.setHashIdRencana(hashIdRencana);
         newRealmItem.setPaketTeknologi(rencanaUmum.getPaketTeknologi());
         newRealmItem.setPolaTanam(rencanaUmum.getPolaTanam());
         newRealmItem.setJadwalTanam(rencanaUmum.getJadwalTanam());
@@ -207,7 +241,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         newRealmItem.setTabunganAnggota(rencanaUmum.getTabunganAnggota());
         newRealmItem.setIuranAnggota(rencanaUmum.getIuranAnggota());
         newRealmItem.setPemupukanModal(rencanaUmum.getPemupukanModal());
-        newRealmItem.setHashIdSasaran(hashIdSasaran);
         newRealmItem.setKomoditasSI(sasaranIntensifikasi.getKomoditasSI());
         newRealmItem.setTarget(sasaranIntensifikasi.getTarget());
         newRealmItem.setTargetHasilPerHa(sasaranIntensifikasi.getTargetHasilPerHa());
@@ -246,7 +279,7 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-                String idItem = ((RDKRealm) itemData).getHashId();
+                String idItem = ((RDKParcelable) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
             }
         }
@@ -282,14 +315,24 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     protected String getSaltString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 10) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            StringBuilder salt = new StringBuilder();
+            Random rnd = new Random();
+            while (salt.length() < 10) { // length of the random string.
+                int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         return timeStamp + "" + salt.toString();
     }
 
+    public UserDB getData() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        if(user == null){
+            return null;
+        }else{
+            return user;
+        }
+    }
 }
