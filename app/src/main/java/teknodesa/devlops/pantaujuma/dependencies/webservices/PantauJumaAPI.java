@@ -15,7 +15,7 @@ import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PengurusPoktanBody
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PetaniBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PoktanBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PostBody;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RDKBody;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RKTPBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.TargetPetugasBody;

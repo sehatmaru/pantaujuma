@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.TargetPetugas;
+
 public class TargetPetugasBody {
     private String hashId;
     private String idUser;
@@ -16,17 +18,17 @@ public class TargetPetugasBody {
 
     }
 
-    public TargetPetugasBody(String hashId, String idUser, int idDesa, int tahun, String komoditas, float luasTanam, float luasPanen, float sasaranProduksi, float sasaranProduktifitas, String keterangan) {
-        this.hashId = hashId;
-        this.idUser = idUser;
-        this.idDesa = idDesa;
-        this.tahun = tahun;
-        this.komoditas = komoditas;
-        this.luasTanam = luasTanam;
-        this.luasPanen = luasPanen;
-        this.sasaranProduksi = sasaranProduksi;
-        this.sasaranProduktifitas = sasaranProduktifitas;
-        this.keterangan = keterangan;
+    public TargetPetugasBody(TargetPetugas data) {
+        this.hashId = data.getHashId();
+        this.idUser = data.getIdUser();
+        this.idDesa = data.getIdDesa();
+        this.tahun = data.getTahun();
+        this.komoditas = data.getKomoditas();
+        this.luasTanam = data.getLuasTanam();
+        this.luasPanen = data.getLuasPanen();
+        this.sasaranProduksi = data.getSasaranProduksi();
+        this.sasaranProduktifitas = data.getSasaranProduktifitas();
+        this.keterangan = data.getKeterangan();
     }
 
     public String getHashId() {

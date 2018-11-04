@@ -159,7 +159,7 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
         newRealmItem.setKabupaten(strkabupaten);
         newRealmItem.setIsSync(0);
 
-        Log.e("dataHarga", newRealmItem.toString());
+//        Log.e("dataHarga", newRealmItem.toString());
 
         return newRealmItem;
     }

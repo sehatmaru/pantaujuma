@@ -67,13 +67,7 @@ public class GetRKTPController implements GetRKTPContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,RKTPRealm targetTemp) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(targetTemp);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

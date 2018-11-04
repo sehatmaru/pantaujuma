@@ -92,6 +92,7 @@ public class CRUAnggotaPoktanFragment extends Fragment implements PoktanContract
     }
 
     public static List<AnggotaPoktanRealm> listData = Collections.EMPTY_LIST;
+    public static List<AnggotaPoktanRealm> listanggotaNotSync = Collections.EMPTY_LIST;
     PoktanRealm dataPoktan = null;
 
     private AppComponent appComponent;
@@ -105,6 +106,11 @@ public class CRUAnggotaPoktanFragment extends Fragment implements PoktanContract
 
         appComponent = ((MainApplication) getActivity().getApplication()).getComponent();
         appComponent.inject(this);
+
+        realm.beginTransaction();
+        listanggotaNotSync = realm.where(AnggotaPoktanRealm.class).equalTo("isSync",0).findAll();
+        Log.e("ini list anggota", "" + listanggotaNotSync.toString());
+        realm.commitTransaction();
     }
 
     @Override
@@ -177,14 +183,13 @@ public class CRUAnggotaPoktanFragment extends Fragment implements PoktanContract
     @Override
     public AnggotaPoktanRealm getUIData() {
         String strTanggalMasuk = (input_tanggalmasuk.getText().toString() == null) ? "-" : input_tanggalmasuk.getText().toString();
-        String status = "aktif";
 
         AnggotaPoktanRealm newItem = new AnggotaPoktanRealm();
         newItem.setHashId(getSaltString());
         newItem.setPoktanAnggota(DetailPoktanActivity.idPoktan);
         newItem.setPetaniAnggota(biodata);
         newItem.setTanggalMasuk(strTanggalMasuk);
-        newItem.setStatusAnggota(status);
+        newItem.setStatusAnggota(0);
         newItem.setIdDesa(getIdDesa());
         newItem.setIsSync(0);
 
@@ -193,7 +198,7 @@ public class CRUAnggotaPoktanFragment extends Fragment implements PoktanContract
         dataPoktan.setIsSync(0);
         realm.commitTransaction();
 
-        Log.e("data Poktan" , "" + dataPoktan.toString());
+        Log.e("data anggota" , "" + newItem.toString());
 
         return newItem;
     }

@@ -68,13 +68,7 @@ public class GetTargetController implements GetTargetContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,TargetPetugas targetTemp) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(targetTemp);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

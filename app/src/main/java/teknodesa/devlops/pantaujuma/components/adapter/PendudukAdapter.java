@@ -50,9 +50,9 @@ public class PendudukAdapter extends RecyclerView.Adapter<PendudukAdapter.MyView
             holder.cardview.setCardBackgroundColor(Color.CYAN);
         }
         if(penduduk.getNIK() == null || penduduk.getNIK().compareTo("")==0){
-            holder.textnik.setText("NIK : -");
+            holder.textnik.setText("NIK: -");
         }else{
-            holder.textnik.setText("NIK : "+penduduk.getNIK());
+            holder.textnik.setText("NIK: "+penduduk.getNIK());
         }
 
         String namaDepan;
@@ -67,10 +67,10 @@ public class PendudukAdapter extends RecyclerView.Adapter<PendudukAdapter.MyView
         }else{
             namaBelakang = penduduk.getNamaBelakang();
         }
-        holder.textname.setText("Nama :"+namaDepan+" "+ namaBelakang);
+        holder.textname.setText("Nama: "+namaDepan+" "+ namaBelakang);
 
         if(penduduk.getJenisKelamin() == null || penduduk.getJenisKelamin().compareTo("")==0){
-            holder.textjk.setText("Jenis Kelamin : -");
+            holder.textjk.setText("Jenis Kelamin: -");
         }else{
             holder.textjk.setText("Jenis Kelamin: "+penduduk.getJenisKelamin());
         }
@@ -86,7 +86,7 @@ public class PendudukAdapter extends RecyclerView.Adapter<PendudukAdapter.MyView
         }else{
             tanggalLahir = penduduk.getTanggalLahir();
         }
-        holder.textttl.setText("TTL : "+tempatLahir+", "+tanggalLahir);
+        holder.textttl.setText("TTL: "+tempatLahir+", "+tanggalLahir);
         holder.cardview.setOnClickListener(view -> {
             onClicPenduduk.OnClickPenduduk(penduduk.getHashId());
         });

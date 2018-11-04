@@ -2,15 +2,11 @@ package teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import io.realm.annotations.PrimaryKey;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 
 public class RDKParcelable implements Parcelable{
-    @PrimaryKey
     private String hashId;
 
-    private String hashIdIdentitas;
     private String idUser;
     private String poktan;
     private String irigasi;
@@ -50,12 +46,10 @@ public class RDKParcelable implements Parcelable{
     private String target;
     private String targetHasilPerHa;
 
-    private int isSync;
     private int idDesa;
 
     public RDKParcelable(RDKRealm realm) {
         this.hashId = realm.getHashId();
-        this.hashIdIdentitas = realm.getHashIdIdentitas();
         this.idUser = realm.getIdUser();
         this.poktan = realm.getPoktan();
         this.irigasi = realm.getIrigasi();
@@ -86,13 +80,11 @@ public class RDKParcelable implements Parcelable{
         this.komoditasSI = realm.getKomoditasSI();
         this.target = realm.getTarget();
         this.targetHasilPerHa = realm.getTargetHasilPerHa();
-        this.isSync = realm.getIsSync();
         this.idDesa = realm.getIdDesa();
     }
 
     protected RDKParcelable(Parcel in) {
         hashId = in.readString();
-        hashIdIdentitas = in.readString();
         idUser = in.readString();
         poktan = in.readString();
         irigasi = in.readString();
@@ -123,7 +115,6 @@ public class RDKParcelable implements Parcelable{
         komoditasSI = in.readString();
         target = in.readString();
         targetHasilPerHa = in.readString();
-        isSync = in.readInt();
         idDesa = in.readInt();
     }
 
@@ -145,14 +136,6 @@ public class RDKParcelable implements Parcelable{
 
     public void setHashId(String hashId) {
         this.hashId = hashId;
-    }
-
-    public String getHashIdIdentitas() {
-        return hashIdIdentitas;
-    }
-
-    public void setHashIdIdentitas(String hashIdIdentitas) {
-        this.hashIdIdentitas = hashIdIdentitas;
     }
 
     public String getIdUser() {
@@ -395,14 +378,6 @@ public class RDKParcelable implements Parcelable{
         this.targetHasilPerHa = targetHasilPerHa;
     }
 
-    public int getIsSync() {
-        return isSync;
-    }
-
-    public void setIsSync(int isSync) {
-        this.isSync = isSync;
-    }
-
     public int getIdDesa() {
         return idDesa;
     }
@@ -415,7 +390,6 @@ public class RDKParcelable implements Parcelable{
     public String toString() {
         return "RDKParcelable{" +
                 "hashId='" + hashId + '\'' +
-                ", hashIdIdentitas='" + hashIdIdentitas + '\'' +
                 ", idUser='" + idUser + '\'' +
                 ", poktan='" + poktan + '\'' +
                 ", irigasi='" + irigasi + '\'' +
@@ -446,7 +420,6 @@ public class RDKParcelable implements Parcelable{
                 ", komoditasSI='" + komoditasSI + '\'' +
                 ", target='" + target + '\'' +
                 ", targetHasilPerHa='" + targetHasilPerHa + '\'' +
-                ", isSync=" + isSync +
                 ", idDesa=" + idDesa +
                 '}';
     }
@@ -459,7 +432,6 @@ public class RDKParcelable implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(hashId);
-        parcel.writeString(hashIdIdentitas);
         parcel.writeString(idUser);
         parcel.writeString(poktan);
         parcel.writeString(irigasi);
@@ -490,7 +462,6 @@ public class RDKParcelable implements Parcelable{
         parcel.writeString(komoditasSI);
         parcel.writeString(target);
         parcel.writeString(targetHasilPerHa);
-        parcel.writeInt(isSync);
         parcel.writeInt(idDesa);
     }
 }

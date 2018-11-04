@@ -27,63 +27,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:layout_marginTop="50dp">
-
-                    <ImageView
-                        android:id="@+id/nameImage"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsuser"
-                        android:visibility="visible" />
-
-
-                    <LinearLayout
-                        android:id="@+id/dataPetugas"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/nameImage"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/petugasrdktext"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="@string/petugas"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/petugasrdk"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:padding="16dp">
 
                     <ImageView
@@ -391,52 +334,6 @@
 
                         <TextView
                             android:id="@+id/deskripsiIrigasi"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/kegiatantext"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="@string/kegiatan"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kegiatan"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -1122,16 +1019,6 @@
             android:layout_weight="1"
             android:background="@android:color/holo_green_dark"
             android:text="@string/edit" />
-
-        <Button
-            android:id="@+id/btnHapus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_green_dark"
-            android:text="@string/delete" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

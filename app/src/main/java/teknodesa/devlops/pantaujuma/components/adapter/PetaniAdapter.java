@@ -70,9 +70,9 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
             holder.cardview.setCardBackgroundColor(Color.CYAN);
         }
         if(penduduk.getNIK() == null || penduduk.getNIK().compareTo("")==0){
-            holder.textnik.setText("NIK : -");
+            holder.textnik.setText("NIK: -");
         }else{
-            holder.textnik.setText("NIK : "+penduduk.getNIK());
+            holder.textnik.setText("NIK: "+penduduk.getNIK());
         }
 
         String namaDepan;
@@ -87,10 +87,10 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
         }else{
             namaBelakang = penduduk.getNamaBelakang();
         }
-        holder.textname.setText("Nama :"+namaDepan+" "+ namaBelakang);
+        holder.textname.setText("Nama: "+namaDepan+" "+ namaBelakang);
 
         if(penduduk.getJenisKelamin() == null || penduduk.getJenisKelamin().compareTo("")==0){
-            holder.textjk.setText("Jenis Kelamin : -");
+            holder.textjk.setText("Jenis Kelamin: -");
         }else{
             holder.textjk.setText("Jenis Kelamin: "+penduduk.getJenisKelamin());
         }

@@ -71,13 +71,7 @@ public class GetPengurusPoktanController implements GetPengurusPoktanContract.Co
     }
 
     @Override
-    public void saveDataSuccess(String message,PengurusPoktanRealm poktanTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(poktanTempRealm);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

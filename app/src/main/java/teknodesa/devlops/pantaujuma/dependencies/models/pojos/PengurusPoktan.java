@@ -14,7 +14,7 @@ public class PengurusPoktan implements Parcelable {
     private String petaniPengurus;
     private String jabatan;
     private String periode;
-    private String statusPengurus;
+    private int statusPengurus;
 
     private int idDesa;
     private int isSync;
@@ -33,24 +33,13 @@ public class PengurusPoktan implements Parcelable {
         this.isSync = anggotaPoktanRealm.getIsSync();
     }
 
-    public PengurusPoktan(String hashId, String poktanPengurus, String petaniPengurus, String jabatan, String periode, String statusPengurus, int idDesa, int isSync) {
-        this.hashId = hashId;
-        this.poktanPengurus = poktanPengurus;
-        this.petaniPengurus = petaniPengurus;
-        this.jabatan = jabatan;
-        this.periode = periode;
-        this.statusPengurus = statusPengurus;
-        this.idDesa = idDesa;
-        this.isSync = isSync;
-    }
-
     protected PengurusPoktan(Parcel in) {
         hashId = in.readString();
         poktanPengurus = in.readString();
         petaniPengurus = in.readString();
         jabatan = in.readString();
         periode = in.readString();
-        statusPengurus = in.readString();
+        statusPengurus = in.readInt();
         idDesa = in.readInt();
         isSync = in.readInt();
     }
@@ -108,11 +97,11 @@ public class PengurusPoktan implements Parcelable {
         this.periode = periode;
     }
 
-    public String getStatusPengurus() {
+    public int getStatusPengurus() {
         return statusPengurus;
     }
 
-    public void setStatusPengurus(String statusPengurus) {
+    public void setStatusPengurus(int statusPengurus) {
         this.statusPengurus = statusPengurus;
     }
 
@@ -179,7 +168,7 @@ public class PengurusPoktan implements Parcelable {
         parcel.writeString(petaniPengurus);
         parcel.writeString(jabatan);
         parcel.writeString(periode);
-        parcel.writeString(statusPengurus);
+        parcel.writeInt(statusPengurus);
         parcel.writeInt(idDesa);
         parcel.writeInt(isSync);
     }

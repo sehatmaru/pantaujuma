@@ -18,7 +18,7 @@ public class GetTargetContract {
         void saveData(List<TargetPetugas> allTar);
         void getAllTargetSuccess(List<TargetPetugas> allTarget);
         void getAllTargetFailed(String message);
-        void saveDataSuccess(String message, TargetPetugas targetTemp);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(TargetPetugas targetTemp);
     }

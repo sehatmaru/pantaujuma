@@ -184,7 +184,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
         if (CRUActivity.mAction.equals("update")){
             newRealmItem.setHashId(DetailRDKActivity.dataRDK.getHashId());
-            newRealmItem.setHashIdIdentitas(DetailRDKActivity.dataRDK.getHashIdIdentitas());
             newRealmItem.setHashIdIrigasi(DetailRDKActivity.dataRDK.getHashIdIrigasi());
             newRealmItem.setHashIdRencana(DetailRDKActivity.dataRDK.getHashIdRencana());
             newRealmItem.setHashIdJadwal(DetailRDKActivity.dataRDK.getHashIdJadwal());
@@ -202,7 +201,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
             newRealmItem.setIntensifikasi(hashIdSasaran);
 
             newRealmItem.setHashId(getSaltString());
-            newRealmItem.setHashIdIdentitas(hashIdIdentitas);
             newRealmItem.setHashIdIrigasi(hashIdIrigasi);
             newRealmItem.setHashIdRencana(hashIdRencana);
             newRealmItem.setHashIdJadwal(hashIdJadwal);
@@ -281,6 +279,7 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
             if (tipe.equals("update")) {
                 String idItem = ((RDKParcelable) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
+                Log.e("ini hasil update", "" + itemData.toString());
             }
         }
     }

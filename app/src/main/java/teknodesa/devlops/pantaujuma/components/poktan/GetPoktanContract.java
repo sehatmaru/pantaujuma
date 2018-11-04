@@ -21,7 +21,7 @@ public class GetPoktanContract {
         void saveData(List<PoktanRealm> allPen);
         void getAllPoktanSuccess(List<PoktanRealm> allPoktan);
         void getAllPoktanFailed(String message);
-        void saveDataSuccess(String message, PoktanRealm poktanTempRealm);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(PoktanRealm poktanTempRealm);
     }

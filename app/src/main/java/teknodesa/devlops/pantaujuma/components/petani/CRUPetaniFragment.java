@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -187,14 +188,12 @@ public class CRUPetaniFragment extends Fragment implements
         input_deskripsi.setText(DetailPetaniActivity.dataPetani.getDeskripsi());
         String[] sourcesStatus= {"Pilih salah satu", "Aktif", "Non-Aktif"};
         setSpinnerSelection(DetailPetaniActivity.dataPetani.getStatus(),sourcesStatus,input_status);
-
     }
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
         PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this, appComponent);
         PetaniRealm uiItem = getUIData();
-
         if (tipe.equals("insert")) {
             mController.addItem(uiItem);
         } else {

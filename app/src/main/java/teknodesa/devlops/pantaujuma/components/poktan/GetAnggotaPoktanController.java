@@ -71,13 +71,7 @@ public class GetAnggotaPoktanController implements GetAnggotaPoktanContract.Cont
     }
 
     @Override
-    public void saveDataSuccess(String message,AnggotaPoktanRealm poktanTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(poktanTempRealm);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

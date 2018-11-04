@@ -21,7 +21,7 @@ public class GetPengurusPoktanContract {
         void saveData(List<PengurusPoktanRealm> allPen);
         void getAllPengurusPoktanSuccess(List<PengurusPoktanRealm> allPengurusPoktan);
         void getAllPengurusPoktanFailed(String message);
-        void saveDataSuccess(String message, PengurusPoktanRealm pengurusPoktanTempRealm);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(PengurusPoktanRealm pengurusPoktanTempRealm);
     }

@@ -93,7 +93,7 @@
 
 
                     <LinearLayout
-                        android:id="@+id/dataTahun"
+                        android:id="@+id/dataPenanggungJawab"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -114,11 +114,11 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Tahun"
+                            android:text="Penanggung Jawab"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tahun"
+                            android:id="@+id/penanggungjawab"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -653,7 +653,7 @@
 
 
                     <LinearLayout
-                        android:id="@+id/dataPenanggungJawab"
+                        android:id="@+id/dataTahun"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -674,11 +674,11 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Penanggung Jawab"
+                            android:text="Tahun"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/penanggungjawab"
+                            android:id="@+id/tahun"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"

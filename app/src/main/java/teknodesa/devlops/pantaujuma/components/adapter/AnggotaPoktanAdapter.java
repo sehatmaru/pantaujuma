@@ -66,9 +66,34 @@ public class AnggotaPoktanAdapter extends RecyclerView.Adapter<AnggotaPoktanAdap
                 .equalTo("hashId", idPenduduk)
                 .findFirst();
 
-        holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
-        holder.textnik.setText(penduduk.getNIK());
-        holder.texttanggal.setText("Masuk : " + anggotaPoktan.getTanggalMasuk());
+        String nama;
+        String nik;
+        String tanggal;
+
+        if(anggotaPoktan.getPetaniAnggota() == null || anggotaPoktan.getPetaniAnggota().compareTo("")==0){
+            nama="";
+            nik= "";
+        }else{
+            nama = penduduk.getNamaDepan() + " " + penduduk.getNamaBelakang();
+            nik = penduduk.getNIK();
+        }
+
+        holder.textname.setText(nama);
+        holder.textnik.setText(nik);
+
+        if(anggotaPoktan.getTanggalMasuk() == null || anggotaPoktan.getTanggalMasuk().compareTo("")==0){
+            tanggal="";
+        }else{
+            tanggal = anggotaPoktan.getTanggalMasuk();
+        }
+
+        holder.texttanggal.setText("Masuk: " + tanggal);
+
+//        Log.e("ini tanggal masuk ", anggotaPoktan.getTanggalMasuk());
+
+//        holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
+//        holder.textnik.setText(penduduk.getNIK());
+//        holder.texttanggal.setText("Masuk : " + anggotaPoktan.getTanggalMasuk());
     }
 
     @Override

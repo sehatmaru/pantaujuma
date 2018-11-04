@@ -11,7 +11,7 @@ public class AnggotaPoktanRealm extends RealmObject {
     private String poktanAnggota = null;
     private String petaniAnggota = null;
     private String tanggalMasuk = "-";
-    private String statusAnggota = "-";
+    private int statusAnggota;
     private int idDesa = 0;
     private int isSync = 0;
 
@@ -50,11 +50,11 @@ public class AnggotaPoktanRealm extends RealmObject {
         this.tanggalMasuk = tanggalMasuk;
     }
 
-    public String getStatusAnggota() {
+    public int getStatusAnggota() {
         return statusAnggota;
     }
 
-    public void setStatusAnggota(String statusAnggota) {
+    public void setStatusAnggota(int statusAnggota) {
         this.statusAnggota = statusAnggota;
     }
 
@@ -72,5 +72,18 @@ public class AnggotaPoktanRealm extends RealmObject {
 
     public void setIsSync(int isSync) {
         this.isSync = isSync;
+    }
+
+    @Override
+    public String toString() {
+        return "AnggotaPoktanRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", poktanAnggota='" + poktanAnggota + '\'' +
+                ", petaniAnggota='" + petaniAnggota + '\'' +
+                ", tanggalMasuk='" + tanggalMasuk + '\'' +
+                ", statusAnggota='" + statusAnggota + '\'' +
+                ", idDesa=" + idDesa +
+                ", isSync=" + isSync +
+                '}';
     }
 }

@@ -145,6 +145,7 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
         String strKecamatan = (input_kecamatan.getText().toString() == null) ? "-" : input_kecamatan.getText().toString();
         String strNoHP = (input_hp.getText().toString() == null) ? "-" : input_hp.getText().toString();
         String strNoTelp = (input_telp.getText().toString() == null) ? "-" : input_telp.getText().toString();
+//        String strStatus = "Aktif";
 
         PoktanRealm newItem = new PoktanRealm();
 
@@ -162,11 +163,11 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
         newItem.setKecamatan(strKecamatan);
         newItem.setNoHP(strNoHP);
         newItem.setNoTelp(strNoTelp);
-        newItem.setStatusPoktan("Aktif");
+        newItem.setStatusPoktan(0);
         newItem.setIdDesa(getIdDesa());
         newItem.setIsSync(0);
 
-        Log.e("dataPoktan", "" + newItem.toString());
+//        Log.e("ini data poktan", newItem.toString())
 
         return newItem;
     }

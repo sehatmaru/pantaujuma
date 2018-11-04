@@ -37,13 +37,6 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewController<Identitas>, RDKContract.View, SearchPoktanFragment.OnClickPoktanListener {
 
     Calendar myCalendar;
-    DatePickerDialog.OnDateSetListener date;
-
-    @BindView(R.id.input_idDesa)
-    EditText input_idDesa;
-
-    @BindView(R.id.input_petugas)
-    EditText input_petugas;
 
     @BindView(R.id.input_poktan)
     EditText input_poktan;
@@ -76,12 +69,14 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     EditText input_keterangan;
 
     String poktan;
+    String namaPoktan;
 
     @OnClick(R.id.btnPoktan)
     void clickPilihPoktan() {
         SearchPoktanFragment.keterangan = 1;
         SearchPoktanFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
+
     @Inject
     Realm realm;
     @Override
@@ -104,31 +99,13 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     }
 
     private void setData(){
-        UserDB userDB = getData();
-        String namaDesa;
-        try {
-            namaDesa =  userDB.getNamaDesa();
-        }catch (Exception e){
-            namaDesa = "";
-        }
 
-        String namaPetugas;
-        try {
-            namaPetugas =  userDB.getNamaLengkap();
-        }catch (Exception e){
-            namaPetugas = "";
-        }
-
-        input_idDesa.setText(namaDesa);
-        input_petugas.setText(namaPetugas);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        input_idDesa = getActivity().findViewById(R.id.input_idDesa);
-        input_petugas= getActivity().findViewById(R.id.input_petugas);
         input_poktan = getActivity().findViewById(R.id.input_poktan);
         input_tanggal= getActivity().findViewById(R.id.input_tanggal);
         input_luasSawah = getActivity().findViewById(R.id.input_luasSawah);
@@ -140,35 +117,9 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
             setData();
         }
     }
-    public UserDB getData() {
-        realm.beginTransaction();
-        UserDB user =realm.where(UserDB.class).findFirst();
-        realm.commitTransaction();
-        if(user == null){
-            return null;
-        }else{
-            return user;
-        }
-    }
+
     private void setLayoutForEdit(){
-        UserDB userDB = getData();
-
-        String namaDesa;
-        try {
-            namaDesa =  userDB.getNamaDesa();
-        }catch (Exception e){
-            namaDesa = "";
-        }
-
-        String namaPetugas;
-        try {
-            namaPetugas =  userDB.getNamaLengkap();
-        }catch (Exception e){
-            namaPetugas = "";
-        }
-
-        input_idDesa.setText(namaDesa);
-        input_petugas.setText(namaPetugas);
+        input_poktan.setText(DetailRDKActivity.dataRDK.getPoktan());
         input_tanggal.setText(DetailRDKActivity.dataRDK.getTanggal());
         input_luasSawah.setText(DetailRDKActivity.dataRDK.getLuasSawah());
         input_keterangan.setText(DetailRDKActivity.dataRDK.getKeterangan());
@@ -176,6 +127,8 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
 
     @Override
     public Identitas getUIData() {
+        Identitas theUIData = (Identitas) CRUActivity.mData;
+
         String strTanggal = "";
         String strLuasSawah = "";
         String strKeterangan = "";
@@ -200,8 +153,6 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     @Override
     public void setUIData() {
         Identitas theUIData = (Identitas) CRUActivity.mData;
-        input_idDesa.setText(theUIData.getIdDesa()+ "");
-        input_petugas.setText(theUIData.getPetugas()+ "");
         input_poktan.setText(theUIData.getPoktan()+ "");
         input_tanggal.setText(theUIData.getTanggal()+ "");
         input_luasSawah.setText(theUIData.getLuasSawah()+ "");

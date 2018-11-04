@@ -36,8 +36,7 @@ public class GetRKTPService implements GetRKTPContract.Repository {
         this.controller = controller;
     }
 
-
-    private boolean res = false;
+    private boolean insertRKTP = true;
 
     @Override
     public void getAllRKTP(int idDesa) {
@@ -71,43 +70,43 @@ public class GetRKTPService implements GetRKTPContract.Repository {
     }
 
     @Override
-    public void saveData(List<RKTPRealm> allTar) {
-        for (int i = 0; i < allTar.size(); i++) {
-            RKTPRealm rktpTempRealm = allTar.get(i);
-            realm.beginTransaction();
-            rktpTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            RKTPBody targetPetugasBody = new RKTPBody(rktpTempRealm.getHashId(), rktpTempRealm.getIdUser(),
-                    rktpTempRealm.getIdDesa(), rktpTempRealm.getPoktan(), rktpTempRealm.getTahun(), rktpTempRealm.getTujuan(), rktpTempRealm.getMasalah(),
-                    rktpTempRealm.getSasaran(), rktpTempRealm.getMateri(), rktpTempRealm.getMetode(), rktpTempRealm.getVolume(), rktpTempRealm.getLokasi(), rktpTempRealm.getWaktu(),
-                    rktpTempRealm.getSumberBiaya(), rktpTempRealm.getPenanggungJawab(), rktpTempRealm.getPelaksana(), rktpTempRealm.getKeterangan());
-
-            Log.e("target service", targetPetugasBody.toString());
-            Call<ResponseSaveData> call = sisApi.insertRktp(WebServiceModule.ACCESS_TOKEN_TEMP, targetPetugasBody);
+    public void saveData(List<RKTPRealm> allRKTP) {
+        for(int i=0; i < allRKTP.size();i++ ){
+            RKTPRealm rktpTempRealm = allRKTP.get(i);
+            RKTPBody rktpBody = new RKTPBody(rktpTempRealm);
+            Log.e("rktp service",rktpBody.toString());
+            final int dataLoop = i;
+            Call<ResponseSaveData> call = sisApi.insertRktp(WebServiceModule.ACCESS_TOKEN_TEMP,rktpBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
-                    if (response.isSuccessful()) {
-                        if (response.body().isSuccess()) {
-
-                            controller.saveDataSuccess("Success", rktpTempRealm);
-                        } else {
-                            controller.saveDataFailed("Failed" + response.body().getMessage());
+                    if(response.isSuccessful()){
+                        if(response.body().isSuccess()){
+                            if (dataLoop == allRKTP.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertRKTP =true;
+                        }else {
+                            insertRKTP =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
 
-                    } else {
-                        Log.e("target service", "Error3" + response.toString());
-                        controller.saveDataFailed("Failed");
+                    }else{
+                        insertRKTP =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("target service", "error server" + t.getMessage());
+                    insertRKTP =false;
                     controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertRKTP){
+                break;
+            }
         }
     }
 }

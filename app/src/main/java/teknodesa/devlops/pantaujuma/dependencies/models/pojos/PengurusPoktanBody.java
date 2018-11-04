@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
+
 public class PengurusPoktanBody {
 
     private String hashId;
@@ -8,21 +10,21 @@ public class PengurusPoktanBody {
     private String petaniPengurus = null;
     private String jabatan = "-";
     private String periode = "-";
-    private String statusPengurus = "-";
+    private int statusPengurus;
 
     private int idDesa = 0;
 
     public PengurusPoktanBody() {
     }
 
-    public PengurusPoktanBody(String hashId, String poktanPengurus, String petaniPengurus, String jabatan, String periode, String statusPengurus, int idDesa) {
-        this.hashId = hashId;
-        this.poktanPengurus = poktanPengurus;
-        this.petaniPengurus = petaniPengurus;
-        this.jabatan = jabatan;
-        this.periode = periode;
-        this.statusPengurus = statusPengurus;
-        this.idDesa = idDesa;
+    public PengurusPoktanBody(PengurusPoktanRealm data) {
+        this.hashId = data.getHashId();
+        this.poktanPengurus = data.getPoktanPengurus();
+        this.petaniPengurus = data.getPetaniPengurus();
+        this.jabatan = data.getJabatan();
+        this.periode = data.getPeriode();
+        this.statusPengurus = data.getStatusPengurus();
+        this.idDesa = data.getIdDesa();
     }
 
     public String getHashId() {
@@ -65,11 +67,11 @@ public class PengurusPoktanBody {
         this.periode = periode;
     }
 
-    public String getStatusPengurus() {
+    public int getStatusPengurus() {
         return statusPengurus;
     }
 
-    public void setStatusPengurus(String statusPengurus) {
+    public void setStatusPengurus(int statusPengurus) {
         this.statusPengurus = statusPengurus;
     }
 
@@ -79,5 +81,18 @@ public class PengurusPoktanBody {
 
     public void setIdDesa(int idDesa) {
         this.idDesa = idDesa;
+    }
+
+    @Override
+    public String toString() {
+        return "PengurusPoktanBody{" +
+                "hashId='" + hashId + '\'' +
+                ", poktanPengurus='" + poktanPengurus + '\'' +
+                ", petaniPengurus='" + petaniPengurus + '\'' +
+                ", jabatan='" + jabatan + '\'' +
+                ", periode='" + periode + '\'' +
+                ", statusPengurus=" + statusPengurus +
+                ", idDesa=" + idDesa +
+                '}';
     }
 }

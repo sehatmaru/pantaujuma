@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
+
 public class RDKKBody {
     private String hashId;
     private int idDesa;
@@ -8,42 +10,63 @@ public class RDKKBody {
     private String petani;
     private String komoditas;
     private String pupuk;
-    private float butuhJanuari;
-    private float butuhFebruari;
-    private float butuhMaret;
-    private float butuhApril;
-    private float butuhMei;
-    private float butuhJuni;
-    private float butuhJuli;
-    private float butuhAgustus;
-    private float butuhSeptember;
-    private float butuhOktober;
-    private float butuhNovember;
-    private float butuhDesember;
+    private int butuhJanuari;
+    private int butuhFebruari;
+    private int butuhMaret;
+    private int butuhApril;
+    private int butuhMei;
+    private int butuhJuni;
+    private int butuhJuli;
+    private int butuhAgustus;
+    private int butuhSeptember;
+    private int butuhOktober;
+    private int butuhNovember;
+    private int butuhDesember;
 
     public RDKKBody() {
     }
 
-    public RDKKBody(String hashId, int idDesa, String petugas, String poktan, String petani, String komoditas, String pupuk, float butuhJanuari, float butuhFebruari, float butuhMaret, float butuhApril, float butuhMei, float butuhJuni, float butuhJuli, float butuhAgustus, float butuhSeptember, float butuhOktober, float butuhNovember, float butuhDesember) {
-        this.hashId = hashId;
-        this.idDesa = idDesa;
-        this.petugas = petugas;
-        this.poktan = poktan;
-        this.petani = petani;
-        this.komoditas = komoditas;
-        this.pupuk = pupuk;
-        this.butuhJanuari = butuhJanuari;
-        this.butuhFebruari = butuhFebruari;
-        this.butuhMaret = butuhMaret;
-        this.butuhApril = butuhApril;
-        this.butuhMei = butuhMei;
-        this.butuhJuni = butuhJuni;
-        this.butuhJuli = butuhJuli;
-        this.butuhAgustus = butuhAgustus;
-        this.butuhSeptember = butuhSeptember;
-        this.butuhOktober = butuhOktober;
-        this.butuhNovember = butuhNovember;
-        this.butuhDesember = butuhDesember;
+//    public RDKKBody(String hashId, int idDesa, String petugas, String poktan, String petani, String komoditas, String pupuk, int butuhJanuari, int butuhFebruari, int butuhMaret, int butuhApril, int butuhMei, int butuhJuni, int butuhJuli, int butuhAgustus, int butuhSeptember, int butuhOktober, int butuhNovember, int butuhDesember) {
+//        this.hashId = hashId;
+//        this.idDesa = idDesa;
+//        this.petugas = petugas;
+//        this.poktan = poktan;
+//        this.petani = petani;
+//        this.komoditas = komoditas;
+//        this.pupuk = pupuk;
+//        this.butuhJanuari = butuhJanuari;
+//        this.butuhFebruari = butuhFebruari;
+//        this.butuhMaret = butuhMaret;
+//        this.butuhApril = butuhApril;
+//        this.butuhMei = butuhMei;
+//        this.butuhJuni = butuhJuni;
+//        this.butuhJuli = butuhJuli;
+//        this.butuhAgustus = butuhAgustus;
+//        this.butuhSeptember = butuhSeptember;
+//        this.butuhOktober = butuhOktober;
+//        this.butuhNovember = butuhNovember;
+//        this.butuhDesember = butuhDesember;
+//    }
+
+    public RDKKBody(RDKKPupukSubsidiRealm data) {
+        this.hashId = data.getHashId();
+        this.idDesa = data.getIdDesa();
+        this.poktan = data.getPoktan();
+        this.petani = data.getPetani();
+        this.komoditas = data.getKomoditas();
+        this.pupuk = data.getPupuk();
+        this.butuhJanuari = data.getButuhJanuari();
+        this.butuhFebruari = data.getButuhFebruari();
+        this.butuhMaret = data.getButuhMaret();
+        this.butuhApril = data.getButuhApril();
+        this.butuhMei = data.getButuhMei();
+        this.butuhJuni = data.getButuhJuni();
+        this.butuhJuli = data.getButuhJuli();
+        this.butuhAgustus = data.getButuhAgustus();
+        this.butuhSeptember = data.getButuhSeptember();
+        this.butuhOktober = data.getButuhOktober();
+        this.butuhNovember = data.getButuhNovember();
+        this.butuhDesember = data.getButuhDesember();
     }
 
     public String getHashId() {
@@ -102,99 +125,99 @@ public class RDKKBody {
         this.pupuk = pupuk;
     }
 
-    public float getButuhJanuari() {
+    public int getButuhJanuari() {
         return butuhJanuari;
     }
 
-    public void setButuhJanuari(float butuhJanuari) {
+    public void setButuhJanuari(int butuhJanuari) {
         this.butuhJanuari = butuhJanuari;
     }
 
-    public float getButuhFebruari() {
+    public int getButuhFebruari() {
         return butuhFebruari;
     }
 
-    public void setButuhFebruari(float butuhFebruari) {
+    public void setButuhFebruari(int butuhFebruari) {
         this.butuhFebruari = butuhFebruari;
     }
 
-    public float getButuhMaret() {
+    public int getButuhMaret() {
         return butuhMaret;
     }
 
-    public void setButuhMaret(float butuhMaret) {
+    public void setButuhMaret(int butuhMaret) {
         this.butuhMaret = butuhMaret;
     }
 
-    public float getButuhApril() {
+    public int getButuhApril() {
         return butuhApril;
     }
 
-    public void setButuhApril(float butuhApril) {
+    public void setButuhApril(int butuhApril) {
         this.butuhApril = butuhApril;
     }
 
-    public float getButuhMei() {
+    public int getButuhMei() {
         return butuhMei;
     }
 
-    public void setButuhMei(float butuhMei) {
+    public void setButuhMei(int butuhMei) {
         this.butuhMei = butuhMei;
     }
 
-    public float getButuhJuni() {
+    public int getButuhJuni() {
         return butuhJuni;
     }
 
-    public void setButuhJuni(float butuhJuni) {
+    public void setButuhJuni(int butuhJuni) {
         this.butuhJuni = butuhJuni;
     }
 
-    public float getButuhJuli() {
+    public int getButuhJuli() {
         return butuhJuli;
     }
 
-    public void setButuhJuli(float butuhJuli) {
+    public void setButuhJuli(int butuhJuli) {
         this.butuhJuli = butuhJuli;
     }
 
-    public float getButuhAgustus() {
+    public int getButuhAgustus() {
         return butuhAgustus;
     }
 
-    public void setButuhAgustus(float butuhAgustus) {
+    public void setButuhAgustus(int butuhAgustus) {
         this.butuhAgustus = butuhAgustus;
     }
 
-    public float getButuhSeptember() {
+    public int getButuhSeptember() {
         return butuhSeptember;
     }
 
-    public void setButuhSeptember(float butuhSeptember) {
+    public void setButuhSeptember(int butuhSeptember) {
         this.butuhSeptember = butuhSeptember;
     }
 
-    public float getButuhOktober() {
+    public int getButuhOktober() {
         return butuhOktober;
     }
 
-    public void setButuhOktober(float butuhOktober) {
+    public void setButuhOktober(int butuhOktober) {
         this.butuhOktober = butuhOktober;
     }
 
-    public float getButuhNovember() {
+    public int getButuhNovember() {
         return butuhNovember;
     }
 
-    public void setButuhNovember(float butuhNovember) {
+    public void setButuhNovember(int butuhNovember) {
         this.butuhNovember = butuhNovember;
     }
 
-    public float getButuhDesember() {
+    public int getButuhDesember() {
         return butuhDesember;
     }
 
-    public void setButuhDesember(float butuhDesember) {
+    public void setButuhDesember(int butuhDesember) {
         this.butuhDesember = butuhDesember;
     }
 

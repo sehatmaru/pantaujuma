@@ -67,13 +67,7 @@ public class GetRDKController implements GetRDKContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,RDKRealm rdkTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(rdkTempRealm);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

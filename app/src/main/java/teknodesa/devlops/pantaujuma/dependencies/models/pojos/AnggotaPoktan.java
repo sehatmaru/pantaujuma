@@ -13,7 +13,7 @@ public class AnggotaPoktan implements Parcelable {
     private String poktanAnggota;
     private String petaniAnggota;
     private String tanggalMasuk;
-    private String statusAnggota;
+    private int statusAnggota;
 
     private int idDesa;
     private int isSync;
@@ -31,22 +31,12 @@ public class AnggotaPoktan implements Parcelable {
         this.isSync = anggotaPoktanRealm.getIsSync();
     }
 
-    public AnggotaPoktan(String hashId, String poktanAnggota, String petaniAnggota, String tanggalMasuk, String statusAnggota, int idDesa, int isSync) {
-        this.hashId = hashId;
-        this.poktanAnggota = poktanAnggota;
-        this.petaniAnggota = petaniAnggota;
-        this.tanggalMasuk = tanggalMasuk;
-        this.statusAnggota = statusAnggota;
-        this.idDesa = idDesa;
-        this.isSync = isSync;
-    }
-
     protected AnggotaPoktan(Parcel in) {
         hashId = in.readString();
         poktanAnggota = in.readString();
         petaniAnggota = in.readString();
         tanggalMasuk = in.readString();
-        statusAnggota = in.readString();
+        statusAnggota = in.readInt();
         idDesa = in.readInt();
         isSync = in.readInt();
     }
@@ -96,11 +86,11 @@ public class AnggotaPoktan implements Parcelable {
         this.tanggalMasuk = tanggalMasuk;
     }
 
-    public String getTanggalDidirikan() {
+    public int getTanggalDidirikan() {
         return statusAnggota;
     }
 
-    public void setTanggalDidirikan(String statusAnggota) {
+    public void setTanggalDidirikan(int statusAnggota) {
         this.statusAnggota = statusAnggota;
     }
 
@@ -164,7 +154,7 @@ public class AnggotaPoktan implements Parcelable {
         parcel.writeString(poktanAnggota);
         parcel.writeString(petaniAnggota);
         parcel.writeString(tanggalMasuk);
-        parcel.writeString(statusAnggota);
+        parcel.writeInt(statusAnggota);
         parcel.writeInt(idDesa);
         parcel.writeInt(isSync);
     }

@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,9 +59,37 @@ public class PoktanAdapter extends RecyclerView.Adapter<PoktanAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PoktanRealm poktan = listData.get(position);
 
-        holder.textnama.setText(poktan.getNama());
-        holder.textdesa.setText("Didiikan: " + poktan.getTanggalDidirikan());
-        holder.textnohp.setText("Alamat: " + poktan.getAlamat());
+        if(poktan.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
+        }
+
+        String nama;
+        String didirikan;
+        String alamat;
+
+        if(poktan.getNama() == null || poktan.getNama().compareTo("")==0){
+            nama="";
+        }else{
+            nama = poktan.getNama();
+        }
+
+        holder.textnama.setText(nama);
+
+        if(poktan.getTanggalDidirikan() == null || poktan.getTanggalDidirikan().compareTo("")==0){
+            didirikan="";
+        }else{
+            didirikan = poktan.getTanggalDidirikan();
+        }
+
+        holder.textdesa.setText("Didirikan: " + didirikan);
+
+        if(poktan.getAlamat() == null || poktan.getAlamat().compareTo("")==0){
+            alamat="";
+        }else{
+            alamat = poktan.getAlamat();
+        }
+
+        holder.textnohp.setText("Alamat: " + alamat);
         holder.cardview.setOnClickListener(view -> {
             onClicPoktan.OnClickPoktan(poktan.getHashId());
         });

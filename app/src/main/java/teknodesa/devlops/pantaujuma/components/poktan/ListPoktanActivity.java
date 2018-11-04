@@ -112,6 +112,8 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
         listpoktanNotSync = realm.where(PoktanRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
 
+//        Log.e("ini list anggota poktan", "" + CRUAnggotaPoktanFragment.listData.toString());
+
         hasilList = listpoktanNotSync.size();
 
         spinner.setVisibility(View.VISIBLE);
@@ -271,9 +273,20 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
 
     private void startSync(){
         counter=0;
+        Log.e("list poktan sync", "" + listpoktanNotSync.toString());
+        Log.e("list anggota sync", "" + CRUAnggotaPoktanFragment.listanggotaNotSync.toString());
+        Log.e("list pengurus sync", "" + CRUPengurusPoktanFragment.listpengurusNotSync.toString());
+//        if (listpoktanNotSync!=null){
+//            mController.saveData(listpoktanNotSync);
+//        }else if (CRUAnggotaPoktanFragment.listanggotaNotSync!=null){
+//            aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
+//        }else if (CRUPengurusPoktanFragment.listpengurusNotSync!=null){
+//            pController.saveData(CRUPengurusPoktanFragment.listData);
+//        }
+
         mController.saveData(listpoktanNotSync);
-        aController.saveData(CRUAnggotaPoktanFragment.listData);
-        pController.saveData(CRUPengurusPoktanFragment.listData);
+        aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
+        pController.saveData(CRUPengurusPoktanFragment.listpengurusNotSync);
     }
 
     private void checkDataRealm(){

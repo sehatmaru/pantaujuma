@@ -12,7 +12,7 @@ public class PengurusPoktanRealm extends RealmObject {
     private String petaniPengurus = null;
     private String jabatan = "-";
     private String periode = "-";
-    private String statusPengurus = "-";
+    private int statusPengurus;
 
     private int idDesa = 0;
     private int isSync = 0;
@@ -60,11 +60,11 @@ public class PengurusPoktanRealm extends RealmObject {
         this.periode = periode;
     }
 
-    public String getStatusPengurus() {
+    public int getStatusPengurus() {
         return statusPengurus;
     }
 
-    public void setStatusPengurus(String statusPengurus) {
+    public void setStatusPengurus(int statusPengurus) {
         this.statusPengurus = statusPengurus;
     }
 
@@ -82,5 +82,19 @@ public class PengurusPoktanRealm extends RealmObject {
 
     public void setIsSync(int isSync) {
         this.isSync = isSync;
+    }
+
+    @Override
+    public String toString() {
+        return "PengurusPoktanRealm{" +
+                "hashId='" + hashId + '\'' +
+                ", poktanPengurus='" + poktanPengurus + '\'' +
+                ", petaniPengurus='" + petaniPengurus + '\'' +
+                ", jabatan='" + jabatan + '\'' +
+                ", periode='" + periode + '\'' +
+                ", statusPengurus=" + statusPengurus +
+                ", idDesa=" + idDesa +
+                ", isSync=" + isSync +
+                '}';
     }
 }

@@ -1,8 +1,10 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
+
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 
 public class RDKBody {
     private String hashId;
-    private int idDesa;
+
     private String idUser;
     private String poktan;
     private String irigasi;
@@ -11,18 +13,21 @@ public class RDKBody {
     private String kegiatan;
     private String tanggal;
     private String luasSawah;
-    private String 	keterangan;
+    private String keterangan;
 
     //Irigasi
+    private String hashIdIrigasi;
     private String nama;
     private String deskripsiIrigasi;
 
     // Jadwal Kegiatan
+    private String hashIdJadwal;
     private String kegiatanJK;
     private String tanggalJK;
     private String deskripsiJK;
 
     //Rencana Umum
+    private String hashIdRencana;
     private String paketTeknologi;
     private String polaTanam;
     private String jadwalTanam;
@@ -33,43 +38,50 @@ public class RDKBody {
     private String iuranAnggota;
     private String pemupukanModal;
 
-    //Sarana Intensifikasi
+    //Sasaran Intensifikasi
+    private String hashIdSasaran;
     private String komoditasSI;
     private String target;
     private String targetHasilPerHa;
 
+    private int idDesa;
+
     public RDKBody() {
     }
 
-    public RDKBody(String hashId, int idDesa, String idUser, String poktan, String irigasi, String intensifikasi, String rencana, String kegiatan, String tanggal, String luasSawah, String keterangan, String nama, String deskripsiIrigasi, String kegiatanJK, String tanggalJK, String deskripsiJK, String paketTeknologi, String polaTanam, String jadwalTanam, String komoditasRU, String varietas, String sumberBenih, String tabunganAnggota, String iuranAnggota, String pemupukanModal, String komoditasSI, String target, String targetHasilPerHa) {
-        this.hashId = hashId;
-        this.idDesa = idDesa;
-        this.idUser = idUser;
-        this.poktan = poktan;
-        this.irigasi = irigasi;
-        this.intensifikasi = intensifikasi;
-        this.rencana = rencana;
-        this.kegiatan = kegiatan;
-        this.tanggal = tanggal;
-        this.luasSawah = luasSawah;
-        this.keterangan = keterangan;
-        this.nama = nama;
-        this.deskripsiIrigasi = deskripsiIrigasi;
-        this.kegiatanJK = kegiatanJK;
-        this.tanggalJK = tanggalJK;
-        this.deskripsiJK = deskripsiJK;
-        this.paketTeknologi = paketTeknologi;
-        this.polaTanam = polaTanam;
-        this.jadwalTanam = jadwalTanam;
-        this.komoditasRU = komoditasRU;
-        this.varietas = varietas;
-        this.sumberBenih = sumberBenih;
-        this.tabunganAnggota = tabunganAnggota;
-        this.iuranAnggota = iuranAnggota;
-        this.pemupukanModal = pemupukanModal;
-        this.komoditasSI = komoditasSI;
-        this.target = target;
-        this.targetHasilPerHa = targetHasilPerHa;
+    public RDKBody(RDKRealm data) {
+        this.hashId = data.getHashId();
+        this.idUser = data.getIdUser();
+        this.poktan = data.getPoktan();
+        this.irigasi = data.getIrigasi();
+        this.intensifikasi = data.getIntensifikasi();
+        this.rencana = data.getRencana();
+        this.kegiatan = data.getKegiatan();
+        this.tanggal = data.getTanggal();
+        this.luasSawah = data.getLuasSawah();
+        this.keterangan = data.getKeterangan();
+        this.hashIdIrigasi = data.getHashIdIrigasi();
+        this.nama = data.getNama();
+        this.deskripsiIrigasi = data.getDeskripsiIrigasi();
+        this.hashIdJadwal = data.getHashIdJadwal();
+        this.kegiatanJK = data.getKegiatanJK();
+        this.tanggalJK = data.getTanggalJK();
+        this.deskripsiJK = data.getDeskripsiJK();
+        this.hashIdRencana = data.getHashIdRencana();
+        this.paketTeknologi = data.getPaketTeknologi();
+        this.polaTanam = data.getPolaTanam();
+        this.jadwalTanam = data.getJadwalTanam();
+        this.komoditasRU = data.getKomoditasRU();
+        this.varietas = data.getVarietas();
+        this.sumberBenih = data.getSumberBenih();
+        this.tabunganAnggota = data.getTabunganAnggota();
+        this.iuranAnggota = data.getIuranAnggota();
+        this.pemupukanModal = data.getPemupukanModal();
+        this.hashIdSasaran = data.getHashIdSasaran();
+        this.komoditasSI = data.getKomoditasSI();
+        this.target = data.getTarget();
+        this.targetHasilPerHa = data.getTargetHasilPerHa();
+        this.idDesa = data.getIdDesa();
     }
 
     public String getHashId() {
@@ -78,14 +90,6 @@ public class RDKBody {
 
     public void setHashId(String hashId) {
         this.hashId = hashId;
-    }
-
-    public int getIdDesa() {
-        return idDesa;
-    }
-
-    public void setIdDesa(int idDesa) {
-        this.idDesa = idDesa;
     }
 
     public String getIdUser() {
@@ -160,6 +164,14 @@ public class RDKBody {
         this.keterangan = keterangan;
     }
 
+    public String getHashIdIrigasi() {
+        return hashIdIrigasi;
+    }
+
+    public void setHashIdIrigasi(String hashIdIrigasi) {
+        this.hashIdIrigasi = hashIdIrigasi;
+    }
+
     public String getNama() {
         return nama;
     }
@@ -174,6 +186,14 @@ public class RDKBody {
 
     public void setDeskripsiIrigasi(String deskripsiIrigasi) {
         this.deskripsiIrigasi = deskripsiIrigasi;
+    }
+
+    public String getHashIdJadwal() {
+        return hashIdJadwal;
+    }
+
+    public void setHashIdJadwal(String hashIdJadwal) {
+        this.hashIdJadwal = hashIdJadwal;
     }
 
     public String getKegiatanJK() {
@@ -198,6 +218,14 @@ public class RDKBody {
 
     public void setDeskripsiJK(String deskripsiJK) {
         this.deskripsiJK = deskripsiJK;
+    }
+
+    public String getHashIdRencana() {
+        return hashIdRencana;
+    }
+
+    public void setHashIdRencana(String hashIdRencana) {
+        this.hashIdRencana = hashIdRencana;
     }
 
     public String getPaketTeknologi() {
@@ -272,6 +300,14 @@ public class RDKBody {
         this.pemupukanModal = pemupukanModal;
     }
 
+    public String getHashIdSasaran() {
+        return hashIdSasaran;
+    }
+
+    public void setHashIdSasaran(String hashIdSasaran) {
+        this.hashIdSasaran = hashIdSasaran;
+    }
+
     public String getKomoditasSI() {
         return komoditasSI;
     }
@@ -296,11 +332,18 @@ public class RDKBody {
         this.targetHasilPerHa = targetHasilPerHa;
     }
 
+    public int getIdDesa() {
+        return idDesa;
+    }
+
+    public void setIdDesa(int idDesa) {
+        this.idDesa = idDesa;
+    }
+
     @Override
     public String toString() {
         return "RDKBody{" +
                 "hashId='" + hashId + '\'' +
-                ", idDesa=" + idDesa +
                 ", idUser='" + idUser + '\'' +
                 ", poktan='" + poktan + '\'' +
                 ", irigasi='" + irigasi + '\'' +
@@ -310,11 +353,14 @@ public class RDKBody {
                 ", tanggal='" + tanggal + '\'' +
                 ", luasSawah='" + luasSawah + '\'' +
                 ", keterangan='" + keterangan + '\'' +
+                ", hashIdIrigasi='" + hashIdIrigasi + '\'' +
                 ", nama='" + nama + '\'' +
                 ", deskripsiIrigasi='" + deskripsiIrigasi + '\'' +
+                ", hashIdJadwal='" + hashIdJadwal + '\'' +
                 ", kegiatanJK='" + kegiatanJK + '\'' +
                 ", tanggalJK='" + tanggalJK + '\'' +
                 ", deskripsiJK='" + deskripsiJK + '\'' +
+                ", hashIdRencana='" + hashIdRencana + '\'' +
                 ", paketTeknologi='" + paketTeknologi + '\'' +
                 ", polaTanam='" + polaTanam + '\'' +
                 ", jadwalTanam='" + jadwalTanam + '\'' +
@@ -324,9 +370,11 @@ public class RDKBody {
                 ", tabunganAnggota='" + tabunganAnggota + '\'' +
                 ", iuranAnggota='" + iuranAnggota + '\'' +
                 ", pemupukanModal='" + pemupukanModal + '\'' +
+                ", hashIdSasaran='" + hashIdSasaran + '\'' +
                 ", komoditasSI='" + komoditasSI + '\'' +
                 ", target='" + target + '\'' +
                 ", targetHasilPerHa='" + targetHasilPerHa + '\'' +
+                ", idDesa=" + idDesa +
                 '}';
     }
 }

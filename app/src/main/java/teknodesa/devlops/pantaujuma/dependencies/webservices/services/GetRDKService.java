@@ -12,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import teknodesa.devlops.pantaujuma.components.rdk.GetRDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RDKBody;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseRDK;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseSaveData;
@@ -35,9 +35,9 @@ public class GetRDKService implements GetRDKContract.Repository {
     public void instanceClass(GetRDKContract.Controller controller){
         this.controller = controller;
     }
-
-
-    private boolean res = false;
+    
+    private boolean insertRDK = true;
+    
     @Override
     public void getAllRDK(int idDesa) {
         Log.e("send","data comehere"+idDesa);
@@ -70,68 +70,44 @@ public class GetRDKService implements GetRDKContract.Repository {
     }
 
     @Override
-    public void saveData(List<RDKRealm> allPen) {
-        for(int i=0; i < allPen.size();i++ ){
-            RDKRealm rdkTempRealm = allPen.get(i);
-            realm.beginTransaction();
-            rdkTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            RDKBody rdkBody = new RDKBody(
-                    rdkTempRealm.getHashId(),
-                    rdkTempRealm.getIdDesa(),
-                    rdkTempRealm.getIdUser(),
-                    rdkTempRealm.getPoktan(),
-                    rdkTempRealm.getIrigasi(),
-                    rdkTempRealm.getIntensifikasi(),
-                    rdkTempRealm.getRencana(),
-                    rdkTempRealm.getKegiatan(),
-                    rdkTempRealm.getTanggal(),
-                    rdkTempRealm.getLuasSawah(),
-                    rdkTempRealm.getKeterangan(),
-                    rdkTempRealm.getNama(),
-                    rdkTempRealm.getDeskripsiIrigasi(),
-                    rdkTempRealm.getKegiatanJK(),
-                    rdkTempRealm.getTanggalJK(),
-                    rdkTempRealm.getDeskripsiJK(),
-                    rdkTempRealm.getPaketTeknologi(),
-                    rdkTempRealm.getPolaTanam(),
-                    rdkTempRealm.getJadwalTanam(),
-                    rdkTempRealm.getKomoditasRU(),
-                    rdkTempRealm.getVarietas(),
-                    rdkTempRealm.getSumberBenih(),
-                    rdkTempRealm.getTabunganAnggota(),
-                    rdkTempRealm.getIuranAnggota(),
-                    rdkTempRealm.getPemupukanModal(),
-                    rdkTempRealm.getKomoditasSI(),
-                    rdkTempRealm.getTarget(),
-                    rdkTempRealm.getTargetHasilPerHa());
-
-            Log.e("rdk service",rdkBody.toString());
-            Call<ResponseSaveData> call = sisApi.insertRDK(WebServiceModule.ACCESS_TOKEN_TEMP,rdkBody);
+    public void saveData(List<RDKRealm> allRDK) {
+        for(int i=0; i < allRDK.size();i++ ){
+            RDKRealm rdkTempRealm = allRDK.get(i);
+            RDKBody rdkBody = new RDKBody(rdkTempRealm);
+            Log.e("body rdk",rdkBody.toString());
+            Log.e("realm rdk",rdkTempRealm.toString());
+            final int dataLoop = i;
+            Call<ResponseSaveData> call = sisApi.insertRdk(WebServiceModule.ACCESS_TOKEN_TEMP,rdkBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",rdkTempRealm);
+                            if (dataLoop == allRDK.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertRDK =true;
                         }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                            insertRDK =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
 
                     }else{
-                        Log.e("rdk service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                        insertRDK =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("rdk service","error server"+t.getMessage());
-                    controller.saveDataFailed("Failed"+t.getMessage());
+                    insertRDK =false;
+                    controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertRDK){
+                break;
+            }
         }
     }
 

@@ -14,6 +14,7 @@ import teknodesa.devlops.pantaujuma.components.poktan.GetPengurusPoktanContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PengurusPoktanBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponsePengurusPoktan;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseSaveData;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
@@ -40,8 +41,10 @@ public class GetPengurusPoktanService implements GetPengurusPoktanContract.Repos
         this.controller = controller;
     }
 
+    String idPoktan;
+    PoktanRealm dataPoktan;
+    private boolean insertPengurus = true;
 
-    private boolean res = false;
     @Override
     public void getAllPengurusPoktan(int idDesa) {
         Log.e("send","data comehere "+idDesa);
@@ -83,42 +86,51 @@ public class GetPengurusPoktanService implements GetPengurusPoktanContract.Repos
     }
 
     @Override
-    public void saveData(List<PengurusPoktanRealm> allPen) {
-        for(int i=0; i < allPen.size();i++ ){
-            PengurusPoktanRealm pengurusPoktanTempRealm = allPen.get(i);
-            realm.beginTransaction();
-            pengurusPoktanTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            PengurusPoktanBody pengurusPoktanBody = new PengurusPoktanBody(pengurusPoktanTempRealm.getHashId(),pengurusPoktanTempRealm.getPoktanPengurus(),
-                    pengurusPoktanTempRealm.getPetaniPengurus(),pengurusPoktanTempRealm.getJabatan(),pengurusPoktanTempRealm.getPeriode(),
-                    pengurusPoktanTempRealm.getStatusPengurus(), pengurusPoktanTempRealm.getIdDesa());
+    public void saveData(List<PengurusPoktanRealm> allPeng) {
+        for(int i=0; i < allPeng.size();i++ ){
+            PengurusPoktanRealm pengurusTempRealm = allPeng.get(i);
 
-            Log.e("pengurusPoktan service",pengurusPoktanBody.toString());
-            Call<ResponseSaveData> call = sisApi.insertPengurusPoktan(WebServiceModule.ACCESS_TOKEN_TEMP,pengurusPoktanBody);
+            realm.beginTransaction();
+            idPoktan = pengurusTempRealm.getPoktanPengurus();
+            dataPoktan = realm.where(PoktanRealm.class).equalTo("hashId", idPoktan).findFirst();
+            dataPoktan.setIsSync(1);
+            realm.commitTransaction();
+
+            Log.e("ini data pengurus sync", pengurusTempRealm.toString());
+            PengurusPoktanBody pengurusBody = new PengurusPoktanBody(pengurusTempRealm);
+            Log.e("ini body pengurus sync", pengurusBody.toString());
+            final int dataLoop = i;
+            Call<ResponseSaveData> call = sisApi.insertPengurusPoktan(WebServiceModule.ACCESS_TOKEN_TEMP,pengurusBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",pengurusPoktanTempRealm);
+                            if (dataLoop == allPeng.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertPengurus =true;
                         }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                            insertPengurus =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi pengurus "+response.body().getMessage());
                         }
 
                     }else{
-                        Log.e("pengurusPoktan service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                        insertPengurus =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("pengurusPoktan service","error server"+t.getMessage());
-                    controller.saveDataFailed("Failed"+t.getMessage());
+                    insertPengurus =false;
+                    controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertPengurus){
+                break;
+            }
         }
     }
 

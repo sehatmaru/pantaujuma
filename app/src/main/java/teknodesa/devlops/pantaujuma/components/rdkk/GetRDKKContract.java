@@ -18,7 +18,7 @@ public class GetRDKKContract {
         void saveData(List<RDKKPupukSubsidiRealm> allPen);
         void getAllRDKKSuccess(List<RDKKPupukSubsidiRealm> allRDKK);
         void getAllRDKKFailed(String message);
-        void saveDataSuccess(String message, RDKKPupukSubsidiRealm rdkkTempRealm);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(RDKKPupukSubsidiRealm rdkkTempRealm);
     }

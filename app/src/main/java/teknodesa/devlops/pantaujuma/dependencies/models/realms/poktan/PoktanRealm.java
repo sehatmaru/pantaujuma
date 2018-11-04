@@ -6,7 +6,6 @@ import io.realm.annotations.PrimaryKey;
 public class PoktanRealm extends RealmObject {
     @PrimaryKey
     private String hashId;
-
     private String nama;
     private String desa;
     private String kecamatan;
@@ -15,8 +14,7 @@ public class PoktanRealm extends RealmObject {
     private String noHP;
     private String noTelp;
     private String deskripsi;
-    private String statusPoktan;
-
+    private int statusPoktan;
     private int idDesa;
     private int isSync;
 
@@ -37,7 +35,7 @@ public class PoktanRealm extends RealmObject {
         this.isSync = poktanRealm.getIsSync();
     }
 
-    public PoktanRealm(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, String statusPoktan, int idDesa, int isSync) {
+    public PoktanRealm(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, int statusPoktan, int idDesa, int isSync) {
         this.hashId = hashId;
         this.nama = nama;
         this.desa = desa;
@@ -124,11 +122,11 @@ public class PoktanRealm extends RealmObject {
         this.deskripsi = deskripsi;
     }
 
-    public String getStatusPoktan() {
+    public int getStatusPoktan() {
         return statusPoktan;
     }
 
-    public void setStatusPoktan(String statusPoktan) {
+    public void setStatusPoktan(int statusPoktan) {
         this.statusPoktan = statusPoktan;
     }
 

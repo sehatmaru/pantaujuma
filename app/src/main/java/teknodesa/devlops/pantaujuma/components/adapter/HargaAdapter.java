@@ -1,12 +1,15 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -63,9 +66,47 @@ public class HargaAdapter extends RecyclerView.Adapter<HargaAdapter.MyViewHolder
                 .equalTo("hashId", harga.getHashKomoditas())
                 .findFirst();
 
-        holder.textkomoditas.setText(komoditas.getNama());
-        holder.texttanggal.setText(harga.getTanggal());
-        holder.textharga.setText("Harga : " + harga.getNilai());
+        if(harga.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
+        }
+
+        String nama;
+        String tanggal;
+        String nilai;
+        String satuan;
+
+        if(harga.getHashKomoditas() == null || harga.getHashKomoditas().compareTo("")==0){
+            nama="";
+        }else{
+            nama = komoditas.getNama();
+        }
+
+        holder.textkomoditas.setText("Komoditas: " + nama);
+
+        if(harga.getTanggal() == null || harga.getTanggal().compareTo("")==0){
+            tanggal="";
+        }else{
+            tanggal = harga.getTanggal();
+        }
+
+        holder.texttanggal.setText("Tanggal: " + tanggal);
+
+        if(harga.getSatuan() == null || harga.getSatuan().compareTo("")==0){
+            satuan="";
+        }else{
+            satuan = harga.getSatuan();
+        }
+
+        holder.textsatuan.setText("Satuan : " + satuan);
+
+        if(harga.getNilai() == null || harga.getNilai().compareTo("")==0){
+            nilai="";
+        }else{
+            nilai = harga.getNilai();
+        }
+
+        holder.textharga.setText("Harga : Rp " + nilai);
+
         holder.cardview.setOnClickListener(view -> {
             onClicHarga.OnClickHarga(harga.getHashId());
         });
@@ -83,6 +124,7 @@ public class HargaAdapter extends RecyclerView.Adapter<HargaAdapter.MyViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textkomoditas;
         TextView texttanggal;
+        TextView textsatuan;
         TextView textharga;
         CardView cardview;
         public MyViewHolder(View itemView) {
@@ -90,6 +132,7 @@ public class HargaAdapter extends RecyclerView.Adapter<HargaAdapter.MyViewHolder
             textkomoditas = (TextView)itemView.findViewById(R.id.komoditas);
             texttanggal = (TextView)itemView.findViewById(R.id.tanggal);
             textharga = (TextView)itemView.findViewById(R.id.harga);
+            textsatuan = (TextView)itemView.findViewById(R.id.satuan);
             cardview = (CardView) itemView.findViewById(R.id.hargaCardView);
         }
     }

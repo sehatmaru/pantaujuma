@@ -16,18 +16,18 @@ public class RDKKParcelable implements Parcelable {
     private String petani;
     private String komoditas;
     private String pupuk;
-    private float butuhJanuari;
-    private float butuhFebruari;
-    private float butuhMaret;
-    private float butuhApril;
-    private float butuhMei;
-    private float butuhJuni;
-    private float butuhJuli;
-    private float butuhAgustus;
-    private float butuhSeptember;
-    private float butuhOktober;
-    private float butuhNovember;
-    private float butuhDesember;
+    private int butuhJanuari;
+    private int butuhFebruari;
+    private int butuhMaret;
+    private int butuhApril;
+    private int butuhMei;
+    private int butuhJuni;
+    private int butuhJuli;
+    private int butuhAgustus;
+    private int butuhSeptember;
+    private int butuhOktober;
+    private int butuhNovember;
+    private int butuhDesember;
     private int isSync;
 
     public RDKKParcelable() {
@@ -56,28 +56,28 @@ public class RDKKParcelable implements Parcelable {
         this.isSync = rdkkPupukSubsidiRealm.getIsSync();
     }
 
-    public RDKKParcelable(String hashId, int idDesa, String idUser, String poktan, String petani, String komoditas, String pupuk, float butuhJanuari, float butuhFebruari, float butuhMaret, float butuhApril, float butuhMei, float butuhJuni, float butuhJuli, float butuhAgustus, float butuhSeptember, float butuhOktober, float butuhNovember, float butuhDesember, int isSync) {
-        this.hashId = hashId;
-        this.idDesa = idDesa;
-        this.idUser = idUser;
-        this.poktan = poktan;
-        this.petani = petani;
-        this.komoditas = komoditas;
-        this.pupuk = pupuk;
-        this.butuhJanuari = butuhJanuari;
-        this.butuhFebruari = butuhFebruari;
-        this.butuhMaret = butuhMaret;
-        this.butuhApril = butuhApril;
-        this.butuhMei = butuhMei;
-        this.butuhJuni = butuhJuni;
-        this.butuhJuli = butuhJuli;
-        this.butuhAgustus = butuhAgustus;
-        this.butuhSeptember = butuhSeptember;
-        this.butuhOktober = butuhOktober;
-        this.butuhNovember = butuhNovember;
-        this.butuhDesember = butuhDesember;
-        this.isSync = isSync;
-    }
+//    public RDKKParcelable(String hashId, int idDesa, String idUser, String poktan, String petani, String komoditas, String pupuk, int butuhJanuari, int butuhFebruari, int butuhMaret, int butuhApril, int butuhMei, int butuhJuni, int butuhJuli, int butuhAgustus, int butuhSeptember, int butuhOktober, int butuhNovember, int butuhDesember, int isSync) {
+//        this.hashId = hashId;
+//        this.idDesa = idDesa;
+//        this.idUser = idUser;
+//        this.poktan = poktan;
+//        this.petani = petani;
+//        this.komoditas = komoditas;
+//        this.pupuk = pupuk;
+//        this.butuhJanuari = butuhJanuari;
+//        this.butuhFebruari = butuhFebruari;
+//        this.butuhMaret = butuhMaret;
+//        this.butuhApril = butuhApril;
+//        this.butuhMei = butuhMei;
+//        this.butuhJuni = butuhJuni;
+//        this.butuhJuli = butuhJuli;
+//        this.butuhAgustus = butuhAgustus;
+//        this.butuhSeptember = butuhSeptember;
+//        this.butuhOktober = butuhOktober;
+//        this.butuhNovember = butuhNovember;
+//        this.butuhDesember = butuhDesember;
+//        this.isSync = isSync;
+//    }
 
     protected RDKKParcelable(Parcel in) {
         hashId = in.readString();
@@ -87,18 +87,18 @@ public class RDKKParcelable implements Parcelable {
         petani = in.readString();
         komoditas = in.readString();
         pupuk = in.readString();
-        butuhJanuari = in.readFloat();
-        butuhFebruari = in.readFloat();
-        butuhMaret = in.readFloat();
-        butuhApril = in.readFloat();
-        butuhMei = in.readFloat();
-        butuhJuni = in.readFloat();
-        butuhJuli = in.readFloat();
-        butuhAgustus = in.readFloat();
-        butuhSeptember = in.readFloat();
-        butuhOktober = in.readFloat();
-        butuhNovember = in.readFloat();
-        butuhDesember = in.readFloat();
+        butuhJanuari = in.readInt();
+        butuhFebruari = in.readInt();
+        butuhMaret = in.readInt();
+        butuhApril = in.readInt();
+        butuhMei = in.readInt();
+        butuhJuni = in.readInt();
+        butuhJuli = in.readInt();
+        butuhAgustus = in.readInt();
+        butuhSeptember = in.readInt();
+        butuhOktober = in.readInt();
+        butuhNovember = in.readInt();
+        butuhDesember = in.readInt();
         isSync = in.readInt();
     }
 
@@ -170,99 +170,99 @@ public class RDKKParcelable implements Parcelable {
         this.pupuk = pupuk;
     }
 
-    public float getButuhJanuari() {
+    public int getButuhJanuari() {
         return butuhJanuari;
     }
 
-    public void setButuhJanuari(float butuhJanuari) {
+    public void setButuhJanuari(int butuhJanuari) {
         this.butuhJanuari = butuhJanuari;
     }
 
-    public float getButuhFebruari() {
+    public int getButuhFebruari() {
         return butuhFebruari;
     }
 
-    public void setButuhFebruari(float butuhFebruari) {
+    public void setButuhFebruari(int butuhFebruari) {
         this.butuhFebruari = butuhFebruari;
     }
 
-    public float getButuhMaret() {
+    public int getButuhMaret() {
         return butuhMaret;
     }
 
-    public void setButuhMaret(float butuhMaret) {
+    public void setButuhMaret(int butuhMaret) {
         this.butuhMaret = butuhMaret;
     }
 
-    public float getButuhApril() {
+    public int getButuhApril() {
         return butuhApril;
     }
 
-    public void setButuhApril(float butuhApril) {
+    public void setButuhApril(int butuhApril) {
         this.butuhApril = butuhApril;
     }
 
-    public float getButuhMei() {
+    public int getButuhMei() {
         return butuhMei;
     }
 
-    public void setButuhMei(float butuhMei) {
+    public void setButuhMei(int butuhMei) {
         this.butuhMei = butuhMei;
     }
 
-    public float getButuhJuni() {
+    public int getButuhJuni() {
         return butuhJuni;
     }
 
-    public void setButuhJuni(float butuhJuni) {
+    public void setButuhJuni(int butuhJuni) {
         this.butuhJuni = butuhJuni;
     }
 
-    public float getButuhJuli() {
+    public int getButuhJuli() {
         return butuhJuli;
     }
 
-    public void setButuhJuli(float butuhJuli) {
+    public void setButuhJuli(int butuhJuli) {
         this.butuhJuli = butuhJuli;
     }
 
-    public float getButuhAgustus() {
+    public int getButuhAgustus() {
         return butuhAgustus;
     }
 
-    public void setButuhAgustus(float butuhAgustus) {
+    public void setButuhAgustus(int butuhAgustus) {
         this.butuhAgustus = butuhAgustus;
     }
 
-    public float getButuhSeptember() {
+    public int getButuhSeptember() {
         return butuhSeptember;
     }
 
-    public void setButuhSeptember(float butuhSeptember) {
+    public void setButuhSeptember(int butuhSeptember) {
         this.butuhSeptember = butuhSeptember;
     }
 
-    public float getButuhOktober() {
+    public int getButuhOktober() {
         return butuhOktober;
     }
 
-    public void setButuhOktober(float butuhOktober) {
+    public void setButuhOktober(int butuhOktober) {
         this.butuhOktober = butuhOktober;
     }
 
-    public float getButuhNovember() {
+    public int getButuhNovember() {
         return butuhNovember;
     }
 
-    public void setButuhNovember(float butuhNovember) {
+    public void setButuhNovember(int butuhNovember) {
         this.butuhNovember = butuhNovember;
     }
 
-    public float getButuhDesember() {
+    public int getButuhDesember() {
         return butuhDesember;
     }
 
-    public void setButuhDesember(float butuhDesember) {
+    public void setButuhDesember(int butuhDesember) {
         this.butuhDesember = butuhDesember;
     }
 
@@ -314,18 +314,18 @@ public class RDKKParcelable implements Parcelable {
         parcel.writeString(petani);
         parcel.writeString(komoditas);
         parcel.writeString(pupuk);
-        parcel.writeFloat(butuhJanuari);
-        parcel.writeFloat(butuhFebruari);
-        parcel.writeFloat(butuhMaret);
-        parcel.writeFloat(butuhApril);
-        parcel.writeFloat(butuhMei);
-        parcel.writeFloat(butuhJuni);
-        parcel.writeFloat(butuhJuli);
-        parcel.writeFloat(butuhAgustus);
-        parcel.writeFloat(butuhSeptember);
-        parcel.writeFloat(butuhOktober);
-        parcel.writeFloat(butuhNovember);
-        parcel.writeFloat(butuhDesember);
+        parcel.writeInt(butuhJanuari);
+        parcel.writeInt(butuhFebruari);
+        parcel.writeInt(butuhMaret);
+        parcel.writeInt(butuhApril);
+        parcel.writeInt(butuhMei);
+        parcel.writeInt(butuhJuni);
+        parcel.writeInt(butuhJuli);
+        parcel.writeInt(butuhAgustus);
+        parcel.writeInt(butuhSeptember);
+        parcel.writeInt(butuhOktober);
+        parcel.writeInt(butuhNovember);
+        parcel.writeInt(butuhDesember);
         parcel.writeInt(isSync);
     }
 }

@@ -18,7 +18,7 @@ public class GetRKTPContract {
         void saveData(List<RKTPRealm> allRktp);
         void getAllRKTPSuccess(List<RKTPRealm> allRKTP);
         void getAllRKTPFailed(String message);
-        void saveDataSuccess(String message, RKTPRealm targetTemp);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(RKTPRealm targetTemp);
     }

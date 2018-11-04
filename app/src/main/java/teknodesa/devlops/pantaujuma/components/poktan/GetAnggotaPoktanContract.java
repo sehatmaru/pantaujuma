@@ -21,7 +21,7 @@ public class GetAnggotaPoktanContract {
         void saveData(List<AnggotaPoktanRealm> allPen);
         void getAllAnggotaPoktanSuccess(List<AnggotaPoktanRealm> allAnggotaPoktan);
         void getAllAnggotaPoktanFailed(String message);
-        void saveDataSuccess(String message, AnggotaPoktanRealm anggotaPoktanTempRealm);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(AnggotaPoktanRealm anggotaPoktanTempRealm);
     }

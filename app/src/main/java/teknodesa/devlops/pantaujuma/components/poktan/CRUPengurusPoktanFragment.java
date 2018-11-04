@@ -40,6 +40,7 @@ import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchpetani.SearchPetaniFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.AnggotaPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
@@ -82,6 +83,7 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
     PoktanRealm dataPoktan = null;
 
     public static List<PengurusPoktanRealm> listData = Collections.EMPTY_LIST;
+    public static List<PengurusPoktanRealm> listpengurusNotSync = Collections.EMPTY_LIST;
 
     private AppComponent appComponent;
 
@@ -94,6 +96,10 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
 
         appComponent = ((MainApplication) getActivity().getApplication()).getComponent();
         appComponent.inject(this);
+
+        realm.beginTransaction();
+        listpengurusNotSync = realm.where(PengurusPoktanRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
     }
 
     @Override
@@ -145,7 +151,9 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listData = realm1.copyFromRealm(realm1.where(PengurusPoktanRealm.class).equalTo("poktanPengurus", DetailPoktanActivity.idPoktan).sort("jabatan", Sort.DESCENDING).findAll());
+            listData = realm1.copyFromRealm(realm1.where(PengurusPoktanRealm.class).equalTo("poktanPengurus", DetailPoktanActivity.idPoktan).findAll());
+            Log.e("ini idPoktan", DetailPoktanActivity.idPoktan);
+            Log.e("ini list pengurus", listData.toString());
         }, () -> {
             if (!listData.isEmpty()) {
                 Log.e("List Pengurus","ini hasil"+listData.size());
@@ -167,7 +175,6 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
     public PengurusPoktanRealm getUIData() {
         String strJabatan = (input_jabatan.getText().toString() == null) ? "-" : input_jabatan.getText().toString();
         String strPeriode = (input_periode.getText().toString() == null) ? "-" : input_periode.getText().toString();
-        String status = "aktif";
 
         PengurusPoktanRealm newItem = new PengurusPoktanRealm();
         newItem.setHashId(getSaltString());
@@ -175,7 +182,7 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
         newItem.setPetaniPengurus(biodata);
         newItem.setJabatan(strJabatan);
         newItem.setPeriode(strPeriode);
-        newItem.setStatusPengurus(status);
+        newItem.setStatusPengurus(0);
         newItem.setIdDesa(getIdDesa());
         newItem.setIsSync(0);
 
@@ -183,8 +190,8 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
         dataPoktan = realm.where(PoktanRealm.class).equalTo("hashId", DetailPoktanActivity.idPoktan).findFirst();
         dataPoktan.setIsSync(0);
         realm.commitTransaction();
-
-        Log.e("data Poktan" , "" + dataPoktan.toString());
+//
+        Log.e("data pengurus" , "" + newItem.toString());
 
         return newItem;
     }

@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
@@ -59,11 +61,37 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
 
         PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
 
-        try{
-            holder.textnama.setText(poktan.getNama());
-            holder.textkegiatan.setText(rdk.getLuasSawah());
-            holder.texttanggal.setText(rdk.getTanggal());
-        }catch (NullPointerException ex){}
+        if(rdk.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
+        }
+
+        String nama;
+        String tanggal;
+        String keterangan;
+
+        if(rdk.getPoktan() == null || rdk.getPoktan().compareTo("")==0){
+            nama="";
+        }else{
+            nama = poktan.getNama();
+        }
+
+        holder.textnama.setText(nama);
+
+        if(rdk.getTanggal() == null || rdk.getTanggal().compareTo("")==0){
+            tanggal="";
+        }else{
+            tanggal = rdk.getTanggal();
+        }
+
+        holder.texttanggal.setText("Tanggal: " + tanggal);
+
+        if(rdk.getKeterangan() == null || rdk.getKeterangan().compareTo("")==0){
+            keterangan="-";
+        }else{
+            keterangan = rdk.getKeterangan();
+        }
+
+        holder.textketerangan.setText("Keterangan: " + keterangan);
 
         holder.cardview.setOnClickListener(view -> {
             onClicRDK.OnClickRDK(rdk.getHashId());
@@ -81,13 +109,13 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textnama;
-        TextView textkegiatan;
         TextView texttanggal;
+        TextView textketerangan;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textnama = (TextView)itemView.findViewById(R.id.nama);
-            textkegiatan = (TextView)itemView.findViewById(R.id.kegiatan);
+            textketerangan = (TextView)itemView.findViewById(R.id.keterangan);
             texttanggal = (TextView)itemView.findViewById(R.id.tanggal);
             cardview = (CardView) itemView.findViewById(R.id.rdkCardView);
         }

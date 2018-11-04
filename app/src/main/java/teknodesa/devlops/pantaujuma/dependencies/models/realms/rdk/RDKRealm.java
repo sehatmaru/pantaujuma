@@ -7,7 +7,6 @@ public class RDKRealm extends RealmObject {
     @PrimaryKey
     private String hashId;
 
-    private String hashIdIdentitas;
     private String idUser;
     private String poktan;
     private String irigasi;
@@ -16,7 +15,7 @@ public class RDKRealm extends RealmObject {
     private String kegiatan;
     private String tanggal;
     private String luasSawah;
-    private String 	keterangan;
+    private String keterangan;
 
     //Irigasi
     private String hashIdIrigasi;
@@ -53,9 +52,44 @@ public class RDKRealm extends RealmObject {
     public RDKRealm() {
     }
 
-    public RDKRealm(String hashId, String hashIdIdentitas, String idUser, String poktan, String irigasi, String intensifikasi, String rencana, String kegiatan, String tanggal, String luasSawah, String keterangan, String hashIdIrigasi, String nama, String deskripsiIrigasi, String hashIdJadwal, String kegiatanJK, String tanggalJK, String deskripsiJK, String hashIdRencana, String paketTeknologi, String polaTanam, String jadwalTanam, String komoditasRU, String varietas, String sumberBenih, String tabunganAnggota, String iuranAnggota, String pemupukanModal, String hashIdSasaran, String komoditasSI, String target, String targetHasilPerHa, int isSync, int idDesa) {
+    public RDKRealm(RDKRealm data, int isSync) {
+        this.hashId = data.getHashId();
+        this.idUser = data.getIdUser();
+        this.poktan = data.getPoktan();
+        this.irigasi = data.getIrigasi();
+        this.intensifikasi = data.getIntensifikasi();
+        this.rencana = data.getRencana();
+        this.kegiatan = data.getKegiatan();
+        this.tanggal = data.getTanggal();
+        this.luasSawah = data.getLuasSawah();
+        this.keterangan = data.getKeterangan();
+        this.hashIdIrigasi = data.getHashIdIrigasi();
+        this.nama = data.getNama();
+        this.deskripsiIrigasi = data.getDeskripsiIrigasi();
+        this.hashIdJadwal = data.getHashIdJadwal();
+        this.kegiatanJK = data.getKegiatanJK();
+        this.tanggalJK = data.getTanggalJK();
+        this.deskripsiJK = data.getDeskripsiJK();
+        this.hashIdRencana = data.getHashIdRencana();
+        this.paketTeknologi = data.getPaketTeknologi();
+        this.polaTanam = data.getPolaTanam();
+        this.jadwalTanam = data.getJadwalTanam();
+        this.komoditasRU = data.getKomoditasRU();
+        this.varietas = data.getVarietas();
+        this.sumberBenih = data.getSumberBenih();
+        this.tabunganAnggota = data.getTabunganAnggota();
+        this.iuranAnggota = data.getIuranAnggota();
+        this.pemupukanModal = data.getPemupukanModal();
+        this.hashIdSasaran = data.getHashIdSasaran();
+        this.komoditasSI = data.getKomoditasSI();
+        this.target = data.getTarget();
+        this.targetHasilPerHa = data.getTargetHasilPerHa();
+        this.isSync = isSync;
+        this.idDesa = data.getIdDesa();
+    }
+
+    public RDKRealm(String hashId, String idUser, String poktan, String irigasi, String intensifikasi, String rencana, String kegiatan, String tanggal, String luasSawah, String keterangan, String hashIdIrigasi, String nama, String deskripsiIrigasi, String hashIdJadwal, String kegiatanJK, String tanggalJK, String deskripsiJK, String hashIdRencana, String paketTeknologi, String polaTanam, String jadwalTanam, String komoditasRU, String varietas, String sumberBenih, String tabunganAnggota, String iuranAnggota, String pemupukanModal, String hashIdSasaran, String komoditasSI, String target, String targetHasilPerHa, int isSync, int idDesa) {
         this.hashId = hashId;
-        this.hashIdIdentitas = hashIdIdentitas;
         this.idUser = idUser;
         this.poktan = poktan;
         this.irigasi = irigasi;
@@ -96,14 +130,6 @@ public class RDKRealm extends RealmObject {
 
     public void setHashId(String hashId) {
         this.hashId = hashId;
-    }
-
-    public String getHashIdIdentitas() {
-        return hashIdIdentitas;
-    }
-
-    public void setHashIdIdentitas(String hashIdIdentitas) {
-        this.hashIdIdentitas = hashIdIdentitas;
     }
 
     public String getIdUser() {
@@ -366,7 +392,6 @@ public class RDKRealm extends RealmObject {
     public String toString() {
         return "RDKRealm{" +
                 "hashId='" + hashId + '\'' +
-                ", hashIdIdentitas='" + hashIdIdentitas + '\'' +
                 ", idUser='" + idUser + '\'' +
                 ", poktan='" + poktan + '\'' +
                 ", irigasi='" + irigasi + '\'' +

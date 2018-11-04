@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
@@ -31,9 +35,14 @@ import teknodesa.devlops.pantaujuma.components.searchpetani.SearchPetaniFragment
 import teknodesa.devlops.pantaujuma.components.searchpoktan.SearchPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.searchpupuk.SearchPupukFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdkk.RDKKParcelable;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
 
 public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContract.ViewController<RDKKPupukSubsidiRealm>, RDKKContract.View, SearchPoktanFragment.OnClickPoktanListener, SearchKomoditasFragment.OnClickKomoditasListener, SearchPetaniFragment.OnClickPetaniListener, SearchPupukFragment.OnClickPupukListener {
+
+    @Inject
+    Realm realm;
 
     @BindView(R.id.input_poktan)
     EditText input_poktan;
@@ -150,7 +159,6 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
 
     @Override
     public RDKKPupukSubsidiRealm getUIData() {
-
         String strJan = input_butuhjanuari.getText().toString();
         String strFeb = input_butuhfebruari.getText().toString();
         String strMar = input_butuhmaret.getText().toString();
@@ -165,23 +173,31 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
         String strDes = input_butuhdesember.getText().toString();
 
         RDKKPupukSubsidiRealm newRealmItem = new RDKKPupukSubsidiRealm();
-        newRealmItem.setHashId(getSaltString());
+
+        if(CRUActivity.mAction == "update"){
+            newRealmItem.setHashId(DetailRDKKActivity.dataRDKK.getHashId());
+        }else{
+            newRealmItem.setHashId(getSaltString());
+        }
+//
+//        newRealmItem.setHashId(getSaltString());
+//        newRealmItem.setIdUser(userDB.getId());
         newRealmItem.setPoktan(poktan);
         newRealmItem.setPetani(petani);
         newRealmItem.setKomoditas(komoditas);
         newRealmItem.setPupuk(pupuk);
-        newRealmItem.setButuhJanuari(Float.parseFloat(strJan));
-        newRealmItem.setButuhFebruari(Float.parseFloat(strFeb));
-        newRealmItem.setButuhMaret(Float.parseFloat(strMar));
-        newRealmItem.setButuhApril(Float.parseFloat(strApr));
-        newRealmItem.setButuhMei(Float.parseFloat(strMei));
-        newRealmItem.setButuhJuni(Float.parseFloat(strJun));
-        newRealmItem.setButuhJuli(Float.parseFloat(strJul));
-        newRealmItem.setButuhAgustus(Float.parseFloat(strAug));
-        newRealmItem.setButuhSeptember(Float.parseFloat(strSep));
-        newRealmItem.setButuhOktober(Float.parseFloat(strOkt));
-        newRealmItem.setButuhNovember(Float.parseFloat(strNov));
-        newRealmItem.setButuhDesember(Float.parseFloat(strDes));
+        newRealmItem.setButuhJanuari(Integer.parseInt(strJan));
+        newRealmItem.setButuhFebruari(Integer.parseInt(strFeb));
+        newRealmItem.setButuhMaret(Integer.parseInt(strMar));
+        newRealmItem.setButuhApril(Integer.parseInt(strApr));
+        newRealmItem.setButuhMei(Integer.parseInt(strMei));
+        newRealmItem.setButuhJuni(Integer.parseInt(strJun));
+        newRealmItem.setButuhJuli(Integer.parseInt(strJul));
+        newRealmItem.setButuhAgustus(Integer.parseInt(strAug));
+        newRealmItem.setButuhSeptember(Integer.parseInt(strSep));
+        newRealmItem.setButuhOktober(Integer.parseInt(strOkt));
+        newRealmItem.setButuhNovember(Integer.parseInt(strNov));
+        newRealmItem.setButuhDesember(Integer.parseInt(strDes));
 
         return newRealmItem;
     }
@@ -189,9 +205,9 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     @Override
     public void setUIData() {
         input_poktan.setText(DetailRDKKActivity.dataPoktan.getNama());
-        input_petani.setText(DetailRDKKActivity.dataRDKK.getPetani());
-        input_komoditas.setText(DetailRDKKActivity.dataRDKK.getKomoditas());
-        input_pupuk.setText(DetailRDKKActivity.dataRDKK.getPupuk());
+        input_petani.setText(DetailRDKKActivity.dataPenduduk.getNamaDepan() + " " + DetailRDKKActivity.dataPenduduk.getNamaBelakang());
+        input_komoditas.setText(DetailRDKKActivity.dataKomoditas.getNama());
+        input_pupuk.setText(DetailRDKKActivity.dataPupuk.getNama());
         input_butuhjanuari.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhJanuari()));
         input_butuhfebruari.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhFebruari()));
         input_butuhmaret.setText(String.valueOf(DetailRDKKActivity.dataRDKK.getButuhMaret()));
@@ -210,12 +226,13 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     public void saveData(String tipe, Parcelable itemData) {
         RDKKContract.Controller<RDKKPupukSubsidiRealm> mController = new RDKKController(this, appComponent);
         RDKKPupukSubsidiRealm uiItem = getUIData();
-
+        Log.e("ini tipe:", "" + tipe.toString());
         if (tipe.equals("insert")) {
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-                String idItem = ((RDKKPupukSubsidiRealm) itemData).getHashId();
+                Log.e("ini update RDKK", "" + itemData.toString());
+                String idItem = ((RDKKParcelable) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
             }
         }

@@ -100,28 +100,35 @@
             android:name=".components.petani.ListPetaniActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:label="Harga"
+            android:parentActivityName=".components.MainActivity"
             android:name=".components.harga.ListHargaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:label="Poktan"
+            android:parentActivityName=".components.MainActivity"
             android:name=".components.poktan.ListPoktanActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:label="Target"
+            android:parentActivityName=".components.MainActivity"
             android:name=".components.petugas.ListTargetActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:label="RDKK"
+            android:parentActivityName=".components.MainActivity"
             android:name=".components.rdkk.ListRDKKActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:label="RDK"
+            android:parentActivityName=".components.MainActivity"
             android:name=".components.rdk.ListRDKActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:label="RKTP"
+            android:parentActivityName=".components.MainActivity"
             android:name=".components.rktp.ListRKTPActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity
-            android:name=".components.resetpassword.ResetPasswordActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_reset_password"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".components.lahan.ListLahanKomoditasActivity"></activity>
     </application>
 

@@ -37,7 +37,7 @@ public class GetRDKKService implements GetRDKKContract.Repository {
     }
 
 
-    private boolean res = false;
+    private boolean insertRDKK = true;
     @Override
     public void getAllRDKK(int idDesa) {
         Log.e("send","data comehere"+idDesa);
@@ -70,59 +70,42 @@ public class GetRDKKService implements GetRDKKContract.Repository {
     }
 
     @Override
-    public void saveData(List<RDKKPupukSubsidiRealm> allPen) {
-        for(int i=0; i < allPen.size();i++ ){
-            RDKKPupukSubsidiRealm rdkkTempRealm = allPen.get(i);
-            realm.beginTransaction();
-            rdkkTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            RDKKBody rdkkBody = new RDKKBody(
-                    rdkkTempRealm.getHashId(),
-                    rdkkTempRealm.getIdDesa(),
-                    rdkkTempRealm.getIdUser(),
-                    rdkkTempRealm.getPoktan(),
-                    rdkkTempRealm.getPetani(),
-                    rdkkTempRealm.getKomoditas(),
-                    rdkkTempRealm.getPupuk(),
-                    rdkkTempRealm.getButuhJanuari(),
-                    rdkkTempRealm.getButuhFebruari(),
-                    rdkkTempRealm.getButuhMaret(),
-                    rdkkTempRealm.getButuhApril(),
-                    rdkkTempRealm.getButuhMei(),
-                    rdkkTempRealm.getButuhJuni(),
-                    rdkkTempRealm.getButuhJuli(),
-                    rdkkTempRealm.getButuhAgustus(),
-                    rdkkTempRealm.getButuhSeptember(),
-                    rdkkTempRealm.getButuhOktober(),
-                    rdkkTempRealm.getButuhNovember(),
-                    rdkkTempRealm.getButuhDesember());
-
-            Log.e("rdkk service",rdkkBody.toString());
+    public void saveData(List<RDKKPupukSubsidiRealm> allRDKK) {
+        for(int i=0; i < allRDKK.size();i++ ){
+            RDKKPupukSubsidiRealm rdkkTempRealm = allRDKK.get(i);
+            RDKKBody rdkkBody = new RDKKBody(rdkkTempRealm);
+            final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertRDKK(WebServiceModule.ACCESS_TOKEN_TEMP,rdkkBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",rdkkTempRealm);
+                            if (dataLoop == allRDKK.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertRDKK =true;
                         }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                            insertRDKK =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
 
                     }else{
-                        Log.e("rdkk service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                        insertRDKK =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("rdkk service","error server"+t.getMessage());
-                    controller.saveDataFailed("Failed"+t.getMessage());
+                    insertRDKK =false;
+                    controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertRDKK){
+                break;
+            }
         }
     }
 }

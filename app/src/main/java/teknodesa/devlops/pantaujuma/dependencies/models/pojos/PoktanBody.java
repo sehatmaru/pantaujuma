@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 
 public class PoktanBody {
     private String hashId;
@@ -14,14 +13,14 @@ public class PoktanBody {
     private String noHP;
     private String noTelp;
     private String deskripsi;
-    private String statusPoktan;
+    private int statusPoktan;
 
     private int idDesa;
 
     public PoktanBody() {
     }
 
-    public PoktanBody(PoktanBody poktanRealm) {
+    public PoktanBody(PoktanRealm poktanRealm) {
         this.hashId = poktanRealm.getHashId();
         this.nama = poktanRealm.getNama();
         this.desa = poktanRealm.getDesa();
@@ -32,20 +31,6 @@ public class PoktanBody {
         this.noTelp = poktanRealm.getNoTelp();
         this.deskripsi = poktanRealm.getDeskripsi();
         this.idDesa = poktanRealm.getIdDesa();
-    }
-
-    public PoktanBody(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, String statusPoktan, int idDesa) {
-        this.hashId = hashId;
-        this.nama = nama;
-        this.desa = desa;
-        this.kecamatan = kecamatan;
-        this.tanggalDidirikan = tanggalDidirikan;
-        this.alamat = alamat;
-        this.noHP = noHP;
-        this.noTelp = noTelp;
-        this.deskripsi = deskripsi;
-        this.statusPoktan = statusPoktan;
-        this.idDesa = idDesa;
     }
 
     public String getHashId() {
@@ -120,11 +105,11 @@ public class PoktanBody {
         this.deskripsi = deskripsi;
     }
 
-    public String getStatusPoktan() {
+    public int getStatusPoktan() {
         return statusPoktan;
     }
 
-    public void setStatusPoktan(String statusPoktan) {
+    public void setStatusPoktan(int statusPoktan) {
         this.statusPoktan = statusPoktan;
     }
 
@@ -134,5 +119,22 @@ public class PoktanBody {
 
     public void setIdDesa(int idDesa) {
         this.idDesa = idDesa;
+    }
+
+    @Override
+    public String toString() {
+        return "PoktanBody{" +
+                "hashId='" + hashId + '\'' +
+                ", nama='" + nama + '\'' +
+                ", desa='" + desa + '\'' +
+                ", kecamatan='" + kecamatan + '\'' +
+                ", tanggalDidirikan='" + tanggalDidirikan + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", noHP='" + noHP + '\'' +
+                ", noTelp='" + noTelp + '\'' +
+                ", deskripsi='" + deskripsi + '\'' +
+                ", statusPoktan='" + statusPoktan + '\'' +
+                ", idDesa=" + idDesa +
+                '}';
     }
 }

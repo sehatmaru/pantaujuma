@@ -36,6 +36,7 @@ public class GetTargetService implements GetTargetContract.Repository {
         this.controller = controller;
     }
 
+    public boolean insertTarget =true;
 
     private boolean res = false;
     @Override
@@ -73,39 +74,40 @@ public class GetTargetService implements GetTargetContract.Repository {
     public void saveData(List<TargetPetugas> allTar) {
         for(int i=0; i < allTar.size();i++ ){
             TargetPetugas targetTempRealm = allTar.get(i);
-            realm.beginTransaction();
-            targetTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            TargetPetugasBody targetPetugasBody = new TargetPetugasBody(targetTempRealm.getHashId(),targetTempRealm.getIdUser(),
-                    targetTempRealm.getIdDesa(),targetTempRealm.getTahun(),targetTempRealm.getKomoditas(),targetTempRealm.getLuasTanam(),
-                    targetTempRealm.getLuasPanen(),targetTempRealm.getSasaranProduksi(),targetTempRealm.getSasaranProduktifitas(),targetTempRealm.getKeterangan());
-
-            Log.e("target service",targetPetugasBody.toString());
-            Call<ResponseSaveData> call = sisApi.insertTargetPetugas(WebServiceModule.ACCESS_TOKEN_TEMP,targetPetugasBody);
+            TargetPetugasBody targetBody = new TargetPetugasBody(targetTempRealm);
+            Log.e("target service",targetBody.toString());
+            final int dataLoop = i;
+            Call<ResponseSaveData> call = sisApi.insertTargetPetugas(WebServiceModule.ACCESS_TOKEN_TEMP,targetBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",targetTempRealm);
-//                        }else {
-//                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                            if (dataLoop == allTar.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertTarget =true;
+                        }else {
+                            insertTarget =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
 
                     }else{
-                        Log.e("target service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                        insertTarget =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("target service","error server"+t.getMessage());
-                    controller.saveDataFailed("Failed"+t.getMessage());
+                    insertTarget =false;
+                    controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertTarget){
+                break;
+            }
         }
     }
 

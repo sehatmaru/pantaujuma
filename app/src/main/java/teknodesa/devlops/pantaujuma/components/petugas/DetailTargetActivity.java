@@ -31,9 +31,6 @@ public class DetailTargetActivity extends AppCompatActivity {
     @BindView(R.id.btnEdit)
     Button btnEdit;
 
-    @BindView(R.id.btnHapus)
-    Button btnHapus;
-
     @BindView(R.id.komoditas)
     TextView komoditas;
 
@@ -67,13 +64,6 @@ public class DetailTargetActivity extends AppCompatActivity {
 
     private static String idTarget;
     static String idKomoditas;
-
-    @OnClick(R.id.btnHapus)
-    void clickHapus() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
-        builder.setNegativeButton("Tidak", dialogClickListener).show();
-    }
 
     public static Intent createIntent(Context context, String id) {
         idTarget =id;

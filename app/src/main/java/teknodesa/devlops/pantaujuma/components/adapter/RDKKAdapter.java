@@ -1,8 +1,10 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan.PupukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
@@ -59,20 +62,63 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
         String idkomoditas = rdkk.getKomoditas();
         String idpoktan = rdkk.getPoktan();
         String idpetani = rdkk.getPetani();
+        String idpupuk = rdkk.getPupuk();
 
         PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
         KomoditasRealm komoditas = realm.where(KomoditasRealm.class).equalTo("hashId", idkomoditas).findFirst();
         PetaniRealm petani = realm.where(PetaniRealm.class).equalTo("hashId", idpetani).findFirst();
         String biodata = petani.getBiodata();
-
         PendudukRealm penduduk = realm.where(PendudukRealm.class).equalTo("hashId", biodata).findFirst();
-        try{
-            holder.textpoktan.setText(poktan.getNama());
-            holder.textpetani.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
-            holder.textkomoditas.setText(komoditas.getNama());
-        }catch (NullPointerException ex){
+        PupukRealm pupuk = realm.where(PupukRealm.class).equalTo("hashId", idpupuk).findFirst();
 
+        if(rdkk.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
         }
+
+        String namaPoktan;
+        String namaPetani;
+        String namaKomoditas;
+        String namaPupuk;
+
+        if(rdkk.getPoktan() == null || rdkk.getPoktan().compareTo("")==0){
+            namaPoktan="-";
+        }else{
+            namaPoktan = poktan.getNama();
+        }
+
+        holder.textpoktan.setText("Poktan: " + namaPoktan);
+
+        if(rdkk.getPetani() == null || rdkk.getPetani().compareTo("")==0){
+            namaPetani="-";
+        }else{
+            namaPetani = penduduk.getNamaDepan() + " " + penduduk.getNamaBelakang();
+        }
+
+        holder.textpetani.setText("Petani: " + namaPetani);
+
+        if(rdkk.getKomoditas() == null || rdkk.getKomoditas().compareTo("")==0){
+            namaKomoditas="-";
+        }else{
+            namaKomoditas = komoditas.getNama();
+        }
+
+        holder.textkomoditas.setText("Komoditas: " + namaKomoditas);
+
+        if(rdkk.getPupuk() == null || rdkk.getPupuk().compareTo("")==0){
+            namaPupuk="-";
+        }else{
+            namaPupuk = pupuk.getNama();
+        }
+
+        holder.textpupuk.setText("Pupuk: " + namaPupuk);
+
+//        try{
+//            holder.textpoktan.setText(poktan.getNama());
+//            holder.textpetani.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
+//            holder.textkomoditas.setText(komoditas.getNama());
+//        }catch (NullPointerException ex){
+//
+//        }
 
         holder.cardview.setOnClickListener(view -> {
             onClicRDKK.OnClickRDKK(rdkk.getHashId());
@@ -92,12 +138,14 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
         TextView textpoktan;
         TextView textpetani;
         TextView textkomoditas;
+        TextView textpupuk;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textpoktan = (TextView)itemView.findViewById(R.id.poktan);
             textpetani = (TextView)itemView.findViewById(R.id.petani);
             textkomoditas = (TextView)itemView.findViewById(R.id.komoditas);
+            textpupuk = (TextView)itemView.findViewById(R.id.pupuk);
             cardview = (CardView) itemView.findViewById(R.id.rdkkCardView);
         }
     }

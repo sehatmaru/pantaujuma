@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -61,8 +62,28 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
                 .equalTo("hashId", targetPetugas.getKomoditas())
                 .findFirst();
 
-        holder.textkomoditas.setText(komoditasRealm.getNama());
-        holder.textketerangan.setText(targetPetugas.getKeterangan());
+        if(targetPetugas.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
+        }
+
+        String komoditas;
+
+        if(targetPetugas.getKomoditas() == null || targetPetugas.getKomoditas().compareTo("")==0){
+            komoditas="";
+        }else{
+            komoditas = komoditasRealm.getNama();
+        }
+
+        holder.textkomoditas.setText(komoditas);
+
+        String keterangan;
+        if(targetPetugas.getKeterangan() == null || targetPetugas.getKeterangan().compareTo("")==0){
+            keterangan="";
+        }else{
+            keterangan = targetPetugas.getKeterangan();
+        }
+
+        holder.textketerangan.setText("Keterangan: " + keterangan);
         holder.cardview.setOnClickListener(view -> {
             onClicTarget.OnClickTarget(targetPetugas.getHashId());
         });

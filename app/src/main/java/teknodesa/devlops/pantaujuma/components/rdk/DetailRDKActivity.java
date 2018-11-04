@@ -36,12 +36,6 @@ public class DetailRDKActivity extends AppCompatActivity {
     @BindView(R.id.btnEdit)
     Button btnEdit;
 
-    @BindView(R.id.btnHapus)
-    Button btnHapus;
-
-    @BindView(R.id.petugasrdk)
-    TextView petugasrdk;
-
     @BindView(R.id.poktanrdk)
     TextView poktanrdk;
 
@@ -59,9 +53,6 @@ public class DetailRDKActivity extends AppCompatActivity {
 
     @BindView(R.id.deskripsiIrigasi)
     TextView deskripsiIrigasi;
-
-    @BindView(R.id.kegiatan)
-    TextView kegiatan;
 
     @BindView(R.id.tanggalKegiatan)
     TextView tanggalKegiatan;
@@ -112,13 +103,6 @@ public class DetailRDKActivity extends AppCompatActivity {
         finish();
     }
 
-    @OnClick(R.id.btnHapus)
-    void clickHapus() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah Anda yakin ingin menghapus data ini?").setPositiveButton("Iya", dialogClickListener);
-        builder.setNegativeButton("Tidak", dialogClickListener).show();
-    }
-
     public static RDKRealm dataRDK;
     public static PoktanRealm dataPoktan;
     public static KomoditasRealm dataKomoditasSI;
@@ -149,10 +133,10 @@ public class DetailRDKActivity extends AppCompatActivity {
     }
     private void takedata(){
         realm.beginTransaction();
-        Log.e("MISALNYA APA", " ini gimana " + idRDK);
+//        Log.e("ini poktan rdk", "" + dataRDK.getPoktan());
         dataRDK = realm.where(RDKRealm.class).equalTo("hashId", idRDK).findFirst();
         idPoktan = dataRDK.getPoktan();
-        Log.e("MISALNYA APA", " ini " + dataRDK.toString());
+//        Log.e("MISALNYA APA", " ini " + dataRDK.toString());
         idKomoditasSI = dataRDK.getKomoditasSI();
         idKomoditasRU = dataRDK.getKomoditasRU();
 
@@ -163,54 +147,52 @@ public class DetailRDKActivity extends AppCompatActivity {
         realm.commitTransaction();
     }
     private void setdata(){
-        try{
-            String strPetugasrdk = (getNamaUser() == null) ? "-" : getNamaUser();
-            String strDescIrigasi = (dataRDK.getDeskripsiIrigasi() == null) ? "-" : dataRDK.getDeskripsiIrigasi();
-            String strPoktanrdk = (dataRDK.getPoktan() == null) ? "-" : dataPoktan.getNama();
-            String strTanggalData = (dataRDK.getTanggal() == null) ? "-" : dataRDK.getTanggal();
-            String strLuasSawah = (dataRDK.getLuasSawah() == null) ? "-" : dataRDK.getLuasSawah();
-            String strKeterangan = (dataRDK.getKeterangan() == null) ? "-" : dataRDK.getKeterangan();
-            String strNamaIrigasi = (dataRDK.getNama() == null) ? "-" : dataRDK.getNama();
-            String strKegiatan = (dataRDK.getKegiatan() == null) ? "-" : dataRDK.getKegiatan();
-            String strTanggalKegiatan = (dataRDK.getTanggalJK() == null) ? "-" : dataRDK.getTanggalJK();
-            String strDescKegiatan = (dataRDK.getDeskripsiJK() == null) ? "-" : dataRDK.getDeskripsiJK();
-            String strPaketTeknologi = (dataRDK.getPaketTeknologi() == null) ? "-" : dataRDK.getPaketTeknologi();
-            String strPolaTanam = (dataRDK.getPolaTanam() == null) ? "-" : dataRDK.getPolaTanam();
-            String strJadwalTanam = (dataRDK.getJadwalTanam() == null) ? "-" : dataRDK.getJadwalTanam();
-            String strVarietas = (dataRDK.getVarietas() == null) ? "-" : dataRDK.getVarietas();
-            String strSumberBenih = (dataRDK.getSumberBenih() == null) ? "-" : dataRDK.getSumberBenih();
-            String strTabunganAnggota = (dataRDK.getTabunganAnggota() == null) ? "-" : dataRDK.getTabunganAnggota();
-            String strIuranAnggota = (dataRDK.getIuranAnggota() == null) ? "-" : dataRDK.getIuranAnggota();
-            String strTarget = (dataRDK.getTarget() == null) ? "-" : dataRDK.getTarget();
-            String strTargetHasil = (dataRDK.getTargetHasilPerHa() == null) ? "-" : dataRDK.getTargetHasilPerHa();
-            String strModalPemupukan = (dataRDK.getPemupukanModal() == null) ? "-" : dataRDK.getPemupukanModal();
-            String strKomoditasSI = (idKomoditasSI == null) ? "-" : dataKomoditasSI.getNama();
-            String strKomoditasPB = (idKomoditasRU == null) ? "-" : dataKomoditasRU.getNama();
+//        String strPetugasrdk = (getData() == null) ? "-" : getData();
+        String strDescIrigasi = (dataRDK.getDeskripsiIrigasi() == null) ? "-" : dataRDK.getDeskripsiIrigasi();
+//        String strPoktanrdk = (dataRDK.getPoktan() == null) ? "-" : dataPoktan.getNama();
+        String strTanggalData = (dataRDK.getTanggal() == null) ? "-" : dataRDK.getTanggal();
+        String strLuasSawah = (dataRDK.getLuasSawah() == null) ? "-" : dataRDK.getLuasSawah();
+        String strKeterangan = (dataRDK.getKeterangan() == null) ? "-" : dataRDK.getKeterangan();
+        String strNamaIrigasi = (dataRDK.getNama() == null) ? "-" : dataRDK.getNama();
+//        String strKegiatan = (dataRDK.getKegiatan() == null) ? "-" : dataRDK.getKegiatan();
+        String strTanggalKegiatan = (dataRDK.getTanggalJK() == null) ? "-" : dataRDK.getTanggalJK();
+        String strDescKegiatan = (dataRDK.getDeskripsiJK() == null) ? "-" : dataRDK.getDeskripsiJK();
+        String strPaketTeknologi = (dataRDK.getPaketTeknologi() == null) ? "-" : dataRDK.getPaketTeknologi();
+        String strPolaTanam = (dataRDK.getPolaTanam() == null) ? "-" : dataRDK.getPolaTanam();
+        String strJadwalTanam = (dataRDK.getJadwalTanam() == null) ? "-" : dataRDK.getJadwalTanam();
+        String strVarietas = (dataRDK.getVarietas() == null) ? "-" : dataRDK.getVarietas();
+        String strSumberBenih = (dataRDK.getSumberBenih() == null) ? "-" : dataRDK.getSumberBenih();
+        String strTabunganAnggota = (dataRDK.getTabunganAnggota() == null) ? "-" : dataRDK.getTabunganAnggota();
+        String strIuranAnggota = (dataRDK.getIuranAnggota() == null) ? "-" : dataRDK.getIuranAnggota();
+        String strTarget = (dataRDK.getTarget() == null) ? "-" : dataRDK.getTarget();
+        String strTargetHasil = (dataRDK.getTargetHasilPerHa() == null) ? "-" : dataRDK.getTargetHasilPerHa();
+        String strModalPemupukan = (dataRDK.getPemupukanModal() == null) ? "-" : dataRDK.getPemupukanModal();
+        String strKomoditasSI = (idKomoditasSI == null) ? "-" : dataKomoditasSI.getNama();
+        String strKomoditasPB = (idKomoditasRU == null) ? "-" : dataKomoditasRU.getNama();
 
-            petugasrdk.setText(strPetugasrdk);
-            deskripsiIrigasi.setText(strDescIrigasi);
-            poktanrdk.setText(strPoktanrdk);
-            tanggaldata.setText(strTanggalData);
-            luassawahdata.setText(strLuasSawah);
-            keterangandata.setText(strKeterangan);
-            namaIrigasi.setText(strNamaIrigasi);
-            kegiatan.setText(strKegiatan);
-            tanggalKegiatan.setText(strTanggalKegiatan);
-            deskripsikegiatan.setText(strDescKegiatan);
-            paketteknologi.setText(strPaketTeknologi);
-            polatanam.setText(strPolaTanam);
-            jadwaltanam.setText(strJadwalTanam);
-            varietas.setText(strVarietas);
-            sumberbenih.setText(strSumberBenih);
-            tabungananggota.setText(strTabunganAnggota);
-            iurananggota.setText(strIuranAnggota);
-            modalpemupukan.setText(strModalPemupukan);
-            target.setText(strTarget);
-            targethasil.setText(strTargetHasil);
-            iurananggota.setText(strIuranAnggota);
-            komoditassi.setText(strKomoditasSI);
-            komoditaspb.setText(strKomoditasPB);
-        }catch (NullPointerException e){}
+//        petugasrdk.setText(strPetugasrdk);
+        deskripsiIrigasi.setText(strDescIrigasi);
+        poktanrdk.setText("-");
+        tanggaldata.setText(strTanggalData);
+        luassawahdata.setText(strLuasSawah);
+        keterangandata.setText(strKeterangan);
+        namaIrigasi.setText(strNamaIrigasi);
+//        kegiatan.setText(strKegiatan);
+        tanggalKegiatan.setText(strTanggalKegiatan);
+        deskripsikegiatan.setText(strDescKegiatan);
+        paketteknologi.setText(strPaketTeknologi);
+        polatanam.setText(strPolaTanam);
+        jadwaltanam.setText(strJadwalTanam);
+        varietas.setText(strVarietas);
+        sumberbenih.setText(strSumberBenih);
+        tabungananggota.setText(strTabunganAnggota);
+        iurananggota.setText(strIuranAnggota);
+        modalpemupukan.setText(strModalPemupukan);
+        target.setText(strTarget);
+        targethasil.setText(strTargetHasil);
+        iurananggota.setText(strIuranAnggota);
+        komoditassi.setText(strKomoditasSI);
+        komoditaspb.setText(strKomoditasPB);
     }
 
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -230,20 +212,20 @@ public class DetailRDKActivity extends AppCompatActivity {
         }
     };
 
-    public String getNamaUser() {
-        realm.beginTransaction();
-        UserDB user =realm.where(UserDB.class).findFirst();
-        realm.commitTransaction();
-        String res;
-        if(user == null){
-            res = "";
-        }else{
-            try {
-                res = user.getNamaLengkap();
-            }catch (Exception e){
-                res = "";
-            }
-        }
-        return res;
-    }
+//    public String getData() {
+//        realm.beginTransaction();
+//        UserDB user =realm.where(UserDB.class).findFirst();
+//        realm.commitTransaction();
+//        String res;
+//        if(user == null){
+//            res = "";
+//        }else{
+//            try {
+//                res = user.getNamaLengkap();
+//            }catch (Exception e){
+//                res = "";
+//            }
+//        }
+//        return res;
+//    }
 }

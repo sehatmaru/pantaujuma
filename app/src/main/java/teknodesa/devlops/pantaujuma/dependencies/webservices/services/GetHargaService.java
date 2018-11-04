@@ -40,8 +40,8 @@ public class GetHargaService implements GetHargaContract.Repository {
         this.controller = controller;
     }
 
+    private boolean insertHarga = true;
 
-    private boolean res = false;
     @Override
     public void getAllHarga() {
         Log.e("send","data comehere");
@@ -74,43 +74,42 @@ public class GetHargaService implements GetHargaContract.Repository {
     }
 
     @Override
-    public void saveData(List<HargaRealm> allTar) {
-        for(int i=0; i < allTar.size();i++ ){
-            HargaRealm hargaTempRealm = allTar.get(i);
-            realm.beginTransaction();
-            hargaTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            HargaBody hargaBody = new HargaBody(hargaTempRealm.getHashId(), hargaTempRealm.getHashKomoditas(),
-                    hargaTempRealm.getHashPasar(), hargaTempRealm.getTanggal(), hargaTempRealm.getNilai(),
-                    hargaTempRealm.getSatuan(), hargaTempRealm.getNamaPasar(), hargaTempRealm.getAlamat(),
-                    hargaTempRealm.getKecamatan(), hargaTempRealm.getKabupaten());
-
-            Log.e("harga service",hargaBody.toString());
+    public void saveData(List<HargaRealm> allHar) {
+        for(int i=0; i < allHar.size();i++ ){
+            HargaRealm hargaTempRealm = allHar.get(i);
+            HargaBody hargaBody = new HargaBody(hargaTempRealm);
+            final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertHarga(WebServiceModule.ACCESS_TOKEN_TEMP,hargaBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",hargaTempRealm);
+                            if (dataLoop == allHar.size()-1) {
+                                controller.saveDataSuccess("Success");
+                            }
+                            insertHarga =true;
                         }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                            insertHarga =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
 
                     }else{
-                        Log.e("harga service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                        insertHarga =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("harga service","error server"+t.getMessage());
-                    controller.saveDataFailed("Failed"+t.getMessage());
+                    insertHarga =false;
+                    controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertHarga){
+                break;
+            }
         }
     }
 

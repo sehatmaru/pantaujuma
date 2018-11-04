@@ -18,7 +18,7 @@ public class GetHargaContract {
         void saveData(List<HargaRealm> allTar);
         void getAllHargaSuccess(List<HargaRealm> allHarga);
         void getAllHargaFailed(String message);
-        void saveDataSuccess(String message, HargaRealm hargaTemp);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(HargaRealm hargaTemp);
     }

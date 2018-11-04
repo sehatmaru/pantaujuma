@@ -18,7 +18,7 @@ public class Poktan implements Parcelable {
     private String noHP;
     private String noTelp;
     private String deskripsi;
-    private String statusPoktan;
+    private int statusPoktan;
 
     private int idDesa;
     private int isSync;
@@ -41,7 +41,7 @@ public class Poktan implements Parcelable {
         this.isSync = poktanRealm.getIsSync();
     }
 
-    public Poktan(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, String statusPoktan, int idDesa, int isSync) {
+    public Poktan(String hashId, String nama, String desa, String kecamatan, String tanggalDidirikan, String alamat, String noHP, String noTelp, String deskripsi, int statusPoktan, int idDesa, int isSync) {
         this.hashId = hashId;
         this.nama = nama;
         this.desa = desa;
@@ -66,7 +66,7 @@ public class Poktan implements Parcelable {
         noHP = in.readString();
         noTelp = in.readString();
         deskripsi = in.readString();
-        statusPoktan = in.readString();
+        statusPoktan = in.readInt();
         idDesa = in.readInt();
         isSync = in.readInt();
     }
@@ -156,11 +156,11 @@ public class Poktan implements Parcelable {
         this.deskripsi = deskripsi;
     }
 
-    public String getStatusPoktan() {
+    public int getStatusPoktan() {
         return statusPoktan;
     }
 
-    public void setStatusPoktan(String statusPoktan) {
+    public void setStatusPoktan(int statusPoktan) {
         this.statusPoktan = statusPoktan;
     }
 
@@ -239,7 +239,7 @@ public class Poktan implements Parcelable {
         parcel.writeString(noHP);
         parcel.writeString(noTelp);
         parcel.writeString(deskripsi);
-        parcel.writeString(statusPoktan);
+        parcel.writeInt(statusPoktan);
         parcel.writeInt(idDesa);
         parcel.writeInt(isSync);
     }

@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
+
 public class HargaBody {
     private String hashId;
     private String hashKomoditas;
@@ -15,17 +17,17 @@ public class HargaBody {
     public HargaBody() {
     }
 
-    public HargaBody(String hashId, String hashKomoditas, String hashPasar, String tanggal, String nilai, String satuan, String namaPasar, String alamat, String kecamatan, String kabupaten) {
-        this.hashId = hashId;
-        this.hashKomoditas = hashKomoditas;
-        this.hashPasar = hashPasar;
-        this.tanggal = tanggal;
-        this.nilai = nilai;
-        this.satuan = satuan;
-        this.namaPasar = namaPasar;
-        this.alamat = alamat;
-        this.kecamatan = kecamatan;
-        this.kabupaten = kabupaten;
+    public HargaBody(HargaRealm data) {
+        this.hashId = data.getHashId();
+        this.hashKomoditas = data.getHashKomoditas();
+        this.hashPasar = data.getHashPasar();
+        this.tanggal = data.getTanggal();
+        this.nilai = data.getNilai();
+        this.satuan = data.getSatuan();
+        this.namaPasar = data.getNamaPasar();
+        this.alamat = data.getAlamat();
+        this.kecamatan = data.getKecamatan();
+        this.kabupaten = data.getKabupaten();
     }
 
     public String getHashId() {

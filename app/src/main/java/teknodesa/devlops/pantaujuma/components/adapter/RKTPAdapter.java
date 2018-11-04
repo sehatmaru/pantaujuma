@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,9 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp.RKTPRealm;
 
 public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> {
 
+    @Inject
+    Realm realm;
+
     private List<RKTPRealm> listData;
     private LayoutInflater layoutInflater;
     public static Context mContext;
@@ -38,6 +42,10 @@ public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ((MainApplication) mContext.getApplicationContext())
+                .getComponent()
+                .inject(this);
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_rktp , parent, false);
         return new MyViewHolder(itemView);
@@ -46,14 +54,49 @@ public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         RKTPRealm rktp = listData.get(position);
+        String idpoktan = rktp.getPoktan();
+        PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
 
-        try{
-            holder.textpenanggungjawab.setText(rktp.getPenanggungJawab());
-            holder.texttujuan.setText(rktp.getTahun());
-            holder.texttanggal.setText(rktp.getWaktu());
-        } catch (NullPointerException e){
-
+        if(rktp.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
         }
+
+        String penanggungJawab;
+        String tahun;
+        String keterangan;
+        String namaPoktan;
+
+        if(rktp.getPoktan() == null || rktp.getPoktan().compareTo("")==0){
+            namaPoktan="-";
+        }else{
+            namaPoktan = poktan.getNama();
+        }
+
+        holder.textpoktan.setText("Poktan: " + namaPoktan);
+
+        if(rktp.getPenanggungJawab() == null || rktp.getPenanggungJawab().compareTo("")==0){
+            penanggungJawab="-";
+        }else{
+            penanggungJawab = rktp.getPenanggungJawab();
+        }
+
+        holder.textpenanggungjawab.setText("Penanggung Jawab: " + penanggungJawab);
+
+        if(rktp.getTahun() == null || rktp.getTahun().compareTo("")==0){
+            tahun="-";
+        }else{
+            tahun = rktp.getTahun();
+        }
+
+        holder.texttujuan.setText("Tahun: " + tahun);
+
+        if(rktp.getKeterangan() == null || rktp.getKeterangan().compareTo("")==0){
+            keterangan="-";
+        }else{
+            keterangan = rktp.getKeterangan();
+        }
+
+        holder.texttanggal.setText("Keterangan: " + keterangan);
 
         holder.cardview.setOnClickListener(view -> {
             onClicRKTP.OnClickRKTP(rktp.getHashId());
@@ -70,12 +113,14 @@ public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> 
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView textpoktan;
         TextView textpenanggungjawab;
         TextView texttujuan;
         TextView texttanggal;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
+            textpoktan = (TextView)itemView.findViewById(R.id.poktan);
             textpenanggungjawab = (TextView)itemView.findViewById(R.id.penanggungjawab);
             texttujuan = (TextView)itemView.findViewById(R.id.tujuan);
             texttanggal = (TextView) itemView.findViewById(R.id.tanggal);

@@ -23,17 +23,12 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/ActionBarTheme">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/logopantaujuma_nobg" />
-
                 <TextView
                     style="@style/toolbarTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
-                    android:text="@string/title_juma" />
+                    android:text="Tambah RDKK" />
 
 
             </android.support.v7.widget.Toolbar>

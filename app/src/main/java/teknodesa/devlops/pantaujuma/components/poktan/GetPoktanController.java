@@ -21,7 +21,6 @@ public class GetPoktanController implements GetPoktanContract.Controller {
     @Inject
     Realm realm;
 
-
     private GetPoktanContract.View views;
 
     public GetPoktanController(@NonNull AppComponent appComponent) {
@@ -54,6 +53,7 @@ public class GetPoktanController implements GetPoktanContract.Controller {
         }else{
             mService.getAllPoktan(res);
             mService.getAllAnggotaPoktan(res);
+            mService.getAllPengurusPoktan(res);
         }
     }
 
@@ -73,13 +73,7 @@ public class GetPoktanController implements GetPoktanContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,PoktanRealm poktanTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(poktanTempRealm);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

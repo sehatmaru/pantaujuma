@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp.RKTPRealm;
+
 public class RKTPBody {
     private String hashId;
     private String idUser;
@@ -22,24 +24,24 @@ public class RKTPBody {
     public RKTPBody() {
     }
 
-    public RKTPBody(String hashId, String idUser, int idDesa, String poktan, String tahun, String tujuan, String masalah, String sasaran, String materi, String metode, String volume, String lokasi, String waktu, String sumberBiaya, String penanggungJawab, String pelaksana, String keterangan) {
-        this.hashId = hashId;
-        this.idUser = idUser;
-        this.idDesa = idDesa;
-        this.poktan = poktan;
-        this.tahun = tahun;
-        this.tujuan = tujuan;
-        this.masalah = masalah;
-        this.sasaran = sasaran;
-        this.materi = materi;
-        this.metode = metode;
-        this.volume = volume;
-        this.lokasi = lokasi;
-        this.waktu = waktu;
-        this.sumberBiaya = sumberBiaya;
-        this.penanggungJawab = penanggungJawab;
-        this.pelaksana = pelaksana;
-        this.keterangan = keterangan;
+    public RKTPBody(RKTPRealm data) {
+        this.hashId = data.getHashId();
+        this.idUser = data.getIdUser();
+        this.idDesa = data.getIdDesa();
+        this.poktan = data.getPoktan();
+        this.tahun = data.getTahun();
+        this.tujuan = data.getTujuan();
+        this.masalah = data.getMasalah();
+        this.sasaran = data.getSasaran();
+        this.materi = data.getMateri();
+        this.metode = data.getMetode();
+        this.volume = data.getVolume();
+        this.lokasi = data.getLokasi();
+        this.waktu = data.getWaktu();
+        this.sumberBiaya = data.getSumberBiaya();
+        this.penanggungJawab = data.getPenanggungJawab();
+        this.pelaksana = data.getPelaksana();
+        this.keterangan = data.getKeterangan();
     }
 
     public String getHashId() {

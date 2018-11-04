@@ -18,7 +18,7 @@ public class GetRDKContract {
         void saveData(List<RDKRealm> allPen);
         void getAllRDKSuccess(List<RDKRealm> allRDK);
         void getAllRDKFailed(String message);
-        void saveDataSuccess(String message, RDKRealm rdkTempRealm);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
         void updateDataRealm(RDKRealm rdkTempRealm);
     }

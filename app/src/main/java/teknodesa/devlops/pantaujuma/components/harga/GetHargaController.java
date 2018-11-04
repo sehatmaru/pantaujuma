@@ -52,13 +52,7 @@ public class GetHargaController implements GetHargaContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,HargaRealm hargaTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(hargaTempRealm);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 

@@ -445,53 +445,6 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/rttext"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="RT/RW"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:id="@+id/rtrw"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </RelativeLayout>
-
             </LinearLayout>
 
         </LinearLayout>
@@ -517,4 +470,5 @@
             android:background="@android:color/holo_green_dark"
             android:text="@string/edit" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
