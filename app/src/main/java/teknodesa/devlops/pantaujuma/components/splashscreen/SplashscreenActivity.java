@@ -29,7 +29,6 @@ public class SplashscreenActivity extends BaseActivity implements SplashscreenCo
                 .getComponent()
                 .inject(this);
         splashController.setView(this);
-        showLoading();
         checkNetwork();
     }
     private void checkNetwork(){
