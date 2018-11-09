@@ -69,6 +69,5 @@ public class PendudukController implements PendudukContract.Controller<PendudukR
                     break;
             }
         }
-        //(Activity)mView.startActivity(KelahiranActivity.createIntent(getApplicationContext()));
     }
 }

@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +83,6 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         setViewpager();
         setupTabIcons();
         viewPager.setCurrentItem(0);
-        //viewPager.getCurrentItem();
 
         return v;
     }
@@ -92,9 +90,6 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
-
         if(CRUActivity.mAction.equals("update")){
             setUIData();
         }
@@ -162,8 +157,6 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
         newRealmItem.setIsSync(0);
         newRealmItem.setIdDesa(getIdDesa());
 
-
-        Log.e("penduduk",newRealmItem.toString());
         return newRealmItem;
     }
 

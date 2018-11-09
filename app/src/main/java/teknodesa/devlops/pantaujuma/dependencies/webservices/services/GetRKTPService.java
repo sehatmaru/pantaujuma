@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,29 +39,31 @@ public class GetRKTPService implements GetRKTPContract.Repository {
 
     @Override
     public void getAllRKTP(int idDesa) {
-        Log.e("send", "data comehere" + idDesa);
-        Call<ResponseRKTP> call = sisApi.getAllRKTP(WebServiceModule.ACCESS_TOKEN_TEMP, idDesa);
+        Call<ResponseRKTP> call = sisApi.getAllRKTP(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponseRKTP>() {
             @Override
             public void onResponse(Call<ResponseRKTP> call, Response<ResponseRKTP> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().isSuccess()) {
-                        Log.e("hasiltarget", response.body().getData().size() + " ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllRKTPSuccess(response.body().getData());
-                        }, error -> {
-                            Log.e("gettargeteror", error.getMessage());
-                        });
-                    } else
-                        controller.getAllRKTPFailed(response.body().getMessage());
-                } else {
-                    controller.getAllRKTPFailed("Server Error");
+                if(response.isSuccessful()){
+                    if(response.body().isSuccess()){
+                        realm.beginTransaction();
+                        RealmResults<RKTPRealm> allRKTPs = realm.where(RKTPRealm.class).equalTo("isSync",1).findAll();
+                        allRKTPs.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllRKTPSuccess(response.body().getData());
+                    }else{
+                        controller.getAllRKTPFailed("Error "+response.message());
+                    }
+                }else{
+                    controller.getAllRKTPFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseRKTP> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllRKTPFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -74,7 +75,6 @@ public class GetRKTPService implements GetRKTPContract.Repository {
         for(int i=0; i < allRKTP.size();i++ ){
             RKTPRealm rktpTempRealm = allRKTP.get(i);
             RKTPBody rktpBody = new RKTPBody(rktpTempRealm);
-            Log.e("rktp service",rktpBody.toString());
             final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertRktp(WebServiceModule.ACCESS_TOKEN_TEMP,rktpBody);
             call.enqueue(new Callback<ResponseSaveData>() {

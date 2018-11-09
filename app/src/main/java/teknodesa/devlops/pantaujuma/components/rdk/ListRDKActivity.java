@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,9 +77,11 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
 
     private ProgressDialog progressdialog;
     static int counter;
+
     public static Intent createIntent(Context context) {
         return new Intent(context, ListRDKActivity.class);
     }
+
     static int hasilList =0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,8 +116,6 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
             listrdk = realm1.copyFromRealm(realm1.where(RDKRealm.class).sort("poktan", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listrdk.isEmpty()) {
-                Log.e("List Identitas RDK","ini hasil"+listrdk.size());
-
                 rdkAdapter = new RDKAdapter(getApplicationContext(), listrdk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
@@ -289,7 +288,6 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
         if(counter == hasilList){
             progressdialog.dismiss();
             mController.getAllRDK();

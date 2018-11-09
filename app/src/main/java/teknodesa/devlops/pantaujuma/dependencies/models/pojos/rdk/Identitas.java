@@ -10,20 +10,11 @@ public class Identitas {
     }
 
     public Identitas(String poktan, String tanggal, String luasSawah, String keterangan) {
-//        this.idUser = idUser;
         this.poktan = poktan;
         this.tanggal = tanggal;
         this.luasSawah = luasSawah;
         this.keterangan = keterangan;
     }
-//
-//    public String getIdUser() {
-//        return idUser;
-//    }
-//
-//    public void setIdUser(String idUser) {
-//        this.idUser = idUser;
-//    }
 
     public String getPoktan() {
         return poktan;

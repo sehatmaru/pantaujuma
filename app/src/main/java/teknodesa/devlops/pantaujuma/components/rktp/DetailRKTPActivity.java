@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
@@ -73,8 +72,6 @@ public class DetailRKTPActivity extends AppCompatActivity {
     @BindView(R.id.keterangan)
     TextView keterangan;
 
-    Parcelable itemData;
-
     @OnClick(R.id.btnEdit)
     void clickEdit() {
         RKTP rktpObject = new RKTP(dataRKTP);
@@ -121,7 +118,6 @@ public class DetailRKTPActivity extends AppCompatActivity {
             poktan.setText(dataPoktan.getNama());
         }
 
-//        poktan.setText(dataPoktan.getNama());
         tahun.setText(dataRKTP.getTahun());
         tujuan.setText(dataRKTP.getTujuan());
         masalah.setText(dataRKTP.getMasalah());
@@ -143,7 +139,6 @@ public class DetailRKTPActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRUPetaniFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListRKTPActivity.createIntent(getApplicationContext()));
                     break;
 

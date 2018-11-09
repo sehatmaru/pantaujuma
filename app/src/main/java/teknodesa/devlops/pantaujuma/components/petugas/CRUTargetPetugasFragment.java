@@ -1,6 +1,5 @@
 package teknodesa.devlops.pantaujuma.components.petugas;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -8,8 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.joanzapata.iconify.widget.IconTextView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -35,16 +29,11 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.adapter.KomentarAdapter;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.TargetParcelable;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.TargetPetugas;
-import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class CRUTargetPetugasFragment extends Fragment implements TargetContract.ViewController<TargetPetugas>, TargetContract.View, SearchKomoditasFragment.OnClickKomoditasListener {
 
@@ -106,14 +95,6 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
             komoditas = DetailTargetActivity.idKomoditas;
         }
 
-//
-//        if(CRUActivity.mAction.equals("update")){
-//            textForUpdate();
-//            idKomoditas = DetailTargetActivity.idKomoditas;
-//        }else{
-//
-//        }
-
         return v;
     }
 
@@ -161,8 +142,6 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         newRealmItem.setKeterangan(strKeterangan);
         newRealmItem.setIsSync(0);
 
-        Log.e("create target", newRealmItem.toString());
-
         return newRealmItem;
     }
 
@@ -171,16 +150,6 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         input_komoditas.setText(nama);
         komoditas = idKomoditas;
     }
-
-//    void textForUpdate(){
-//        input_komoditas.setText(DetailTargetActivity.dataKomoditas.getNama());
-//        input_tahun.setText(String.valueOf(DetailTargetActivity.dataTarget.getTahun()));
-//        input_luastanam.setText(String.valueOf(DetailTargetActivity.dataTarget.getLuasTanam()));
-//        input_luaspanen.setText(String.valueOf(DetailTargetActivity.dataTarget.getLuasPanen()));
-//        input_sasaranproduksi.setText(String.valueOf(DetailTargetActivity.dataTarget.getSasaranProduksi()));
-//        input_sasaranproduktifitas.setText(String.valueOf(DetailTargetActivity.dataTarget.getSasaranProduktifitas()));
-//        input_keterangan.setText(DetailTargetActivity.dataTarget.getKeterangan());
-//    }
 
     @Override
     public void setUIData() {

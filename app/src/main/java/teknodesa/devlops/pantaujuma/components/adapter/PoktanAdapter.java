@@ -16,7 +16,6 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 
 /**

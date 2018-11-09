@@ -1,6 +1,5 @@
 package teknodesa.devlops.pantaujuma.components.poktan;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -8,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,6 @@ import android.widget.Toast;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -31,17 +28,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
-import io.realm.Sort;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PengurusPoktanAdapter;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchpetani.SearchPetaniFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.AnggotaPoktanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
@@ -152,14 +145,9 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listData = realm1.copyFromRealm(realm1.where(PengurusPoktanRealm.class).equalTo("poktanPengurus", DetailPoktanActivity.idPoktan).findAll());
-            Log.e("ini idPoktan", DetailPoktanActivity.idPoktan);
-            Log.e("ini list pengurus", listData.toString());
         }, () -> {
             if (!listData.isEmpty()) {
-                Log.e("List Pengurus","ini hasil"+listData.size());
                 mAdapter = new PengurusPoktanAdapter(mContext, listData);
-//                recyclerView.setAdapter(mAdapter);
-//                recyclerView.setLayoutManager(linearLayoutManager);
                 LinearLayoutManager manager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(manager);
                 recyclerView.setHasFixedSize(true);
@@ -190,8 +178,6 @@ public class CRUPengurusPoktanFragment extends Fragment implements PoktanContrac
         dataPoktan = realm.where(PoktanRealm.class).equalTo("hashId", DetailPoktanActivity.idPoktan).findFirst();
         dataPoktan.setIsSync(0);
         realm.commitTransaction();
-//
-        Log.e("data pengurus" , "" + newItem.toString());
 
         return newItem;
     }

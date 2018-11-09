@@ -3,7 +3,6 @@ package teknodesa.devlops.pantaujuma.components.penduduk;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PendudukParcelable;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.BiodataPenduduk;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 
 public class DetailPendudukActivity extends AppCompatActivity {
@@ -69,8 +67,6 @@ public class DetailPendudukActivity extends AppCompatActivity {
         startActivity(CRUActivity.createIntent(getApplicationContext(), "penduduk", "update", itemDetail));
         finish();
     }
-
-
 
     public static PendudukRealm dataPenduduk;
 
@@ -126,7 +122,6 @@ public class DetailPendudukActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRUPendudukFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListPendudukActivity.createIntent(getApplicationContext()));
                     break;
 

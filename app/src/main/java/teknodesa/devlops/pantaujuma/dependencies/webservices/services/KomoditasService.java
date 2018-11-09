@@ -1,15 +1,15 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.PantauJumaAPI;
@@ -45,21 +45,24 @@ public class KomoditasService implements KomoditasContract.Repository {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
                         realm.beginTransaction();
-                        realm.executeTransactionAsync(realm -> {
-                            realm.insertOrUpdate(response.body().getData());
-                        });
+                        RealmResults<KomoditasRealm> allPenduduks = realm.where(KomoditasRealm.class).findAll();
+                        allPenduduks.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
                         realm.commitTransaction();
                         controller.getAllKomoditasSuccess(response.body().getData());
-                    }else
-                        controller.getAllKomoditasFailed(response.body().getMessage());
+                    }else{
+                        controller.getAllKomoditasFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllKomoditasFailed("Something Wrong: "+response.message());
+                    controller.getAllKomoditasFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseKomoditasService> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllKomoditasFailed(t.getMessage());
                 t.printStackTrace();
             }

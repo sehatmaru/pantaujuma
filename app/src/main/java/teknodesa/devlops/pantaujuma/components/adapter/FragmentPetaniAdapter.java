@@ -63,7 +63,6 @@ public class FragmentPetaniAdapter extends RecyclerView.Adapter<FragmentPetaniAd
         PendudukRealm penduduk = realm.where(PendudukRealm.class).equalTo("hashId", biodata).findFirst();
 
         holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
-        //holder.textname.setText(penduduk.getAlamat());
         holder.textstatus.setText("NIK : "+penduduk.getNIK());
         holder.cardview.setOnClickListener(view -> { onClicPetani.OnClickPetani(petani.getHashId(), penduduk.getNamaDepan(), penduduk.getNamaBelakang(), penduduk.getNIK());});
     }

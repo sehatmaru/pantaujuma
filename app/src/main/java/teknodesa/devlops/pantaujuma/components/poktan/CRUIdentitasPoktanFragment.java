@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Poktan;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -145,7 +143,6 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
         String strKecamatan = (input_kecamatan.getText().toString() == null) ? "-" : input_kecamatan.getText().toString();
         String strNoHP = (input_hp.getText().toString() == null) ? "-" : input_hp.getText().toString();
         String strNoTelp = (input_telp.getText().toString() == null) ? "-" : input_telp.getText().toString();
-//        String strStatus = "Aktif";
 
         PoktanRealm newItem = new PoktanRealm();
 
@@ -166,8 +163,6 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
         newItem.setStatusPoktan(0);
         newItem.setIdDesa(getIdDesa());
         newItem.setIsSync(0);
-
-//        Log.e("ini data poktan", newItem.toString())
 
         return newItem;
     }

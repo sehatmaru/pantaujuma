@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -27,8 +26,6 @@ import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.signin.UserRealmController;
 
 public class MainActivity extends AppCompatActivity {
-    /*@BindView(R.id.message)
-    TextView mTextMessage;*/
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
@@ -90,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Log.e("Hasil act", userRealmController.getUser().getEmail());
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         replaceFragment(homeFragment);

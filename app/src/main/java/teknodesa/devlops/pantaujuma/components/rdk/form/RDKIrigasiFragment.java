@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Irigasi;
 
 public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewController<Irigasi> {
+
     @BindView(R.id.input_nama)
     EditText input_nama;
 
@@ -41,6 +41,7 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
         View v = inflater.inflate(R.layout.fragment_crurdkirigasi, null);
         ButterKnife.bind(this, v);
         setData();
+
         return v;
     }
 

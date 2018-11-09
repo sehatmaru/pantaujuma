@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import teknodesa.devlops.pantaujuma.components.rktp.RKTPRepository;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;

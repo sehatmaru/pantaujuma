@@ -4,7 +4,6 @@ import java.util.List;
 
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 
-
 public class ResponseRDK {
     private boolean success;
     private String message;

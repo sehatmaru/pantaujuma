@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
@@ -68,10 +67,12 @@ public class DetailPetaniActivity extends AppCompatActivity {
 
     public static String idPetani;
     static String idPenduduk;
+
     public static Intent createIntent(Context context, String id) {
         idPetani = id;
         return new Intent(context, DetailPetaniActivity.class);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +118,6 @@ public class DetailPetaniActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRUPetaniFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListPetaniActivity.createIntent(getApplicationContext()));
                     break;
 

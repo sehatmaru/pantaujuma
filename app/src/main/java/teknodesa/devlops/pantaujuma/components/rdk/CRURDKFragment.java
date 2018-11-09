@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,6 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.form.RDKIdentitasFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.form.RDKIrigasiFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.form.RDKJadwalKegiatanFragment;
@@ -107,7 +105,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         setViewpager();
         setupTabIcons();
         viewPager.setCurrentItem(0);
-        //viewPager.getCurrentItem();
 
         return v;
     }
@@ -174,7 +171,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         rencanaUmum = rdkRencanaUmumFragment.getUIData();
         sasaranIntensifikasi = rdkSasaranIntensifikasiFragment.getUIData();
 
-//        String hashIdIdentitas = getSaltString();
         String hashIdIrigasi = getSaltString();
         String hashIdJadwal = getSaltString();
         String hashIdRencana = getSaltString();
@@ -243,7 +239,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         newRealmItem.setTarget(sasaranIntensifikasi.getTarget());
         newRealmItem.setTargetHasilPerHa(sasaranIntensifikasi.getTargetHasilPerHa());
 
-        Log.e("rdkdata",newRealmItem.toString());
         return newRealmItem;
     }
 
@@ -269,7 +264,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
             if (tipe.equals("update")) {
                 String idItem = ((RDKParcelable) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
-                Log.e("ini hasil update", "" + itemData.toString());
             }
         }
     }

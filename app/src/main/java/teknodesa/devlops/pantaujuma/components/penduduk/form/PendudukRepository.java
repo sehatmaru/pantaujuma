@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.penduduk.form;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -25,7 +24,6 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
 
     @Override
     public void addItem(PendudukRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -40,7 +38,6 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
 
     @Override
     public void updateItem(String idItem, PendudukRealm item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> {
                 bgRealm.insertOrUpdate(item);
         }, () -> {
@@ -69,9 +66,6 @@ public class PendudukRepository implements PendudukContract.Repository<PendudukR
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         PendudukRealm deletedItem = realm.where(PendudukRealm.class).equalTo("hashId", idItem).findFirst();
-
-
     }
 }

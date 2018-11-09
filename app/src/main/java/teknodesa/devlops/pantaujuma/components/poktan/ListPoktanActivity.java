@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +35,6 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PoktanAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.AnggotaPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PengurusPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
@@ -112,8 +110,6 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
         listpoktanNotSync = realm.where(PoktanRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
 
-//        Log.e("ini list anggota poktan", "" + CRUAnggotaPoktanFragment.listData.toString());
-
         hasilList = listpoktanNotSync.size();
 
         spinner.setVisibility(View.VISIBLE);
@@ -127,8 +123,6 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
             listpoktan = realm1.copyFromRealm(realm1.where(PoktanRealm.class).sort("nama", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listpoktan.isEmpty()) {
-                Log.e("List Poktan","ini hasil"+listpoktan.size());
-
                 poktanAdapter = new PoktanAdapter(getApplicationContext(), listpoktan,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(poktanAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
@@ -273,9 +267,6 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
 
     private void startSync(){
         counter=0;
-//        Log.e("list poktan sync", "" + listpoktanNotSync.toString());
-//        Log.e("list anggota sync", "" + CRUAnggotaPoktanFragment.listanggotaNotSync.toString());
-//        Log.e("list pengurus sync", "" + CRUPengurusPoktanFragment.listpengurusNotSync.toString());
 
         if (listpoktanNotSync!=null){
             mController.saveData(listpoktanNotSync);
@@ -288,11 +279,6 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
         if (CRUPengurusPoktanFragment.listpengurusNotSync!=null){
             pController.saveData(CRUPengurusPoktanFragment.listData);
         }
-
-//
-//        mController.saveData(listpoktanNotSync);
-//        aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
-//        pController.saveData(CRUPengurusPoktanFragment.listpengurusNotSync);
     }
 
     private void checkDataRealm(){
@@ -341,7 +327,6 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
         if(counter == hasilList){
             progressdialog.dismiss();
             mController.getAllPoktan();

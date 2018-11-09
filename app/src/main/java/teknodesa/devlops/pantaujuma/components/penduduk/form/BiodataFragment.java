@@ -25,7 +25,6 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
-import teknodesa.devlops.pantaujuma.components.penduduk.form.PendudukContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Agama;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.GolonganDarah;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.JenisKelamin;
@@ -212,56 +211,7 @@ public class BiodataFragment extends Fragment implements PendudukContract.ViewCo
 
     @Override
     public void setUIData() {
-//        BiodataPenduduk theUIData = (BiodataPenduduk) CRUActivity.mData;
-/*
-        input_nik.setText(DetailPendudukActivity.dataPenduduk.getNIK());
 
-
-        input_namadepan.setText(DetailPendudukActivity.dataPenduduk.getNamaDepan());
-        input_namabelakang.setText(DetailPendudukActivity.dataPenduduk.getNamaBelakang());
-
-        ArrayAdapter<JenisKelamin> aJK = new ArrayAdapter<JenisKelamin>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, JenisKelamin.values());
-        spinnerJK.setAdapter(aJK);
-        String valJK = DetailPendudukActivity.dataPenduduk.getJenisKelamin();
-        if (valJK != null) {
-            int spinnerPosition = aJK.getPosition(JenisKelamin.valueFor(valJK));
-            spinnerJK.setSelection(spinnerPosition);
-        }
-
-        input_tempatlahir.setText(DetailPendudukActivity.dataPenduduk.getTempatLahir());
-        input_tanggallahir.setText(DetailPendudukActivity.dataPenduduk.getTanggalLahir());
-
-        ArrayAdapter<Agama> aAgama = new ArrayAdapter<Agama>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Agama.values());
-        spinnerAgama.setAdapter(aAgama);
-        String valAgama = DetailPendudukActivity.dataPenduduk.getAgama();
-        if (valAgama != null) {
-            int spinnerPosition = aAgama.getPosition(Agama.valueFor(valAgama));
-            spinnerAgama.setSelection(spinnerPosition);
-        }
-
-        ArrayAdapter<GolonganDarah> aGolonganDarah = new ArrayAdapter<GolonganDarah>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, GolonganDarah.values());
-        spinnerGolonganDarah.setAdapter(aGolonganDarah);
-        String valGolDarah = DetailPendudukActivity.dataPenduduk.getGolonganDarah();
-        if (valGolDarah != null) {
-            int spinnerPosition = aGolonganDarah.getPosition(GolonganDarah.valueFor(valGolDarah));
-            spinnerGolonganDarah.setSelection(spinnerPosition);
-        }
-
-        ArrayAdapter<Pekerjaan> aPekerjaan = new ArrayAdapter<Pekerjaan>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Pekerjaan.values());
-        spinnerPekerjaan.setAdapter(aPekerjaan);
-        String valPekerjaan = DetailPendudukActivity.dataPenduduk.getPekerjaan();
-        if (valPekerjaan != null) {
-            int spinnerPosition = aPekerjaan.getPosition(Pekerjaan.valueFor(valPekerjaan));
-            spinnerPekerjaan.setSelection(spinnerPosition);
-        }
-
-        ArrayAdapter<Pendidikan> aPendidikan = new ArrayAdapter<Pendidikan>(CRUActivity.mContext.getApplicationContext(), R.layout.spinner_item, Pendidikan.values());
-        spinnerPendidikan.setAdapter(aPendidikan);
-        String valPendidikan = DetailPendudukActivity.dataPenduduk.getGolonganDarah();
-        if (valPendidikan != null) {
-            int spinnerPosition = aPendidikan.getPosition(Pendidikan.valueFor(valPendidikan));
-            spinnerPendidikan.setSelection(spinnerPosition);
-        }*/
     }
 
     @Override

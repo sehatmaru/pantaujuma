@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -125,7 +124,6 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
             listpenduduk = realm1.copyFromRealm(realm1.where(PendudukRealm.class).sort("namaDepan", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listpenduduk.isEmpty()) {
-                Log.e("List BiodataPenduduk","ini hasil"+listpenduduk.size());
                 pendudukAdapter = new PendudukAdapter(getApplicationContext(), listpenduduk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(pendudukAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);

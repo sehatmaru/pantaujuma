@@ -3,7 +3,6 @@ package teknodesa.devlops.pantaujuma.components.splashscreen;
 import android.support.annotation.NonNull;
 import javax.inject.Inject;
 import io.realm.Realm;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.signin.LoginContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;

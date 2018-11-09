@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,29 +39,31 @@ public class GetRDKKService implements GetRDKKContract.Repository {
     private boolean insertRDKK = true;
     @Override
     public void getAllRDKK(int idDesa) {
-        Log.e("send","data comehere"+idDesa);
         Call<ResponseRDKK> call = sisApi.getAllRDKK(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponseRDKK>() {
             @Override
             public void onResponse(Call<ResponseRDKK> call, Response<ResponseRDKK> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-                        Log.e("hasilrdkk",response.body().getData().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllRDKKSuccess(response.body().getData());
-                        }, error -> {
-                            Log.e("getrdkkeror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllRDKKFailed(response.body().getMessage());
+                        realm.beginTransaction();
+                        RealmResults<RDKKPupukSubsidiRealm> allRDKKs = realm.where(RDKKPupukSubsidiRealm.class).equalTo("isSync",1).findAll();
+                        allRDKKs.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllRDKKSuccess(response.body().getData());
+                    }else{
+                        controller.getAllRDKKFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllRDKKFailed("Server Error");
+                    controller.getAllRDKKFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseRDKK> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllRDKKFailed(t.getMessage());
                 t.printStackTrace();
             }

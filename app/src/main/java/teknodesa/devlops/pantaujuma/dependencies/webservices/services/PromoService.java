@@ -1,9 +1,5 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
-import java.util.List;
-
 import javax.inject.Inject;
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -15,8 +11,6 @@ import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.Promotion;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan.PupukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.pasar.PasarRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetPasar;
-import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetPupuk;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseInitializeData;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.PantauJumaAPI;
@@ -92,7 +86,6 @@ public class PromoService implements SplashscreenContract.Repository {
 
             @Override
             public void onFailure(Call<ResponseInitializeData> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getInitializeDataFailed("Fail Access "+t.getMessage());
                 t.printStackTrace();
             }

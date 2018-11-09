@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +34,11 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
     @BindView(R.id.input_tanggalJK)
     EditText input_tanggalJK;
 
+    @BindView(R.id.input_deskripsiJK)
+    EditText input_deskripsiJK;
+
+    @BindView(R.id.btnTanggalJK)
+    Button btnTanggalJK;
     @OnClick(R.id.btnTanggalJK)
     void setTanggal() {
         final Calendar calendar = Calendar.getInstance();
@@ -48,9 +51,6 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         }, tahun, bulan, tanggal);
         datePickerDialog.show();
     }
-
-    @BindView(R.id.input_deskripsiJK)
-    EditText input_deskripsiJK;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

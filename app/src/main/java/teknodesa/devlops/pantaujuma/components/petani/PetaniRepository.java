@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.petani;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -25,7 +24,6 @@ public class PetaniRepository implements PetaniContract.Repository<PetaniRealm> 
 
     @Override
     public void addItem(PetaniRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -40,7 +38,6 @@ public class PetaniRepository implements PetaniContract.Repository<PetaniRealm> 
 
     @Override
     public void updateItem(String idItem, PetaniRealm item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> {
             bgRealm.insertOrUpdate(item);
         }, () -> {
@@ -69,7 +66,6 @@ public class PetaniRepository implements PetaniContract.Repository<PetaniRealm> 
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         PetaniRealm deletedItem = realm.where(PetaniRealm.class).equalTo("hashId", idItem).findFirst();
     }
 }

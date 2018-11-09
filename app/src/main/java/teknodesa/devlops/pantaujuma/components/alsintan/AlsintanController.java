@@ -69,6 +69,5 @@ public class AlsintanController implements AlsintanContract.Controller<AlsintanR
                     break;
             }
         }
-        //(Activity)mView.startActivity(KelahiranActivity.createIntent(getApplicationContext()));
     }
 }

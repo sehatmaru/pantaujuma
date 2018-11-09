@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,29 +39,31 @@ public class GetRDKService implements GetRDKContract.Repository {
     
     @Override
     public void getAllRDK(int idDesa) {
-        Log.e("send","data comehere"+idDesa);
         Call<ResponseRDK> call = sisApi.getAllRDK(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponseRDK>() {
             @Override
             public void onResponse(Call<ResponseRDK> call, Response<ResponseRDK> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-                        Log.e("hasilrdk",response.body().getData().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllRDKSuccess(response.body().getData());
-                        }, error -> {
-                            Log.e("getrdkeror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllRDKFailed(response.body().getMessage());
+                        realm.beginTransaction();
+                        RealmResults<RDKRealm> allRDKs = realm.where(RDKRealm.class).equalTo("isSync",1).findAll();
+                        allRDKs.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllRDKSuccess(response.body().getData());
+                    }else{
+                        controller.getAllRDKFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllRDKFailed("Server Error");
+                    controller.getAllRDKFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseRDK> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllRDKFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -74,8 +75,6 @@ public class GetRDKService implements GetRDKContract.Repository {
         for(int i=0; i < allRDK.size();i++ ){
             RDKRealm rdkTempRealm = allRDK.get(i);
             RDKBody rdkBody = new RDKBody(rdkTempRealm);
-//            Log.e("body rdk",rdkBody.toString());
-//            Log.e("realm rdk",rdkTempRealm.toString());
             final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertRDK(WebServiceModule.ACCESS_TOKEN_TEMP,rdkBody);
             call.enqueue(new Callback<ResponseSaveData>() {

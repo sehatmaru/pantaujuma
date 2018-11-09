@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.AnggotaPoktanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 
 public class AnggotaPoktanController implements PoktanContract.Controller<AnggotaPoktanRealm> {

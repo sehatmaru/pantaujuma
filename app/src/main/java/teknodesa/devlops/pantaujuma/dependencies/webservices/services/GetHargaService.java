@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,29 +43,31 @@ public class GetHargaService implements GetHargaContract.Repository {
 
     @Override
     public void getAllHarga() {
-        Log.e("send","data comehere");
         Call<ResponseHarga> call = sisApi.getAllHarga(WebServiceModule.ACCESS_TOKEN_TEMP);
         call.enqueue(new Callback<ResponseHarga>() {
             @Override
             public void onResponse(Call<ResponseHarga> call, Response<ResponseHarga> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-                        Log.e("hasilharga",response.body().getData().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllHargaSuccess(response.body().getData());
-                        }, error -> {
-                            Log.e("gethargaeror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllHargaFailed(response.body().getMessage());
+                        realm.beginTransaction();
+                        RealmResults<HargaRealm> allHargas = realm.where(HargaRealm.class).equalTo("isSync",1).findAll();
+                        allHargas.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllHargaSuccess(response.body().getData());
+                    }else{
+                        controller.getAllHargaFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllHargaFailed("Server Error");
+                    controller.getAllHargaFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseHarga> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllHargaFailed(t.getMessage());
                 t.printStackTrace();
             }

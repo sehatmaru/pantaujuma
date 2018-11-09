@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -108,7 +107,6 @@ public class SearchPasarFragment extends DialogFragment implements FragmentPasar
             listpasar = realm1.copyFromRealm(realm1.where(PasarRealm.class).findAll().sort("namaPasar", Sort.ASCENDING));
         }, () -> {
             if (!listpasar.isEmpty()) {
-                Log.e("adapters search", listpasar.size() + "");
                 pasarAdapter = new FragmentPasarAdapter(getActivity().getApplicationContext(), listpasar, this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(pasarAdapter);
                 recyclerView.setAdapter(scaleInAnimationAdapter);

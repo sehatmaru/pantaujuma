@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,10 +17,8 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RDKParcelable;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
@@ -133,10 +129,8 @@ public class DetailRDKActivity extends AppCompatActivity {
     }
     private void takedata(){
         realm.beginTransaction();
-//        Log.e("ini poktan rdk", "" + dataRDK.getPoktan());
         dataRDK = realm.where(RDKRealm.class).equalTo("hashId", idRDK).findFirst();
         idPoktan = dataRDK.getPoktan();
-//        Log.e("MISALNYA APA", " ini " + dataRDK.toString());
         idKomoditasSI = dataRDK.getKomoditasSI();
         idKomoditasRU = dataRDK.getKomoditasRU();
 
@@ -147,14 +141,11 @@ public class DetailRDKActivity extends AppCompatActivity {
         realm.commitTransaction();
     }
     private void setdata(){
-//        String strPetugasrdk = (getData() == null) ? "-" : getData();
         String strDescIrigasi = (dataRDK.getDeskripsiIrigasi() == null) ? "-" : dataRDK.getDeskripsiIrigasi();
-//        String strPoktanrdk = (dataRDK.getPoktan() == null) ? "-" : dataPoktan.getNama();
         String strTanggalData = (dataRDK.getTanggal() == null) ? "-" : dataRDK.getTanggal();
         String strLuasSawah = (dataRDK.getLuasSawah() == null) ? "-" : dataRDK.getLuasSawah();
         String strKeterangan = (dataRDK.getKeterangan() == null) ? "-" : dataRDK.getKeterangan();
         String strNamaIrigasi = (dataRDK.getNama() == null) ? "-" : dataRDK.getNama();
-//        String strKegiatan = (dataRDK.getKegiatan() == null) ? "-" : dataRDK.getKegiatan();
         String strTanggalKegiatan = (dataRDK.getTanggalJK() == null) ? "-" : dataRDK.getTanggalJK();
         String strDescKegiatan = (dataRDK.getDeskripsiJK() == null) ? "-" : dataRDK.getDeskripsiJK();
         String strPaketTeknologi = (dataRDK.getPaketTeknologi() == null) ? "-" : dataRDK.getPaketTeknologi();
@@ -167,17 +158,13 @@ public class DetailRDKActivity extends AppCompatActivity {
         String strTarget = (dataRDK.getTarget() == null) ? "-" : dataRDK.getTarget();
         String strTargetHasil = (dataRDK.getTargetHasilPerHa() == null) ? "-" : dataRDK.getTargetHasilPerHa();
         String strModalPemupukan = (dataRDK.getPemupukanModal() == null) ? "-" : dataRDK.getPemupukanModal();
-//        String strKomoditasSI = (idKomoditasSI == null) ? "-" : dataKomoditasSI.getNama();
-//        String strKomoditasPB = (idKomoditasRU == null) ? "-" : dataKomoditasRU.getNama();
 
-//        petugasrdk.setText(strPetugasrdk);
         deskripsiIrigasi.setText(strDescIrigasi);
         poktanrdk.setText("-");
         tanggaldata.setText(strTanggalData);
         luassawahdata.setText(strLuasSawah);
         keterangandata.setText(strKeterangan);
         namaIrigasi.setText(strNamaIrigasi);
-//        kegiatan.setText(strKegiatan);
         tanggalKegiatan.setText(strTanggalKegiatan);
         deskripsikegiatan.setText(strDescKegiatan);
         paketteknologi.setText(strPaketTeknologi);
@@ -204,8 +191,6 @@ public class DetailRDKActivity extends AppCompatActivity {
             komoditaspb.setText(dataKomoditasRU.getNama());
         }
 
-//        komoditassi.setText(strKomoditasSI);
-//        komoditaspb.setText(strKomoditasPB);
     }
 
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -214,7 +199,6 @@ public class DetailRDKActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRULahanFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListRDKActivity.createIntent(getApplicationContext()));
                     break;
 
@@ -225,20 +209,4 @@ public class DetailRDKActivity extends AppCompatActivity {
         }
     };
 
-//    public String getData() {
-//        realm.beginTransaction();
-//        UserDB user =realm.where(UserDB.class).findFirst();
-//        realm.commitTransaction();
-//        String res;
-//        if(user == null){
-//            res = "";
-//        }else{
-//            try {
-//                res = user.getNamaLengkap();
-//            }catch (Exception e){
-//                res = "";
-//            }
-//        }
-//        return res;
-//    }
 }

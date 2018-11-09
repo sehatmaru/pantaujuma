@@ -1,15 +1,17 @@
 package teknodesa.devlops.pantaujuma.components.rdk.form;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +25,7 @@ import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFr
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RencanaUmum;
 
 public class RDKRencanaUmumFragment extends Fragment implements RDKContract.ViewController<RencanaUmum>, SearchKomoditasFragment.OnClickKomoditasListener {
+
     @BindView(R.id.input_komoditas)
     EditText input_komoditas;
 
@@ -41,6 +44,21 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
     @BindView(R.id.input_jadwaltanam)
     EditText input_jadwaltanam;
+
+    @BindView(R.id.btnTanggalJK)
+    Button btnTanggalJK;
+    @OnClick(R.id.btnTanggalJK)
+    void setTanggal() {
+        final Calendar calendar = Calendar.getInstance();
+        int tanggal = calendar.get(Calendar.DAY_OF_MONTH),
+                bulan = calendar.get(Calendar.MONTH),
+                tahun = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
+            input_jadwaltanam.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+        }, tahun, bulan, tanggal);
+        datePickerDialog.show();
+    }
 
     @BindView(R.id.input_varietas)
     EditText input_varietas;

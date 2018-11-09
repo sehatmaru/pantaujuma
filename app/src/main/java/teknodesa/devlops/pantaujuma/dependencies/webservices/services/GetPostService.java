@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,21 +47,24 @@ public class GetPostService implements GetPostContract.Repository {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
                         realm.beginTransaction();
-                        realm.executeTransactionAsync(realm -> {
-                            realm.insertOrUpdate(response.body().getData());
-                        });
+                        RealmResults<PostRealm> allPosts = realm.where(PostRealm.class).equalTo("isSync",1).findAll();
+                        allPosts.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
                         realm.commitTransaction();
                         controller.getAllPostSuccess(response.body().getData());
-                    }else
-                        controller.getAllPostFailed(response.body().getMessage());
+                    }else{
+                        controller.getAllPostFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllPostFailed("Something Wrong: "+response.message());
+                    controller.getAllPostFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponsePost> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllPostFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -80,7 +82,6 @@ public class GetPostService implements GetPostContract.Repository {
                     postTempRealm.getWaktu(), postTempRealm.getTipePost(), postTempRealm.getViewCount(), postTempRealm.getLikes(), postTempRealm.getDislike(), postTempRealm.getThumbnail(),
                     postTempRealm.getIdDesa());
 
-            Log.e("post service", postPetugasBody.toString());
             Call<ResponseSaveData> call = sisApi.insertPost(WebServiceModule.ACCESS_TOKEN_TEMP, postPetugasBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
@@ -94,14 +95,12 @@ public class GetPostService implements GetPostContract.Repository {
                         }
 
                     } else {
-                        Log.e("post service", "Error3" + response.toString());
                         controller.saveDataFailed("Failed");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("post service", "error server" + t.getMessage());
                     controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }

@@ -1,16 +1,14 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import teknodesa.devlops.pantaujuma.components.poktan.CRUPengurusPoktanFragment;
 import teknodesa.devlops.pantaujuma.components.poktan.GetAnggotaPoktanContract;
 import teknodesa.devlops.pantaujuma.components.poktan.GetPengurusPoktanController;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
@@ -51,39 +49,32 @@ public class GetAnggotaPoktanService implements GetAnggotaPoktanContract.Reposit
     private boolean insertAnggota = true;
 
     @Override
-    public void getAllAnggotaPoktan(int idDesa) {
-        Log.e("send","data comehere "+idDesa);
-        Call<ResponseAnggotaPoktan> call = sisApi.getAllAnggotaPoktan(WebServiceModule.ACCESS_TOKEN_TEMP, idDesa);
+    public void getAllAnggotaPoktan(int idDesa){
+        Call<ResponseAnggotaPoktan> call = sisApi.getAllAnggotaPoktan(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponseAnggotaPoktan>() {
             @Override
             public void onResponse(Call<ResponseAnggotaPoktan> call, Response<ResponseAnggotaPoktan> response) {
-                Log.e("ONRESPONSE", "masuk ke onResponse");
                 if(response.isSuccessful()){
-                    Log.e("ISSUCCESSFULL", "masuk ke isSuccessful");
                     if(response.body().isSuccess()){
-                        Log.e("ISSUCCESS", "masuk ke isSuccess");
-                        Log.e("hasilanggotaPoktan",response.body().getData().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllAnggotaPoktanSuccess(response.body().getData());
-                            Log.e("executeTransactionAsync", "masuk ke realm");
+                        realm.beginTransaction();
+                        RealmResults<AnggotaPoktanRealm> allAnggotas = realm.where(AnggotaPoktanRealm.class).equalTo("isSync",1).findAll();
+                        allAnggotas.deleteAllFromRealm();
+                        realm.commitTransaction();
 
-                        }, error -> {
-                            Log.e("getanggotaPoktaneror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllAnggotaPoktanFailed(response.body().getMessage());
-                    Log.e("getAnggotaPoktanFailed", "masuk ke getAllAnggotaPoktanFailed 1");
-
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllAnggotaPoktanSuccess(response.body().getData());
+                    }else{
+                        controller.getAllAnggotaPoktanFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllAnggotaPoktanFailed("Server Error");
-                    Log.e("getAnggotaPoktanFailed", "masuk ke getAllAnggotaPoktanFailed 2");
+                    controller.getAllAnggotaPoktanFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseAnggotaPoktan> call, Throwable t) {
-                Log.e("FAILUEEEEEEERRRR", "masuk ke FAILUREEE");
-                Log.e("Failure", "onFailure");
                 controller.getAllAnggotaPoktanFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -99,9 +90,7 @@ public class GetAnggotaPoktanService implements GetAnggotaPoktanContract.Reposit
             dataPoktan = realm.where(PoktanRealm.class).equalTo("hashId", idPoktan).findFirst();
             dataPoktan.setIsSync(1);
             realm.commitTransaction();
-            Log.e("ini data anggota sync", anggotaTempRealm.toString());
             AnggotaPoktanBody anggotaBody = new AnggotaPoktanBody(anggotaTempRealm);
-            Log.e("ini body anggota sync", anggotaBody.toString());
             final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertAnggotaPoktan(WebServiceModule.ACCESS_TOKEN_TEMP,anggotaBody);
             call.enqueue(new Callback<ResponseSaveData>() {
@@ -115,7 +104,6 @@ public class GetAnggotaPoktanService implements GetAnggotaPoktanContract.Reposit
                             insertAnggota =true;
                         }else {
                             insertAnggota =false;
-//                            controller.saveDataFailed("Gagal Sinkronisasi anggota "+response.body().getMessage());
                         }
 
                     }else{

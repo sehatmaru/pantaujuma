@@ -45,7 +45,6 @@ public class CRUKomoditasFragment extends Fragment {
         setViewpager();
         setupTabIcons();
         viewPager.setCurrentItem(0);
-        //viewPager.getCurrentItem();
         return v;
     }
 

@@ -1,7 +1,5 @@
 package teknodesa.devlops.pantaujuma.components.splashscreen;
 
-
-
 /**
  * Created by Marthin on 2/11/2018.
  */

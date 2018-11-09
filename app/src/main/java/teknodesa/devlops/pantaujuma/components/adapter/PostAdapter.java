@@ -14,9 +14,7 @@ import javax.inject.Inject;
 
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
 
@@ -49,15 +47,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PostRealm postRealm = listData.get(position);
-
-//        UserDB akunFragment = realm.where(UserDB.class)
-//                .equalTo("hashId", postRealm.getIdUser())
-//                .findFirst();
-        PostRealm PostRealm = listData.get(position);
-        holder.textjudul.setText(PostRealm.getJudul());
-        holder.textnama.setText(PostRealm.getNamaUser());
+        holder.textjudul.setText(postRealm.getJudul());
+        holder.textnama.setText(postRealm.getNamaUser());
         holder.cardview.setOnClickListener(view -> {
-            onClicPost.OnClickPost(PostRealm.getHashId());
+            onClicPost.OnClickPost(postRealm.getHashId());
         });
     }
 

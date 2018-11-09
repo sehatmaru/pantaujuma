@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,29 +40,31 @@ public class GetTargetService implements GetTargetContract.Repository {
     private boolean res = false;
     @Override
     public void getAllTarget(int idDesa) {
-        Log.e("send","data comehere"+idDesa);
         Call<ResponseTarget> call = sisApi.getAllTargetPetugas(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponseTarget>() {
             @Override
             public void onResponse(Call<ResponseTarget> call, Response<ResponseTarget> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-                        Log.e("hasiltarget",response.body().getData().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllTargetSuccess(response.body().getData());
-                        }, error -> {
-                            Log.e("gettargeteror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllTargetFailed(response.body().getMessage());
+                        realm.beginTransaction();
+                        RealmResults<TargetPetugas> allTargets = realm.where(TargetPetugas.class).equalTo("isSync",1).findAll();
+                        allTargets.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllTargetSuccess(response.body().getData());
+                    }else{
+                        controller.getAllTargetFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllTargetFailed("Server Error");
+                    controller.getAllTargetFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseTarget> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllTargetFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -75,7 +76,6 @@ public class GetTargetService implements GetTargetContract.Repository {
         for(int i=0; i < allTar.size();i++ ){
             TargetPetugas targetTempRealm = allTar.get(i);
             TargetPetugasBody targetBody = new TargetPetugasBody(targetTempRealm);
-            Log.e("target service",targetBody.toString());
             final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertTargetPetugas(WebServiceModule.ACCESS_TOKEN_TEMP,targetBody);
             call.enqueue(new Callback<ResponseSaveData>() {

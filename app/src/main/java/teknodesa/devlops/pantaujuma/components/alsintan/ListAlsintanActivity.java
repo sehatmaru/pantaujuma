@@ -10,9 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -32,7 +30,6 @@ import io.realm.Sort;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.AlsintanAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan.AlsintanRealm;
@@ -43,7 +40,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
     static int hasilList = 0;
 
     private List<AlsintanRealm> listalsintan = Collections.EMPTY_LIST;
-//    private List<AlsintanRealm> listalsintanNotSync = Collections.EMPTY_LIST;
 
     @Inject
     Realm realm;
@@ -87,11 +83,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-//        realm.beginTransaction();
-//        listalsintanNotSync = realm.where(AlsintanRealm.class).equalTo("isSync", 0).findAll();
-//        realm.commitTransaction();
-//
-//        hasilList = listalsintanNotSync.size();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
@@ -104,7 +95,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
             listalsintan = realm1.copyFromRealm(realm1.where(AlsintanRealm.class).sort("hashId", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listalsintan.isEmpty()) {
-                Log.e("List Alsintan", "ini hasil" + listalsintan.size());
 
                 alsintanAdapter = new AlsintanAdapter(getApplicationContext(), listalsintan, this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(alsintanAdapter);
@@ -181,13 +171,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
         startActivity(DetailAlsintanActivity.createIntent(getApplicationContext(), idAlsintan));
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_eidu, menu);
-//        return true;
-//    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_komoditas, menu);
@@ -229,31 +212,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
         dialog.show();
     }
 
-//
-//    private void syncDialog() {
-//        MaterialDialog dialog = new MaterialDialog.Builder(this)
-//                .title(R.string.title_sync)
-//                .content(R.string.content_sync)
-//                .positiveText(R.string.yes)
-//                .negativeText(R.string.no)
-//                .onPositive((dialog1, which) -> {
-//                    progressdialog.show();
-//                    progressdialog.setCancelable(false);
-//                    progressdialog.setCanceledOnTouchOutside(false);
-//                    startSync();
-//                })
-//                .onNegative((dialog1, which) -> {
-//
-//                })
-//                .build();
-//        dialog.show();
-//    }
-//
-//    private void startSync() {
-//        counter = 0;
-//        mController.saveData(listalsintanNotSync);
-//    }
-
     private void checkDataRealm() {
         if (hasilList > 0) {
             showRealmData("" + hasilList).show();
@@ -278,7 +236,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil", "counter" + counter + " list" + hasilList);
         if (counter == hasilList) {
             progressdialog.dismiss();
             mController.getAllAlsintan();

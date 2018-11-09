@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +33,11 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchpenduduk.SearchPendudukFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.enums.Status;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.petani.PetaniParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
 public class CRUPetaniFragment extends Fragment implements

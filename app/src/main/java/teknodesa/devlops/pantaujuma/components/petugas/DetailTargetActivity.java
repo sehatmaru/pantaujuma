@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.TargetParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.TargetPetugas;
@@ -69,6 +67,7 @@ public class DetailTargetActivity extends AppCompatActivity {
         idTarget =id;
         return new Intent(context, DetailTargetActivity.class);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +97,6 @@ public class DetailTargetActivity extends AppCompatActivity {
             komoditas.setText(dataKomoditas.getNama());
         }
 
-//        komoditas.setText(dataKomoditas.getNama());
         tahunKerja.setText(String.valueOf(dataTarget.getTahun()));
         luasTanam.setText(String.valueOf(dataTarget.getLuasTanam()));
         luasPanen.setText(String.valueOf(dataTarget.getLuasPanen()));
@@ -113,7 +111,6 @@ public class DetailTargetActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRUPetaniFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListTargetActivity.createIntent(getApplicationContext()));
                     break;
 

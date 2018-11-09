@@ -1,7 +1,5 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,7 +43,6 @@ public class GetPendudukService implements GetPendudukContract.Repository {
 
     @Override
     public void getAllPenduduk(int idDesa) {
-        Log.e("send","data comehere"+idDesa);
         Call<ResponsePenduduk> call = sisApi.getAllPenduduk(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponsePenduduk>() {
             @Override
@@ -71,7 +68,6 @@ public class GetPendudukService implements GetPendudukContract.Repository {
 
             @Override
             public void onFailure(Call<ResponsePenduduk> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllPendudukFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -83,7 +79,6 @@ public class GetPendudukService implements GetPendudukContract.Repository {
         for(int i=0; i < allPen.size();i++ ){
             PendudukRealm pendudukTempRealm = allPen.get(i);
             PendudukBody pendudukBody = new PendudukBody(pendudukTempRealm);
-            Log.e("penduduk service",pendudukBody.toString());
             final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertPenduduk(WebServiceModule.ACCESS_TOKEN_TEMP,pendudukBody);
             call.enqueue(new Callback<ResponseSaveData>() {

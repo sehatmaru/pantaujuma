@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,29 +40,31 @@ public class GetKomentarService implements GetKomentarContract.Repository {
 
     @Override
     public void getAllKomentar(String idPost) {
-        Log.e("send", "data comehere" + idPost);
-        Call<ResponseKomentar> call = sisApi.getAllKomentar(WebServiceModule.ACCESS_TOKEN_TEMP, idPost);
+        Call<ResponseKomentar> call = sisApi.getAllKomentar(WebServiceModule.ACCESS_TOKEN_TEMP,idPost);
         call.enqueue(new Callback<ResponseKomentar>() {
             @Override
             public void onResponse(Call<ResponseKomentar> call, Response<ResponseKomentar> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().isSuccess()) {
-                        Log.e("hasilkomentar", response.body().getData().size() + " ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllKomentarSuccess(response.body().getData());
-                        }, error -> {
-                            Log.e("getkomentareror", error.getMessage());
-                        });
-                    } else
-                        controller.getAllKomentarFailed(response.body().getMessage());
-                } else {
-                    controller.getAllKomentarFailed("Server Error");
+                if(response.isSuccessful()){
+                    if(response.body().isSuccess()){
+                        realm.beginTransaction();
+                        RealmResults<KomentarRealm> allKomentars = realm.where(KomentarRealm.class).equalTo("isSync",1).findAll();
+                        allKomentars.deleteAllFromRealm();
+                        realm.commitTransaction();
+
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllKomentarSuccess(response.body().getData());
+                    }else{
+                        controller.getAllKomentarFailed("Error "+response.message());
+                    }
+                }else{
+                    controller.getAllKomentarFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseKomentar> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllKomentarFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -80,7 +81,6 @@ public class GetKomentarService implements GetKomentarContract.Repository {
             KomentarBody komentarBody = new KomentarBody(komentarTempRealm.getHashId(), komentarTempRealm.getHashPost(), komentarTempRealm.getIdUser(), komentarTempRealm.getNamaUser(), komentarTempRealm.getWaktu(),
                     komentarTempRealm.getTanggal(), komentarTempRealm.getDeskripsi(), komentarTempRealm.getIdDesa());
 
-            Log.e("komentar service", komentarTempRealm.toString());
             Call<ResponseSaveData> call = sisApi.insertKomentar(WebServiceModule.ACCESS_TOKEN_TEMP, komentarBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
@@ -94,14 +94,12 @@ public class GetKomentarService implements GetKomentarContract.Repository {
                         }
 
                     } else {
-                        Log.e("komentar service", "Error3" + response.toString());
                         controller.saveDataFailed("Failed");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
-                    Log.e("komentar service", "error server" + t.getMessage());
                     controller.saveDataFailed("Failed" + t.getMessage());
                     t.printStackTrace();
                 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -26,15 +23,16 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.components.searchpoktan.SearchPoktanFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Identitas;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 
 public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewController<Identitas>, RDKContract.View, SearchPoktanFragment.OnClickPoktanListener {
+
+    @Inject
+    Realm realm;
 
     Calendar myCalendar;
 
@@ -69,7 +67,6 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     EditText input_keterangan;
 
     String poktan;
-    String namaPoktan;
 
     @OnClick(R.id.btnPoktan)
     void clickPilihPoktan() {
@@ -77,8 +74,6 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
         SearchPoktanFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
 
-    @Inject
-    Realm realm;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

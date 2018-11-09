@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,14 +110,6 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
         }
 
         holder.textpupuk.setText("Pupuk: " + namaPupuk);
-
-//        try{
-//            holder.textpoktan.setText(poktan.getNama());
-//            holder.textpetani.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
-//            holder.textkomoditas.setText(komoditas.getNama());
-//        }catch (NullPointerException ex){
-//
-//        }
 
         holder.cardview.setOnClickListener(view -> {
             onClicRDKK.OnClickRDKK(rdkk.getHashId());

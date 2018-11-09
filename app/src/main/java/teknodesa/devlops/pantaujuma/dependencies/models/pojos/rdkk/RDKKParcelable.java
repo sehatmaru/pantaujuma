@@ -56,29 +56,6 @@ public class RDKKParcelable implements Parcelable {
         this.isSync = rdkkPupukSubsidiRealm.getIsSync();
     }
 
-//    public RDKKParcelable(String hashId, int idDesa, String idUser, String poktan, String petani, String komoditas, String pupuk, int butuhJanuari, int butuhFebruari, int butuhMaret, int butuhApril, int butuhMei, int butuhJuni, int butuhJuli, int butuhAgustus, int butuhSeptember, int butuhOktober, int butuhNovember, int butuhDesember, int isSync) {
-//        this.hashId = hashId;
-//        this.idDesa = idDesa;
-//        this.idUser = idUser;
-//        this.poktan = poktan;
-//        this.petani = petani;
-//        this.komoditas = komoditas;
-//        this.pupuk = pupuk;
-//        this.butuhJanuari = butuhJanuari;
-//        this.butuhFebruari = butuhFebruari;
-//        this.butuhMaret = butuhMaret;
-//        this.butuhApril = butuhApril;
-//        this.butuhMei = butuhMei;
-//        this.butuhJuni = butuhJuni;
-//        this.butuhJuli = butuhJuli;
-//        this.butuhAgustus = butuhAgustus;
-//        this.butuhSeptember = butuhSeptember;
-//        this.butuhOktober = butuhOktober;
-//        this.butuhNovember = butuhNovember;
-//        this.butuhDesember = butuhDesember;
-//        this.isSync = isSync;
-//    }
-
     protected RDKKParcelable(Parcel in) {
         hashId = in.readString();
         idDesa = in.readInt();

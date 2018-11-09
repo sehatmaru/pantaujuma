@@ -69,6 +69,5 @@ public class RDKController implements RDKContract.Controller<RDKRealm> {
                     break;
             }
         }
-        //(Activity)mView.startActivity(KelahiranActivity.createIntent(getApplicationContext()));
     }
 }

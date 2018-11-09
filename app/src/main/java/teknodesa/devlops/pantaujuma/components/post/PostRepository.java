@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.post;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -25,7 +24,6 @@ public class PostRepository implements CRUPostContract.Repository<PostRealm> {
 
     @Override
     public void addItem(PostRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -40,7 +38,6 @@ public class PostRepository implements CRUPostContract.Repository<PostRealm> {
 
     @Override
     public void updateItem(String idItem, PostRealm item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> {
             bgRealm.insertOrUpdate(item);
         }, () -> {
@@ -69,7 +66,6 @@ public class PostRepository implements CRUPostContract.Repository<PostRealm> {
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         PostRealm deletedItem = realm.where(PostRealm.class).equalTo("hashId", idItem).findFirst();
     }
 }

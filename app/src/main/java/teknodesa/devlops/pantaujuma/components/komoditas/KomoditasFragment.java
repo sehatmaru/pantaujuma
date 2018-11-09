@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -15,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -107,7 +105,6 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
             listData = realm1.copyFromRealm(realm1.where(KomoditasRealm.class).sort("nama", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listData.isEmpty()) {
-                Log.e("List Komoditas","ini hasil"+listData.size());
                 pendudukAdapter = new KomoditasAdapter(getActivity().getApplicationContext(), listData,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(pendudukAdapter);
                 recyclerView.setAdapter(scaleInAnimationAdapter);

@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,8 +114,6 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
             listrdkk = realm1.copyFromRealm(realm1.where(RDKKPupukSubsidiRealm.class).sort("poktan", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listrdkk.isEmpty()) {
-                Log.e("List RDKKSubsidiPupuk","ini hasil"+listrdkk.size());
-
                 rdkkAdapter = new RDKKAdapter(getApplicationContext(), listrdkk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkkAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
@@ -289,7 +286,6 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
         if(counter == hasilList){
             progressdialog.dismiss();
             mController.getAllRDKK();

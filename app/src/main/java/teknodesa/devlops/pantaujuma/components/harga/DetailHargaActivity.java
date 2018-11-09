@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,12 +17,10 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.harga.ListHargaActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Harga;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.pasar.PasarRealm;
 
 public class DetailHargaActivity extends AppCompatActivity {
     private AppComponent appComponent;
@@ -106,8 +102,6 @@ public class DetailHargaActivity extends AppCompatActivity {
     }
 
     private void setdata(){
-        Log.e("dataHarga", dataHarga.toString());
-
         komoditas.setText(dataKomoditas.getNama());
         pasar.setText(dataHarga.getNamaPasar());
         tanggal.setText(dataHarga.getTanggal());

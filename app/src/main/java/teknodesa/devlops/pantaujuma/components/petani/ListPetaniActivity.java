@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -118,7 +117,6 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
             listpetani = realm1.copyFromRealm(realm1.where(PetaniRealm.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listpetani.isEmpty()) {
-                Log.e("List Petani","ini hasil"+listpetani.size());
                 petaniAdapter = new PetaniAdapter(getApplicationContext(), listpetani,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(petaniAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);

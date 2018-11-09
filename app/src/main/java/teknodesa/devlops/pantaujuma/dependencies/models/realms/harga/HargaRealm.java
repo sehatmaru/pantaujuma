@@ -2,7 +2,6 @@ package teknodesa.devlops.pantaujuma.dependencies.models.realms.harga;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 
 public class HargaRealm extends RealmObject {
     @PrimaryKey

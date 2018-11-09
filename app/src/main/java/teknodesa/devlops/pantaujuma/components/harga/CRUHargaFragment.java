@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,8 +152,6 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
         newRealmItem.setKecamatan(strkecamatan);
         newRealmItem.setKabupaten(strkabupaten);
         newRealmItem.setIsSync(0);
-
-        Log.e("ini data harga", newRealmItem.toString());
 
         return newRealmItem;
     }

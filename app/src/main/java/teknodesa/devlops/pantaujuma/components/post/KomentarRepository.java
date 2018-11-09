@@ -1,14 +1,9 @@
 package teknodesa.devlops.pantaujuma.components.post;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.Toast;
-
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
 
@@ -48,7 +43,6 @@ public class KomentarRepository implements KomentarContract.Repository<KomentarR
 
     @Override
     public void updateItem(String idItem, KomentarRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {

@@ -3,7 +3,6 @@ package teknodesa.devlops.pantaujuma.components.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,12 +87,6 @@ public class AnggotaPoktanAdapter extends RecyclerView.Adapter<AnggotaPoktanAdap
         }
 
         holder.texttanggal.setText("Masuk: " + tanggal);
-
-//        Log.e("ini tanggal masuk ", anggotaPoktan.getTanggalMasuk());
-
-//        holder.textname.setText(penduduk.getNamaDepan()+" "+ penduduk.getNamaBelakang());
-//        holder.textnik.setText(penduduk.getNIK());
-//        holder.texttanggal.setText("Masuk : " + anggotaPoktan.getTanggalMasuk());
     }
 
     @Override

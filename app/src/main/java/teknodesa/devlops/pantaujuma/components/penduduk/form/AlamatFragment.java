@@ -18,7 +18,6 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.DetailPendudukActivity;
-import teknodesa.devlops.pantaujuma.components.penduduk.form.PendudukContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.penduduk.Alamat;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 

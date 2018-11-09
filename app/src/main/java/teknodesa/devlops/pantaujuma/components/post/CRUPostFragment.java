@@ -21,13 +21,11 @@ import java.util.Random;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -93,8 +91,6 @@ public class CRUPostFragment extends Fragment implements CRUPostContract.ViewCon
             newRealmItem.setNama(userDB.getNamaDesa());
         }
 
-
-
         newRealmItem.setHashId(getSaltString());
         newRealmItem.setJudul(strJudul);
         newRealmItem.setIsi(strIsi);
@@ -124,8 +120,7 @@ public class CRUPostFragment extends Fragment implements CRUPostContract.ViewCon
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-//                String idItem = ((RKTP) itemData).getHashId();
-//                mController.updateItem(idItem, uiItem);
+
             }
         }
     }
@@ -133,7 +128,6 @@ public class CRUPostFragment extends Fragment implements CRUPostContract.ViewCon
     @Override
     public void showNotification(String title, String header, String message) {
         Toast.makeText(CRUActivity.mContext, message, Toast.LENGTH_SHORT).show();
-//        startActivity(ListPostActivity.createIntent(CRUActivity.mContext));
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

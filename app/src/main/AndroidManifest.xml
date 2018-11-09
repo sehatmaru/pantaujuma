@@ -91,10 +91,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".components.komoditas.ListKomoditasActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:parentActivityName=".components.MainActivity"
             android:label="Petani"
             android:name=".components.petani.ListPetaniActivity"

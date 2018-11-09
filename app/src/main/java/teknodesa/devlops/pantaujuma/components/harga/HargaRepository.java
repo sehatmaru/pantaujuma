@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.harga.HargaContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
 

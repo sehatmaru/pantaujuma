@@ -1,9 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.post;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +38,6 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PostAdapter;
-import teknodesa.devlops.pantaujuma.components.rktp.DetailRKTPActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 import teknodesa.devlops.pantaujuma.utils.NetworkUtils;
@@ -130,7 +125,6 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
             listData = realm1.copyFromRealm(realm1.where(PostRealm.class).sort("judul", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listData.isEmpty()) {
-                Log.e("List Post","ini hasil"+listData.size());
                 postAdapter = new PostAdapter(getActivity().getApplicationContext(), listData,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(postAdapter);
                 recyclerView.setAdapter(scaleInAnimationAdapter);
@@ -300,7 +294,6 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
         if(counter == hasilList){
             progressdialog.dismiss();
             mController.getAllPost();

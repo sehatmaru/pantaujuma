@@ -15,8 +15,6 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 
 public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.MyViewHolder> {
 
@@ -43,12 +41,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         KomentarRealm komentarRealm = listData.get(position);
-
-//        PostRealm postRealm = realm.where(PostRealm.class)
-//                .equalTo("hashId", komentarRealm.getHashPost())
-//                .findFirst();
-        KomentarRealm KomentarRealm = listData.get(position);
-        holder.textnama.setText(KomentarRealm.getNamaUser());
+        holder.textnama.setText(komentarRealm.getNamaUser());
         holder.textKomentar.setText(komentarRealm.getDeskripsi());
         holder.textDesa.setText(komentarRealm.getNama());
         holder.textTanggal.setText(komentarRealm.getTanggal());

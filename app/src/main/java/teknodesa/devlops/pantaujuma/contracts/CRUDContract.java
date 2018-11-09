@@ -9,10 +9,6 @@ package teknodesa.devlops.pantaujuma.contracts;
 
 import android.os.Parcelable;
 
-import io.realm.RealmModel;
-import io.realm.RealmResults;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
-
 /**
  *
  * @author Roy Deddy Tobing

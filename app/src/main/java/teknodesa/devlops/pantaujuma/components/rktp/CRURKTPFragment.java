@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchpoktan.SearchPoktanFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RKTP;
@@ -129,6 +127,7 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
 
         View v = inflater.inflate(R.layout.fragment_crurktp, container, false);
         ButterKnife.bind(this, v);
+
         if(CRUActivity.mAction == "update"){
             textForEdit();
             idPoktan = DetailRKTPActivity.idPoktan;

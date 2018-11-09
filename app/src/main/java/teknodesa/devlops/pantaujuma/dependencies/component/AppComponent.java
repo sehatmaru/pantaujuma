@@ -6,7 +6,6 @@ import dagger.Component;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.MainActivity;
-import teknodesa.devlops.pantaujuma.components.adapter.AlsintanPengecerPupukAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.AnggotaPoktanAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.FragmentPetaniAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.FragmentPoktanAdapter;
@@ -34,7 +33,6 @@ import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
-import teknodesa.devlops.pantaujuma.components.komoditas.ListKomoditasActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.GetLahanController;
@@ -153,6 +151,22 @@ public interface AppComponent {
     //Service
     void inject(LoginService service);
     void inject(GetPendudukService service);
+    void inject(GetKomentarService getKomentarService);
+    void inject(GetPostService getPostService);
+    void inject(GetPetaniService getPetaniService);
+    void inject(GetPoktanService getPoktanService);
+    void inject(GetTargetService getTargetService);
+    void inject(GetRKTPService getRKTPService);
+    void inject(GetRDKService getRDKService);
+    void inject(GetRDKKService getRDKKService);
+    void inject(GetAlsintanService getAlsintanService);
+    void inject(GetHargaService getHargaService);
+    void inject(GetAnggotaPoktanService getAnggotaPoktanService);
+    void inject(GetPengurusPoktanService getPengurusPoktanService);
+    void inject(PromoService promoService);
+    void inject(KomoditasService komoditasService);
+    void inject(ListLahanKomoditasService listLahanKomoditasService);
+    void inject(GetLahanService getLahanService);
 
     //Controllers
     void inject(SplashscreenController controller);
@@ -164,12 +178,48 @@ public interface AppComponent {
     void inject(KomoditasController controller);
     void inject(ListLahanKomoditasController controller);
     void inject(UserRealmController controller);
+    void inject(PetaniController petaniController);
+    void inject(GetRDKKController getRDKKController);
+    void inject(TargetController targetController);
+    void inject(GetPoktanController getPoktanController);
+    void inject(GetPetaniController getPetaniController);
+    void inject(GetPengurusPoktanController getPengurusPoktanController);
+    void inject(PengurusPoktanController pengurusPoktanController);
+    void inject(GetRKTPController getRKTPController);
+    void inject(GetTargetController getTargetController);
+    void inject(AnggotaPoktanController anggotaPoktanController);
+    void inject(AlsintanController alsintanController);
+    void inject(GetAnggotaPoktanController getAnggotaPoktanController);
+    void inject(GetRDKController getRDKController);
+    void inject(RKTPController rktpController);
+    void inject(GetAlsintanController getAlsintanController);
+    void inject(GetHargaController getHargaController);
+    void inject(HargaController hargaController);
+    void inject(RDKController rdkController);
+    void inject(RDKKController rdkkController);
+    void inject(PoktanController poktanController);
+    void inject(KomentarController komentarController);
+    void inject(GetPostController getPostController);
+    void inject(GetKomentarController getKomentarController);
+    void inject(CRUPostController cruPostController);
+    void inject(LahanController lahanController);
+    void inject(GetLahanController getLahanController);
 
     //Repository
     void inject(PendudukRepository repository);
-    void inject(PromoService repository);
-    void inject(KomoditasService repository);
-    void inject(ListLahanKomoditasService repository);
+    void inject(PetaniRepository petaniRepository);
+    void inject(TargetRepository targetRepository);
+    void inject(PoktanRepository poktanRepository);
+    void inject(AnggotaPoktanRepository anggotaPoktanRepository);
+    void inject(RDKKRepository rdkkRepository);
+    void inject(KomentarRepository komentarRepository);
+    void inject(LahanRepository lahanRepository);
+    void inject(PostRepository postRepository);
+    void inject(HargaRepository hargaRepository);
+    void inject(RKTPRepository rktpRepository);
+    void inject(RDKRepository rdkRepository);
+    void inject(AlsintanRepository alsintanRepository);
+    void inject(PengurusPoktanRepository pengurusPoktanRepository);
 
     //Activity
     void inject(SplashscreenActivity activity);
@@ -184,10 +234,20 @@ public interface AppComponent {
     void inject(ListRKTPActivity activity);
     void inject(ListTargetActivity activity);
     void inject(ListLahanActivity activity);
-    void inject(ListKomoditasActivity activity);
     void inject(ListHargaActivity activity);
     void inject(DetailPendudukActivity activity);
     void inject(ListLahanKomoditasActivity activity);
+    void inject(ListAlsintanActivity listAlsintanActivity);
+    void inject(DetailAlsintanActivity detailAlsintanActivity);
+    void inject(DetailPostActivity detailPostActivity);
+    void inject(DetailLahanActivity detailLahanActivity);
+    void inject(DetailTargetActivity detailTargetActivity);
+    void inject(DetailRDKKActivity detailRDKKActivity);
+    void inject(DetailRKTPActivity detailRKTPActivity);
+    void inject(DetailRDKActivity detailRDKActivity);
+    void inject(DetailPoktanActivity detailPoktanActivity);
+    void inject(DetailPetaniActivity detailPetaniActivity);
+    void inject(DetailHargaActivity detailHargaActivity);
 
     //fragment
     void inject(HomeFragment fragment);
@@ -204,188 +264,35 @@ public interface AppComponent {
     void inject(AlamatFragment fragment);
     void inject(AkunFragment fragment);
     void inject(KomoditasFragment fragment);
-
-    void inject(TargetAdapter targetAdapter);
-
-    void inject(PetaniController petaniController);
-
     void inject(CRUAnggotaPoktanFragment cruAnggotaPoktanFragment);
-
     void inject(CRUPengurusPoktanFragment cruPengurusPoktanFragment);
-
     void inject(SearchTargetKomoditasFragment searchTargetKomoditasFragment);
-
-    void inject(FragmentPetaniAdapter fragmentPetaniAdapter);
-
-    void inject(PetaniAdapter petaniAdapter);
-
-    void inject(PoktanAdapter poktanAdapter);
-
-    void inject(RDKKAdapter rdkkAdapter);
-
     void inject(SearchPendudukFragment searchPendudukFragment);
-
     void inject(SearchPendudukPengurusFragment searchPendudukPengurusFragment);
-
-    void inject(SearchPetaniFragment searchPetaniFragment);
-
-    void inject(SearchPoktanFragment searchPoktanFragment);
-
-    void inject(SearchKomoditasFragment searchKomoditasFragment);
-
-    void inject(CRUIdentitasPoktanFragment CRUIdentitasPoktanFragment);
-
-    void inject(DetailPetaniActivity detailPetaniActivity);
-
-    void inject(PetaniRepository petaniRepository);
-
-    void inject(DetailTargetActivity detailTargetActivity);
-
-    void inject(DetailRDKKActivity detailRDKKActivity);
-
-    void inject(TargetController targetController);
-
-    void inject(RDKKController rdkkController);
-
-    void inject(PoktanController poktanController);
-
-    void inject(TargetRepository targetRepository);
-
-    void inject(PoktanRepository poktanRepository);
-
-    void inject(RDKKRepository rdkkRepository);
-
-    void inject(DetailPoktanActivity detailPoktanActivity);
-
-    void inject(GetPetaniService getPetaniService);
-
-    void inject(GetPetaniController getPetaniController);
-
-    void inject(RKTPRepository rktpRepository);
-
-    void inject(RKTPController rktpController);
-
-    void inject(DetailRKTPActivity detailRKTPActivity);
-
     void inject(RDKIrigasiFragment rdkIrigasiFragment);
-
     void inject(RDKJadwalKegiatanFragment rdkJadwalKegiatanFragment);
-
     void inject(RDKRencanaUmumFragment rdkRencanaUmumFragment);
-
     void inject(RDKSasaranIntensifikasiFragment rdkSasaranIntensifikasiFragment);
-
-    void inject(DetailRDKActivity detailRDKActivity);
-
-    void inject(RDKController rdkController);
-
-    void inject(RDKRepository rdkRepository);
-
-    void inject(GetPoktanService getPoktanService);
-
-    void inject(GetPoktanController getPoktanController);
-
-    void inject(GetTargetService getTargetService);
-
-    void inject(GetRKTPService getRKTPService);
-
-    void inject(GetRKTPController getRKTPController);
-
-    void inject(GetTargetController getTargetController);
-
-    void inject(GetRDKController getRDKController);
-
-    void inject(GetRDKService getRDKService);
-
-    void inject(RDKAdapter rdkAdapter);
-
-    void inject(GetRDKKService getRDKKService);
-
-    void inject(GetRDKKController getRDKKController);
-
-    void inject(FragmentPoktanAdapter fragmentPoktanAdapter);
-
-    void inject(GetAlsintanService getAlsintanService);
-
-    void inject(GetAlsintanController getAlsintanController);
-
-    void inject(DetailHargaActivity detailHargaActivity);
-
-    void inject(GetHargaController getHargaController);
-
-    void inject(HargaController hargaController);
-
-    void inject(HargaRepository hargaRepository);
-
-    void inject(GetHargaService getHargaService);
-
-    void inject(HargaAdapter hargaAdapter);
-
-    void inject(AnggotaPoktanAdapter anggotaPoktanAdapter);
-
-    void inject(AnggotaPoktanRepository anggotaPoktanRepository);
-
-    void inject(AnggotaPoktanController anggotaPoktanController);
-
     void inject(SearchPupukFragment searchPupukFragment);
-
     void inject(SearchPasarFragment searchPasarFragment);
-
-    void inject(RKTPAdapter rktpAdapter);
-
-    void inject(AlsintanPengecerPupukAdapter alsintanPengecerPupukAdapter);
-
-    void inject(AlsintanRepository alsintanRepository);
-
-    void inject(AlsintanController alsintanController);
-
-    void inject(GetAnggotaPoktanController getAnggotaPoktanController);
-
-    void inject(GetAnggotaPoktanService getAnggotaPoktanService);
-
-    void inject(GetPengurusPoktanService getPengurusPoktanService);
-
-    void inject(GetPengurusPoktanController getPengurusPoktanController);
-
-    void inject(PengurusPoktanAdapter pengurusPoktanAdapter);
-
-    void inject(PengurusPoktanRepository pengurusPoktanRepository);
-
-    void inject(PengurusPoktanController pengurusPoktanController);
+    void inject(SearchPetaniFragment searchPetaniFragment);
+    void inject(SearchPoktanFragment searchPoktanFragment);
+    void inject(SearchKomoditasFragment searchKomoditasFragment);
+    void inject(CRUIdentitasPoktanFragment CRUIdentitasPoktanFragment);
+    void inject(PostFragment postFragment);
 
     void inject(CRUPostFragment cruPostFragment);
 
-    void inject(GetKomentarService getKomentarService);
-
-    void inject(KomentarController komentarController);
-
-    void inject(GetPostController getPostController);
-
-    void inject(GetPostService getPostService);
-
-    void inject(KomentarRepository komentarRepository);
-
-    void inject(PostRepository postRepository);
-
-    void inject(PostFragment postFragment);
-
-    void inject(GetKomentarController getKomentarController);
-
-    void inject(CRUPostController cruPostController);
-
-    void inject(DetailPostActivity detailPostActivity);
-
-    void inject(LahanController lahanController);
-
-    void inject(LahanRepository lahanRepository);
-
-    void inject(DetailLahanActivity detailLahanActivity);
-
-    void inject(GetLahanController getLahanController);
-
-    void inject(GetLahanService getLahanService);
-
-    void inject(ListAlsintanActivity listAlsintanActivity);
-
-    void inject(DetailAlsintanActivity detailAlsintanActivity);
+    //adapter
+    void inject(TargetAdapter targetAdapter);
+    void inject(FragmentPetaniAdapter fragmentPetaniAdapter);
+    void inject(PetaniAdapter petaniAdapter);
+    void inject(PoktanAdapter poktanAdapter);
+    void inject(RDKKAdapter rdkkAdapter);
+    void inject(FragmentPoktanAdapter fragmentPoktanAdapter);
+    void inject(RKTPAdapter rktpAdapter);
+    void inject(RDKAdapter rdkAdapter);
+    void inject(HargaAdapter hargaAdapter);
+    void inject(AnggotaPoktanAdapter anggotaPoktanAdapter);
+    void inject(PengurusPoktanAdapter pengurusPoktanAdapter);
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import io.realm.Sort;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
-import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 /**
  * Created by Marthin on 10/13/2017.

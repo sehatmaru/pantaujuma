@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.poktan;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -11,7 +10,6 @@ import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.AnggotaPoktanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 
 public class AnggotaPoktanRepository implements PoktanContract.Repository<AnggotaPoktanRealm> {
     @Inject
@@ -26,7 +24,6 @@ public class AnggotaPoktanRepository implements PoktanContract.Repository<Anggot
 
     @Override
     public void addItem(AnggotaPoktanRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -41,7 +38,6 @@ public class AnggotaPoktanRepository implements PoktanContract.Repository<Anggot
 
     @Override
     public void updateItem(String idItem, AnggotaPoktanRealm item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> {
             bgRealm.insertOrUpdate(item);
         }, () -> {
@@ -70,7 +66,6 @@ public class AnggotaPoktanRepository implements PoktanContract.Repository<Anggot
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         AnggotaPoktanRealm deletedItem = realm.where(AnggotaPoktanRealm.class).equalTo("hashId", idItem).findFirst();
     }
 }

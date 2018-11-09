@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +35,8 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.AnggotaPoktanAdapter;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.components.searchpetani.SearchPetaniFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.AnggotaPoktan;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.AnggotaPoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
@@ -109,7 +106,6 @@ public class CRUAnggotaPoktanFragment extends Fragment implements PoktanContract
 
         realm.beginTransaction();
         listanggotaNotSync = realm.where(AnggotaPoktanRealm.class).equalTo("isSync",0).findAll();
-        Log.e("ini list anggota", "" + listanggotaNotSync.toString());
         realm.commitTransaction();
     }
 
@@ -165,10 +161,7 @@ public class CRUAnggotaPoktanFragment extends Fragment implements PoktanContract
             listData = realm1.copyFromRealm(realm1.where(AnggotaPoktanRealm.class).equalTo("poktanAnggota", DetailPoktanActivity.idPoktan).sort("tanggalMasuk", Sort.DESCENDING).findAll());
         }, () -> {
             if (!listData.isEmpty()) {
-                Log.e("List Anggota","ini hasil"+listData.size());
                 mAdapter = new AnggotaPoktanAdapter(mContext, listData);
-//                recyclerView.setAdapter(mAdapter);
-//                recyclerView.setLayoutManager(linearLayoutManager);
                 LinearLayoutManager manager = new LinearLayoutManager(getActivity());
                 recyclerView.setLayoutManager(manager);
                 recyclerView.setHasFixedSize(true);
@@ -197,8 +190,6 @@ public class CRUAnggotaPoktanFragment extends Fragment implements PoktanContract
         dataPoktan = realm.where(PoktanRealm.class).equalTo("hashId", DetailPoktanActivity.idPoktan).findFirst();
         dataPoktan.setIsSync(0);
         realm.commitTransaction();
-
-        Log.e("data anggota" , "" + newItem.toString());
 
         return newItem;
     }

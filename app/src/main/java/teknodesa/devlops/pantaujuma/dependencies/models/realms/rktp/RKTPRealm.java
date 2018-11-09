@@ -1,10 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp;
 
-import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import teknodesa.devlops.pantaujuma.components.rktp.RKTPContract;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.PetugasRealm;
 
 public class RKTPRealm extends RealmObject {
     @PrimaryKey

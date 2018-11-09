@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -34,13 +33,7 @@ public class DetailAlsintanActivity extends AppCompatActivity {
     public static AlsintanRealm dataAlsintan;
     public static KomoditasRealm dataKomoditas;
 
-//    public static String idPasar;
     public static String idAlsintan;
-//    public static String idKomoditas;
-//    public static String nama;
-//    public static String alamat;
-//    public static String kecamatan;
-//    public static String kabupaten;
 
     public static Intent createIntent(Context context, String id) {
         idAlsintan = id;
@@ -66,29 +59,12 @@ public class DetailAlsintanActivity extends AppCompatActivity {
     private void takedata(){
         realm.beginTransaction();
         dataAlsintan = realm.where(AlsintanRealm.class).equalTo("hashId", idAlsintan).findFirst();
-//
-//        idPasar = dataAlsintan.getHashId();
-//        idKomoditas = dataAlsintan.getHashId();
-//
-//        dataKomoditas = realm.where(KomoditasRealm.class).equalTo("hashId", idKomoditas).findFirst();
-//
-//        nama = dataAlsintan.getNamaPasar();
-//        alamat = dataAlsintan.getAlamat();
-//        kecamatan = dataAlsintan.getKecamatan();
-//        kabupaten = dataAlsintan.getKabupaten();
-//
         realm.commitTransaction();
     }
 
     private void setdata(){
-        Log.e("dataAlsintan", dataAlsintan.toString());
         namaAlat.setText(dataAlsintan.getNamaAlat());
         deskripsi.setText(dataAlsintan.getDeskripsi());
-//        komoditas.setText(dataKomoditas.getNama());
-//        pasar.setText(dataAlsintan.getNamaPasar());
-//        tanggal.setText(dataAlsintan.getTanggal());
-//        alsintan.setText(dataAlsintan.getNilai());
-//        satuan.setText(dataAlsintan.getSatuan());
     }
 
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -97,7 +73,6 @@ public class DetailAlsintanActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRUAlsintanFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListAlsintanActivity.createIntent(getApplicationContext()));
                     break;
 

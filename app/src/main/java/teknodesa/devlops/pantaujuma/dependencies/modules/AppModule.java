@@ -86,7 +86,7 @@ public class AppModule {
         return app;
     }
 
-    ///////////////////////Services
+    //Services
     @Provides
     @Singleton
     ListLahanKomoditasService listLahanKomoditasService() {
@@ -195,7 +195,7 @@ public class AppModule {
         return new GetPostService(app.getComponent());
     }
 
-    ///////////////////////Controllers
+    //Controllers
     @Provides
     @Singleton
     KomoditasController komoditasController() {
@@ -324,16 +324,16 @@ public class AppModule {
         return new ListLahanKomoditasController(app.getComponent());
     }
 
-    ///////////Repository
+    //Repository
     @Provides
     @Singleton
     KomentarRepository komentarRepository() {
         return new KomentarRepository(app.getComponent());
     }
 
-    ///////////////////////Activities///
+    //Activities
 
-    /////Fragments
+    //Fragments
     @Provides
     @Singleton
     KomoditasFragment komoditasFragment(){return new KomoditasFragment();}

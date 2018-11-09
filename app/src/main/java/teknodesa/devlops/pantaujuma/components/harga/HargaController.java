@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import teknodesa.devlops.pantaujuma.components.harga.HargaContract;
-import teknodesa.devlops.pantaujuma.components.harga.HargaRepository;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;

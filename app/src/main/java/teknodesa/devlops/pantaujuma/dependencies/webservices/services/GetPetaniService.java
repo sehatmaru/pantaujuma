@@ -1,7 +1,5 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -70,7 +68,6 @@ public class GetPetaniService implements GetPetaniContract.Repository {
 
             @Override
             public void onFailure(Call<ResponsePetani> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllPetaniFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -82,7 +79,6 @@ public class GetPetaniService implements GetPetaniContract.Repository {
         for(int i=0; i < allPen.size();i++ ){
             PetaniRealm petaniTempRealm = allPen.get(i);
             PetaniBody petaniBody = new PetaniBody(petaniTempRealm);
-            Log.e("petani service",petaniBody.toString());
             final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertPetani(WebServiceModule.ACCESS_TOKEN_TEMP,petaniBody);
             call.enqueue(new Callback<ResponseSaveData>() {

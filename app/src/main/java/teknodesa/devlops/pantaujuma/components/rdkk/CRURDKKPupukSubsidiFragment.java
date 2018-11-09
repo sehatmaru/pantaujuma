@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -302,12 +301,10 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     public void saveData(String tipe, Parcelable itemData) {
         RDKKContract.Controller<RDKKPupukSubsidiRealm> mController = new RDKKController(this, appComponent);
         RDKKPupukSubsidiRealm uiItem = getUIData();
-        Log.e("ini tipe:", "" + tipe.toString());
         if (tipe.equals("insert")) {
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-                Log.e("ini update RDKK", "" + itemData.toString());
                 String idItem = ((RDKKParcelable) itemData).getHashId();
                 mController.updateItem(idItem, uiItem);
             }

@@ -3,17 +3,12 @@ package teknodesa.devlops.pantaujuma.components.post;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -40,8 +35,6 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.KomentarAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
-import teknodesa.devlops.pantaujuma.components.petugas.DetailTargetActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
@@ -182,7 +175,6 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
                     .findAll());
         }, () -> {
             if (!listData.isEmpty()) {
-                Log.e("List Komentar","ini hasil"+listData.size());
                 mAdapter = new KomentarAdapter(mContext, listData);
                 tampungKomentar.setAdapter(mAdapter);
                 tampungKomentar.setHasFixedSize(true);
@@ -389,7 +381,6 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
         if(counter == hasilList){
             progressdialog.dismiss();
             gController.getAllKomentar(idPost);

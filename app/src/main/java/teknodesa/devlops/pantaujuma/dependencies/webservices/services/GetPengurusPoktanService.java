@@ -1,12 +1,11 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,38 +46,31 @@ public class GetPengurusPoktanService implements GetPengurusPoktanContract.Repos
 
     @Override
     public void getAllPengurusPoktan(int idDesa) {
-        Log.e("send","data comehere "+idDesa);
-        Call<ResponsePengurusPoktan> call = sisApi.getAllPengurusPoktan(WebServiceModule.ACCESS_TOKEN_TEMP, idDesa);
+        Call<ResponsePengurusPoktan> call = sisApi.getAllPengurusPoktan(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponsePengurusPoktan>() {
             @Override
             public void onResponse(Call<ResponsePengurusPoktan> call, Response<ResponsePengurusPoktan> response) {
-                Log.e("ONRESPONSE", "masuk ke onResponse");
                 if(response.isSuccessful()){
-                    Log.e("ISSUCCESSFULL", "masuk ke isSuccessful");
                     if(response.body().isSuccess()){
-                        Log.e("ISSUCCESS", "masuk ke isSuccess");
-                        Log.e("hasilpengurusPoktan",response.body().getData().size()+" ini");
-                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
-                            controller.getAllPengurusPoktanSuccess(response.body().getData());
-                            Log.e("executeTransactionAsync", "masuk ke realm");
+                        realm.beginTransaction();
+                        RealmResults<PengurusPoktanRealm> allPenguruss = realm.where(PengurusPoktanRealm.class).equalTo("isSync",1).findAll();
+                        allPenguruss.deleteAllFromRealm();
+                        realm.commitTransaction();
 
-                        }, error -> {
-                            Log.e("getpengurusPoktaneror",error.getMessage());
-                        });
-                    }else
-                        controller.getAllPengurusPoktanFailed(response.body().getMessage());
-                    Log.e("getPengurusPoktanFailed", "masuk ke getAllPengurusPoktanFailed 1");
-
+                        realm.beginTransaction();
+                        realm.executeTransactionAsync(realmkelompok -> realmkelompok.insertOrUpdate(response.body().getData()));
+                        realm.commitTransaction();
+                        controller.getAllPengurusPoktanSuccess(response.body().getData());
+                    }else{
+                        controller.getAllPengurusPoktanFailed("Error "+response.message());
+                    }
                 }else{
-                    controller.getAllPengurusPoktanFailed("Server Error");
-                    Log.e("getPengurusPoktanFailed", "masuk ke getAllPengurusPoktanFailed 2");
+                    controller.getAllPengurusPoktanFailed("Server Error "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponsePengurusPoktan> call, Throwable t) {
-                Log.e("FAILUEEEEEEERRRR", "masuk ke FAILUREEE");
-                Log.e("Failure", "onFailure");
                 controller.getAllPengurusPoktanFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -96,9 +88,7 @@ public class GetPengurusPoktanService implements GetPengurusPoktanContract.Repos
             dataPoktan.setIsSync(1);
             realm.commitTransaction();
 
-            Log.e("ini data pengurus sync", pengurusTempRealm.toString());
             PengurusPoktanBody pengurusBody = new PengurusPoktanBody(pengurusTempRealm);
-            Log.e("ini body pengurus sync", pengurusBody.toString());
             final int dataLoop = i;
             Call<ResponseSaveData> call = sisApi.insertPengurusPoktan(WebServiceModule.ACCESS_TOKEN_TEMP,pengurusBody);
             call.enqueue(new Callback<ResponseSaveData>() {
