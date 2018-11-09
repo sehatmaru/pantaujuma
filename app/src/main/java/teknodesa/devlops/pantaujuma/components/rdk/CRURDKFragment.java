@@ -74,7 +74,7 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     @Inject
     RDKSasaranIntensifikasiFragment rdkSasaranIntensifikasiFragment;
-    
+
     ViewPagerAdapter adapter;
 
     @BindView(R.id.tabs)
@@ -174,7 +174,7 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         rencanaUmum = rdkRencanaUmumFragment.getUIData();
         sasaranIntensifikasi = rdkSasaranIntensifikasiFragment.getUIData();
 
-        String hashIdIdentitas = getSaltString();
+//        String hashIdIdentitas = getSaltString();
         String hashIdIrigasi = getSaltString();
         String hashIdJadwal = getSaltString();
         String hashIdRencana = getSaltString();
@@ -249,17 +249,7 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     @Override
     public void setUIData() {
-        /*if (biodataFragment != null) {
-            biodataFragment.setUIData();
-        } else {
-            Toast.makeText(CRUActivity.mContext, "biodata", Toast.LENGTH_SHORT).show();
-        }
 
-        if (alamatFragment != null) {
-            alamatFragment.setUIData();
-        } else {
-            Toast.makeText(CRUActivity.mContext, "alamat", Toast.LENGTH_SHORT).show();
-        }*/
     }
 
     public static void setDeletedData(Parcelable itemData, AppComponent appComp) {
@@ -314,10 +304,10 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     protected String getSaltString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            StringBuilder salt = new StringBuilder();
-            Random rnd = new Random();
-            while (salt.length() < 10) { // length of the random string.
-                int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());

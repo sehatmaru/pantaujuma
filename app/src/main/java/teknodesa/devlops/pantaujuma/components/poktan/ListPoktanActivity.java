@@ -273,20 +273,26 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
 
     private void startSync(){
         counter=0;
-        Log.e("list poktan sync", "" + listpoktanNotSync.toString());
-        Log.e("list anggota sync", "" + CRUAnggotaPoktanFragment.listanggotaNotSync.toString());
-        Log.e("list pengurus sync", "" + CRUPengurusPoktanFragment.listpengurusNotSync.toString());
-//        if (listpoktanNotSync!=null){
-//            mController.saveData(listpoktanNotSync);
-//        }else if (CRUAnggotaPoktanFragment.listanggotaNotSync!=null){
-//            aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
-//        }else if (CRUPengurusPoktanFragment.listpengurusNotSync!=null){
-//            pController.saveData(CRUPengurusPoktanFragment.listData);
-//        }
+//        Log.e("list poktan sync", "" + listpoktanNotSync.toString());
+//        Log.e("list anggota sync", "" + CRUAnggotaPoktanFragment.listanggotaNotSync.toString());
+//        Log.e("list pengurus sync", "" + CRUPengurusPoktanFragment.listpengurusNotSync.toString());
 
-        mController.saveData(listpoktanNotSync);
-        aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
-        pController.saveData(CRUPengurusPoktanFragment.listpengurusNotSync);
+        if (listpoktanNotSync!=null){
+            mController.saveData(listpoktanNotSync);
+        }
+
+        if (CRUAnggotaPoktanFragment.listanggotaNotSync!=null){
+            aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
+        }
+
+        if (CRUPengurusPoktanFragment.listpengurusNotSync!=null){
+            pController.saveData(CRUPengurusPoktanFragment.listData);
+        }
+
+//
+//        mController.saveData(listpoktanNotSync);
+//        aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
+//        pController.saveData(CRUPengurusPoktanFragment.listpengurusNotSync);
     }
 
     private void checkDataRealm(){
@@ -317,7 +323,8 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
 
     @Override
     public void getAllAnggotaPoktanFailed(String message) {
-
+        createSnackbar(message).show();
+        updateLayout(Konstanta.LAYOUT_ERROR);
     }
 
     @Override
@@ -327,7 +334,8 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
 
     @Override
     public void getAllPengurusPoktanFailed(String message) {
-
+        createSnackbar(message).show();
+        updateLayout(Konstanta.LAYOUT_ERROR);
     }
 
     @Override

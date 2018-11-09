@@ -80,10 +80,7 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         SearchKomoditasFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
 
-    private String idKomoditas = "";
-
-    private String idUser;
-    private UserDB userDB;
+    private String komoditas = "";
 
     private AppComponent appComponent;
     FragmentActivity activity;
@@ -105,11 +102,17 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         ButterKnife.bind(this, v);
 
         if(CRUActivity.mAction.equals("update")){
-            textForUpdate();
-            idKomoditas = DetailTargetActivity.idKomoditas;
-        }else{
-
+            setUIData();
+            komoditas = DetailTargetActivity.idKomoditas;
         }
+
+//
+//        if(CRUActivity.mAction.equals("update")){
+//            textForUpdate();
+//            idKomoditas = DetailTargetActivity.idKomoditas;
+//        }else{
+//
+//        }
 
         return v;
     }
@@ -149,7 +152,7 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         }
         newRealmItem.setIdDesa(idDes);
         newRealmItem.setIdUser(idUs);
-        newRealmItem.setKomoditas(idKomoditas);
+        newRealmItem.setKomoditas(komoditas);
         newRealmItem.setTahun(Integer.valueOf(strTahun));
         newRealmItem.setLuasTanam(Float.valueOf(strLuasTanam));
         newRealmItem.setLuasPanen(Float.valueOf(strLuasPanen));
@@ -158,16 +161,29 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         newRealmItem.setKeterangan(strKeterangan);
         newRealmItem.setIsSync(0);
 
+        Log.e("create target", newRealmItem.toString());
+
         return newRealmItem;
     }
 
     @Override
     public void OnClickKomoditas(String idKomoditas, String nama, String deskripsi) {
         input_komoditas.setText(nama);
-        idKomoditas = idKomoditas;
+        komoditas = idKomoditas;
     }
 
-    void textForUpdate(){
+//    void textForUpdate(){
+//        input_komoditas.setText(DetailTargetActivity.dataKomoditas.getNama());
+//        input_tahun.setText(String.valueOf(DetailTargetActivity.dataTarget.getTahun()));
+//        input_luastanam.setText(String.valueOf(DetailTargetActivity.dataTarget.getLuasTanam()));
+//        input_luaspanen.setText(String.valueOf(DetailTargetActivity.dataTarget.getLuasPanen()));
+//        input_sasaranproduksi.setText(String.valueOf(DetailTargetActivity.dataTarget.getSasaranProduksi()));
+//        input_sasaranproduktifitas.setText(String.valueOf(DetailTargetActivity.dataTarget.getSasaranProduktifitas()));
+//        input_keterangan.setText(DetailTargetActivity.dataTarget.getKeterangan());
+//    }
+
+    @Override
+    public void setUIData() {
         input_komoditas.setText(DetailTargetActivity.dataKomoditas.getNama());
         input_tahun.setText(String.valueOf(DetailTargetActivity.dataTarget.getTahun()));
         input_luastanam.setText(String.valueOf(DetailTargetActivity.dataTarget.getLuasTanam()));
@@ -175,11 +191,6 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         input_sasaranproduksi.setText(String.valueOf(DetailTargetActivity.dataTarget.getSasaranProduksi()));
         input_sasaranproduktifitas.setText(String.valueOf(DetailTargetActivity.dataTarget.getSasaranProduktifitas()));
         input_keterangan.setText(DetailTargetActivity.dataTarget.getKeterangan());
-    }
-
-    @Override
-    public void setUIData() {
-
     }
 
     @Override

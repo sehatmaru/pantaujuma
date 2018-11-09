@@ -69,7 +69,7 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
         String komoditas;
 
         if(targetPetugas.getKomoditas() == null || targetPetugas.getKomoditas().compareTo("")==0){
-            komoditas="";
+            komoditas="-";
         }else{
             komoditas = komoditasRealm.getNama();
         }

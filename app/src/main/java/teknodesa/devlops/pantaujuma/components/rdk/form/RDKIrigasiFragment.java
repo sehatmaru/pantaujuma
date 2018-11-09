@@ -76,9 +76,7 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
             strDeskripsiIrigasi = (input_deskripsiIrigasi.getText().toString() == null) ? "-" : input_deskripsiIrigasi.getText().toString();
         }catch (NullPointerException e){}
 
-        Irigasi newItem = new Irigasi();
-        newItem.setNama(strNama);
-        newItem.setDeskripsiIrigasi(strDeskripsiIrigasi);
+        Irigasi newItem = new Irigasi(strNama, strDeskripsiIrigasi);
 
         return newItem;
     }

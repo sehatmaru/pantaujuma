@@ -28,6 +28,7 @@ import butterknife.OnClick;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.ImageSlideAdapter;
+import teknodesa.devlops.pantaujuma.components.alsintan.ListAlsintanActivity;
 import teknodesa.devlops.pantaujuma.components.harga.ListHargaActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
 import teknodesa.devlops.pantaujuma.components.penduduk.ListPendudukActivity;
@@ -37,7 +38,6 @@ import teknodesa.devlops.pantaujuma.components.poktan.ListPoktanActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdkk.ListRDKKActivity;
 import teknodesa.devlops.pantaujuma.components.rktp.ListRKTPActivity;
-import teknodesa.devlops.pantaujuma.components.survei.ListSurveiActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.Promotion;
 import teknodesa.devlops.pantaujuma.utils.pageindicator.CheckNetworkConnection;
 import teknodesa.devlops.pantaujuma.utils.pageindicator.CirclePageIndicator;
@@ -113,13 +113,13 @@ public class HomeFragment extends Fragment implements HomeContract.View{
         startActivity(ListLahanActivity.createIntent(getContext()));
     }
 
-//    //Alsintan
-//    @BindView(R.id.btnAlsintan)
-//    Button btnAlsintan;
-//    @OnClick(R.id.btnAlsintan)
-//    void clickListAlsintan(){
-//        startActivity(ListAlsintanActivity.createIntent(getContext()));
-//    }
+    //Alsintan
+    @BindView(R.id.btnAlsintan)
+    Button btnAlsintan;
+    @OnClick(R.id.btnAlsintan)
+    void clickListAlsintan(){
+        startActivity(ListAlsintanActivity.createIntent(getContext()));
+    }
 
     //Harga
     @BindView(R.id.btnHarga)
@@ -128,15 +128,6 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     void clickListHarga(){
         startActivity(ListHargaActivity.createIntent(getContext()));
     }
-
-    //Survei
-    @BindView(R.id.btnSurvei)
-    Button btnSurvei;
-    @OnClick(R.id.btnSurvei)
-    void clickListSurvei(){
-        startActivity(ListSurveiActivity.createIntent(getContext()));
-    }
-
 
     //Slider
     private static final long ANIM_VIEWPAGER_DELAY = 5000;

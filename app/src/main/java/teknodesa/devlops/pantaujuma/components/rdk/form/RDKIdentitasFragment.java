@@ -119,7 +119,7 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     }
 
     private void setLayoutForEdit(){
-        input_poktan.setText(DetailRDKActivity.dataRDK.getPoktan());
+        input_poktan.setText(DetailRDKActivity.dataPoktan.getNama());
         input_tanggal.setText(DetailRDKActivity.dataRDK.getTanggal());
         input_luasSawah.setText(DetailRDKActivity.dataRDK.getLuasSawah());
         input_keterangan.setText(DetailRDKActivity.dataRDK.getKeterangan());
@@ -127,8 +127,6 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
 
     @Override
     public Identitas getUIData() {
-        Identitas theUIData = (Identitas) CRUActivity.mData;
-
         String strTanggal = "";
         String strLuasSawah = "";
         String strKeterangan = "";
@@ -141,11 +139,7 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
             strPoktan = (poktan == null) ? "-" : poktan;
         }catch (NullPointerException e){}
 
-        Identitas newItem = new Identitas();
-        newItem.setPoktan(strPoktan);
-        newItem.setTanggal(strTanggal);
-        newItem.setLuasSawah(strLuasSawah);
-        newItem.setKeterangan(strKeterangan);
+        Identitas newItem = new Identitas(strPoktan, strTanggal, strLuasSawah, strKeterangan);
 
         return newItem;
     }

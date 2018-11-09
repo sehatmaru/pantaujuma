@@ -77,25 +77,26 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
     }
 
     private void setLayoutForEdit() {
-        input_komoditasSI.setText(DetailRDKActivity.dataRDK.getKomoditasSI());
+        input_komoditasSI.setText(DetailRDKActivity.dataKomoditasSI.getNama());
         input_target.setText(DetailRDKActivity.dataRDK.getTarget());
         input_targethasilperha.setText(DetailRDKActivity.dataRDK.getTargetHasilPerHa());
     }
 
     @Override
     public SasaranIntensifikasi getUIData() {
-        String target = "";
-        String targetHasil = "";
-        String strKomoditas = "";
-
-        try{
-            target = (input_target.getText().toString() == null) ? "-" : input_target.getText().toString();
-            targetHasil = (input_targethasilperha.getText().toString() == null) ? "-" : input_targethasilperha.getText().toString();
-            strKomoditas = (komoditas == null) ? "-" : komoditas;
-        }catch (NullPointerException e){}
+        String target = input_target.getText().toString();
+        String targetHasil = input_targethasilperha.getText().toString();
+//        String strKomoditas = "";
+//
+//        try{
+//            target = (input_target.getText().toString() == null) ? "-" : input_target.getText().toString();
+//            targetHasil = (input_targethasilperha.getText().toString() == null) ? "-" : input_targethasilperha.getText().toString();
+//            strKomoditas = (komoditas == null) ? "-" : komoditas;
+//        }catch (NullPointerException e){}
 
         SasaranIntensifikasi newItem = new SasaranIntensifikasi();
-        newItem.setKomoditasSI(strKomoditas);
+
+        newItem.setKomoditasSI(komoditas);
         newItem.setTarget(target);
         newItem.setTargetHasilPerHa(targetHasil);
 

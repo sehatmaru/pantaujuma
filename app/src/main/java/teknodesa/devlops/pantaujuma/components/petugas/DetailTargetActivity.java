@@ -92,7 +92,13 @@ public class DetailTargetActivity extends AppCompatActivity {
         realm.commitTransaction();
     }
     private void setdata(){
-        komoditas.setText(dataKomoditas.getNama());
+        if(dataTarget.getKomoditas() == null || dataTarget.getKomoditas().compareTo("")==0){
+            komoditas.setText("-");
+        }else{
+            komoditas.setText(dataKomoditas.getNama());
+        }
+
+//        komoditas.setText(dataKomoditas.getNama());
         tahunKerja.setText(String.valueOf(dataTarget.getTahun()));
         luasTanam.setText(String.valueOf(dataTarget.getLuasTanam()));
         luasPanen.setText(String.valueOf(dataTarget.getLuasPanen()));

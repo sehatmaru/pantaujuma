@@ -31,7 +31,6 @@ import teknodesa.devlops.pantaujuma.components.post.CRUPostFragment;
 import teknodesa.devlops.pantaujuma.components.rdk.CRURDKFragment;
 import teknodesa.devlops.pantaujuma.components.rdkk.CRURDKKPupukSubsidiFragment;
 import teknodesa.devlops.pantaujuma.components.rktp.CRURKTPFragment;
-import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 
 public class CRUActivity extends AppCompatActivity {
     public static String mJenisCRU;
@@ -63,8 +62,6 @@ public class CRUActivity extends AppCompatActivity {
     CRUKomoditasFragment cruKomoditasFragment;
     @Inject
     CRUHargaFragment cruHargaFragment;
-    @Inject
-    CRUSurveiFragment cruSurveiFragment;
     @Inject
     CRUPostFragment cruPostFragment;
 
@@ -130,9 +127,6 @@ public class CRUActivity extends AppCompatActivity {
                 break;
             case "harga":
                 replaceFragment(cruHargaFragment);
-                break;
-            case "survei":
-                replaceFragment(cruSurveiFragment);
                 break;
         }
 

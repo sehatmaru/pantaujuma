@@ -47,7 +47,8 @@ public class AlsintanAdapter extends RecyclerView.Adapter<AlsintanAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         AlsintanRealm alsintan = listData.get(position);
 
-        holder.textname.setText(alsintan.getNamaAlat());
+        holder.textnamaAlat.setText(alsintan.getNamaAlat());
+        holder.textdeskripsi.setText(alsintan.getDeskripsi());
         holder.cardview.setOnClickListener(view -> {
             onClicAlsintan.OnClickAlsintan(alsintan.getHashId());
         });
@@ -63,11 +64,13 @@ public class AlsintanAdapter extends RecyclerView.Adapter<AlsintanAdapter.MyView
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textname;
+        TextView textnamaAlat;
+        TextView textdeskripsi;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
-            textname = (TextView)itemView.findViewById(R.id.nama);
+            textnamaAlat = (TextView)itemView.findViewById(R.id.namaalat);
+            textdeskripsi = (TextView)itemView.findViewById(R.id.deskripsi);
             cardview = (CardView) itemView.findViewById(R.id.alsintanCardView);
         }
     }

@@ -38,7 +38,6 @@ import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Harga;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.pasar.PasarRealm;
 
-
 public class CRUHargaFragment extends Fragment implements HargaContract.ViewController<HargaRealm>, HargaContract.View, SearchKomoditasFragment.OnClickKomoditasListener, SearchPasarFragment.OnClickPasarListener {
 
     @Inject
@@ -117,7 +116,7 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
         ButterKnife.bind(this, v);
 
         if(CRUActivity.mAction.equals("update")){
-            textForEdit();
+            setUIData();
 
             komoditas = DetailHargaActivity.idKomoditas;
             strpasar = DetailHargaActivity.idPasar;
@@ -125,10 +124,6 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
             stralamat = DetailHargaActivity.alamat;
             strkecamatan = DetailHargaActivity.kecamatan;
             strkabupaten = DetailHargaActivity.kabupaten;
-
-            realm.beginTransaction();
-            dataPasar = realm.where(PasarRealm.class).equalTo("hashIdPasar", strpasar).findFirst();
-            realm.commitTransaction();
         }
 
         return v;
@@ -159,7 +154,7 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
         newRealmItem.setKabupaten(strkabupaten);
         newRealmItem.setIsSync(0);
 
-//        Log.e("dataHarga", newRealmItem.toString());
+        Log.e("ini data harga", newRealmItem.toString());
 
         return newRealmItem;
     }
@@ -170,22 +165,13 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
         komoditas = idKomoditas;
     }
 
-    void textForEdit(){
-        try{
-            input_komoditas.setText(DetailHargaActivity.dataKomoditas.getNama());
-            input_pasar.setText(DetailHargaActivity.dataHarga.getNamaPasar());
-            input_tanggal.setText(DetailHargaActivity.dataHarga.getTanggal());
-            input_harga.setText(DetailHargaActivity.dataHarga.getNilai());
-            input_satuan.setText(DetailHargaActivity.dataHarga.getSatuan());
-
-        } catch (NullPointerException e){
-
-        }
-    }
-
     @Override
     public void setUIData() {
-
+        input_komoditas.setText(DetailHargaActivity.dataKomoditas.getNama());
+        input_pasar.setText(DetailHargaActivity.dataHarga.getNamaPasar());
+        input_tanggal.setText(DetailHargaActivity.dataHarga.getTanggal());
+        input_harga.setText(DetailHargaActivity.dataHarga.getNilai());
+        input_satuan.setText(DetailHargaActivity.dataHarga.getSatuan());
     }
 
     @Override

@@ -107,7 +107,7 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
         input_paketteknologi.setText(DetailRDKActivity.dataRDK.getPaketTeknologi());
         input_polatanam.setText(DetailRDKActivity.dataRDK.getPolaTanam());
         input_jadwaltanam.setText(DetailRDKActivity.dataRDK.getJadwalTanam());
-        input_komoditas.setText(DetailRDKActivity.dataRDK.getKomoditasRU());
+        input_komoditas.setText(DetailRDKActivity.dataKomoditasRU.getNama());
         input_varietas.setText(DetailRDKActivity.dataRDK.getVarietas());
         input_sumberbenih.setText(DetailRDKActivity.dataRDK.getSumberBenih());
         input_tabungananggota.setText(DetailRDKActivity.dataRDK.getTabunganAnggota());
@@ -117,33 +117,45 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
     @Override
     public RencanaUmum getUIData() {
-        String paketTeknologi = "";
-        String polaTanam = "";
-        String jadwalTanam = "";
-        String varietas = "";
-        String iuranAnggota = "";
-        String sumberBenih = "";
-        String tabunganAnggota = "";
-        String pemupukanModal = "";
-        String strKomoditas = "";
+        String paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();;
+        String polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();;
+        String jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();;
+        String varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();;
+        String iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();;
+        String sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();;
+        String tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();;
+        String pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();;
 
-        try{
-            paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();
-            polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();
-            jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();
-            varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();
-            iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();
-            sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();
-            tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();
-            pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();
-            strKomoditas = (komoditas == null) ? "-" : komoditas;
-        }catch (NullPointerException e){}
+//        paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();
+//        polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();
+//        jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();
+//        iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();
+//        sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();
+//        tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();
+//        pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();
+//        varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();
+//
+////        String strKomoditas = "";
+//
+//        try{
+//            paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();
+//            polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();
+//            jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();
+//            varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();
+//            iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();
+//            sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();
+//            tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();
+//            pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();
+////            strKomoditas = (komoditas == null) ? "-" : komoditas;
+//        }catch (NullPointerException e){}
+
 
         RencanaUmum newItem = new RencanaUmum();
+
         newItem.setPaketTeknologi(paketTeknologi);
         newItem.setPolaTanam(polaTanam);
         newItem.setJadwalTanam(jadwalTanam);
-        newItem.setKomoditasRU(strKomoditas);
+        newItem.setKomoditasRU(komoditas);
         newItem.setVarietas(varietas);
         newItem.setSumberBenih(sumberBenih);
         newItem.setTabunganAnggota(tabunganAnggota);

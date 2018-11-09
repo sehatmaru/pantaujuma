@@ -42,43 +42,74 @@ public class GetAlsintanService implements GetAlsintanContract.Repository {
         this.controller = controller;
     }
 
+//    @Override
+//    public void getAllAlsintan() {
+//        Call<ResponseGetAlsintan> call = pjApi.getAlsintan(WebServiceModule.ACCESS_TOKEN_TEMP);
+//        call.enqueue(new Callback<ResponseGetAlsintan>() {
+//            @Override
+//            public void onResponse(Call<ResponseGetAlsintan> call, Response<ResponseGetAlsintan> response) {
+//                if(response.isSuccessful()){
+//                    if(response.body().isSuccess()){
+//
+//                        realm.beginTransaction();
+//                        realm.executeTransactionAsync(realm -> {
+//                            realm.insertOrUpdate(response.body().getAlat_pertanian());
+//                        });
+//                        realm.commitTransaction();
+//
+//                        realm.beginTransaction();
+//                        realm.executeTransactionAsync(realm -> {
+//                            realm.insertOrUpdate(response.body().getPengecer());
+//                        });
+//                        realm.commitTransaction();
+//
+//                        realm.beginTransaction();
+//                        realm.executeTransactionAsync(realm -> {
+//                            realm.insertOrUpdate(response.body().getPengecer_pupuk());
+//                        });
+//                        realm.commitTransaction();
+//
+//                        realm.beginTransaction();
+//                        realm.executeTransactionAsync(realm -> {
+//                            realm.insertOrUpdate(response.body().getPupuk());
+//                        });
+//                        realm.commitTransaction();
+//                        controller.getAllAlsintanSuccess(response.body().getAlat_pertanian());
+//                    }else
+//                        controller.getAllAlsintanFailed(response.body().getMessage());
+//                }else{
+//                    controller.getAllAlsintanFailed("Something Wrong: "+response.message());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseGetAlsintan> call, Throwable t) {
+//                Log.e("Failure", "onFailure");
+//                controller.getAllAlsintanFailed(t.getMessage());
+//                t.printStackTrace();
+//            }
+//        });
+//    }
+
     @Override
-    public void getAllAlsintan() {
+    public void getAllAlsintan(){
+        Log.e("send","data comehere");
         Call<ResponseGetAlsintan> call = pjApi.getAlsintan(WebServiceModule.ACCESS_TOKEN_TEMP);
         call.enqueue(new Callback<ResponseGetAlsintan>() {
             @Override
             public void onResponse(Call<ResponseGetAlsintan> call, Response<ResponseGetAlsintan> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-
-                        realm.beginTransaction();
-                        realm.executeTransactionAsync(realm -> {
-                            realm.insertOrUpdate(response.body().getAlat_pertanian());
+                        Log.e("hasilalsintan",response.body().getData().size()+" ini");
+                        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
+                            controller.getAllAlsintanSuccess(response.body().getData());
+                        }, error -> {
+                            Log.e("getalsintanerror",error.getMessage());
                         });
-                        realm.commitTransaction();
-
-                        realm.beginTransaction();
-                        realm.executeTransactionAsync(realm -> {
-                            realm.insertOrUpdate(response.body().getPengecer());
-                        });
-                        realm.commitTransaction();
-
-                        realm.beginTransaction();
-                        realm.executeTransactionAsync(realm -> {
-                            realm.insertOrUpdate(response.body().getPengecer_pupuk());
-                        });
-                        realm.commitTransaction();
-
-                        realm.beginTransaction();
-                        realm.executeTransactionAsync(realm -> {
-                            realm.insertOrUpdate(response.body().getPupuk());
-                        });
-                        realm.commitTransaction();
-                        controller.getAllAlsintanSuccess(response.body().getAlat_pertanian());
                     }else
                         controller.getAllAlsintanFailed(response.body().getMessage());
                 }else{
-                    controller.getAllAlsintanFailed("Something Wrong: "+response.message());
+                    controller.getAllAlsintanFailed("Server Error");
                 }
             }
 

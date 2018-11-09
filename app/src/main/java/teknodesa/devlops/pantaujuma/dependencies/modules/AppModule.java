@@ -54,7 +54,6 @@ import teknodesa.devlops.pantaujuma.components.rktp.GetRKTPController;
 import teknodesa.devlops.pantaujuma.components.signin.LoginController;
 import teknodesa.devlops.pantaujuma.components.signin.UserRealmController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
-import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetAlsintanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetAnggotaPoktanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetHargaService;
@@ -430,10 +429,6 @@ public class AppModule {
     @Provides
     @Singleton
     CRUHargaFragment provideCRUHargaFragment(){return new CRUHargaFragment();}
-
-    @Provides
-    @Singleton
-    CRUSurveiFragment provideCRUSurveiFragment(){return new CRUSurveiFragment();}
 
     @Provides
     @Singleton

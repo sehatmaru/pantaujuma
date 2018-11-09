@@ -20,7 +20,9 @@ import teknodesa.devlops.pantaujuma.components.adapter.RKTPAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.TargetAdapter;
 import teknodesa.devlops.pantaujuma.components.alsintan.AlsintanController;
 import teknodesa.devlops.pantaujuma.components.alsintan.AlsintanRepository;
+import teknodesa.devlops.pantaujuma.components.alsintan.DetailAlsintanActivity;
 import teknodesa.devlops.pantaujuma.components.alsintan.GetAlsintanController;
+import teknodesa.devlops.pantaujuma.components.alsintan.ListAlsintanActivity;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.harga.DetailHargaActivity;
 import teknodesa.devlops.pantaujuma.components.harga.GetHargaController;
@@ -121,8 +123,6 @@ import teknodesa.devlops.pantaujuma.components.signin.LoginController;
 import teknodesa.devlops.pantaujuma.components.signin.UserRealmController;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenActivity;
 import teknodesa.devlops.pantaujuma.components.splashscreen.SplashscreenController;
-import teknodesa.devlops.pantaujuma.components.survei.CRUSurveiFragment;
-import teknodesa.devlops.pantaujuma.components.survei.ListSurveiActivity;
 import teknodesa.devlops.pantaujuma.dependencies.modules.AppModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.RealmModule;
 import teknodesa.devlops.pantaujuma.dependencies.modules.WebServiceModule;
@@ -186,7 +186,6 @@ public interface AppComponent {
     void inject(ListLahanActivity activity);
     void inject(ListKomoditasActivity activity);
     void inject(ListHargaActivity activity);
-    void inject(ListSurveiActivity activity);
     void inject(DetailPendudukActivity activity);
     void inject(ListLahanKomoditasActivity activity);
 
@@ -201,7 +200,6 @@ public interface AppComponent {
     void inject(CRULahanFragment fragment);
     void inject(CRUKomoditasFragment fragment);
     void inject(CRUHargaFragment fragment);
-    void inject(CRUSurveiFragment fragment);
     void inject(BiodataFragment fragment);
     void inject(AlamatFragment fragment);
     void inject(AkunFragment fragment);
@@ -386,4 +384,8 @@ public interface AppComponent {
     void inject(GetLahanController getLahanController);
 
     void inject(GetLahanService getLahanService);
+
+    void inject(ListAlsintanActivity listAlsintanActivity);
+
+    void inject(DetailAlsintanActivity detailAlsintanActivity);
 }

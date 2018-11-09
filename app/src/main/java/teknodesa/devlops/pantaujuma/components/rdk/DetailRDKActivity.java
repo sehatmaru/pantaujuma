@@ -167,8 +167,8 @@ public class DetailRDKActivity extends AppCompatActivity {
         String strTarget = (dataRDK.getTarget() == null) ? "-" : dataRDK.getTarget();
         String strTargetHasil = (dataRDK.getTargetHasilPerHa() == null) ? "-" : dataRDK.getTargetHasilPerHa();
         String strModalPemupukan = (dataRDK.getPemupukanModal() == null) ? "-" : dataRDK.getPemupukanModal();
-        String strKomoditasSI = (idKomoditasSI == null) ? "-" : dataKomoditasSI.getNama();
-        String strKomoditasPB = (idKomoditasRU == null) ? "-" : dataKomoditasRU.getNama();
+//        String strKomoditasSI = (idKomoditasSI == null) ? "-" : dataKomoditasSI.getNama();
+//        String strKomoditasPB = (idKomoditasRU == null) ? "-" : dataKomoditasRU.getNama();
 
 //        petugasrdk.setText(strPetugasrdk);
         deskripsiIrigasi.setText(strDescIrigasi);
@@ -191,8 +191,21 @@ public class DetailRDKActivity extends AppCompatActivity {
         target.setText(strTarget);
         targethasil.setText(strTargetHasil);
         iurananggota.setText(strIuranAnggota);
-        komoditassi.setText(strKomoditasSI);
-        komoditaspb.setText(strKomoditasPB);
+
+        if(dataRDK.getKomoditasSI() == null || dataRDK.getKomoditasSI().compareTo("")==0){
+            komoditassi.setText("-");
+        }else{
+            komoditassi.setText(dataKomoditasSI.getNama());
+        }
+
+        if(dataRDK.getKomoditasRU() == null || dataRDK.getKomoditasRU().compareTo("")==0){
+            komoditaspb.setText("-");
+        }else{
+            komoditaspb.setText(dataKomoditasRU.getNama());
+        }
+
+//        komoditassi.setText(strKomoditasSI);
+//        komoditaspb.setText(strKomoditasPB);
     }
 
     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

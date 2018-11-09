@@ -115,7 +115,13 @@ public class DetailRKTPActivity extends AppCompatActivity {
         realm.commitTransaction();
     }
     private void setdata(){
-        poktan.setText(dataPoktan.getNama());
+        if(dataRKTP.getPoktan() == null || dataRKTP.getPoktan().compareTo("")==0){
+            poktan.setText("-");
+        }else{
+            poktan.setText(dataPoktan.getNama());
+        }
+
+//        poktan.setText(dataPoktan.getNama());
         tahun.setText(dataRKTP.getTahun());
         tujuan.setText(dataRKTP.getTujuan());
         masalah.setText(dataRKTP.getMasalah());

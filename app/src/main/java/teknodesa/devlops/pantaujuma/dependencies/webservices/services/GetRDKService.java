@@ -74,10 +74,10 @@ public class GetRDKService implements GetRDKContract.Repository {
         for(int i=0; i < allRDK.size();i++ ){
             RDKRealm rdkTempRealm = allRDK.get(i);
             RDKBody rdkBody = new RDKBody(rdkTempRealm);
-            Log.e("body rdk",rdkBody.toString());
-            Log.e("realm rdk",rdkTempRealm.toString());
+//            Log.e("body rdk",rdkBody.toString());
+//            Log.e("realm rdk",rdkTempRealm.toString());
             final int dataLoop = i;
-            Call<ResponseSaveData> call = sisApi.insertRdk(WebServiceModule.ACCESS_TOKEN_TEMP,rdkBody);
+            Call<ResponseSaveData> call = sisApi.insertRDK(WebServiceModule.ACCESS_TOKEN_TEMP,rdkBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {

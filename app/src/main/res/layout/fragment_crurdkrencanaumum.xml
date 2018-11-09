@@ -79,8 +79,9 @@
                     android:id="@+id/input_paketteknologi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3"
                     android:hint="@string/paketteknologi"
-                    android:singleLine="false" />
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 

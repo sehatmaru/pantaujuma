@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdkk;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
+
 public class RDKKBody {
     private String hashId;
     private int idDesa;
@@ -24,26 +26,26 @@ public class RDKKBody {
     public RDKKBody() {
     }
 
-    public RDKKBody(String hashId, int idDesa, String idUser, String poktan, String petani, String komoditas, String pupuk, float butuhJanuari, float butuhFebruari, float butuhMaret, float butuhApril, float butuhMei, float butuhJuni, float butuhJuli, float butuhAgustus, float butuhSeptember, float butuhOktober, float butuhNovember, float butuhDesember) {
-        this.hashId = hashId;
-        this.idDesa = idDesa;
-        this.idUser = idUser;
-        this.poktan = poktan;
-        this.petani = petani;
-        this.komoditas = komoditas;
-        this.pupuk = pupuk;
-        this.butuhJanuari = butuhJanuari;
-        this.butuhFebruari = butuhFebruari;
-        this.butuhMaret = butuhMaret;
-        this.butuhApril = butuhApril;
-        this.butuhMei = butuhMei;
-        this.butuhJuni = butuhJuni;
-        this.butuhJuli = butuhJuli;
-        this.butuhAgustus = butuhAgustus;
-        this.butuhSeptember = butuhSeptember;
-        this.butuhOktober = butuhOktober;
-        this.butuhNovember = butuhNovember;
-        this.butuhDesember = butuhDesember;
+    public RDKKBody(RDKKPupukSubsidiRealm data) {
+        this.hashId = data.getHashId();
+        this.idDesa = data.getIdDesa();
+        this.idUser = data.getIdUser();
+        this.poktan = data.getPoktan();
+        this.petani = data.getPetani();
+        this.komoditas = data.getKomoditas();
+        this.pupuk = data.getPupuk();
+        this.butuhJanuari = data.getButuhJanuari();
+        this.butuhFebruari = data.getButuhFebruari();
+        this.butuhMaret = data.getButuhMaret();
+        this.butuhApril = data.getButuhApril();
+        this.butuhMei = data.getButuhMei();
+        this.butuhJuni = data.getButuhJuni();
+        this.butuhJuli = data.getButuhJuli();
+        this.butuhAgustus = data.getButuhAgustus();
+        this.butuhSeptember = data.getButuhSeptember();
+        this.butuhOktober = data.getButuhOktober();
+        this.butuhNovember = data.getButuhNovember();
+        this.butuhDesember = data.getButuhDesember();
     }
 
     public String getHashId() {

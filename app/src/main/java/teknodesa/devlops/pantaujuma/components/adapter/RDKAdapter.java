@@ -95,6 +95,7 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
 
         holder.cardview.setOnClickListener(view -> {
             onClicRDK.OnClickRDK(rdk.getHashId());
+            Log.e("ini detail rdk", rdk.toString());
         });
     }
 

@@ -1,7 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk;
 
 public class RencanaUmum {
-    private String hashId;
+    //    private String hashId;
     private String paketTeknologi;
     private String polaTanam;
     private String jadwalTanam;
@@ -15,8 +15,8 @@ public class RencanaUmum {
     public RencanaUmum() {
     }
 
-    public RencanaUmum(String hashId, String paketTeknologi, String polaTanam, String jadwalTanam, String komoditasRU, String varietas, String sumberBenih, String tabunganAnggota, String iuranAnggota, String pemupukanModal) {
-        this.hashId = hashId;
+    public RencanaUmum(String paketTeknologi, String polaTanam, String jadwalTanam, String komoditasRU, String varietas, String sumberBenih, String tabunganAnggota, String iuranAnggota, String pemupukanModal) {
+//        this.hashId = hashId;
         this.paketTeknologi = paketTeknologi;
         this.polaTanam = polaTanam;
         this.jadwalTanam = jadwalTanam;
@@ -27,14 +27,14 @@ public class RencanaUmum {
         this.iuranAnggota = iuranAnggota;
         this.pemupukanModal = pemupukanModal;
     }
-
-    public String getHashId() {
-        return hashId;
-    }
-
-    public void setHashId(String hashId) {
-        this.hashId = hashId;
-    }
+//
+//    public String getHashId() {
+//        return hashId;
+//    }
+//
+//    public void setHashId(String hashId) {
+//        this.hashId = hashId;
+//    }
 
     public String getPaketTeknologi() {
         return paketTeknologi;

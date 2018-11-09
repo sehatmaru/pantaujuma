@@ -143,10 +143,30 @@ public class DetailRDKKActivity extends AppCompatActivity {
     }
 
     private void setdata(){
-        poktan.setText(dataPoktan.getNama());
-        petani.setText(dataPenduduk.getNamaBelakang() + " " + dataPenduduk.getNamaBelakang());
-        komoditas.setText(dataKomoditas.getNama());
-        pupuk.setText(dataPupuk.getNama());
+        if(dataRDKK.getPoktan() == null || dataRDKK.getPoktan().compareTo("")==0){
+            poktan.setText("-");
+        }else{
+            poktan.setText(dataPoktan.getNama());
+        }
+
+        if(dataRDKK.getPetani() == null || dataRDKK.getPetani().compareTo("")==0){
+            petani.setText("-");
+        }else{
+            petani.setText(dataPenduduk.getNamaBelakang() + " " + dataPenduduk.getNamaBelakang());
+        }
+
+        if(dataRDKK.getKomoditas() == null || dataRDKK.getKomoditas().compareTo("")==0){
+            komoditas.setText("-");
+        }else{
+            komoditas.setText(dataKomoditas.getNama());
+        }
+
+        if(dataRDKK.getPupuk() == null || dataRDKK.getPupuk().compareTo("")==0){
+            pupuk.setText("-");
+        }else{
+            pupuk.setText(dataPupuk.getNama());
+        }
+
         jan.setText(Float.toString(dataRDKK.getButuhJanuari()));
         feb.setText(Float.toString(dataRDKK.getButuhFebruari()));
         mar.setText(Float.toString(dataRDKK.getButuhMaret()));

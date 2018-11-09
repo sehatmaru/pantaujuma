@@ -15,13 +15,13 @@ public class AlsintanRealm extends RealmObject {
     public AlsintanRealm() {
     }
 
-    public AlsintanRealm(AlsintanRealm petaniRealm) {
-        this.hashId = petaniRealm.getHashId();
-        this.namaAlat = petaniRealm.getNamaAlat();
-        this.deskripsi = petaniRealm.getDeskripsi();
-        this.gambar = petaniRealm.getGambar();
-        this.idDesa = petaniRealm.getIdDesa();
-        this.isSync = petaniRealm.getIsSync();
+    public AlsintanRealm(AlsintanRealm alsintanRealm) {
+        this.hashId = alsintanRealm.getHashId();
+        this.namaAlat = alsintanRealm.getNamaAlat();
+        this.deskripsi = alsintanRealm.getDeskripsi();
+        this.gambar = alsintanRealm.getGambar();
+        this.idDesa = alsintanRealm.getIdDesa();
+        this.isSync = alsintanRealm.getIsSync();
     }
 
     public AlsintanRealm(String hashId, String namaAlat, String deskripsi, String gambar, int idDesa, int isSync) {

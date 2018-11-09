@@ -108,10 +108,7 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
             deskripsiJK = (input_deskripsiJK.getText().toString() == null) ? "-" : input_deskripsiJK.getText().toString();
         }catch (NullPointerException e){}
 
-        JadwalKegiatan newItem = new JadwalKegiatan();
-        newItem.setKegiatanJK(kegiatanJK);
-        newItem.setTanggalJK(tanggalJK);
-        newItem.setDeskripsiJK(deskripsiJK);
+        JadwalKegiatan newItem = new JadwalKegiatan(kegiatanJK, tanggalJK, deskripsiJK);
 
         return newItem;
     }

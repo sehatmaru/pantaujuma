@@ -100,6 +100,14 @@ public class GetPoktanService implements GetPoktanContract.Repository {
                     if(response.isSuccessful()){
                         if(response.body().isSuccess()){
                             if (dataLoop == allPok.size()-1) {
+                                if (CRUAnggotaPoktanFragment.listanggotaNotSync!=null){
+                                    aController.saveData(CRUAnggotaPoktanFragment.listanggotaNotSync);
+                                }
+
+                                if (CRUPengurusPoktanFragment.listpengurusNotSync!=null){
+                                    pController.saveData(CRUPengurusPoktanFragment.listpengurusNotSync);
+                                }
+
                                 controller.saveDataSuccess("Success");
                             }
                             insertPoktan =true;

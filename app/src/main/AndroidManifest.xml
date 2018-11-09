@@ -48,6 +48,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".components.alsintan.DetailAlsintanActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".components.petani.DetailPetaniActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -91,10 +95,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".components.survei.ListSurveiActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:parentActivityName=".components.MainActivity"
             android:label="Petani"
             android:name=".components.petani.ListPetaniActivity"
@@ -103,6 +103,11 @@
             android:label="Harga"
             android:parentActivityName=".components.MainActivity"
             android:name=".components.harga.ListHargaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:label="Alsintan"
+            android:parentActivityName=".components.MainActivity"
+            android:name=".components.alsintan.ListAlsintanActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:label="Poktan"

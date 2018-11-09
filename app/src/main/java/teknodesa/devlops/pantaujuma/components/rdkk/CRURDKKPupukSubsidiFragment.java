@@ -179,25 +179,101 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
         }else{
             newRealmItem.setHashId(getSaltString());
         }
-//
-//        newRealmItem.setHashId(getSaltString());
-//        newRealmItem.setIdUser(userDB.getId());
+
+        UserDB userDB = getData();
+        int idDes;
+        try {
+            idDes =  Integer.valueOf(userDB.getAttributeValue());
+        }catch (Exception e){
+            idDes = 0;
+        }
+        String idUs;
+        try {
+            idUs =  userDB.getId();
+        }catch (Exception e){
+            idUs = "";
+        }
+
+        newRealmItem.setIdDesa(idDes);
+        newRealmItem.setIdUser(idUs);
         newRealmItem.setPoktan(poktan);
         newRealmItem.setPetani(petani);
         newRealmItem.setKomoditas(komoditas);
         newRealmItem.setPupuk(pupuk);
-        newRealmItem.setButuhJanuari(Integer.parseInt(strJan));
-        newRealmItem.setButuhFebruari(Integer.parseInt(strFeb));
-        newRealmItem.setButuhMaret(Integer.parseInt(strMar));
-        newRealmItem.setButuhApril(Integer.parseInt(strApr));
-        newRealmItem.setButuhMei(Integer.parseInt(strMei));
-        newRealmItem.setButuhJuni(Integer.parseInt(strJun));
-        newRealmItem.setButuhJuli(Integer.parseInt(strJul));
-        newRealmItem.setButuhAgustus(Integer.parseInt(strAug));
-        newRealmItem.setButuhSeptember(Integer.parseInt(strSep));
-        newRealmItem.setButuhOktober(Integer.parseInt(strOkt));
-        newRealmItem.setButuhNovember(Integer.parseInt(strNov));
-        newRealmItem.setButuhDesember(Integer.parseInt(strDes));
+
+        if(strJan == null || strJan.compareTo("")==0){
+            newRealmItem.setButuhJanuari(0);
+        }else{
+            newRealmItem.setButuhJanuari(Integer.parseInt(strJan));
+        }
+
+        if(strFeb == null || strFeb.compareTo("")==0){
+            newRealmItem.setButuhFebruari(0);
+        }else{
+            newRealmItem.setButuhFebruari(Integer.parseInt(strFeb));
+        }
+
+        if(strMar == null || strMar.compareTo("")==0){
+            newRealmItem.setButuhMaret(0);
+        }else{
+            newRealmItem.setButuhMaret(Integer.parseInt(strMar));
+        }
+
+        if(strApr == null || strApr.compareTo("")==0){
+            newRealmItem.setButuhApril(0);
+        }else{
+            newRealmItem.setButuhApril(Integer.parseInt(strApr));
+        }
+
+        if(strMei == null || strMei.compareTo("")==0){
+            newRealmItem.setButuhMei(0);
+        }else{
+            newRealmItem.setButuhMei(Integer.parseInt(strMei));
+        }
+
+        if(strJun == null || strJun.compareTo("")==0){
+            newRealmItem.setButuhJuni(0);
+        }else{
+            newRealmItem.setButuhJuni(Integer.parseInt(strJun));
+        }
+
+        if(strJul == null || strJul.compareTo("")==0){
+            newRealmItem.setButuhJuli(0);
+        }else{
+            newRealmItem.setButuhJuli(Integer.parseInt(strJul));
+        }
+
+        if(strAug == null || strAug.compareTo("")==0){
+            newRealmItem.setButuhAgustus(0);
+        }else{
+            newRealmItem.setButuhAgustus(Integer.parseInt(strAug));
+        }
+
+        if(strSep == null || strSep.compareTo("")==0){
+            newRealmItem.setButuhSeptember(0);
+        }else{
+            newRealmItem.setButuhSeptember(Integer.parseInt(strSep));
+        }
+
+        if(strOkt == null || strOkt.compareTo("")==0){
+            newRealmItem.setButuhOktober(0);
+        }else{
+            newRealmItem.setButuhOktober(Integer.parseInt(strOkt));
+        }
+
+        if(strNov == null || strNov.compareTo("")==0){
+            newRealmItem.setButuhNovember(0);
+        }else{
+            newRealmItem.setButuhNovember(Integer.parseInt(strNov));
+        }
+
+        if(strDes == null || strDes.compareTo("")==0){
+            newRealmItem.setButuhDesember(0);
+        }else{
+            newRealmItem.setButuhDesember(Integer.parseInt(strDes));
+        }
+
+        newRealmItem.setIsSync(0);
 
         return newRealmItem;
     }
@@ -300,6 +376,17 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
         }
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         return timeStamp + "" + salt.toString();
+    }
+
+    public UserDB getData() {
+        realm.beginTransaction();
+        UserDB user =realm.where(UserDB.class).findFirst();
+        realm.commitTransaction();
+        if(user == null){
+            return null;
+        }else{
+            return user;
+        }
     }
 
 }

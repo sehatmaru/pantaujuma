@@ -16,11 +16,11 @@ import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PetaniBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PoktanBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.PostBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKBody;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RKTPBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.TargetPetugasBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.LahanBody;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdkk.RDKKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseAnggotaPoktan;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetAlsintan;
@@ -113,16 +113,13 @@ public interface PantauJumaAPI {
     @GET("rdk/viewAllRDK/{idDesa}")
     Call<ResponseRDK> getAllRDK(@Header("Authorization") String token, @Path("idDesa") int idDesa);
 
-    @POST("rdk/insertRdk")
-    Call<ResponseSaveData> insertRdk(@Header("Authorization") String token, @Body RDKBody rdkBody);
-
     @GET("rdkk/viewAllRDKK/{idDesa}")
     Call<ResponseRDKK> getAllRDKK(@Header("Authorization") String token, @Path("idDesa") int idDesa);
 
     @POST("rdkk/insertRDKK")
     Call<ResponseSaveData> insertRDKK(@Header("Authorization") String token, @Body RDKKBody rdkkBody);
 
-    @POST("rdkk/insertRDK")
+    @POST("rdk/insertRDK")
     Call<ResponseSaveData> insertRDK(@Header("Authorization") String token, @Body RDKBody rdkBody);
 
     @POST("alsintan/insertAlatPertanian")

@@ -12,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import teknodesa.devlops.pantaujuma.components.rdkk.GetRDKKContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKKBody;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdkk.RDKKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseRDKK;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseSaveData;
