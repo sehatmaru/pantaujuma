@@ -66,7 +66,10 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
         PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
         KomoditasRealm komoditas = realm.where(KomoditasRealm.class).equalTo("hashId", idkomoditas).findFirst();
         PetaniRealm petani = realm.where(PetaniRealm.class).equalTo("hashId", idpetani).findFirst();
-        String biodata = petani.getBiodata();
+        String biodata = null;
+        if (petani != null) {
+            biodata = petani.getBiodata();
+        }
         PendudukRealm penduduk = realm.where(PendudukRealm.class).equalTo("hashId", biodata).findFirst();
         PupukRealm pupuk = realm.where(PupukRealm.class).equalTo("hashId", idpupuk).findFirst();
 

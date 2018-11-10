@@ -153,6 +153,11 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
 
         if(CRUActivity.mAction.equals("update")){
             setUIData();
+
+            poktan = DetailRDKKActivity.idPoktan;
+            petani = DetailRDKKActivity.idPetani;
+            komoditas = DetailRDKKActivity.idKomoditas;
+            pupuk = DetailRDKKActivity.idPupuk;
         }
     }
 
