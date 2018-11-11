@@ -147,7 +147,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/desatext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -193,7 +192,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/komoditastext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -205,12 +203,12 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="@string/komoditas"
+                            android:text="Batas Timur"
                             android:textStyle="bold" />
 
 
                         <TextView
-                            android:id="@+id/komoditas"
+                            android:id="@+id/batastimur"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -239,7 +237,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/deskripsitext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -251,7 +248,142 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="@string/deskripsi"
+                            android:text="Batas Selatan"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/batasselatan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Batas Barat"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/batasbarat"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Batas Utara"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/batasutara"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Deskripsi"
                             android:textStyle="bold" />
 
 
@@ -272,6 +404,7 @@
                             android:textSize="15sp" />
                     </LinearLayout>
                 </RelativeLayout>
+
 
             </LinearLayout>
 

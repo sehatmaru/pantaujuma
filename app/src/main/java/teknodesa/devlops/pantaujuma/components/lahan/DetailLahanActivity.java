@@ -18,16 +18,12 @@ import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
+import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.LahanParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 
-public class DetailLahanActivity extends AppCompatActivity {
-    private AppComponent appComponent;
-
-    @Inject
-    Realm realm;
-
+public class DetailLahanActivity extends BaseActivity {
     @BindView(R.id.btnEdit)
     Button btnEdit;
 
@@ -62,33 +58,21 @@ public class DetailLahanActivity extends AppCompatActivity {
         finish();
     }
 
-    private LahanRealm dataLahan;
+    public static LahanRealm dataLahan;
 
-    private static String idLahan;
 
-    public static Intent createIntent(Context context, String id) {
-        idLahan =id;
+    public static Intent createIntent(Context context, LahanRealm id) {
+        dataLahan =id;
         return new Intent(context, DetailLahanActivity.class);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_lahan);
-
-        appComponent = ((MainApplication) getApplication()).getComponent();
-        ((MainApplication) getApplication())
-                .getComponent()
-                .inject(this);
-        takedata();
-
         ButterKnife.bind(this);
         setdata();
     }
-    private void takedata(){
-        realm.beginTransaction();
-        dataLahan = realm.where(LahanRealm.class).equalTo("hashId", idLahan).findFirst();
-        realm.commitTransaction();
-    }
+
     private void setdata(){
         namaPemilikLahan.setText(dataLahan.getNamaPemilikLahan());
         luas.setText(dataLahan.getLuas());
@@ -100,20 +84,4 @@ public class DetailLahanActivity extends AppCompatActivity {
         deskripsi.setText(dataLahan.getDeskripsi());
     }
 
-    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which){
-                case DialogInterface.BUTTON_POSITIVE:
-                    //Yes button clicked
-//                    CRULahanFragment.setDeletedData(itemDetail, appComponent);
-                    startActivity(ListLahanActivity.createIntent(getApplicationContext()));
-                    break;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
-                    break;
-            }
-        }
-    };
 }

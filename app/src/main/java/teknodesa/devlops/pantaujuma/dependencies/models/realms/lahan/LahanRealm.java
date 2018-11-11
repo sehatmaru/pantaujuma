@@ -33,7 +33,10 @@ public class LahanRealm extends RealmObject {
     public LahanRealm() {
     }
 
-    public LahanRealm(String hashId, int idDesa, String pemilik, String namaPemilikLahan, String alamat, String rt, String rw, String dusun, String desa, String namaKecamatan, String datiII, String provinsi, double longitude, double latitude, String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara, String deskripsi, int status, String gambar, int isSync) {
+    public LahanRealm(String hashId, int idDesa, String pemilik, String namaPemilikLahan, String alamat, String rt,
+                      String rw, String dusun, String desa, String namaKecamatan, String datiII, String provinsi, double longitude,
+                      double latitude, String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara,
+                      String deskripsi, int status, String gambar, int isSync) {
         this.hashId = hashId;
         this.idDesa = idDesa;
         this.pemilik = pemilik;

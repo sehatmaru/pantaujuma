@@ -189,9 +189,9 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
     }
 
     @Override
-    public void OnClickLahan(String idLahan) {
-//        startActivity(DetailLahanActivity.createIntent(getApplicationContext(),idLahan));
-        startActivity(MapsActivity.createIntent(getApplicationContext()));
+    public void OnClickLahan(LahanRealm idLahan) {
+        startActivity(DetailLahanActivity.createIntent(getApplicationContext(),idLahan));
+//        startActivity(MapsActivity.createIntent(getApplicationContext()));
     }
 
     @Override

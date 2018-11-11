@@ -18,10 +18,11 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
 
     private LahanContract.Controller mController;
 
-    public LahanRepository(LahanContract.Controller mController) {
-        this.mController = mController;
-    }
 
+    public LahanRepository(LahanContract.Controller mController, AppComponent appComponent) {
+        this.mController = mController;
+        appComponent.inject(this);
+    }
     @Override
     public void addItem(LahanRealm item) {
         Log.e("Error", "Masuk addItem success");

@@ -3,6 +3,7 @@ package teknodesa.devlops.pantaujuma.components.lahan;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.EditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 
 public class CRUKegiatanPembajakanFragment extends Fragment implements LahanContract.ViewController<LahanRealm>, LahanContract.View{
@@ -29,7 +32,15 @@ public class CRUKegiatanPembajakanFragment extends Fragment implements LahanCont
 
     @BindView(R.id.input_luas)
     EditText input_luas;
+    private AppComponent appComponent;
+    FragmentActivity activity;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = getActivity();
 
+        appComponent = ((MainApplication) getActivity().getApplication()).getComponent();
+        appComponent.inject(this);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +70,7 @@ public class CRUKegiatanPembajakanFragment extends Fragment implements LahanCont
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
-        LahanContract.Controller<LahanRealm> mController = new LahanController(this);
+        LahanContract.Controller<LahanRealm> mController = new LahanController(this,appComponent);
         LahanRealm uiItem = getUIData();
 
         if(tipe.equals("insert")){

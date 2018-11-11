@@ -27,7 +27,7 @@ public class LahanAdapter extends RecyclerView.Adapter<LahanAdapter.MyViewHolder
     }
 
     public interface OnClickLahanListener {
-        void OnClickLahan(String idLahan);
+        void OnClickLahan(LahanRealm idLahan);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class LahanAdapter extends RecyclerView.Adapter<LahanAdapter.MyViewHolder
         holder.textbatasbarat.setText(lahan.getBatasBarat());
         holder.textbatasutara.setText(lahan.getBatasUtara());
         holder.cardview.setOnClickListener(view -> {
-            onClicLahan.OnClickLahan(lahan.getHashId());
+            onClicLahan.OnClickLahan(lahan);
         });
 
     }

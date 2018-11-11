@@ -15,7 +15,10 @@ import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
+import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanFragment;
+import teknodesa.devlops.pantaujuma.components.lahan.LahanRepository;
+import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRUAlamatLahanFragment;
+import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.GetLahanController;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasController;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.AlamatFragment;
@@ -331,9 +334,15 @@ public class AppModule {
         return new KomentarRepository(app.getComponent());
     }
 
+
+
     //Activities
 
     //Fragments
+    @Provides
+    @Singleton
+    DetailLahanFragment detailLahanFragment(){return new DetailLahanFragment();}
+
     @Provides
     @Singleton
     KomoditasFragment komoditasFragment(){return new KomoditasFragment();}
@@ -413,6 +422,10 @@ public class AppModule {
     @Provides
     @Singleton
     CRUAnggotaPoktanFragment provideAnggotaPoktanFragment(){return new CRUAnggotaPoktanFragment();}
+
+    @Provides
+    @Singleton
+    CRUAlamatLahanFragment cruAlamatLahanFragment(){return new CRUAlamatLahanFragment();}
 
     @Provides
     @Singleton

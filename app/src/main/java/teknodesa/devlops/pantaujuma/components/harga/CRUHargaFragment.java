@@ -37,7 +37,9 @@ import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Harga;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.pasar.PasarRealm;
 
-public class CRUHargaFragment extends Fragment implements HargaContract.ViewController<HargaRealm>, HargaContract.View, SearchKomoditasFragment.OnClickKomoditasListener, SearchPasarFragment.OnClickPasarListener {
+public class CRUHargaFragment extends Fragment implements
+        HargaContract.ViewController<HargaRealm>, HargaContract.View,
+        SearchKomoditasFragment.OnClickKomoditasListener, SearchPasarFragment.OnClickPasarListener {
 
     @Inject
     Realm realm;

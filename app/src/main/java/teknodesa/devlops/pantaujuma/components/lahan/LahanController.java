@@ -10,15 +10,13 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 
 public class LahanController implements LahanContract.Controller<LahanRealm> {
-    @Inject
-    Realm realm;
 
     LahanContract.View mView;
     LahanContract.Repository<LahanRealm> mRepository;
 
-    public LahanController(LahanContract.View mView){
+    public LahanController(LahanContract.View mView, @NonNull AppComponent appComponent){
         this.mView = mView;
-        this.mRepository = new LahanRepository(this);
+        this.mRepository = new LahanRepository(this,appComponent);
     }
 
     @Override

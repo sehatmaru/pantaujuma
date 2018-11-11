@@ -20,7 +20,7 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRULahanFragment;
+import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
 import teknodesa.devlops.pantaujuma.components.petugas.CRUTargetPetugasFragment;
@@ -159,6 +159,9 @@ public class CRUActivity extends AppCompatActivity {
                     break;
                 case "rdk":
                     cruRDKFragment.saveData(mAction, mData);
+                    break;
+                case "lahan":
+                    cruLahanFragment.saveData(mAction, mData);
                     break;
                 case "harga":
                     cruHargaFragment.saveData(mAction, mData);
