@@ -36,6 +36,7 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.LahanAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.components.maps.MapsActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
@@ -189,7 +190,8 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
 
     @Override
     public void OnClickLahan(String idLahan) {
-        startActivity(DetailLahanActivity.createIntent(getApplicationContext(),idLahan));
+//        startActivity(DetailLahanActivity.createIntent(getApplicationContext(),idLahan));
+        startActivity(MapsActivity.createIntent(getApplicationContext()));
     }
 
     @Override

@@ -6,6 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -39,10 +46,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:label="Penduduk"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.penduduk.ListPendudukActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Penduduk"
+            android:parentActivityName=".components.MainActivity" />
         <activity
             android:name=".components.penduduk.DetailPendudukActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -88,50 +95,65 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".components.lahan.ListLahanActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:parentActivityName=".components.MainActivity"
-            android:label="Petani"
             android:name=".components.petani.ListPetaniActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Petani"
+            android:parentActivityName=".components.MainActivity" />
         <activity
-            android:label="Harga"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.harga.ListHargaActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Harga"
+            android:parentActivityName=".components.MainActivity" />
         <activity
-            android:label="Alsintan"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.alsintan.ListAlsintanActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Alsintan"
+            android:parentActivityName=".components.MainActivity" />
         <activity
-            android:label="Poktan"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.poktan.ListPoktanActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Poktan"
+            android:parentActivityName=".components.MainActivity" />
         <activity
-            android:label="Target"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.petugas.ListTargetActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Target"
+            android:parentActivityName=".components.MainActivity" />
         <activity
-            android:label="RDKK"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.rdkk.ListRDKKActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="RDKK"
+            android:parentActivityName=".components.MainActivity" />
         <activity
-            android:label="RDK"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.rdk.ListRDKActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="RDK"
+            android:parentActivityName=".components.MainActivity" />
         <activity
-            android:label="RKTP"
-            android:parentActivityName=".components.MainActivity"
             android:name=".components.rktp.ListRKTPActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="RKTP"
+            android:parentActivityName=".components.MainActivity" />
         <activity
             android:name=".components.lahan.ListLahanKomoditasActivity"
-            android:label="Daftar Lahan Komditas"/>
+            android:label="Daftar Lahan Komditas" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".components.maps.MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

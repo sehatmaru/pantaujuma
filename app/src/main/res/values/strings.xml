@@ -249,5 +249,6 @@
     <string name="judul">Judul</string>
     <string name="isi">Isi</string>
     <string name="tahun_kerja">Tahun Kerja</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
