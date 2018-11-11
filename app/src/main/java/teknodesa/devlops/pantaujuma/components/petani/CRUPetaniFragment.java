@@ -130,6 +130,7 @@ public class CRUPetaniFragment extends Fragment implements
 
         if(CRUActivity.mAction.equals("update")){
             setUIData();
+            biodata = DetailPetaniActivity.idPenduduk;
         }
     }
 

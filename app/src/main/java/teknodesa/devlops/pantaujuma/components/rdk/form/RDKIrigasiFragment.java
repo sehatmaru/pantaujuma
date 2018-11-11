@@ -40,12 +40,8 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
 
         View v = inflater.inflate(R.layout.fragment_crurdkirigasi, null);
         ButterKnife.bind(this, v);
-        setData();
 
         return v;
-    }
-
-    private void setData(){
     }
 
     @Override
@@ -58,7 +54,6 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
         } else {
-            setData();
         }
     }
 
@@ -69,8 +64,8 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
 
     @Override
     public Irigasi getUIData() {
-        String strNama = (input_nama.getText().toString() == null) ? "-" : input_nama.getText().toString();
-        String strDeskripsiIrigasi = (input_deskripsiIrigasi.getText().toString() == null) ? "-" : input_deskripsiIrigasi.getText().toString();
+        String strNama = "";
+        String strDeskripsiIrigasi = "";
 
         try{
             strNama = (input_nama.getText().toString() == null) ? "-" : input_nama.getText().toString();

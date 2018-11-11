@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -20,11 +21,12 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
+import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.components.searchkomoditas.SearchKomoditasFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RencanaUmum;
 
-public class RDKRencanaUmumFragment extends Fragment implements RDKContract.ViewController<RencanaUmum>, SearchKomoditasFragment.OnClickKomoditasListener {
+public class RDKRencanaUmumFragment extends Fragment implements RDKContract.ViewController<RencanaUmum>, RDKContract.View, SearchKomoditasFragment.OnClickKomoditasListener {
 
     @BindView(R.id.input_komoditas)
     EditText input_komoditas;
@@ -45,9 +47,9 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
     @BindView(R.id.input_jadwaltanam)
     EditText input_jadwaltanam;
 
-    @BindView(R.id.btnTanggalJK)
-    Button btnTanggalJK;
-    @OnClick(R.id.btnTanggalJK)
+    @BindView(R.id.btnJadwalTanam)
+    Button btnJadwalTanam;
+    @OnClick(R.id.btnJadwalTanam)
     void setTanggal() {
         final Calendar calendar = Calendar.getInstance();
         int tanggal = calendar.get(Calendar.DAY_OF_MONTH),
@@ -91,12 +93,8 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
         View v = inflater.inflate(R.layout.fragment_crurdkrencanaumum, null);
         ButterKnife.bind(this, v);
-        setData();
+
         return v;
-    }
-
-    private void setData(){
-
     }
 
     @Override
@@ -115,8 +113,9 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
+            komoditas = DetailRDKActivity.idKomoditasRU;
         } else {
-            setData();
+
         }
 
     }
@@ -135,50 +134,30 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
     @Override
     public RencanaUmum getUIData() {
-        String paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();;
-        String polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();;
-        String jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();;
-        String varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();;
-        String iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();;
-        String sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();;
-        String tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();;
-        String pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();;
+        String paketTeknologi = "";
+        String polaTanam = "";
+        String jadwalTanam = "";
+        String varietas = "";
+        String iuranAnggota = "";
+        String sumberBenih = "";
+        String tabunganAnggota = "";
+        String pemupukanModal = "";
+        String strKomoditas = "";
 
-//        paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();
-//        polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();
-//        jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();
-//        iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();
-//        sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();
-//        tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();
-//        pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();
-//        varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();
-//
-////        String strKomoditas = "";
-//
-//        try{
-//            paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();
-//            polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();
-//            jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();
-//            varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();
-//            iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();
-//            sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();
-//            tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();
-//            pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();
-////            strKomoditas = (komoditas == null) ? "-" : komoditas;
-//        }catch (NullPointerException e){}
+        try{
+            paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();
+            polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();
+            jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();
+            varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();
+            iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();
+            sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();
+            tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();
+            pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();
+            strKomoditas = (komoditas == null) ? "-" : komoditas;
+        }catch (NullPointerException e){}
 
-
-        RencanaUmum newItem = new RencanaUmum();
-
-        newItem.setPaketTeknologi(paketTeknologi);
-        newItem.setPolaTanam(polaTanam);
-        newItem.setJadwalTanam(jadwalTanam);
-        newItem.setKomoditasRU(komoditas);
-        newItem.setVarietas(varietas);
-        newItem.setSumberBenih(sumberBenih);
-        newItem.setTabunganAnggota(tabunganAnggota);
-        newItem.setIuranAnggota(iuranAnggota);
-        newItem.setPemupukanModal(pemupukanModal);
+        RencanaUmum newItem = new RencanaUmum(paketTeknologi, polaTanam, jadwalTanam, strKomoditas, varietas,
+                sumberBenih, tabunganAnggota, iuranAnggota, pemupukanModal);
 
         return newItem;
     }
@@ -200,6 +179,12 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
     @Override
     public void saveData(String tipe, Parcelable itemData) {
         //not implemented yet
+    }
+
+    @Override
+    public void showNotification(String title, String header, String message) {
+        Toast.makeText(CRUActivity.mContext, message, Toast.LENGTH_SHORT).show();
+        startActivity(ListRDKActivity.createIntent(CRUActivity.mContext));
     }
 
     @Override

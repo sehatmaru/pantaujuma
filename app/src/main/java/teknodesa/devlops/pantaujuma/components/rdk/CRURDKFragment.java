@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,13 +124,13 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         TextView tabIdentitas = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
         tabIdentitas.setText("Identitas");
         tabIdentitas.setTextColor(getResources().getColor(R.color.black));
-        tabs.getTabAt(0).setCustomView(tabIdentitas).setIcon(R.drawable.penduduk);
+        tabs.getTabAt(1).setCustomView(tabIdentitas).setIcon(R.drawable.penduduk);
 
         //Pager Irigasi
         TextView tabIrigasi = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
         tabIrigasi.setText("Irigasi");
         tabIrigasi.setTextColor(getResources().getColor(R.color.black));
-        tabs.getTabAt(1).setCustomView(tabIrigasi).setIcon(R.drawable.penduduk);
+        tabs.getTabAt(0).setCustomView(tabIrigasi).setIcon(R.drawable.penduduk);
 
         //Pager Jadwal Kegiatan
         TextView tabJadwalKegiatan = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
@@ -152,8 +153,8 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     private void setViewpager() {
         adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(rdkIdentitasFragment);
         adapter.addFragment(rdkIrigasiFragment);
+        adapter.addFragment(rdkIdentitasFragment);
         adapter.addFragment(rdkJadwalKegiatanFragment);
         adapter.addFragment(rdkRencanaUmumFragment);
         adapter.addFragment(rdkSasaranIntensifikasiFragment);
@@ -238,6 +239,8 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         newRealmItem.setKomoditasSI(sasaranIntensifikasi.getKomoditasSI());
         newRealmItem.setTarget(sasaranIntensifikasi.getTarget());
         newRealmItem.setTargetHasilPerHa(sasaranIntensifikasi.getTargetHasilPerHa());
+
+        Log.e("rdk", newRealmItem.toString());
 
         return newRealmItem;
     }

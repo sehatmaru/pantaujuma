@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,6 +83,7 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     }
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
     public static Intent createIntent(Context context) {
         return new Intent(context, ListPendudukActivity.class);
@@ -103,31 +105,41 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-        realm.beginTransaction();
-        listpendudukNotSync = realm.where(PendudukRealm.class).equalTo("isSync",0).findAll();
-        realm.commitTransaction();
-
-        hasilList = listpendudukNotSync.size();
-        realm.beginTransaction();
-        lakiLaki = realm.where(PendudukRealm.class).equalTo("jenisKelamin","Laki-laki").findAll().size();
-        perempuan = realm.where(PendudukRealm.class).equalTo("jenisKelamin","Perempuan").findAll().size();
-
-        realm.commitTransaction();
+        getNotSync();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
-        setDataPenduduk();
+        setPenduduk();
+    }
+
+    private void setPenduduk(){
+        realm.beginTransaction();
+        lakiLaki = realm.where(PendudukRealm.class).equalTo("jenisKelamin","Laki-laki").findAll().size();
+        perempuan = realm.where(PendudukRealm.class).equalTo("jenisKelamin","Perempuan").findAll().size();
+        realm.commitTransaction();
+
+        totalPerempuan.setText("Perempuan :" + perempuan);
+        totalLaki.setText("Laki-Laki :" + lakiLaki);
+    }
+
+    private void getNotSync(){
+        realm.beginTransaction();
+        listpendudukNotSync = realm.where(PendudukRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+        hasilList = listpendudukNotSync.size();
+        Log.e("hasil", "" + hasilList);
     }
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listpenduduk = realm1.copyFromRealm(realm1.where(PendudukRealm.class).sort("namaDepan", Sort.ASCENDING).findAll());
+            listpenduduk = realm1.copyFromRealm(realm1.where(PendudukRealm.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listpenduduk.isEmpty()) {
                 pendudukAdapter = new PendudukAdapter(getApplicationContext(), listpenduduk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(pendudukAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
+                getNotSync();
                 checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
@@ -248,7 +260,6 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
         dialog.show();
     }
 
-
     private void syncDialog() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .title(R.string.title_sync)
@@ -273,11 +284,6 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
         mController.saveData(listpendudukNotSync);
     }
 
-    private void setDataPenduduk(){
-        totalPerempuan.setText("Perempuan :"+ perempuan);
-        totalLaki.setText("Laki-Laki :"+ lakiLaki);
-    }
-
     private void checkDataRealm(){
         if(hasilList > 0){
             showRealmData(""+hasilList).show();
@@ -285,7 +291,9 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data penduduk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data penduduk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+
+        return snackbar;
     }
 
     @Override
@@ -304,7 +312,8 @@ public class ListPendudukActivity extends BaseActivity implements PendudukAdapte
         progressdialog.dismiss();
         mController.getAllPenduduk();
         updateLayout(Konstanta.LAYOUT_LOADING);
-        this.recreate();
+        snackbar.dismiss();
+//        this.recreate();
     }
 
     @Override

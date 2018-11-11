@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,6 +77,7 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
     }
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
 
     public static Intent createIntent(Context context) {
@@ -111,6 +113,7 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
         listpetaniNotSync = realm.where(PetaniRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
         hasilList = listpetaniNotSync.size();
+        Log.e("hasil", "" + hasilList);
     }
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
@@ -273,7 +276,9 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data petani "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data petani "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+
+        return snackbar;
     }
 
     @Override
@@ -292,7 +297,8 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
         progressdialog.dismiss();
         mController.getAllPetani();
         updateLayout(Konstanta.LAYOUT_LOADING);
-        this.recreate();
+        snackbar.dismiss();
+//        this.recreate();
     }
 
     @Override

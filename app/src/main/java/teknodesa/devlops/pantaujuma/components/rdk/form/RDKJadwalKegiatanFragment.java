@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -20,13 +21,14 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.DetailRDKActivity;
+import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.JadwalKegiatan;
 
-public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.ViewController<JadwalKegiatan> {
+public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.ViewController<JadwalKegiatan>, RDKContract.View {
 
     Calendar myCalendar;
-    DatePickerDialog.OnDateSetListener date;
+//    DatePickerDialog.OnDateSetListener date;
 
     @BindView(R.id.input_kegiatan)
     EditText input_kegiatan;
@@ -67,12 +69,8 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
 
         View v = inflater.inflate(R.layout.fragment_crurdkjadwalkegiatan, null);
         ButterKnife.bind(this, v);
-        setDate();
 
         return v;
-    }
-
-    private void setData(){
     }
 
     @Override
@@ -86,11 +84,10 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
         } else {
-            setData();
         }
     }
 
-    private void setLayoutForEdit() {
+    private void setLayoutForEdit(){
         input_kegiatan.setText(DetailRDKActivity.dataRDK.getKegiatanJK());
         input_tanggalJK.setText(DetailRDKActivity.dataRDK.getTanggalJK());
         input_deskripsiJK.setText(DetailRDKActivity.dataRDK.getDeskripsiJK());
@@ -126,12 +123,9 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         //not implemented yet
     }
 
-    private void setDate(){
-        date = (view, year, monthOfYear, dayOfMonth) -> {
-            // TODO Auto-generated method stub
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        };
+    @Override
+    public void showNotification(String title, String header, String message) {
+        Toast.makeText(CRUActivity.mContext, message, Toast.LENGTH_SHORT).show();
+        startActivity(ListRDKActivity.createIntent(CRUActivity.mContext));
     }
 }

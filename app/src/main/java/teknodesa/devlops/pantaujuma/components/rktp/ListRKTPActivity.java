@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,6 +77,7 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
     }
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
     public static Intent createIntent(Context context) {
         return new Intent(context, ListRKTPActivity.class);
@@ -97,27 +99,32 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-        realm.beginTransaction();
-        listrktpNotSync = realm.where(RKTPRealm.class).equalTo("isSync",0).findAll();
-        realm.commitTransaction();
-
-        hasilList = listrktpNotSync.size();
+        getNotSync();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
+    }
 
-        checkDataRealm();
+    private void getNotSync(){
+        realm.beginTransaction();
+        listrktpNotSync = realm.where(RKTPRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+        hasilList = listrktpNotSync.size();
+        Log.e("hasil", "" + hasilList);
+        Log.e("list", listrktpNotSync.toString());
     }
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listrktp = realm1.copyFromRealm(realm1.where(RKTPRealm.class).sort("penanggungJawab", Sort.ASCENDING).findAll());
+            listrktp = realm1.copyFromRealm(realm1.where(RKTPRealm.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listrktp.isEmpty()) {
                 rktpAdapter = new RKTPAdapter(getApplicationContext(), listrktp,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(rktpAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
+                getNotSync();
+                checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
             }else {
@@ -171,7 +178,7 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         query = query.toLowerCase();
         final List<RKTPRealm> filteredList = new ArrayList<>();
         for (RKTPRealm konten : realm.where(RKTPRealm.class).findAll()) {
-            final String text = konten.getPelaksana().toLowerCase();
+            final String text = konten.getPenanggungJawab().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }
@@ -237,7 +244,6 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         dialog.show();
     }
 
-
     private void syncDialog() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .title(R.string.title_sync)
@@ -269,7 +275,9 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data rktp "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+
+        return snackbar;
     }
 
     @Override
@@ -285,13 +293,11 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
 
     @Override
     public void saveDataSuccess(String message) {
-        counter++;
-        if(counter == hasilList){
-            progressdialog.dismiss();
-            mController.getAllRKTP();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
+        progressdialog.dismiss();
+        mController.getAllRKTP();
+        updateLayout(Konstanta.LAYOUT_LOADING);
+        snackbar.dismiss();
+//        this.recreate();
     }
 
     @Override

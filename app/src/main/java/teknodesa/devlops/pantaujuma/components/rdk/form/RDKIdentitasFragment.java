@@ -93,10 +93,6 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
         return v;
     }
 
-    private void setData(){
-
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -108,8 +104,8 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
 
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
+            poktan = DetailRDKActivity.idPoktan;
         } else {
-            setData();
         }
     }
 

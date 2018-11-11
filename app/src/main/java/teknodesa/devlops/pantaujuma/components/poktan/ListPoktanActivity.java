@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,6 +85,7 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
     }
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
     public static Intent createIntent(Context context) {
         return new Intent(context, ListPoktanActivity.class);
@@ -288,7 +290,8 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data poktan "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data poktan "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        return snackbar;
     }
 
     @Override
@@ -331,7 +334,8 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
             progressdialog.dismiss();
             mController.getAllPoktan();
             updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
+            snackbar.dismiss();
+//            this.recreate();
         }
     }
 

@@ -54,11 +54,8 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
 
         View v = inflater.inflate(R.layout.fragment_crurdksaranaintensifikasi, null);
         ButterKnife.bind(this, v);
-        setData();
-        return v;
-    }
 
-    private void setData(){
+        return v;
     }
 
     @Override
@@ -71,8 +68,8 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
 
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
+            komoditas = DetailRDKActivity.idKomoditasSI;
         } else {
-            setData();
         }
     }
 
@@ -84,8 +81,15 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
 
     @Override
     public SasaranIntensifikasi getUIData() {
-        String target = input_target.getText().toString();
-        String targetHasil = input_targethasilperha.getText().toString();
+        String targetHasil = "";
+        String target = "";
+        String strKomoditas = "";
+
+        try{
+            target = input_target.getText().toString();
+            targetHasil = input_targethasilperha.getText().toString();
+            strKomoditas = (komoditas== null) ? "-" : komoditas;
+        }catch (NullPointerException e){}
 
         SasaranIntensifikasi newItem = new SasaranIntensifikasi();
 

@@ -104,10 +104,11 @@ public class DetailRDKActivity extends AppCompatActivity {
     public static KomoditasRealm dataKomoditasSI;
     public static KomoditasRealm dataKomoditasRU;
 
-    private static String idRDK;
-    private static String idPoktan;
-    private static String idKomoditasSI;
-    private static String idKomoditasRU;
+    public static String idRDK;
+    public static String idPoktan;
+    public static String idKomoditasSI;
+    public static String idKomoditasRU;
+
     public static Intent createIntent(Context context, String id) {
         idRDK =id;
         return new Intent(context, DetailRDKActivity.class);
