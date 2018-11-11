@@ -30,7 +30,7 @@ public class GetLahanController implements GetLahanContract.Controller {
 
 
     public void setView(GetLahanContract.View view){
-        //mService.instanceClass(this);
+        mService.instanceClass(this);
         views = view;
     }
 

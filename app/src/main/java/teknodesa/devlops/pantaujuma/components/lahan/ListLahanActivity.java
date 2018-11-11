@@ -55,10 +55,10 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
     LahanAdapter lahanAdapter;
     RecyclerView.LayoutManager linearLayoutManager;
 
-    @BindView(R.id.coordinatorLayoutPenduduk)
+    @BindView(R.id.coordinatorLayoutLahan)
     CoordinatorLayout coordinatorLayout;
 
-    @BindView(R.id.searchViewListPenduduk)
+    @BindView(R.id.searchViewListLahan)
     SearchView searchView;
 
     @BindView(R.id.spinnerIcon)
@@ -112,7 +112,7 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listlahan = realm1.copyFromRealm(realm1.where(LahanRealm.class).sort("namaDepan", Sort.ASCENDING).findAll());
+            listlahan = realm1.copyFromRealm(realm1.where(LahanRealm.class).sort("namaPemilikLahan", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listlahan.isEmpty()) {
                 Log.e("List BiodataLahan","ini hasil"+listlahan.size());

@@ -54,26 +54,25 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(RDKAdapter.MyViewHolder holder, int position) {
         RDKRealm rdk = listData.get(position);
-        String idpoktan = rdk.getPoktan();
-
-        PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
-
         if(rdk.getIsSync() == 0 ){
             holder.cardview.setCardBackgroundColor(Color.CYAN);
         }
 
+        String idpoktan = rdk.getPoktan();
+        PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
         String nama;
         String tanggal;
         String keterangan;
-
-        if(rdk.getPoktan() == null || rdk.getPoktan().compareTo("")==0){
-            nama="";
+        if(poktan != null){
+            if(rdk.getPoktan().compareTo("")==0){
+                nama = "";
+            }else{
+                nama = poktan.getNama();
+            }
         }else{
-            nama = poktan.getNama();
+            nama = "";
         }
-
         holder.textnama.setText(nama);
-
         if(rdk.getTanggal() == null || rdk.getTanggal().compareTo("")==0){
             tanggal="";
         }else{

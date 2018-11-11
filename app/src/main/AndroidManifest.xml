@@ -88,8 +88,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".components.lahan.ListLahanActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:parentActivityName=".components.MainActivity"
             android:label="Petani"
@@ -130,7 +129,9 @@
             android:parentActivityName=".components.MainActivity"
             android:name=".components.rktp.ListRKTPActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".components.lahan.ListLahanKomoditasActivity"></activity>
+        <activity
+            android:name=".components.lahan.ListLahanKomoditasActivity"
+            android:label="Daftar Lahan Komditas"/>
     </application>
 
 </manifest>

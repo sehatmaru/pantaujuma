@@ -15,22 +15,6 @@
         android:orientation="vertical"
         android:id="@+id/content_lahan">
         <android.support.v7.widget.CardView
-            android:id="@+id/lahanCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:layout_margin="8dp"
-            android:background="@color/white"
-            app:cardCornerRadius="0dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp">
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
