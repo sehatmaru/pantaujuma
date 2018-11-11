@@ -25,7 +25,7 @@ import teknodesa.devlops.pantaujuma.components.rdk.ListRDKActivity;
 import teknodesa.devlops.pantaujuma.components.rdk.RDKContract;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.JadwalKegiatan;
 
-public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.ViewController<JadwalKegiatan>, RDKContract.View {
+public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.ViewController<JadwalKegiatan> {
 
     Calendar myCalendar;
 //    DatePickerDialog.OnDateSetListener date;
@@ -70,24 +70,41 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         View v = inflater.inflate(R.layout.fragment_crurdkjadwalkegiatan, null);
         ButterKnife.bind(this, v);
 
+        if(CRUActivity.mAction == "update"){
+            textForEdit();
+        }else{
+//            setData();
+        }
         return v;
     }
+
+//    private void setData(){
+//        UserDB userDB = getData();
+//        if(userDB != null){
+//            input_desa.setText(userDB.getNamaDesa());
+//            input_kecamatan.setText(userDB.getKecamatan());
+//            input_datiii.setText(userDB.getKabupatenKota());
+//            input_provinsi.setText(userDB.getProvinsi());
+//        }else{
+//            input_desa.setText("-");
+//            input_kecamatan.setText("-");
+//            input_datiii.setText("-");
+//            input_provinsi.setText("-");
+//        }
+//
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         input_kegiatan = getActivity().findViewById(R.id.input_kegiatan);
-        input_tanggalJK = getActivity().findViewById(R.id.input_tanggalJK);
+        input_tanggalJK= getActivity().findViewById(R.id.input_tanggalJK);
         input_deskripsiJK= getActivity().findViewById(R.id.input_deskripsiJK);
 
-        if (CRUActivity.mAction == "update"){
-            setLayoutForEdit();
-        } else {
-        }
     }
 
-    private void setLayoutForEdit(){
+    void textForEdit(){
         input_kegiatan.setText(DetailRDKActivity.dataRDK.getKegiatanJK());
         input_tanggalJK.setText(DetailRDKActivity.dataRDK.getTanggalJK());
         input_deskripsiJK.setText(DetailRDKActivity.dataRDK.getDeskripsiJK());
@@ -95,17 +112,29 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
 
     @Override
     public JadwalKegiatan getUIData() {
-        String kegiatanJK = "";
-        String tanggalJK = "";
-        String deskripsiJK = "";
+        String strKegiatan = input_kegiatan.getText().toString();
+        String strTanggal = input_tanggalJK.getText().toString();
+        String strDeskripsi = input_deskripsiJK.getText().toString();
 
-        try{
-            kegiatanJK = (input_kegiatan.getText().toString() == null) ? "-" : input_kegiatan.getText().toString();
-            tanggalJK = (input_tanggalJK.getText().toString() == null) ? "-" : input_tanggalJK.getText().toString();
-            deskripsiJK = (input_deskripsiJK.getText().toString() == null) ? "-" : input_deskripsiJK.getText().toString();
-        }catch (NullPointerException e){}
+        JadwalKegiatan newItem = new JadwalKegiatan(strKegiatan, strTanggal, strDeskripsi);
 
-        JadwalKegiatan newItem = new JadwalKegiatan(kegiatanJK, tanggalJK, deskripsiJK);
+        if(strKegiatan == null || strKegiatan.compareTo("")==0){
+            newItem.setKegiatanJK("");
+        }else{
+            newItem.setKegiatanJK(strKegiatan);
+        }
+
+        if(strKegiatan == null || strKegiatan.compareTo("")==0){
+            newItem.setKegiatanJK("");
+        }else{
+            newItem.setKegiatanJK(strKegiatan);
+        }
+
+        if(strKegiatan == null || strKegiatan.compareTo("")==0){
+            newItem.setKegiatanJK("");
+        }else{
+            newItem.setKegiatanJK(strKegiatan);
+        }
 
         return newItem;
     }
@@ -121,11 +150,5 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
     @Override
     public void saveData(String tipe, Parcelable itemData) {
         //not implemented yet
-    }
-
-    @Override
-    public void showNotification(String title, String header, String message) {
-        Toast.makeText(CRUActivity.mContext, message, Toast.LENGTH_SHORT).show();
-        startActivity(ListRDKActivity.createIntent(CRUActivity.mContext));
     }
 }

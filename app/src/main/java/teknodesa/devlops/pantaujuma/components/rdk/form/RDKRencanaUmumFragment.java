@@ -120,7 +120,7 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
     }
 
-    private void setLayoutForEdit() {
+    public void setLayoutForEdit() {
         input_paketteknologi.setText(DetailRDKActivity.dataRDK.getPaketTeknologi());
         input_polatanam.setText(DetailRDKActivity.dataRDK.getPolaTanam());
         input_jadwaltanam.setText(DetailRDKActivity.dataRDK.getJadwalTanam());

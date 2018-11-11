@@ -86,14 +86,13 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
         datePickerDialog.show();
     }
 
-    PasarRealm dataPasar;
-
     private String komoditas = "";
     private String strpasar = "";
     private String strnama = "";
     private String stralamat = "";
     private String strkecamatan = "";
     private String strkabupaten = "";
+    private String messageError;
 
     private AppComponent appComponent;
     FragmentActivity activity;
@@ -130,9 +129,15 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
 
     @Override
     public HargaRealm getUIData() {
-        String strTanggal = (input_tanggal.getText().toString() == null) ? "-" : input_tanggal.getText().toString();
-        String strHarga = (input_harga.getText().toString() == null) ? "-" : input_harga.getText().toString();
-        String strSatuan = (input_satuan.getText().toString() == null) ? "-" : input_satuan.getText().toString();
+        messageError = "";
+
+//        String strTanggal = (input_tanggal.getText().toString() == null) ? "-" : input_tanggal.getText().toString();
+//        String strHarga = (input_harga.getText().toString() == null) ? "-" : input_harga.getText().toString();
+//        String strSatuan = (input_satuan.getText().toString() == null) ? "-" : input_satuan.getText().toString();
+
+        String strTanggal = input_tanggal.getText().toString();
+        String strHarga = input_harga.getText().toString();
+        String strSatuan = input_satuan.getText().toString();
 
         HargaRealm newRealmItem = new HargaRealm();
 
@@ -142,11 +147,41 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
             newRealmItem.setHashId(getSaltString());
         }
 
-        newRealmItem.setHashKomoditas(komoditas);
-        newRealmItem.setHashPasar(strpasar);
-        newRealmItem.setTanggal(strTanggal);
-        newRealmItem.setNilai(strHarga);
-        newRealmItem.setSatuan(strSatuan);
+        if(komoditas.compareTo("")==0 || komoditas == null){
+            messageError = messageError+" 'Komoditas'";
+        }else{
+            newRealmItem.setHashKomoditas(komoditas);
+        }
+
+        if(strpasar.compareTo("")==0 || strpasar == null){
+            messageError = messageError+" 'Pasar'";
+        }else{
+            newRealmItem.setHashPasar(strpasar);
+        }
+
+        if(strTanggal == null || strTanggal.compareTo("")==0){
+            newRealmItem.setTanggal("");
+        }else{
+            newRealmItem.setTanggal(strTanggal);
+        }
+
+        if(strHarga == null || strHarga.compareTo("")==0){
+            newRealmItem.setNilai("");
+        }else{
+            newRealmItem.setNilai(strHarga);
+        }
+
+        if(strSatuan == null || strSatuan.compareTo("")==0){
+            newRealmItem.setSatuan("");
+        }else{
+            newRealmItem.setSatuan(strSatuan);
+        }
+
+//        newRealmItem.setHashKomoditas(komoditas);
+//        newRealmItem.setHashPasar(strpasar);
+//        newRealmItem.setTanggal(strTanggal);
+//        newRealmItem.setNilai(strHarga);
+//        newRealmItem.setSatuan(strSatuan);
         newRealmItem.setNamaPasar(strnama);
         newRealmItem.setAlamat(stralamat);
         newRealmItem.setKecamatan(strkecamatan);
@@ -176,13 +211,17 @@ public class CRUHargaFragment extends Fragment implements HargaContract.ViewCont
         HargaContract.Controller<HargaRealm> mController = new HargaController(this, appComponent);
         HargaRealm uiItem = getUIData();
 
-        if (tipe.equals("insert")) {
-            mController.addItem(uiItem);
-        } else {
-            if (tipe.equals("update")) {
-                String idItem = ((Harga) itemData).getHashId();
-                mController.updateItem(idItem, uiItem);
+        if(messageError.compareTo("")==0){
+            if (tipe.equals("insert")) {
+                mController.addItem(uiItem);
+            } else {
+                if (tipe.equals("update")) {
+                    String idItem = ((HargaRealm) itemData).getHashId();
+                    mController.updateItem(idItem, uiItem);
+                }
             }
+        }else {
+            Toast.makeText(activity, "Harap mengisi data "+ messageError, Toast.LENGTH_SHORT).show();
         }
     }
 

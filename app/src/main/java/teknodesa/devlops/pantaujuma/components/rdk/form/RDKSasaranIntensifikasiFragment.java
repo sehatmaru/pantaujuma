@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
     @BindView(R.id.input_targethasilperha)
     EditText input_targethasilperha;
 
-    String komoditas;
+    private String komoditas = "";
+    private String messageError;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,29 +75,37 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
         }
     }
 
-    private void setLayoutForEdit() {
+    public void setLayoutForEdit() {
         input_komoditasSI.setText(DetailRDKActivity.dataKomoditasSI.getNama());
         input_target.setText(DetailRDKActivity.dataRDK.getTarget());
         input_targethasilperha.setText(DetailRDKActivity.dataRDK.getTargetHasilPerHa());
+        Log.e("check point", "reached");
     }
 
     @Override
     public SasaranIntensifikasi getUIData() {
-        String targetHasil = "";
-        String target = "";
-        String strKomoditas = "";
-
-        try{
-            target = input_target.getText().toString();
-            targetHasil = input_targethasilperha.getText().toString();
-            strKomoditas = (komoditas== null) ? "-" : komoditas;
-        }catch (NullPointerException e){}
+        String targetHasil = input_targethasilperha.getText().toString();
+        String target = input_target.getText().toString();
 
         SasaranIntensifikasi newItem = new SasaranIntensifikasi();
 
-        newItem.setKomoditasSI(komoditas);
-        newItem.setTarget(target);
-        newItem.setTargetHasilPerHa(targetHasil);
+        if(komoditas.compareTo("")==0 || komoditas == null){
+            messageError = messageError+" 'Komoditas Sasaran'";
+        }else{
+            newItem.setKomoditasSI(komoditas);
+        }
+
+        if(targetHasil == null || targetHasil.compareTo("")==0){
+            newItem.setTargetHasilPerHa("");
+        }else{
+            newItem.setTargetHasilPerHa(targetHasil);
+        }
+
+        if(target == null || target.compareTo("")==0){
+            newItem.setTarget("");
+        }else{
+            newItem.setTarget(target);
+        }
 
         return newItem;
     }

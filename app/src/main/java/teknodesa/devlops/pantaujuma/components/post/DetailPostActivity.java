@@ -93,6 +93,7 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     private Context mContext;
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
     private List<KomentarRealm> listkomentarNotSync = Collections.EMPTY_LIST;
     static int hasilList;
@@ -280,8 +281,9 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     }
 
     private Snackbar createSnackbar(String message) {
-        return Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE)
+        snackbar = Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE)
                 .setAction("REFRESH", v -> DetailPostActivity.this.recreate());
+        return snackbar;
     }
 
     @Override
@@ -364,7 +366,8 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        return snackbar;
     }
 
     @Override
@@ -385,7 +388,8 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
             progressdialog.dismiss();
             gController.getAllKomentar(idPost);
             updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
+            snackbar.dismiss();
+//            this.recreate();
         }
     }
 

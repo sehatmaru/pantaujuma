@@ -111,7 +111,6 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         realm.commitTransaction();
         hasilList = listrktpNotSync.size();
         Log.e("hasil", "" + hasilList);
-        Log.e("list", listrktpNotSync.toString());
     }
 
     private void populateInitialData(){
@@ -178,7 +177,7 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         query = query.toLowerCase();
         final List<RKTPRealm> filteredList = new ArrayList<>();
         for (RKTPRealm konten : realm.where(RKTPRealm.class).findAll()) {
-            final String text = konten.getPenanggungJawab().toLowerCase();
+            final String text = konten.getHashId().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }

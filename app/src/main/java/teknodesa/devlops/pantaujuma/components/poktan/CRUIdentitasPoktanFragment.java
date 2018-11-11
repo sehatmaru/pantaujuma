@@ -135,14 +135,14 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
 
     @Override
     public PoktanRealm getUIData() {
-        String strAlamat = (input_alamat.getText().toString() == null) ? "-" : input_alamat.getText().toString();
-        String strTanggalDidirikan = (input_tanggaldidirikan.getText().toString() == null) ? "-" : input_tanggaldidirikan.getText().toString();
-        String strDeskripsi = (input_deskripsi.getText().toString() == null) ? "-" : input_deskripsi.getText().toString();
-        String strNamaPoktan = (input_namapoktan.getText().toString() == null) ? "-" : input_namapoktan.getText().toString();
-        String strDesa = (input_desa.getText().toString() == null) ? "-" : input_desa.getText().toString();
-        String strKecamatan = (input_kecamatan.getText().toString() == null) ? "-" : input_kecamatan.getText().toString();
-        String strNoHP = (input_hp.getText().toString() == null) ? "-" : input_hp.getText().toString();
-        String strNoTelp = (input_telp.getText().toString() == null) ? "-" : input_telp.getText().toString();
+        String strAlamat = input_alamat.getText().toString();
+        String strTanggalDidirikan = input_tanggaldidirikan.getText().toString();
+        String strDeskripsi = input_deskripsi.getText().toString();
+        String strNamaPoktan = input_namapoktan.getText().toString();
+        String strDesa = input_desa.getText().toString();
+        String strKecamatan = input_kecamatan.getText().toString();
+        String strNoHP = input_hp.getText().toString();
+        String strNoTelp = input_telp.getText().toString();
 
         PoktanRealm newItem = new PoktanRealm();
 
@@ -152,16 +152,64 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
             newItem.setHashId(getSaltString());
         }
 
-        newItem.setNama(strNamaPoktan);
-        newItem.setAlamat(strAlamat);
-        newItem.setTanggalDidirikan(strTanggalDidirikan);
-        newItem.setDeskripsi(strDeskripsi);
-        newItem.setDesa(strDesa);
-        newItem.setKecamatan(strKecamatan);
-        newItem.setNoHP(strNoHP);
-        newItem.setNoTelp(strNoTelp);
-        newItem.setStatusPoktan(0);
-        newItem.setIdDesa(getIdDesa());
+        if(strAlamat == null || strAlamat.compareTo("")==0){
+            newItem.setAlamat("");
+        }else{
+            newItem.setAlamat(strAlamat);
+        }
+
+        if(strTanggalDidirikan == null || strTanggalDidirikan.compareTo("")==0){
+            newItem.setTanggalDidirikan("");
+        }else{
+            newItem.setTanggalDidirikan(strTanggalDidirikan);
+        }
+
+        if(strDeskripsi == null || strDeskripsi.compareTo("")==0){
+            newItem.setDeskripsi("");
+        }else{
+            newItem.setDeskripsi(strDeskripsi);
+        }
+
+        if(strNamaPoktan == null || strNamaPoktan.compareTo("")==0){
+            newItem.setNama("");
+        }else{
+            newItem.setNama(strNamaPoktan);
+        }
+
+        if(strDesa == null || strDesa.compareTo("")==0){
+            newItem.setDesa("");
+        }else{
+            newItem.setDesa(strDesa);
+        }
+
+        if(strKecamatan == null || strKecamatan.compareTo("")==0){
+            newItem.setKecamatan("");
+        }else{
+            newItem.setKecamatan(strKecamatan);
+        }
+
+        if(strNoHP == null || strNoHP.compareTo("")==0){
+            newItem.setNoHP("");
+        }else{
+            newItem.setNoHP(strNoHP);
+        }
+
+        if(strNoTelp == null || strNoTelp.compareTo("")==0){
+            newItem.setNoTelp("");
+        }else{
+            newItem.setNoTelp(strNoTelp);
+        }
+
+//        newItem.setNama(strNamaPoktan);
+//        newItem.setAlamat(strAlamat);
+//        newItem.setTanggalDidirikan(strTanggalDidirikan);
+//        newItem.setDeskripsi(strDeskripsi);
+//        newItem.setDesa(strDesa);
+//        newItem.setKecamatan(strKecamatan);
+//        newItem.setNoHP(strNoHP);
+//        newItem.setNoTelp(strNoTelp);
+//        newItem.setStatusPoktan(0);
+//        newItem.setIdDesa(getIdDesa());
         newItem.setIsSync(0);
 
         return newItem;

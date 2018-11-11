@@ -77,14 +77,12 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
     }
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
-
     public static Intent createIntent(Context context) {
         return new Intent(context, ListRDKKActivity.class);
     }
-
-    static int hasilList = 0;
-
+    static int hasilList =0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +93,7 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
 
         setContentView(R.layout.activity_listrdkk);
         ButterKnife.bind(this);
-        counter = 0;
+        counter=0;
         mController.setView(this);
         progressdialog = new ProgressDialog(this);
 
@@ -105,22 +103,22 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
-
     }
 
-    private void getNotSync() {
+    private void getNotSync(){
         realm.beginTransaction();
-        listrdkkNotSync = realm.where(RDKKPupukSubsidiRealm.class).equalTo("isSync", 0).findAll();
+        listrdkkNotSync = realm.where(RDKKPupukSubsidiRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
         hasilList = listrdkkNotSync.size();
+        Log.e("hasil", "" + hasilList);
     }
 
-    private void populateInitialData() {
+    private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listrdkk = realm1.copyFromRealm(realm1.where(RDKKPupukSubsidiRealm.class).sort("isSync", Sort.ASCENDING).findAll());
+            listrdkk = realm1.copyFromRealm(realm1.where(RDKKPupukSubsidiRealm.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listrdkk.isEmpty()) {
-                rdkkAdapter = new RDKKAdapter(getApplicationContext(), listrdkk, this);
+                rdkkAdapter = new RDKKAdapter(getApplicationContext(), listrdkk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkkAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
@@ -128,7 +126,7 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
                 checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
-            } else {
+            }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }
         });
@@ -194,7 +192,7 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
 
     @Override
     public void OnClickRDKK(String idRDKK) {
-        startActivity(DetailRDKKActivity.createIntent(getApplicationContext(), idRDKK));
+        startActivity(DetailRDKKActivity.createIntent(getApplicationContext(),idRDKK));
     }
 
     @Override
@@ -208,18 +206,18 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_sync) {
-            if (isNetworkConnected()) {
+        if (id == R.id.action_sync){
+            if(isNetworkConnected()){
                 syncDialog();
-            } else {
+            }else {
                 createSnackbar("Koneksi Tidak Tersedia").show();
             }
             return true;
         }
-        if (id == R.id.action_download) {
-            if (isNetworkConnected()) {
+        if (id == R.id.action_download){
+            if(isNetworkConnected()){
                 createDownloadDialog();
-            } else {
+            }else {
                 createSnackbar("Koneksi Tidak Tersedia").show();
             }
             return true;
@@ -264,20 +262,21 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
         dialog.show();
     }
 
-    private void startSync() {
-        counter = 0;
+    private void startSync(){
+        counter=0;
         mController.saveData(listrdkkNotSync);
-        hasilList = 0;
     }
 
-    private void checkDataRealm() {
-        if (hasilList > 0) {
-            showRealmData("" + hasilList).show();
+    private void checkDataRealm(){
+        if(hasilList > 0){
+            showRealmData(""+hasilList).show();
         }
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data rdkk " + message + " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data rdkk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+
+        return snackbar;
     }
 
     @Override
@@ -296,7 +295,8 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
         progressdialog.dismiss();
         mController.getAllRDKK();
         updateLayout(Konstanta.LAYOUT_LOADING);
-        this.recreate();
+        snackbar.dismiss();
+//        this.recreate();
     }
 
     @Override

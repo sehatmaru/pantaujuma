@@ -57,7 +57,7 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
         }
     }
 
-    private void setLayoutForEdit() {
+    public void setLayoutForEdit() {
         input_nama.setText(DetailRDKActivity.dataRDK.getNama());
         input_deskripsiIrigasi.setText(DetailRDKActivity.dataRDK.getDeskripsiIrigasi());
     }
