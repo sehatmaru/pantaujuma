@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +41,9 @@ public class LahanAdapter extends RecyclerView.Adapter<LahanAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         LahanRealm lahan = listData.get(position);
+        if(lahan.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
+        }
         holder.textnamapemilik.setText(lahan.getNamaPemilikLahan());
         holder.textluas.setText(lahan.getLuas());
         holder.textalamatlahan.setText(lahan.getAlamat());

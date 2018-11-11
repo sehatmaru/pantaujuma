@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,9 +36,7 @@ public class GetLahanService implements GetLahanContract.Repository {
     public void instanceClass(GetLahanContract.Controller controller){
         this.controller = controller;
     }
-
-
-    private boolean res = false;
+    public boolean insertLahan =true;
     @Override
     public void getAllLahan(int idDesa) {
         Log.e("send","data comehere"+idDesa);
@@ -47,7 +46,11 @@ public class GetLahanService implements GetLahanContract.Repository {
             public void onResponse(Call<ResponseLahan> call, Response<ResponseLahan> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
-                        Log.e("hasillahan",response.body().getData().size()+" ini");
+                        realm.beginTransaction();
+                        RealmResults<LahanRealm> dataLahan = realm.where(LahanRealm.class).equalTo("isSync",1).findAll();
+                        dataLahan.deleteAllFromRealm();
+                        realm.commitTransaction();
+
                         realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
                             controller.getAllLahanSuccess(response.body().getData());
                         }, error -> {
@@ -72,59 +75,42 @@ public class GetLahanService implements GetLahanContract.Repository {
     @Override
     public void saveData(List<LahanRealm> allPen) {
         for(int i=0; i < allPen.size();i++ ){
+            final int dataLoop = i;
             LahanRealm lahanTempRealm = allPen.get(i);
-            realm.beginTransaction();
-            lahanTempRealm.setIsSync(1);
-            realm.commitTransaction();
-            LahanBody lahanBody = new LahanBody(lahanTempRealm.getHashId(),
-                    lahanTempRealm.getHashId(),
-                    lahanTempRealm.getIdDesa(),
-                    lahanTempRealm.getPemilik(),
-                    lahanTempRealm.getNamaPemilikLahan(),
-                    lahanTempRealm.getAlamat(),
-                    lahanTempRealm.getRt(),
-                    lahanTempRealm.getRw(),
-                    lahanTempRealm.getDusun(),
-                    lahanTempRealm.getDesa(),
-                    lahanTempRealm.getNamaKecamatan(),
-                    lahanTempRealm.getDatiII(),
-                    lahanTempRealm.getProvinsi(),
-                    lahanTempRealm.getLongitude(),
-                    lahanTempRealm.getLatitude(),
-                    lahanTempRealm.getLuas(),
-                    lahanTempRealm.getBatasTimur(),
-                    lahanTempRealm.getBatasBarat(),
-                    lahanTempRealm.getBatasSelatan(),
-                    lahanTempRealm.getBatasUtara(),
-                    lahanTempRealm.getDeskripsi(),
-                    lahanTempRealm.getStatus());
-
-            Log.e("lahan service",lahanBody.toString());
+            LahanBody lahanBody = new LahanBody(lahanTempRealm);
+            Log.e("Hasil Lahan", lahanBody.toString());
             Call<ResponseSaveData> call = sisApi.insertLahan(WebServiceModule.ACCESS_TOKEN_TEMP,lahanBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
-                    if(response.isSuccessful()){
-                        if(response.body().isSuccess()){
-
-                            controller.saveDataSuccess("Success",lahanTempRealm);
-                        }else {
-                            controller.saveDataFailed("Failed"+response.body().getMessage());
+                    if (response.isSuccessful()) {
+                        if (response.body().isSuccess()) {
+                            Log.e("hasil",dataLoop+" kelompok "+allPen.size() );
+                            if (dataLoop == allPen.size()-1) {
+                                controller.saveDataSuccess("Success",lahanTempRealm);
+                            }
+                            insertLahan =true;
+                        } else {
+                            insertLahan =false;
+                            controller.saveDataFailed("Gagal Sinkronisasi "+response.body().getMessage());
                         }
-
-                    }else{
-                        Log.e("lahan service","Error3"+response.toString());
-                        controller.saveDataFailed("Failed");
+                    } else {
+                        insertLahan =false;
+                        controller.saveDataFailed("Server Error "+ response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
+                    insertLahan =false;
                     Log.e("lahan service","error server"+t.getMessage());
                     controller.saveDataFailed("Failed"+t.getMessage());
                     t.printStackTrace();
                 }
             });
+            if (!insertLahan){
+                break;
+            }
         }
     }
 }

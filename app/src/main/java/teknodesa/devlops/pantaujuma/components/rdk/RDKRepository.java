@@ -41,14 +41,10 @@ public class RDKRepository implements RDKContract.Repository<RDKRealm> {
     @Override
     public void updateItem(String idItem, RDKRealm item) {
         Log.e("Error", "Masuk updateItem success");
-        realm.executeTransactionAsync(bgRealm -> {
-                bgRealm.insertOrUpdate(item);
-        }, () -> {
-            Log.e("rdkmodul","sukses");
+        realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(item), () -> {
             // Transaction was a success.
             mController.responseCRUD(true, "update");
         }, error -> {
-            Log.e("rdkmodul","error");
             // Transaction failed and was automatically canceled.
             mController.responseCRUD(false, "update");
         });

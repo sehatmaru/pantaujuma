@@ -182,32 +182,23 @@ public class DetailRDKActivity extends AppCompatActivity {
 
         if(dataRDK.getKomoditasSI() == null || dataRDK.getKomoditasSI().compareTo("")==0){
             komoditassi.setText("-");
-        }else{
-            komoditassi.setText(dataKomoditasSI.getNama());
+        }else {
+            if(dataKomoditasSI != null){
+                komoditassi.setText(dataKomoditasSI.getNama());
+            }else{
+                komoditassi.setText("-");
+            }
         }
 
         if(dataRDK.getKomoditasRU() == null || dataRDK.getKomoditasRU().compareTo("")==0){
             komoditaspb.setText("-");
         }else{
-            komoditaspb.setText(dataKomoditasRU.getNama());
+            if(dataKomoditasRU!=null){
+                komoditaspb.setText("-");
+            }else {
+                komoditaspb.setText(dataKomoditasRU.getNama());
+            }
         }
 
     }
-
-    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            switch (which){
-                case DialogInterface.BUTTON_POSITIVE:
-                    //Yes button clicked
-                    startActivity(ListRDKActivity.createIntent(getApplicationContext()));
-                    break;
-
-                case DialogInterface.BUTTON_NEGATIVE:
-                    //No button clicked
-                    break;
-            }
-        }
-    };
-
 }

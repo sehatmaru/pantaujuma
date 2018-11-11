@@ -166,42 +166,99 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     @Override
     public RDKRealm getUIData() {
-        identitas = rdkIdentitasFragment.getUIData();
-        irigasi = rdkIrigasiFragment.getUIData();
-        jadwalKegiatan = rdkJadwalKegiatanFragment.getUIData();
-        rencanaUmum = rdkRencanaUmumFragment.getUIData();
-        sasaranIntensifikasi = rdkSasaranIntensifikasiFragment.getUIData();
-
-        String hashIdIrigasi = getSaltString();
-        String hashIdJadwal = getSaltString();
-        String hashIdRencana = getSaltString();
-        String hashIdSasaran = getSaltString();
-
         RDKRealm newRealmItem = new RDKRealm();
 
+
+        Log.e("Hasil Repo",CRUActivity.mAction+" ");
         if (CRUActivity.mAction.equals("update")){
+            Log.e("Hasil Repo",CRUActivity.mAction+" di update");
+
+            RDKRealm dataRealm = getDataRDK(DetailRDKActivity.dataRDK.getHashId());
             newRealmItem.setHashId(DetailRDKActivity.dataRDK.getHashId());
             newRealmItem.setHashIdIrigasi(DetailRDKActivity.dataRDK.getHashIdIrigasi());
             newRealmItem.setHashIdRencana(DetailRDKActivity.dataRDK.getHashIdRencana());
             newRealmItem.setHashIdJadwal(DetailRDKActivity.dataRDK.getHashIdJadwal());
             newRealmItem.setHashIdSasaran(DetailRDKActivity.dataRDK.getHashIdSasaran());
-
             newRealmItem.setIrigasi(DetailRDKActivity.dataRDK.getIrigasi());
             newRealmItem.setRencana(DetailRDKActivity.dataRDK.getRencana());
             newRealmItem.setKegiatan(DetailRDKActivity.dataRDK.getKegiatan());
             newRealmItem.setIntensifikasi(DetailRDKActivity.dataRDK.getIntensifikasi());
+            newRealmItem.setPoktan(dataRealm.getPoktan());
+            newRealmItem.setTanggal(dataRealm.getTanggal());
+            newRealmItem.setLuasSawah(dataRealm.getLuasSawah());
+            newRealmItem.setKeterangan(dataRealm.getKeterangan());
+            newRealmItem.setNama(dataRealm.getNama());
+            newRealmItem.setDeskripsiIrigasi(dataRealm.getDeskripsiIrigasi());
+            newRealmItem.setKegiatanJK(dataRealm.getKegiatanJK());
+            newRealmItem.setTanggalJK(dataRealm.getTanggalJK());
+            newRealmItem.setDeskripsiJK(dataRealm.getDeskripsiJK());
+            newRealmItem.setPaketTeknologi(dataRealm.getPaketTeknologi());
+            newRealmItem.setPolaTanam(dataRealm.getPolaTanam());
+            newRealmItem.setJadwalTanam(dataRealm.getJadwalTanam());
+            newRealmItem.setKomoditasRU(dataRealm.getKomoditasRU());
+            newRealmItem.setVarietas(dataRealm.getVarietas());
+            newRealmItem.setSumberBenih(dataRealm.getSumberBenih());
+            newRealmItem.setTabunganAnggota(dataRealm.getTabunganAnggota());
+            newRealmItem.setIuranAnggota(dataRealm.getIuranAnggota());
+            newRealmItem.setPemupukanModal(dataRealm.getPemupukanModal());
+            newRealmItem.setKomoditasSI(dataRealm.getKomoditasSI());
+            newRealmItem.setTarget(dataRealm.getTarget());
+            newRealmItem.setTargetHasilPerHa(dataRealm.getTargetHasilPerHa());
 
         } else {
+            Log.e("Hasil Repo",CRUActivity.mAction+" di create");
+            String hashIdIrigasi = getSaltString();
+            String hashIdJadwal = getSaltString();
+            String hashIdRencana = getSaltString();
+            String hashIdSasaran = getSaltString();
+
             newRealmItem.setIrigasi(hashIdIrigasi);
             newRealmItem.setRencana(hashIdRencana);
             newRealmItem.setKegiatan(hashIdJadwal);
             newRealmItem.setIntensifikasi(hashIdSasaran);
-
             newRealmItem.setHashId(getSaltString());
             newRealmItem.setHashIdIrigasi(hashIdIrigasi);
             newRealmItem.setHashIdRencana(hashIdRencana);
             newRealmItem.setHashIdJadwal(hashIdJadwal);
             newRealmItem.setHashIdSasaran(hashIdSasaran);
+        }
+
+        if(RDKIdentitasFragment.isOpen){
+            identitas = rdkIdentitasFragment.getUIData();
+            newRealmItem.setPoktan(identitas.getPoktan());
+            newRealmItem.setTanggal(identitas.getTanggal());
+            newRealmItem.setLuasSawah(identitas.getLuasSawah());
+            newRealmItem.setKeterangan(identitas.getKeterangan());
+        }
+        if(RDKIrigasiFragment.isOpen){
+            irigasi = rdkIrigasiFragment.getUIData();
+            newRealmItem.setNama(irigasi.getNama());
+            newRealmItem.setDeskripsiIrigasi(irigasi.getDeskripsiIrigasi());
+        }
+        if(RDKJadwalKegiatanFragment.isOpen){
+            jadwalKegiatan = rdkJadwalKegiatanFragment.getUIData();
+            newRealmItem.setKegiatanJK(jadwalKegiatan.getKegiatanJK());
+            newRealmItem.setTanggalJK(jadwalKegiatan.getTanggalJK());
+            newRealmItem.setDeskripsiJK(jadwalKegiatan.getDeskripsiJK());
+        }
+        if(RDKRencanaUmumFragment.isOpen){
+            Log.e("Hasil repo","masuk rencana umum");
+            rencanaUmum = rdkRencanaUmumFragment.getUIData();
+            newRealmItem.setPaketTeknologi(rencanaUmum.getPaketTeknologi());
+            newRealmItem.setPolaTanam(rencanaUmum.getPolaTanam());
+            newRealmItem.setJadwalTanam(rencanaUmum.getJadwalTanam());
+            newRealmItem.setKomoditasRU(rencanaUmum.getKomoditasRU());
+            newRealmItem.setVarietas(rencanaUmum.getVarietas());
+            newRealmItem.setSumberBenih(rencanaUmum.getSumberBenih());
+            newRealmItem.setTabunganAnggota(rencanaUmum.getTabunganAnggota());
+            newRealmItem.setIuranAnggota(rencanaUmum.getIuranAnggota());
+            newRealmItem.setPemupukanModal(rencanaUmum.getPemupukanModal());
+        }
+        if(RDKSasaranIntensifikasiFragment.isOpen){
+            sasaranIntensifikasi = rdkSasaranIntensifikasiFragment.getUIData();
+            newRealmItem.setKomoditasSI(sasaranIntensifikasi.getKomoditasSI());
+            newRealmItem.setTarget(sasaranIntensifikasi.getTarget());
+            newRealmItem.setTargetHasilPerHa(sasaranIntensifikasi.getTargetHasilPerHa());
         }
         UserDB userDB = getData();
         int idDes;
@@ -218,30 +275,8 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         }
         newRealmItem.setIdDesa(idDes);
         newRealmItem.setIdUser(idUs);
-        newRealmItem.setPoktan(identitas.getPoktan());
-        newRealmItem.setTanggal(identitas.getTanggal());
-        newRealmItem.setLuasSawah(identitas.getLuasSawah());
-        newRealmItem.setKeterangan(identitas.getKeterangan());
-        newRealmItem.setNama(irigasi.getNama());
-        newRealmItem.setDeskripsiIrigasi(irigasi.getDeskripsiIrigasi());
-        newRealmItem.setKegiatanJK(jadwalKegiatan.getKegiatanJK());
-        newRealmItem.setTanggalJK(jadwalKegiatan.getTanggalJK());
-        newRealmItem.setDeskripsiJK(jadwalKegiatan.getDeskripsiJK());
-        newRealmItem.setPaketTeknologi(rencanaUmum.getPaketTeknologi());
-        newRealmItem.setPolaTanam(rencanaUmum.getPolaTanam());
-        newRealmItem.setJadwalTanam(rencanaUmum.getJadwalTanam());
-        newRealmItem.setKomoditasRU(rencanaUmum.getKomoditasRU());
-        newRealmItem.setVarietas(rencanaUmum.getVarietas());
-        newRealmItem.setSumberBenih(rencanaUmum.getSumberBenih());
-        newRealmItem.setTabunganAnggota(rencanaUmum.getTabunganAnggota());
-        newRealmItem.setIuranAnggota(rencanaUmum.getIuranAnggota());
-        newRealmItem.setPemupukanModal(rencanaUmum.getPemupukanModal());
-        newRealmItem.setKomoditasSI(sasaranIntensifikasi.getKomoditasSI());
-        newRealmItem.setTarget(sasaranIntensifikasi.getTarget());
-        newRealmItem.setTargetHasilPerHa(sasaranIntensifikasi.getTargetHasilPerHa());
-
-        Log.e("rdk", newRealmItem.toString());
-
+        newRealmItem.setIsSync(0);
+        Log.e("Hasil RDK", newRealmItem.toString());
         return newRealmItem;
     }
 
@@ -254,13 +289,12 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
     public void saveData(String tipe, Parcelable itemData) {
         RDKContract.Controller<RDKRealm> mController = new RDKController(this, appComponent);
         RDKRealm uiItem = getUIData();
-
+        Log.e("Tipe data",tipe+" ");
         if (tipe.equals("insert")) {
             mController.addItem(uiItem);
         } else {
             if (tipe.equals("update")) {
-                String idItem = ((RDKParcelable) itemData).getHashId();
-                mController.updateItem(idItem, uiItem);
+                mController.updateItem(uiItem.getHashId(), uiItem);
             }
         }
     }
@@ -315,4 +349,16 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
             return user;
         }
     }
+
+    public RDKRealm getDataRDK(String id) {
+        realm.beginTransaction();
+        RDKRealm data =realm.where(RDKRealm.class).equalTo("hashId",id).findFirst();
+        realm.commitTransaction();
+        if(data == null){
+            return null;
+        }else{
+            return data;
+        }
+    }
+
 }

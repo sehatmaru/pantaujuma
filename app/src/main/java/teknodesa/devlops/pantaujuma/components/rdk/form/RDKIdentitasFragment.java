@@ -67,7 +67,7 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     EditText input_keterangan;
 
     String poktan;
-
+    public static boolean isOpen=false;
     @OnClick(R.id.btnPoktan)
     void clickPilihPoktan() {
         SearchPoktanFragment.keterangan = 1;
@@ -86,28 +86,16 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myCalendar = Calendar.getInstance();
-
+        isOpen = true;
         View v = inflater.inflate(R.layout.fragment_crurdkidentitas, null);
         ButterKnife.bind(this, v);
-
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        input_poktan = getActivity().findViewById(R.id.input_poktan);
-        input_tanggal= getActivity().findViewById(R.id.input_tanggal);
-        input_luasSawah = getActivity().findViewById(R.id.input_luasSawah);
-        input_keterangan= getActivity().findViewById(R.id.input_keterangan);
-
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
             poktan = DetailRDKActivity.idPoktan;
-        } else {
         }
+        return v;
     }
+
 
     public void setLayoutForEdit(){
         input_poktan.setText(DetailRDKActivity.dataPoktan.getNama());

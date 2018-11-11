@@ -141,6 +141,8 @@ public class CRUAlamatLahanFragment extends Fragment implements LahanContract.Vi
         String strKecamatan = input_kecamatan.getText().toString();
         String strDatiII = input_datiii.getText().toString();
         String strProvinsi = input_provinsi.getText().toString();
+        Log.e("Hasil latitude",latitudeAdd+" itu");
+        Log.e("Hasil latitude",longitudeAdd+" itu");
         AlamatLahanModel newItem = new AlamatLahanModel(strAlamat, strRt,strRw,strDusun,strDesa,strKecamatan,
                 strDatiII,strProvinsi,longitudeAdd,latitudeAdd);
         return newItem;
@@ -183,6 +185,8 @@ public class CRUAlamatLahanFragment extends Fragment implements LahanContract.Vi
                 input_alamat.setText(address.toString());
                 latitudeAdd = place.getLatLng().latitude;
                 longitudeAdd = place.getLatLng().longitude;
+                Log.e("Hasil latitude",latitudeAdd+" ini");
+                Log.e("Hasil latitude",longitudeAdd+" ini");
             }catch (NullPointerException nx)
             {
                 Log.e("null","back pressed");

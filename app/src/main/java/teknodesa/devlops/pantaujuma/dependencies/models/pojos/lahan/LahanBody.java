@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+
 public class LahanBody {
     private String hashId;
     private int idDesa;
@@ -24,32 +26,32 @@ public class LahanBody {
     private int status;
     private String gambar;
 
-    public LahanBody(String hashId, String id, int idDesa, String pemilik, String namaPemilikLahan, String alamat, String rt, String rw, String dusun, String desa, String namaKecamatan, String datiII, String provinsi, double longitude, double latitude, String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara, String deskripsi, int status) {
+    public LahanBody() {
     }
 
-    public LahanBody(String hashId, int idDesa, String pemilik, String namaPemilikLahan, String alamat, String rt, String rw, String dusun, String desa, String namaKecamatan, String datiII, String provinsi, double longitude, double latitude, String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara, String deskripsi, int status, String gambar) {
-        this.hashId = hashId;
-        this.idDesa = idDesa;
-        this.pemilik = pemilik;
-        this.namaPemilikLahan = namaPemilikLahan;
-        this.alamat = alamat;
-        this.rt = rt;
-        this.rw = rw;
-        this.dusun = dusun;
-        this.desa = desa;
-        this.namaKecamatan = namaKecamatan;
-        this.datiII = datiII;
-        this.provinsi = provinsi;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.luas = luas;
-        this.batasTimur = batasTimur;
-        this.batasBarat = batasBarat;
-        this.batasSelatan = batasSelatan;
-        this.batasUtara = batasUtara;
-        this.deskripsi = deskripsi;
-        this.status = status;
-        this.gambar = gambar;
+    public LahanBody(LahanRealm data) {
+        this.hashId = data.getHashId();
+        this.idDesa = data.getIdDesa();
+        this.pemilik = data.getPemilik();
+        this.namaPemilikLahan = data.getNamaPemilikLahan();
+        this.alamat = data.getAlamat();
+        this.rt = data.getRt();
+        this.rw = data.getRw();
+        this.dusun = data.getDusun();
+        this.desa = data.getDesa();
+        this.namaKecamatan = data.getNamaKecamatan();
+        this.datiII = data.getDatiII();
+        this.provinsi = data.getProvinsi();
+        this.longitude = data.getLongitude();
+        this.latitude = data.getLatitude();
+        this.luas = data.getLuas();
+        this.batasTimur = data.getBatasTimur();
+        this.batasBarat = data.getBatasBarat();
+        this.batasSelatan = data.getBatasSelatan();
+        this.batasUtara = data.getBatasUtara();
+        this.deskripsi = data.getDeskripsi();
+        this.status = 1;
+        this.gambar = "";
     }
 
     public String getHashId() {

@@ -53,7 +53,7 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         }, tahun, bulan, tanggal);
         datePickerDialog.show();
     }
-
+    public static boolean isOpen = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,36 +72,9 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
 
         if(CRUActivity.mAction == "update"){
             textForEdit();
-        }else{
-//            setData();
         }
+        isOpen = true;
         return v;
-    }
-
-//    private void setData(){
-//        UserDB userDB = getData();
-//        if(userDB != null){
-//            input_desa.setText(userDB.getNamaDesa());
-//            input_kecamatan.setText(userDB.getKecamatan());
-//            input_datiii.setText(userDB.getKabupatenKota());
-//            input_provinsi.setText(userDB.getProvinsi());
-//        }else{
-//            input_desa.setText("-");
-//            input_kecamatan.setText("-");
-//            input_datiii.setText("-");
-//            input_provinsi.setText("-");
-//        }
-//
-//    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        input_kegiatan = getActivity().findViewById(R.id.input_kegiatan);
-        input_tanggalJK= getActivity().findViewById(R.id.input_tanggalJK);
-        input_deskripsiJK= getActivity().findViewById(R.id.input_deskripsiJK);
-
     }
 
     void textForEdit(){

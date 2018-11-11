@@ -122,6 +122,7 @@ public class CRULahanFragment extends Fragment implements LahanContract.ViewCont
             data.setHashId(getSaltString());
         }
         lahanModel = cruDataLahanFragment.getUIData();
+        data.setPemilik(lahanModel.getPemilik());
         data.setNamaPemilikLahan(lahanModel.getNamaPemilikLahan());
         data.setLuas(lahanModel.getLuas());
         data.setBatasBarat(lahanModel.getBatasBarat());
@@ -129,6 +130,7 @@ public class CRULahanFragment extends Fragment implements LahanContract.ViewCont
         data.setBatasTimur(lahanModel.getBatasTimur());
         data.setBatasUtara(lahanModel.getBatasUtara());
         data.setDeskripsi(lahanModel.getDeskripsi());
+
         alamatLahanModel = cruAlamatLahanFragment.getUIData();
         data.setAlamat(alamatLahanModel.getAlamat());
         data.setRt(alamatLahanModel.getRt());
@@ -166,7 +168,7 @@ public class CRULahanFragment extends Fragment implements LahanContract.ViewCont
                     mController.addItem(uiItem);
                 } else {
                     if (tipe.equals("update")) {
-                        String idItem = ((LahanRealm) itemData).getHashId();
+                        String idItem = uiItem.getHashId();
                         mController.updateItem(idItem, uiItem);
                     }
                 }

@@ -41,7 +41,7 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
 
     private String komoditas = "";
     private String messageError;
-
+    public static boolean isOpen = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,24 +56,14 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
 
         View v = inflater.inflate(R.layout.fragment_crurdksaranaintensifikasi, null);
         ButterKnife.bind(this, v);
-
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        input_komoditasSI = getActivity().findViewById(R.id.input_komoditasSI);
-        input_target = getActivity().findViewById(R.id.input_target);
-        input_targethasilperha= getActivity().findViewById(R.id.input_targethasilperha);
-
+        isOpen = true;
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
             komoditas = DetailRDKActivity.idKomoditasSI;
-        } else {
         }
+        return v;
     }
+
 
     public void setLayoutForEdit() {
         input_komoditasSI.setText(DetailRDKActivity.dataKomoditasSI.getNama());

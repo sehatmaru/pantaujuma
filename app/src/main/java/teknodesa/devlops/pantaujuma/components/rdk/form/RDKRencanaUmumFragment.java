@@ -46,7 +46,7 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
     @BindView(R.id.input_jadwaltanam)
     EditText input_jadwaltanam;
-
+    public static boolean isOpen = false;
     @BindView(R.id.btnJadwalTanam)
     Button btnJadwalTanam;
     @OnClick(R.id.btnJadwalTanam)
@@ -93,31 +93,12 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
         View v = inflater.inflate(R.layout.fragment_crurdkrencanaumum, null);
         ButterKnife.bind(this, v);
-
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        input_paketteknologi = getActivity().findViewById(R.id.input_paketteknologi);
-        input_polatanam= getActivity().findViewById(R.id.input_polatanam);
-        input_jadwaltanam = getActivity().findViewById(R.id.input_jadwaltanam);
-        input_komoditas = getActivity().findViewById(R.id.input_komoditas);
-        input_varietas = getActivity().findViewById(R.id.input_varietas);
-        input_sumberbenih= getActivity().findViewById(R.id.input_sumberbenih);
-        input_tabungananggota = getActivity().findViewById(R.id.input_tabungananggota);
-        input_iurananggota= getActivity().findViewById(R.id.input_iurananggota);
-        input_pemupukanmodal = getActivity().findViewById(R.id.input_pemupukanmodal);
-
+        isOpen = true;
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
             komoditas = DetailRDKActivity.idKomoditasRU;
-        } else {
-
         }
-
+        return v;
     }
 
     public void setLayoutForEdit() {

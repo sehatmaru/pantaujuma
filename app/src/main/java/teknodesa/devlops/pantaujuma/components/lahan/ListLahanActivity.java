@@ -291,15 +291,10 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
     @Override
     public void saveDataSuccess(String message) {
         counter++;
-        Log.e("hasil","counter"+counter+" list"+hasilList);
-        if(counter == hasilList){
-            progressdialog.dismiss();
-            mController.getAllLahan();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
-
-
+        progressdialog.dismiss();
+        mController.getAllLahan();
+        updateLayout(Konstanta.LAYOUT_LOADING);
+        this.recreate();
     }
 
     @Override

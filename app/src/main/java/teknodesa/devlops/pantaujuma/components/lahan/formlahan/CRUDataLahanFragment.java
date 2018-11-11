@@ -3,6 +3,7 @@ package teknodesa.devlops.pantaujuma.components.lahan.formlahan;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,7 @@ public class CRUDataLahanFragment extends Fragment implements LahanContract.View
         String strBatasSelatan = input_batasselatan.getText().toString();
         String strBatasUtara = input_batasutara.getText().toString();
         String strDeskripsi = input_deskripsi.getText().toString();
+        Log.e("Pemilik",pemilik+" ");
         LahanModel uiItem = new LahanModel(pemilik,strNamaPemilik,strLuas,strBatasTimur,strBatasBarat,strBatasSelatan,strBatasUtara,
                 strDeskripsi);
         return uiItem;
@@ -97,7 +99,7 @@ public class CRUDataLahanFragment extends Fragment implements LahanContract.View
     @Override
     public void setUIData() {
         pemilik = DetailLahanActivity.dataLahan.getPemilik();
-        namaPemilikLahan = DetailLahanActivity.dataLahan.getNamaPemilikLahan();
+
         inputNamaPemilik.setText(DetailLahanActivity.dataLahan.getNamaPemilikLahan());
         input_luas.setText(DetailLahanActivity.dataLahan.getLuas());
         input_batastimur.setText(DetailLahanActivity.dataLahan.getBatasTimur());

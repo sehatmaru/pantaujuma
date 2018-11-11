@@ -76,8 +76,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".components.rdkk.DetailRDKKActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".components.rdk.DetailRDKActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

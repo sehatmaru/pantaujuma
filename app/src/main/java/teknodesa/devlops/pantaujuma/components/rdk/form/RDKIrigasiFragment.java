@@ -26,6 +26,7 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
     @BindView(R.id.input_deskripsiIrigasi)
     EditText input_deskripsiIrigasi;
 
+    public static boolean isOpen = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,21 +41,11 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
 
         View v = inflater.inflate(R.layout.fragment_crurdkirigasi, null);
         ButterKnife.bind(this, v);
-
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        input_nama = getActivity().findViewById(R.id.input_nama);
-        input_deskripsiIrigasi= getActivity().findViewById(R.id.input_deskripsiIrigasi);
-
+        isOpen = true;
         if (CRUActivity.mAction == "update"){
             setLayoutForEdit();
-        } else {
         }
+        return v;
     }
 
     public void setLayoutForEdit() {
