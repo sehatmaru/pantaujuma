@@ -77,6 +77,7 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
     RecyclerView recyclerView;
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
     private List<PostRealm> listpostNotSync = Collections.EMPTY_LIST;
     static int hasilList =0;
@@ -162,7 +163,8 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        return snackbar;
     }
 
     private List<PostRealm> filter(String query) {
@@ -283,6 +285,7 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
     @Override
     public void getAllPostSuccess(List<PostRealm> allPost) {
         populateInitialData();
+        snackbar.dismiss();
     }
 
     @Override
@@ -299,6 +302,7 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
             mController.getAllPost();
             updateLayout(Konstanta.LAYOUT_LOADING);
             getActivity().recreate();
+            snackbar.dismiss();
         }
     }
 

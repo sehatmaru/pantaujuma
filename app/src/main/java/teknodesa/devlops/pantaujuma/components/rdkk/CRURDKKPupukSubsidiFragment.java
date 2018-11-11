@@ -123,11 +123,12 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     private AppComponent appComponent;
     FragmentActivity activity;
 
-    String poktan;
-    String petani;
-    String pupuk;
-    String komoditas;
+    String poktan = "";
+    String petani = "";
+    String pupuk = "";
+    String komoditas = "";
 
+    private String messageEror;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,6 +164,8 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
 
     @Override
     public RDKKPupukSubsidiRealm getUIData() {
+        messageEror="";
+
         String strJan = input_butuhjanuari.getText().toString();
         String strFeb = input_butuhfebruari.getText().toString();
         String strMar = input_butuhmaret.getText().toString();
@@ -200,11 +203,26 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
 
         newRealmItem.setIdDesa(idDes);
         newRealmItem.setIdUser(idUs);
-        newRealmItem.setPoktan(poktan);
-        newRealmItem.setPetani(petani);
-        newRealmItem.setKomoditas(komoditas);
-        newRealmItem.setPupuk(pupuk);
-
+        if(poktan.compareTo("")==0 || poktan == null){
+            messageEror = messageEror+" Poktan";
+        }else{
+            newRealmItem.setPoktan(poktan);
+        }
+        if(petani.compareTo("")==0 || petani == null){
+            messageEror = messageEror+" Petani";
+        }else{
+            newRealmItem.setPetani(petani);
+        }
+        if(komoditas.compareTo("")==0 || komoditas == null){
+            messageEror = messageEror+" Komoditas";
+        }else{
+            newRealmItem.setKomoditas(komoditas);
+        }
+        if(pupuk.compareTo("")==0 || pupuk == null){
+            messageEror = messageEror+" Pupuk";
+        }else{
+            newRealmItem.setPupuk(pupuk);
+        }
         if(strJan == null || strJan.compareTo("")==0){
             newRealmItem.setButuhJanuari(0);
         }else{
@@ -306,13 +324,17 @@ public class CRURDKKPupukSubsidiFragment extends Fragment implements RDKKContrac
     public void saveData(String tipe, Parcelable itemData) {
         RDKKContract.Controller<RDKKPupukSubsidiRealm> mController = new RDKKController(this, appComponent);
         RDKKPupukSubsidiRealm uiItem = getUIData();
-        if (tipe.equals("insert")) {
-            mController.addItem(uiItem);
-        } else {
-            if (tipe.equals("update")) {
-                String idItem = ((RDKKParcelable) itemData).getHashId();
-                mController.updateItem(idItem, uiItem);
+        if(messageEror.compareTo("")==0){
+            if (tipe.equals("insert")) {
+                mController.addItem(uiItem);
+            } else {
+                if (tipe.equals("update")) {
+                    String idItem = ((RDKKParcelable) itemData).getHashId();
+                    mController.updateItem(idItem, uiItem);
+                }
             }
+        }else {
+            Toast.makeText(activity, "Harap mengisi data "+ messageEror, Toast.LENGTH_SHORT).show();
         }
     }
 

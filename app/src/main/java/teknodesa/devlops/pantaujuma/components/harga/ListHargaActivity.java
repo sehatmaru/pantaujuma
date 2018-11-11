@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,8 +40,6 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnClickHargaListener, GetHargaContract.View {
-    static int counter;
-    static int hasilList = 0;
     private final String mJenisCRU = "harga";
 
     private List<HargaRealm> listharga = Collections.EMPTY_LIST;
@@ -65,22 +64,23 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
 
     @BindView(R.id.fabTambah)
     FloatingActionButton fabTambah;
+    @OnClick(R.id.fabTambah)
+    void clickCheckOut() {
+        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "harga", null));
+        finish();
+    }
 
     @BindView(R.id.rcList)
     RecyclerView rcList;
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
-    private ProgressDialog progressdialog;
 
+    private ProgressDialog progressdialog;
+    private Snackbar snackbar;
+    static int counter;
     public static Intent createIntent(Context context) {
         return new Intent(context, ListHargaActivity.class);
     }
-
-    @OnClick(R.id.fabTambah)
-    void clickCheckOut() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "insert", null));
-        finish();
-    }
-
+    static int hasilList =0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,36 +91,40 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
 
         setContentView(R.layout.activity_listharga);
         ButterKnife.bind(this);
-        counter = 0;
+        counter=0;
         mController.setView(this);
         progressdialog = new ProgressDialog(this);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-        realm.beginTransaction();
-        listhargaNotSync = realm.where(HargaRealm.class).equalTo("isSync", 0).findAll();
-        realm.commitTransaction();
-
-        hasilList = listhargaNotSync.size();
+        getNotSync();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
-
-        checkDataRealm();
     }
 
-    private void populateInitialData() {
+    private void getNotSync(){
+        realm.beginTransaction();
+        listhargaNotSync = realm.where(HargaRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+        hasilList = listhargaNotSync.size();
+        Log.e("hasil", "" + hasilList);
+    }
+
+    private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listharga = realm1.copyFromRealm(realm1.where(HargaRealm.class).sort("hashKomoditas", Sort.ASCENDING).findAll());
+            listharga = realm1.copyFromRealm(realm1.where(HargaRealm.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listharga.isEmpty()) {
-                hargaAdapter = new HargaAdapter(getApplicationContext(), listharga, this);
+                hargaAdapter = new HargaAdapter(getApplicationContext(), listharga,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(hargaAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
+                getNotSync();
+                checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
-            } else {
+            }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }
         });
@@ -171,7 +175,7 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
         query = query.toLowerCase();
         final List<HargaRealm> filteredList = new ArrayList<>();
         for (HargaRealm konten : realm.where(HargaRealm.class).findAll()) {
-            final String text = konten.getHashKomoditas().toLowerCase();
+            final String text = konten.getHashId().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }
@@ -186,7 +190,7 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
 
     @Override
     public void OnClickHarga(String idHarga) {
-        startActivity(DetailHargaActivity.createIntent(getApplicationContext(), idHarga));
+        startActivity(DetailHargaActivity.createIntent(getApplicationContext(),idHarga));
     }
 
     @Override
@@ -200,18 +204,18 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_sync) {
-            if (isNetworkConnected()) {
+        if (id == R.id.action_sync){
+            if(isNetworkConnected()){
                 syncDialog();
-            } else {
+            }else {
                 createSnackbar("Koneksi Tidak Tersedia").show();
             }
             return true;
         }
-        if (id == R.id.action_download) {
-            if (isNetworkConnected()) {
+        if (id == R.id.action_download){
+            if(isNetworkConnected()){
                 createDownloadDialog();
-            } else {
+            }else {
                 createSnackbar("Koneksi Tidak Tersedia").show();
             }
             return true;
@@ -237,7 +241,6 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
         dialog.show();
     }
 
-
     private void syncDialog() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .title(R.string.title_sync)
@@ -257,19 +260,21 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
         dialog.show();
     }
 
-    private void startSync() {
-        counter = 0;
+    private void startSync(){
+        counter=0;
         mController.saveData(listhargaNotSync);
     }
 
-    private void checkDataRealm() {
-        if (hasilList > 0) {
-            showRealmData("" + hasilList).show();
+    private void checkDataRealm(){
+        if(hasilList > 0){
+            showRealmData(""+hasilList).show();
         }
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data harga " + message + " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki " +message+ " data harga yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+
+        return snackbar;
     }
 
     @Override
@@ -285,13 +290,11 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
 
     @Override
     public void saveDataSuccess(String message) {
-        counter++;
-        if (counter == hasilList) {
-            progressdialog.dismiss();
-            mController.getAllHarga();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
+        progressdialog.dismiss();
+        mController.getAllHarga();
+        updateLayout(Konstanta.LAYOUT_LOADING);
+        snackbar.dismiss();
+//        this.recreate();
     }
 
     @Override

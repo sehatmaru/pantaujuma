@@ -109,7 +109,7 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
         }
     }
 
-    private void setLayoutForEdit(){
+    public void setLayoutForEdit(){
         input_poktan.setText(DetailRDKActivity.dataPoktan.getNama());
         input_tanggal.setText(DetailRDKActivity.dataRDK.getTanggal());
         input_luasSawah.setText(DetailRDKActivity.dataRDK.getLuasSawah());

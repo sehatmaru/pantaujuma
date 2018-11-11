@@ -68,6 +68,7 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
     RecyclerView recyclerView;
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
 
     private List<KomoditasRealm> listData = Collections.EMPTY_LIST;
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
@@ -147,7 +148,8 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
     }
 
     private Snackbar createSnackbar(String message) {
-        return Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE);
+        return snackbar;
     }
     private void updateLayout(String status) {
         switch (status) {
@@ -219,6 +221,7 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
     @Override
     public void getAllKomoditasSuccess(List<KomoditasRealm> allKomoditas) {
         populateInitialData();
+        snackbar.dismiss();
     }
 
     @Override

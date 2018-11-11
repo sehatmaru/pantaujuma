@@ -124,13 +124,13 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         TextView tabIdentitas = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
         tabIdentitas.setText("Identitas");
         tabIdentitas.setTextColor(getResources().getColor(R.color.black));
-        tabs.getTabAt(1).setCustomView(tabIdentitas).setIcon(R.drawable.penduduk);
+        tabs.getTabAt(0).setCustomView(tabIdentitas).setIcon(R.drawable.penduduk);
 
         //Pager Irigasi
         TextView tabIrigasi = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
         tabIrigasi.setText("Irigasi");
         tabIrigasi.setTextColor(getResources().getColor(R.color.black));
-        tabs.getTabAt(0).setCustomView(tabIrigasi).setIcon(R.drawable.penduduk);
+        tabs.getTabAt(1).setCustomView(tabIrigasi).setIcon(R.drawable.penduduk);
 
         //Pager Jadwal Kegiatan
         TextView tabJadwalKegiatan = (TextView) LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.tab_layout_item, null);
@@ -248,12 +248,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
     @Override
     public void setUIData() {
 
-    }
-
-    public static void setDeletedData(Parcelable itemData, AppComponent appComp) {
-        RDKContract.Controller<RDKRealm> mController = new RDKController(new CRURDKFragment(), appComp);
-        String idItem = ((RDKRealm) itemData).getHashId();
-        mController.setItemDeleted(idItem);
     }
 
     @Override

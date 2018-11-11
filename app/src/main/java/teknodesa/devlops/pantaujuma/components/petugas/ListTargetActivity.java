@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,8 +41,6 @@ import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.TargetPet
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class ListTargetActivity extends BaseActivity implements TargetAdapter.OnClickTargetListener, GetTargetContract.View {
-    static int counter;
-    static int hasilList = 0;
     private final String mJenisCRU = "target";
 
     private List<TargetPetugas> listtarget = Collections.EMPTY_LIST;
@@ -65,22 +65,23 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
 
     @BindView(R.id.fabTambah)
     FloatingActionButton fabTambah;
+    @OnClick(R.id.fabTambah)
+    void clickCheckOut() {
+        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "target", null));
+        finish();
+    }
 
     @BindView(R.id.rcList)
     RecyclerView rcList;
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
-    private ProgressDialog progressdialog;
 
+    private ProgressDialog progressdialog;
+    private Snackbar snackbar;
+    static int counter;
     public static Intent createIntent(Context context) {
         return new Intent(context, ListTargetActivity.class);
     }
-
-    @OnClick(R.id.fabTambah)
-    void clickCheckOut() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "insert", null));
-        finish();
-    }
-
+    static int hasilList =0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,30 +98,34 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-        realm.beginTransaction();
-        listtargetNotSync = realm.where(TargetPetugas.class).equalTo("isSync",0).findAll();
-        realm.commitTransaction();
-
-        hasilList = listtargetNotSync.size();
+        getNotSync();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
-
-        checkDataRealm();
     }
 
-    private void populateInitialData() {
+    private void getNotSync(){
+        realm.beginTransaction();
+        listtargetNotSync = realm.where(TargetPetugas.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+        hasilList = listtargetNotSync.size();
+        Log.e("hasil", "" + hasilList);
+    }
+
+    private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listtarget = realm1.copyFromRealm(realm1.where(TargetPetugas.class).sort("komoditas", Sort.ASCENDING).findAll());
+            listtarget = realm1.copyFromRealm(realm1.where(TargetPetugas.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listtarget.isEmpty()) {
-                targetAdapter = new TargetAdapter(getApplicationContext(), listtarget, this);
+                targetAdapter = new TargetAdapter(getApplicationContext(), listtarget,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(targetAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
+                getNotSync();
+                checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
-            } else {
+            }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }
         });
@@ -171,7 +176,7 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
         query = query.toLowerCase();
         final List<TargetPetugas> filteredList = new ArrayList<>();
         for (TargetPetugas konten : realm.where(TargetPetugas.class).findAll()) {
-            final String text = konten.getKomoditas().toLowerCase();
+            final String text = konten.getHashId().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }
@@ -186,7 +191,7 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
 
     @Override
     public void OnClickTarget(String idTarget) {
-        startActivity(DetailTargetActivity.createIntent(getApplicationContext(), idTarget));
+        startActivity(DetailTargetActivity.createIntent(getApplicationContext(),idTarget));
     }
 
     @Override
@@ -237,7 +242,6 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
         dialog.show();
     }
 
-
     private void syncDialog() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .title(R.string.title_sync)
@@ -269,7 +273,9 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki " +message+ " data target yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+
+        return snackbar;
     }
 
     @Override
@@ -285,13 +291,11 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
 
     @Override
     public void saveDataSuccess(String message) {
-        counter++;
-        if(counter == hasilList){
-            progressdialog.dismiss();
-            mController.getAllTarget();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
+        progressdialog.dismiss();
+        mController.getAllTarget();
+        updateLayout(Konstanta.LAYOUT_LOADING);
+        snackbar.dismiss();
+//        this.recreate();
     }
 
     @Override

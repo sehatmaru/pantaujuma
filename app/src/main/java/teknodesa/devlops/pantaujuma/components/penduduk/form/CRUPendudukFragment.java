@@ -165,12 +165,6 @@ public class CRUPendudukFragment extends Fragment implements PendudukContract.Vi
 
     }
 
-    public static void setDeletedData(Parcelable itemData, AppComponent appComp) {
-        PendudukContract.Controller<PendudukRealm> mController = new PendudukController(new CRUPendudukFragment(), appComp);
-        String idItem = ((PendudukRealm) itemData).getHashId();
-        mController.setItemDeleted(idItem);
-    }
-
     @Override
     public void saveData(String tipe, Parcelable itemData) {
         PendudukContract.Controller<PendudukRealm> mController = new PendudukController(this, appComponent);
