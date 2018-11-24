@@ -54,6 +54,8 @@ public class RKTPAdapter extends RecyclerView.Adapter<RKTPAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         RKTPRealm rktp = listData.get(position);
+        holder.setIsRecyclable(false);
+
         String idpoktan = rktp.getPoktan();
         PoktanRealm poktan = realm.where(PoktanRealm.class).equalTo("hashId", idpoktan).findFirst();
 

@@ -1,13 +1,15 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos.komoditas;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import io.realm.annotations.PrimaryKey;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
-public class LahanRealm extends RealmObject {
+public class LahanParcelable implements Parcelable {
     @PrimaryKey
     private String hashId;
-    private int idDesa;
+
     private String pemilik;
     private String namaPemilikLahan;
     private String alamat;
@@ -28,39 +30,70 @@ public class LahanRealm extends RealmObject {
     private String deskripsi;
     private int status;
     private String gambar;
+
     private int isSync;
 
-    public LahanRealm() {
+    public LahanParcelable(LahanRealm realm) {
+        this.hashId = realm.getHashId();
+        this.pemilik = realm.getPemilik();
+        this.namaPemilikLahan = realm.getNamaPemilikLahan();
+        this.alamat = realm.getAlamat();
+        this.rt = realm.getRt();
+        this.rw = realm.getRw();
+        this.dusun = realm.getDusun();
+        this.desa = realm.getDesa();
+        this.namaKecamatan = realm.getNamaKecamatan();
+        this.datiII = realm.getDatiII();
+        this.provinsi = realm.getProvinsi();
+        this.longitude = realm.getLongitude();
+        this.latitude = realm.getLatitude();
+        this.luas = realm.getLuas();
+        this.batasTimur = realm.getBatasTimur();
+        this.batasBarat = realm.getBatasBarat();
+        this.batasSelatan = realm.getBatasSelatan();
+        this.batasUtara = realm.getBatasUtara();
+        this.deskripsi = realm.getDeskripsi();
+        this.status = realm.getStatus();
+        this.gambar = realm.getGambar();
+        this.isSync = realm.getIsSync();
     }
 
-    public LahanRealm(String hashId, int idDesa, String pemilik, String namaPemilikLahan, String alamat, String rt,
-                      String rw, String dusun, String desa, String namaKecamatan, String datiII, String provinsi, double longitude,
-                      double latitude, String luas, String batasTimur, String batasBarat, String batasSelatan, String batasUtara,
-                      String deskripsi, int status, String gambar, int isSync) {
-        this.hashId = hashId;
-        this.idDesa = idDesa;
-        this.pemilik = pemilik;
-        this.namaPemilikLahan = namaPemilikLahan;
-        this.alamat = alamat;
-        this.rt = rt;
-        this.rw = rw;
-        this.dusun = dusun;
-        this.desa = desa;
-        this.namaKecamatan = namaKecamatan;
-        this.datiII = datiII;
-        this.provinsi = provinsi;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.luas = luas;
-        this.batasTimur = batasTimur;
-        this.batasBarat = batasBarat;
-        this.batasSelatan = batasSelatan;
-        this.batasUtara = batasUtara;
-        this.deskripsi = deskripsi;
-        this.status = status;
-        this.gambar = gambar;
-        this.isSync = isSync;
+    protected LahanParcelable(Parcel in) {
+        hashId = in.readString();
+        pemilik = in.readString();
+        namaPemilikLahan = in.readString();
+        alamat = in.readString();
+        rt = in.readString();
+        rw = in.readString();
+        dusun = in.readString();
+        desa = in.readString();
+        namaKecamatan = in.readString();
+        datiII = in.readString();
+        provinsi = in.readString();
+        longitude = in.readDouble();
+        latitude = in.readDouble();
+        luas = in.readString();
+        batasTimur = in.readString();
+        batasBarat = in.readString();
+        batasSelatan = in.readString();
+        batasUtara = in.readString();
+        deskripsi = in.readString();
+        status = in.readInt();
+        gambar = in.readString();
+        isSync = in.readInt();
     }
+
+    public static final Creator<LahanParcelable> CREATOR = new Creator<LahanParcelable>() {
+        @Override
+        public LahanParcelable createFromParcel(Parcel in) {
+            return new LahanParcelable(in);
+        }
+
+        @Override
+        public LahanParcelable[] newArray(int size) {
+            return new LahanParcelable[size];
+        }
+    };
 
     public String getHashId() {
         return hashId;
@@ -68,14 +101,6 @@ public class LahanRealm extends RealmObject {
 
     public void setHashId(String hashId) {
         this.hashId = hashId;
-    }
-
-    public int getIdDesa() {
-        return idDesa;
-    }
-
-    public void setIdDesa(int idDesa) {
-        this.idDesa = idDesa;
     }
 
     public String getPemilik() {
@@ -248,9 +273,8 @@ public class LahanRealm extends RealmObject {
 
     @Override
     public String toString() {
-        return "LahanRealm{" +
+        return "LahanParcelable{" +
                 "hashId='" + hashId + '\'' +
-                ", idDesa=" + idDesa +
                 ", pemilik='" + pemilik + '\'' +
                 ", namaPemilikLahan='" + namaPemilikLahan + '\'' +
                 ", alamat='" + alamat + '\'' +
@@ -273,5 +297,36 @@ public class LahanRealm extends RealmObject {
                 ", gambar='" + gambar + '\'' +
                 ", isSync=" + isSync +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(hashId);
+        parcel.writeString(pemilik);
+        parcel.writeString(namaPemilikLahan);
+        parcel.writeString(alamat);
+        parcel.writeString(rt);
+        parcel.writeString(rw);
+        parcel.writeString(dusun);
+        parcel.writeString(desa);
+        parcel.writeString(namaKecamatan);
+        parcel.writeString(datiII);
+        parcel.writeString(provinsi);
+        parcel.writeString(String.valueOf(longitude));
+        parcel.writeString(String.valueOf(latitude));
+        parcel.writeString(luas);
+        parcel.writeString(batasTimur);
+        parcel.writeString(batasBarat);
+        parcel.writeString(batasSelatan);
+        parcel.writeString(batasUtara);
+        parcel.writeString(deskripsi);
+        parcel.writeString(String.valueOf(status));
+        parcel.writeString(gambar);
+        parcel.writeInt(isSync);
     }
 }

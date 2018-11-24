@@ -5,7 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.RiwayatLahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.RiwayatLahanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 
 /**
@@ -34,8 +35,8 @@ public class ListLahanKomoditasController implements ListLahanKomoditasContract.
     }
 
     @Override
-    public void getLahanKomoditasSuccess(List<RiwayatLahanRealm> riwayatLahanRealms) {
-        views.getLahanKomoditasSuccess(riwayatLahanRealms);
+    public void getLahanKomoditasSuccess(List<LahanRealm> lahan) {
+        views.getLahanKomoditasSuccess(lahan);
     }
 
     @Override

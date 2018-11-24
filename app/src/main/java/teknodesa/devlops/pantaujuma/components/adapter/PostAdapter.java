@@ -1,8 +1,10 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.Sort;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
+import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
 
@@ -22,9 +29,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     Realm realm;
 
     private List<PostRealm> listData;
+    private List<KomentarRealm> listKomentar;
     private LayoutInflater layoutInflater;
     public static Context mContext;
     private OnClickPostListener onClicPost;
+
+    private int hasil = 0;
 
     public PostAdapter(Context context, List<PostRealm> listData, OnClickPostListener onClicPost) {
         mContext = context;
@@ -39,6 +49,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ((MainApplication) mContext.getApplicationContext())
+                .getComponent()
+                .inject(this);
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_post , parent, false);
         return new MyViewHolder(itemView);
@@ -47,8 +61,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PostRealm postRealm = listData.get(position);
+        holder.setIsRecyclable(false);
+
+        listKomentar = realm.where(KomentarRealm.class)
+                .equalTo("hashPost", postRealm.getHashId())
+                .findAll();
+
+        hasil = listKomentar.size();
+
+        Log.e("hasil komentar", listKomentar.size() + "");
+
+        if(postRealm.getIsSync() == 0 ){
+            holder.cardview.setCardBackgroundColor(Color.CYAN);
+        }
+
         holder.textjudul.setText(postRealm.getJudul());
         holder.textnama.setText(postRealm.getNamaUser());
+        holder.textisi.setText(postRealm.getIsi());
+        holder.textdate.setText(postRealm.getTanggal());
+        holder.texttime.setText(postRealm.getWaktu());
+        holder.textcomment.setText(String.valueOf(hasil));
+        holder.textlike.setText(String.valueOf(postRealm.getViewCount()));
+        holder.textshare.setText(String.valueOf(postRealm.getViewCount()));
         holder.cardview.setOnClickListener(view -> {
             onClicPost.OnClickPost(postRealm.getHashId());
         });
@@ -66,11 +100,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textjudul;
         TextView textnama;
+        TextView textisi;
+        TextView textdate;
+        TextView texttime;
+        TextView textcomment;
+        TextView textshare;
+        TextView textlike;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textjudul = (TextView)itemView.findViewById(R.id.judul);
             textnama = (TextView)itemView.findViewById(R.id.nama);
+            textisi = (TextView)itemView.findViewById(R.id.isi);
+            textdate = (TextView)itemView.findViewById(R.id.date);
+            texttime = (TextView)itemView.findViewById(R.id.time);
+            textcomment = (TextView)itemView.findViewById(R.id.comment);
+            textlike = (TextView)itemView.findViewById(R.id.like);
+            textshare = (TextView)itemView.findViewById(R.id.share);
             cardview = (CardView) itemView.findViewById(R.id.postCardView);
         }
     }

@@ -1,5 +1,7 @@
 package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
+
 public class KomentarBody {
     private String hashId;
     private String hashPost;
@@ -13,15 +15,15 @@ public class KomentarBody {
     public KomentarBody() {
     }
 
-    public KomentarBody(String hashId, String hashPost, String idUser, String namaUser, String waktu, String tanggal, String deskripsi, int idDesa) {
-        this.hashId = hashId;
-        this.hashPost = hashPost;
-        this.idUser = idUser;
-        this.namaUser = namaUser;
-        this.waktu = waktu;
-        this.tanggal = tanggal;
-        this.deskripsi = deskripsi;
-        this.idDesa = idDesa;
+    public KomentarBody(KomentarRealm komentar){
+        this.hashId = komentar.getHashId();
+        this.hashPost = komentar.getHashPost();
+        this.idUser = komentar.getIdUser();
+        this.namaUser = komentar.getNamaUser();
+        this.waktu = komentar.getWaktu();
+        this.tanggal = komentar.getTanggal();
+        this.deskripsi = komentar.getDeskripsi();
+        this.idDesa = komentar.getIdDesa();
     }
 
     public String getHashId() {

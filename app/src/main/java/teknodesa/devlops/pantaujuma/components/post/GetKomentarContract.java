@@ -15,16 +15,15 @@ public class GetKomentarContract {
 
     public interface Controller {
         void getAllKomentar(String idPost);
-        void saveData(List<KomentarRealm> allKomentar);
-        void getAllKomentarSuccess(List<KomentarRealm> allKomentar);
+        void saveData(KomentarRealm komentar);
+        void getAllKomentarSuccess(List<KomentarRealm> komentar);
         void getAllKomentarFailed(String message);
-        void saveDataSuccess(String message, KomentarRealm targetTemp);
+        void saveDataSuccess(String message);
         void saveDataFailed(String message);
-        void updateDataRealm(KomentarRealm targetTemp);
     }
 
     public interface Repository{
         void getAllKomentar(String idPost);
-        void saveData(List<KomentarRealm> allKomentar);
+        void saveData(KomentarRealm komentar);
     }
 }

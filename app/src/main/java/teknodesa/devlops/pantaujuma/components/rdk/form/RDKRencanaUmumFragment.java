@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
     @BindView(R.id.input_jadwaltanam)
     EditText input_jadwaltanam;
-    public static boolean isOpen = false;
+
     @BindView(R.id.btnJadwalTanam)
     Button btnJadwalTanam;
     @OnClick(R.id.btnJadwalTanam)
@@ -77,11 +78,18 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
     @BindView(R.id.input_pemupukanmodal)
     EditText input_pemupukanmodal;
 
-    String komoditas;
+    public static boolean isOpen = false;
+    public static boolean check;
+
+    private String messageError;
+    private String komoditas = "";
+
+    FragmentActivity activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = getActivity();
         ((MainApplication) getActivity().getApplication())
                 .getComponent()
                 .inject(this);
@@ -115,30 +123,73 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
 
     @Override
     public RencanaUmum getUIData() {
-        String paketTeknologi = "";
-        String polaTanam = "";
-        String jadwalTanam = "";
-        String varietas = "";
-        String iuranAnggota = "";
-        String sumberBenih = "";
-        String tabunganAnggota = "";
-        String pemupukanModal = "";
-        String strKomoditas = "";
+        messageError = "";
 
-        try{
-            paketTeknologi = (input_paketteknologi.getText().toString() == null) ? "-" : input_paketteknologi.getText().toString();
-            polaTanam = (input_polatanam.getText().toString() == null) ? "-" : input_polatanam.getText().toString();
-            jadwalTanam = (input_jadwaltanam.getText().toString() == null) ? "-" : input_jadwaltanam.getText().toString();
-            varietas = (input_varietas.getText().toString() == null) ? "-" : input_varietas.getText().toString();
-            iuranAnggota = (input_iurananggota.getText().toString() == null) ? "-" : input_iurananggota.getText().toString();
-            sumberBenih = (input_sumberbenih.getText().toString() == null) ? "-" : input_sumberbenih.getText().toString();
-            tabunganAnggota = (input_tabungananggota.getText().toString() == null) ? "-" : input_tabungananggota.getText().toString();
-            pemupukanModal = (input_pemupukanmodal.getText().toString() == null) ? "-" : input_pemupukanmodal.getText().toString();
-            strKomoditas = (komoditas == null) ? "-" : komoditas;
-        }catch (NullPointerException e){}
+        String paketTeknologi = input_paketteknologi.getText().toString();
+        String polaTanam = input_polatanam.getText().toString();
+        String jadwalTanam = input_jadwaltanam.getText().toString();
+        String varietas = input_varietas.getText().toString();
+        String iuranAnggota = input_iurananggota.getText().toString();
+        String sumberBenih = input_sumberbenih.getText().toString();
+        String tabunganAnggota = input_tabungananggota.getText().toString();
+        String pemupukanModal = input_pemupukanmodal.getText().toString();
 
-        RencanaUmum newItem = new RencanaUmum(paketTeknologi, polaTanam, jadwalTanam, strKomoditas, varietas,
-                sumberBenih, tabunganAnggota, iuranAnggota, pemupukanModal);
+        RencanaUmum newItem = new RencanaUmum();
+
+        if(komoditas.compareTo("")==0 || komoditas == null){
+            check = true;
+            checkData();
+        }else{
+            newItem.setKomoditasRU(komoditas);
+        }
+
+        if(paketTeknologi == null || paketTeknologi.compareTo("")==0){
+            newItem.setPaketTeknologi("");
+        }else{
+            newItem.setPaketTeknologi(paketTeknologi);
+        }
+
+        if(polaTanam == null || polaTanam.compareTo("")==0){
+            newItem.setPolaTanam("");
+        }else{
+            newItem.setPolaTanam(polaTanam);
+        }
+
+        if(jadwalTanam == null || jadwalTanam.compareTo("")==0){
+            newItem.setJadwalTanam("");
+        }else{
+            newItem.setJadwalTanam(jadwalTanam);
+        }
+
+        if(varietas == null || varietas.compareTo("")==0){
+            newItem.setVarietas("");
+        }else{
+            newItem.setVarietas(varietas);
+        }
+
+        if(iuranAnggota == null || iuranAnggota.compareTo("")==0){
+            newItem.setIuranAnggota("");
+        }else{
+            newItem.setIuranAnggota(iuranAnggota);
+        }
+
+        if(sumberBenih == null || sumberBenih.compareTo("")==0){
+            newItem.setSumberBenih("");
+        }else{
+            newItem.setSumberBenih(sumberBenih);
+        }
+
+        if(tabunganAnggota == null || tabunganAnggota.compareTo("")==0){
+            newItem.setTabunganAnggota("");
+        }else{
+            newItem.setTabunganAnggota(tabunganAnggota);
+        }
+
+        if(pemupukanModal == null || pemupukanModal.compareTo("")==0){
+            newItem.setPemupukanModal("");
+        }else{
+            newItem.setPemupukanModal(pemupukanModal);
+        }
 
         return newItem;
     }
@@ -160,6 +211,10 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
     @Override
     public void saveData(String tipe, Parcelable itemData) {
         //not implemented yet
+    }
+
+    public void checkData(){
+
     }
 
     @Override

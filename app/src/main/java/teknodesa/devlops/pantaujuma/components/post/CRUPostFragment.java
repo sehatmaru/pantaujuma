@@ -2,6 +2,7 @@ package teknodesa.devlops.pantaujuma.components.post;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,7 @@ import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
+import teknodesa.devlops.pantaujuma.utils.NetworkUtils;
 
 public class CRUPostFragment extends Fragment implements CRUPostContract.ViewController<PostRealm>, CRUPostContract.View{
 
@@ -61,6 +63,11 @@ public class CRUPostFragment extends Fragment implements CRUPostContract.ViewCon
         ButterKnife.bind(this, v);
 
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -98,9 +105,9 @@ public class CRUPostFragment extends Fragment implements CRUPostContract.ViewCon
         newRealmItem.setWaktu(strWaktu);
         newRealmItem.setTipePost("post");
         newRealmItem.setThumbnail("0");
-        newRealmItem.setViewCount(0);
-        newRealmItem.setLikes(0);
-        newRealmItem.setDislike(0);
+        newRealmItem.setViewCount(21);
+        newRealmItem.setLikes(19);
+        newRealmItem.setDislike(5);
         newRealmItem.setIsSync(0);
 
         return newRealmItem;
@@ -115,13 +122,12 @@ public class CRUPostFragment extends Fragment implements CRUPostContract.ViewCon
     public void saveData(String tipe, Parcelable itemData) {
         CRUPostContract.Controller<PostRealm> mController = new CRUPostController(this, appComponent);
         PostRealm uiItem = getUIData();
-
-        if (tipe.equals("insert")) {
-            mController.addItem(uiItem);
-        } else {
-            if (tipe.equals("update")) {
-
+        if (isNetworkConnected()){
+            if (tipe.equals("insert")) {
+                mController.addItem(uiItem);
             }
+        }else{
+
         }
     }
 
@@ -172,6 +178,11 @@ public class CRUPostFragment extends Fragment implements CRUPostContract.ViewCon
         }else{
             return user;
         }
+    }
+
+    public boolean isNetworkConnected() {
+        boolean result = NetworkUtils.isNetworkConnected(this.getActivity());
+        return result;
     }
 
 }

@@ -8,16 +8,20 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -51,18 +55,10 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     @Inject
     GetKomentarController gController;
 
-    private AppComponent appComponent;
-
     List<KomentarRealm> listData = Collections.EMPTY_LIST;
-
-    @BindView(R.id.namaPetugas)
-    TextView namaPetugas;
 
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
-
-    @BindView(R.id.namaDesa)
-    TextView namaDesa;
 
     @BindView(R.id.judul)
     TextView judul;
@@ -78,6 +74,15 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
 
     @BindView(R.id.textKomentar)
     EditText textKomentar;
+
+    @BindView(R.id.komen)
+    TextView textKomen;
+
+    @BindView(R.id.like)
+    TextView textLike;
+
+    @BindView(R.id.share)
+    TextView textShare;
 
     @BindView(R.id.btnKomentar)
     Button btnKomentar;
@@ -95,7 +100,6 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     private ProgressDialog progressdialog;
     private Snackbar snackbar;
     static int counter;
-    private List<KomentarRealm> listkomentarNotSync = Collections.EMPTY_LIST;
     static int hasilList;
 
     KomentarRealm komentarRealm;
@@ -103,10 +107,14 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     @OnClick(R.id.btnKomentar)
     void saveDataToRealm(){
         komentarRealm = this.getUIData();
-        if (komentarRealm == null) {
-            Toast.makeText(this, "Silahkan isi data untuk menyimpan", Toast.LENGTH_SHORT).show();
-        } else {
-            this.saveData("insert");
+        if (isNetworkConnected()){
+            if (textKomentar.getText().toString().equals("")) {
+                createSnackbar("Anda belum mengisi komentar").show();
+            } else {
+                saveData("insert");
+            }
+        }else{
+            createSnackbar("Koneksi tidak tersedia").show();
         }
     }
 
@@ -135,17 +143,10 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
         mContext = this;
         linearLayoutManager = new LinearLayoutManager(mContext);
 
-        realm.beginTransaction();
-        listkomentarNotSync = realm.where(KomentarRealm.class).equalTo("isSync",0).findAll();
-        realm.commitTransaction();
-
-        hasilList = listkomentarNotSync.size();
-
         populateInitialData();
 
         ButterKnife.bind(this);
         setdata();
-        checkDataRealm();
     }
 
     private void updateLayout(String status) {
@@ -190,7 +191,7 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     public KomentarRealm getUIData(){
         String strKomentar = textKomentar.getText().toString();
         String strTanggal = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        String strWaktu = new SimpleDateFormat("HH:mm:ss").format(new Date());
+        String strWaktu = new SimpleDateFormat("HH:mm").format(new Date());
 
         KomentarRealm komentarRealm = new KomentarRealm();
         UserDB userDB = getData();
@@ -213,12 +214,11 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
             komentarRealm.setNama(userDB.getNamaDesa());
         }
         komentarRealm.setHashId(getSaltString());
-        komentarRealm.setHashPost(DetailPostActivity.idPost);
+        komentarRealm.setHashPost(idPost);
         komentarRealm.setWaktu(strWaktu);
         komentarRealm.setTanggal(strTanggal);
         komentarRealm.setDeskripsi(strKomentar);
-        komentarRealm.setIsSync(0);
-
+        komentarRealm.setIsSync(1);
 
         return komentarRealm;
     }
@@ -226,10 +226,7 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     public void saveData(String tipe) {
         if (tipe.equals("insert")) {
             mController.addItem(komentarRealm);
-        } else {
-            if (tipe.equals("update")) {
-
-            }
+            gController.saveData(komentarRealm);
         }
     }
     public UserDB getData() {
@@ -248,12 +245,13 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
         realm.commitTransaction();
     }
     private void setdata(){
-        namaPetugas.setText(dataPost.getNamaUser());
-        namaDesa.setText(dataPost.getNama());
         judul.setText(dataPost.getJudul());
         isi.setText(dataPost.getIsi());
         tanggal.setText(dataPost.getTanggal());
         waktu.setText(dataPost.getWaktu());
+        textLike.setText(String.valueOf(dataPost.getLikes()));
+        textKomen.setText(String.valueOf(listData.size()));
+        textShare.setText(String.valueOf(dataPost.getDislike()));
     }
 
     protected String getSaltString() {
@@ -281,15 +279,14 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     }
 
     private Snackbar createSnackbar(String message) {
-        snackbar = Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE)
-                .setAction("REFRESH", v -> DetailPostActivity.this.recreate());
+        snackbar = Snackbar.make(coordinatorLayout, message, 3000);
         return snackbar;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_eidu, menu);
+        getMenuInflater().inflate(R.menu.menu_komoditas, menu);
         return true;
     }
 
@@ -356,18 +353,7 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
 
     private void startSync(){
         counter=0;
-        gController.saveData(listkomentarNotSync);
-    }
-
-    private void checkDataRealm(){
-        if(hasilList > 0){
-            showRealmData(""+hasilList).show();
-        }
-    }
-
-    private Snackbar showRealmData(String message) {
-        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
-        return snackbar;
+        gController.saveData(komentarRealm);
     }
 
     @Override
@@ -383,14 +369,7 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
 
     @Override
     public void saveDataSuccess(String message) {
-        counter++;
-        if(counter == hasilList){
-            progressdialog.dismiss();
-            gController.getAllKomentar(idPost);
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            snackbar.dismiss();
-//            this.recreate();
-        }
+        gController.getAllKomentar(idPost);
     }
 
     @Override

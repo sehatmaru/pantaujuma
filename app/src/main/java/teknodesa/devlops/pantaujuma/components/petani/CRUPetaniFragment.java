@@ -69,7 +69,8 @@ public class CRUPetaniFragment extends Fragment implements
         SearchPendudukFragment.newInstance(this).show(getActivity().getFragmentManager(), "");
     }
 
-    private String biodata = DetailPetaniActivity.idPenduduk;
+    private String messageError;
+    private String biodata = "";
 
     private AppComponent appComponent;
     FragmentActivity activity;
@@ -150,6 +151,8 @@ public class CRUPetaniFragment extends Fragment implements
 
     @Override
     public PetaniRealm getUIData() {
+        messageError="";
+
         String strDeskripsi = (input_deskripsi.getText().toString() == null) ? "-" : input_deskripsi.getText().toString();
         String strStatus = input_status.getSelectedItem().toString();
 
@@ -160,11 +163,18 @@ public class CRUPetaniFragment extends Fragment implements
         } else {
             newRealmItem.setHashId(getSaltString());
         }
+
+        if(biodata.compareTo("")==0 || biodata == null){
+            messageError = messageError+" 'Penduduk'";
+        }else{
+            newRealmItem.setBiodata(biodata);
+        }
+
         newRealmItem.setDeskripsi(strDeskripsi);
         newRealmItem.setStatus(strStatus);
-        newRealmItem.setBiodata(biodata);
+//        newRealmItem.setBiodata(biodata);
         newRealmItem.setIdDesa(getIdDesa());
-        newRealmItem.setFoto("image.jpg");
+        newRealmItem.setFoto("");
 
         return newRealmItem;
     }
@@ -192,13 +202,18 @@ public class CRUPetaniFragment extends Fragment implements
     public void saveData(String tipe, Parcelable itemData) {
         PetaniContract.Controller<PetaniRealm> mController = new PetaniController(this, appComponent);
         PetaniRealm uiItem = getUIData();
-        if (tipe.equals("insert")) {
-            mController.addItem(uiItem);
-        } else {
-            if (tipe.equals("update")) {
-                String idItem = ((PetaniParcelable) itemData).getHashId();
-                mController.updateItem(idItem, uiItem);
+
+        if(messageError.compareTo("")==0){
+            if (tipe.equals("insert")) {
+                mController.addItem(uiItem);
+            } else {
+                if (tipe.equals("update")) {
+                    String idItem = ((PetaniParcelable) itemData).getHashId();
+                    mController.updateItem(idItem, uiItem);
+                }
             }
+        }else {
+            Toast.makeText(activity, "Harap mengisi data "+ messageError, Toast.LENGTH_SHORT).show();
         }
     }
 

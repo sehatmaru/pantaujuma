@@ -55,15 +55,22 @@ public class RDKIrigasiFragment extends Fragment implements RDKContract.ViewCont
 
     @Override
     public Irigasi getUIData() {
-        String strNama = "";
-        String strDeskripsiIrigasi = "";
+        String strNama = input_nama.getText().toString();
+        String strDeskripsiIrigasi = input_deskripsiIrigasi.getText().toString();
 
-        try{
-            strNama = (input_nama.getText().toString() == null) ? "-" : input_nama.getText().toString();
-            strDeskripsiIrigasi = (input_deskripsiIrigasi.getText().toString() == null) ? "-" : input_deskripsiIrigasi.getText().toString();
-        }catch (NullPointerException e){}
+        Irigasi newItem = new Irigasi();
 
-        Irigasi newItem = new Irigasi(strNama, strDeskripsiIrigasi);
+        if(strNama == null || strNama.compareTo("")==0){
+            newItem.setNama("");
+        }else{
+            newItem.setNama(strNama);
+        }
+
+        if(strDeskripsiIrigasi == null || strDeskripsiIrigasi.compareTo("")==0){
+            newItem.setDeskripsiIrigasi("");
+        }else{
+            newItem.setDeskripsiIrigasi(strDeskripsiIrigasi);
+        }
 
         return newItem;
     }

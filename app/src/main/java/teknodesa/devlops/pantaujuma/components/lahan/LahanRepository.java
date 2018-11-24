@@ -1,6 +1,5 @@
 package teknodesa.devlops.pantaujuma.components.lahan;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -10,7 +9,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
 public class LahanRepository implements LahanContract.Repository<LahanRealm> {
     @Inject

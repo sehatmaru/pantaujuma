@@ -59,6 +59,8 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PetaniRealm petani = listData.get(position);
+        holder.setIsRecyclable(false);
+
         PendudukRealm penduduk = realm.where(PendudukRealm.class)
                 .equalTo("hashId", petani.getBiodata())
                 .findFirst();

@@ -58,6 +58,8 @@ public class RDKKAdapter extends RecyclerView.Adapter<RDKKAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         RDKKPupukSubsidiRealm rdkk = listData.get(position);
+        holder.setIsRecyclable(false);
+
         String idkomoditas = rdkk.getKomoditas();
         String idpoktan = rdkk.getPoktan();
         String idpetani = rdkk.getPetani();

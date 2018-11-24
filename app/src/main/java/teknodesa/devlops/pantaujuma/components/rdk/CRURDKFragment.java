@@ -82,7 +82,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,8 +152,8 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
 
     private void setViewpager() {
         adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(rdkIrigasiFragment);
         adapter.addFragment(rdkIdentitasFragment);
+        adapter.addFragment(rdkIrigasiFragment);
         adapter.addFragment(rdkJadwalKegiatanFragment);
         adapter.addFragment(rdkRencanaUmumFragment);
         adapter.addFragment(rdkSasaranIntensifikasiFragment);
@@ -167,7 +166,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
     @Override
     public RDKRealm getUIData() {
         RDKRealm newRealmItem = new RDKRealm();
-
 
         Log.e("Hasil Repo",CRUActivity.mAction+" ");
         if (CRUActivity.mAction.equals("update")){
@@ -290,10 +288,30 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         RDKContract.Controller<RDKRealm> mController = new RDKController(this, appComponent);
         RDKRealm uiItem = getUIData();
         Log.e("Tipe data",tipe+" ");
-        if (tipe.equals("insert")) {
-            mController.addItem(uiItem);
-        } else {
-            if (tipe.equals("update")) {
+
+        if(RDKIdentitasFragment.isOpen){
+            identitas = rdkIdentitasFragment.getUIData();
+        }
+        if(RDKRencanaUmumFragment.isOpen){
+            rencanaUmum = rdkRencanaUmumFragment.getUIData();
+        }
+        if(RDKSasaranIntensifikasiFragment.isOpen){
+            sasaranIntensifikasi = rdkSasaranIntensifikasiFragment.getUIData();
+        }
+
+        if(tipe.equals("insert")){
+            if (identitas.getPoktan() == null || rencanaUmum.getKomoditasRU() == null || sasaranIntensifikasi.getKomoditasSI() == null){
+                Toast.makeText(activity, "Harap mengisi Poktan dan Komoditas", Toast.LENGTH_SHORT).show();
+            } else {
+                mController.addItem(uiItem);
+            }
+        }
+
+        if (tipe.equals("update")) {
+            RDKRealm dataRealm = getDataRDK(DetailRDKActivity.dataRDK.getHashId());
+            if (dataRealm.getKomoditasRU() == null || dataRealm.getPoktan() == null || dataRealm.getKomoditasSI() == null){
+                Toast.makeText(activity, "Harap mengisi Poktan dan Komoditas", Toast.LENGTH_SHORT).show();
+            } else{
                 mController.updateItem(uiItem.getHashId(), uiItem);
             }
         }
@@ -362,3 +380,4 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
     }
 
 }
+

@@ -111,6 +111,7 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
     EditText input_pelaksana;
 
     private String idPoktan = "";
+    private String messageError;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,7 +130,7 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         ButterKnife.bind(this, v);
 
         if(CRUActivity.mAction == "update"){
-            textForEdit();
+            setUIData();
             idPoktan = DetailRKTPActivity.idPoktan;
         }else{
 
@@ -138,29 +139,10 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         return v;
     }
 
-    void textForEdit(){
-        try{
-            input_poktan.setText(DetailRKTPActivity.dataPoktan.getNama());
-            input_tahun.setText(DetailRKTPActivity.dataRKTP.getTahun());
-            input_tujuan.setText(DetailRKTPActivity.dataRKTP.getTujuan());
-            input_masalah.setText(DetailRKTPActivity.dataRKTP.getMasalah());
-            input_sasaran.setText(DetailRKTPActivity.dataRKTP.getSasaran());
-            input_materi.setText(DetailRKTPActivity.dataRKTP.getMateri());
-            input_metode.setText(DetailRKTPActivity.dataRKTP.getMetode());
-            input_volume.setText(DetailRKTPActivity.dataRKTP.getVolume());
-            input_lokasi.setText(DetailRKTPActivity.dataRKTP.getLokasi());
-            input_waktu.setText(DetailRKTPActivity.dataRKTP.getWaktu());
-            input_sumberbiaya.setText(DetailRKTPActivity.dataRKTP.getSumberBiaya());
-            input_penanggungjawab.setText(DetailRKTPActivity.dataRKTP.getPenanggungJawab());
-            input_pelaksana.setText(DetailRKTPActivity.dataRKTP.getPelaksana());
-            input_keterangan.setText(DetailRKTPActivity.dataRKTP.getKeterangan());
-        } catch (NullPointerException e){
-
-        }
-    }
-
     @Override
     public RKTPRealm getUIData() {
+        messageError = "";
+
         String strTahun = input_tahun.getText().toString();
         String strTujuan = input_tujuan.getText().toString();
         String strMasalah = input_masalah.getText().toString();
@@ -196,22 +178,94 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         }catch (Exception e){
             idUs = "";
         }
+
+        if(idPoktan.compareTo("")==0 || idPoktan == null){
+            messageError = messageError+" Poktan";
+        }else{
+            newRealmItem.setPoktan(idPoktan);
+        }
+
         newRealmItem.setIdDesa(idDes);
         newRealmItem.setIdUser(idUs);
-        newRealmItem.setPoktan(idPoktan);
-        newRealmItem.setTujuan(strTujuan);
-        newRealmItem.setTahun(strTahun);
-        newRealmItem.setPelaksana(strPelaksana);
-        newRealmItem.setPenanggungJawab(strPenanggungJawab);
-        newRealmItem.setSumberBiaya(strSumberBiaya);
-        newRealmItem.setWaktu(strWaktu);
-        newRealmItem.setLokasi(strLokasi);
-        newRealmItem.setMasalah(strMasalah);
-        newRealmItem.setSasaran(strSasaran);
-        newRealmItem.setMateri(strMateri);
-        newRealmItem.setMetode(strMetode);
-        newRealmItem.setVolume(strVolume);
-        newRealmItem.setKeterangan(strKeterangan);
+//        newRealmItem.setPoktan(idPoktan);
+        if(strTujuan == null || strTujuan.compareTo("")==0){
+            newRealmItem.setTujuan("");
+        }else{
+            newRealmItem.setTujuan(strTujuan);
+        }
+        if(strTahun == null || strTahun.compareTo("")==0){
+            newRealmItem.setTahun("");
+        }else{
+            newRealmItem.setTahun(strTahun);
+        }
+        if(strPelaksana == null || strPelaksana.compareTo("")==0){
+            newRealmItem.setPelaksana("");
+        }else{
+            newRealmItem.setPelaksana(strPelaksana);
+        }
+        if(strPenanggungJawab == null || strPenanggungJawab.compareTo("")==0){
+            newRealmItem.setPenanggungJawab("");
+        }else{
+            newRealmItem.setPenanggungJawab(strPenanggungJawab);
+        }
+        if(strSumberBiaya == null || strSumberBiaya.compareTo("")==0){
+            newRealmItem.setSumberBiaya("");
+        }else{
+            newRealmItem.setSumberBiaya(strSumberBiaya);
+        }
+        if(strWaktu == null || strWaktu.compareTo("")==0){
+            newRealmItem.setWaktu("");
+        }else{
+            newRealmItem.setWaktu(strWaktu);
+        }
+        if(strLokasi == null || strLokasi.compareTo("")==0){
+            newRealmItem.setLokasi("");
+        }else{
+            newRealmItem.setLokasi(strLokasi);
+        }
+        if(strMasalah == null || strMasalah.compareTo("")==0){
+            newRealmItem.setMasalah("");
+        }else{
+            newRealmItem.setMasalah(strMasalah);
+        }
+        if(strSasaran == null || strSasaran.compareTo("")==0){
+            newRealmItem.setSasaran("");
+        }else{
+            newRealmItem.setSasaran(strSasaran);
+        }
+        if(strMateri == null || strMateri.compareTo("")==0){
+            newRealmItem.setMateri("");
+        }else{
+            newRealmItem.setMateri(strMateri);
+        }
+        if(strMetode == null || strMetode.compareTo("")==0){
+            newRealmItem.setMetode("");
+        }else{
+            newRealmItem.setMetode(strMetode);
+        }
+        if(strVolume == null || strVolume.compareTo("")==0){
+            newRealmItem.setVolume("");
+        }else{
+            newRealmItem.setVolume(strVolume);
+        }
+        if(strKeterangan == null || strKeterangan.compareTo("")==0){
+            newRealmItem.setKeterangan("");
+        }else{
+            newRealmItem.setKeterangan(strKeterangan);
+        }
+//        newRealmItem.setTujuan(strTujuan);
+//        newRealmItem.setTahun(strTahun);
+//        newRealmItem.setPelaksana(strPelaksana);
+//        newRealmItem.setPenanggungJawab(strPenanggungJawab);
+//        newRealmItem.setSumberBiaya(strSumberBiaya);
+//        newRealmItem.setWaktu(strWaktu);
+//        newRealmItem.setLokasi(strLokasi);
+//        newRealmItem.setMasalah(strMasalah);
+//        newRealmItem.setSasaran(strSasaran);
+//        newRealmItem.setMateri(strMateri);
+//        newRealmItem.setMetode(strMetode);
+//        newRealmItem.setVolume(strVolume);
+//        newRealmItem.setKeterangan(strKeterangan);
         newRealmItem.setIsSync(0);
 
         return newRealmItem;
@@ -225,7 +279,20 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
 
     @Override
     public void setUIData() {
-
+        input_poktan.setText(DetailRKTPActivity.dataPoktan.getNama());
+        input_tahun.setText(DetailRKTPActivity.dataRKTP.getTahun());
+        input_tujuan.setText(DetailRKTPActivity.dataRKTP.getTujuan());
+        input_masalah.setText(DetailRKTPActivity.dataRKTP.getMasalah());
+        input_sasaran.setText(DetailRKTPActivity.dataRKTP.getSasaran());
+        input_materi.setText(DetailRKTPActivity.dataRKTP.getMateri());
+        input_metode.setText(DetailRKTPActivity.dataRKTP.getMetode());
+        input_volume.setText(DetailRKTPActivity.dataRKTP.getVolume());
+        input_lokasi.setText(DetailRKTPActivity.dataRKTP.getLokasi());
+        input_waktu.setText(DetailRKTPActivity.dataRKTP.getWaktu());
+        input_sumberbiaya.setText(DetailRKTPActivity.dataRKTP.getSumberBiaya());
+        input_penanggungjawab.setText(DetailRKTPActivity.dataRKTP.getPenanggungJawab());
+        input_pelaksana.setText(DetailRKTPActivity.dataRKTP.getPelaksana());
+        input_keterangan.setText(DetailRKTPActivity.dataRKTP.getKeterangan());
     }
 
     @Override
@@ -233,13 +300,17 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         RKTPContract.Controller<RKTPRealm> mController = new RKTPController(this, appComponent);
         RKTPRealm uiItem = getUIData();
 
-        if (tipe.equals("insert")) {
-            mController.addItem(uiItem);
-        } else {
-            if (tipe.equals("update")) {
-                String idItem = ((RKTP) itemData).getHashId();
-                mController.updateItem(idItem, uiItem);
+        if(messageError.compareTo("")==0){
+            if (tipe.equals("insert")) {
+                mController.addItem(uiItem);
+            } else {
+                if (tipe.equals("update")) {
+                    String idItem = ((RKTP) itemData).getHashId();
+                    mController.updateItem(idItem, uiItem);
+                }
             }
+        }else {
+            Toast.makeText(activity, "Harap mengisi data "+ messageError, Toast.LENGTH_SHORT).show();
         }
     }
 

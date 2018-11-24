@@ -52,12 +52,7 @@ public class ListLahanKomoditasService implements ListLahanKomoditasContract.Rep
                         });
                         realm.commitTransaction();
 
-                        realm.beginTransaction();
-                        realm.executeTransactionAsync(realm -> {
-                            realm.insertOrUpdate(response.body().getData());
-                        });
-                        realm.commitTransaction();
-                        controller.getLahanKomoditasSuccess(response.body().getData());
+                        controller.getLahanKomoditasSuccess(response.body().getLahan());
                     }else
                         controller.getLahanKomoditasFailed(response.body().getMessage());
                 }else{

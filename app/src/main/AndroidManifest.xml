@@ -91,7 +91,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".components.post.DetailPostActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Post"
+            android:parentActivityName=".components.MainActivity" />
         <activity
             android:name=".components.lahan.ListLahanActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
@@ -109,6 +111,11 @@
             android:name=".components.alsintan.ListAlsintanActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="Alsintan"
+            android:parentActivityName=".components.MainActivity" />
+        <activity
+            android:name=".components.komoditas.MapLahan"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Lahan"
             android:parentActivityName=".components.MainActivity" />
         <activity
             android:name=".components.poktan.ListPoktanActivity"
@@ -152,7 +159,7 @@
 
         <activity
             android:name=".components.maps.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>

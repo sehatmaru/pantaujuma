@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.RiwayatLahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.RiwayatLahanRealm;
 
 /**
  * Created by Marthin on 8/2/2018.

@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,6 +77,7 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
     }
 
     private ProgressDialog progressdialog;
+    private Snackbar snackbar;
     static int counter;
 
     public static Intent createIntent(Context context) {
@@ -83,6 +85,7 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
     }
 
     static int hasilList =0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,27 +102,30 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-        realm.beginTransaction();
-        listrdkNotSync = realm.where(RDKRealm.class).equalTo("isSync",0).findAll();
-        realm.commitTransaction();
-
-        hasilList = listrdkNotSync.size();
+        getNotSync();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
 
-        checkDataRealm();
     }
-
+    private void getNotSync(){
+        realm.beginTransaction();
+        listrdkNotSync = realm.where(RDKRealm.class).equalTo("isSync",0).findAll();
+        realm.commitTransaction();
+        hasilList = listrdkNotSync.size();
+        Log.e("hasil", "" + hasilList);
+    }
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listrdk = realm1.copyFromRealm(realm1.where(RDKRealm.class).sort("poktan", Sort.ASCENDING).findAll());
+            listrdk = realm1.copyFromRealm(realm1.where(RDKRealm.class).sort("isSync",Sort.ASCENDING).findAll());
         }, () -> {
             if (!listrdk.isEmpty()) {
                 rdkAdapter = new RDKAdapter(getApplicationContext(), listrdk,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkAdapter);
                 rcList.setAdapter(scaleInAnimationAdapter);
                 rcList.setLayoutManager(linearLayoutManager);
+                getNotSync();
+                checkDataRealm();
                 updateLayout(Konstanta.LAYOUT_SUCCESS);
                 setSearchFunction();
             }else {
@@ -188,7 +194,7 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
 
     @Override
     public void OnClickRDK(String idRDK) {
-        startActivity(DetailRDKActivity.createIntent(getApplicationContext(), idRDK));
+        startActivity(DetailRDKActivity.createIntent(getApplicationContext(),idRDK));
     }
 
     @Override
@@ -239,7 +245,6 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
         dialog.show();
     }
 
-
     private void syncDialog() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .title(R.string.title_sync)
@@ -271,7 +276,9 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
     }
 
     private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data RDK "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data rdk "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+
+        return snackbar;
     }
 
     @Override
@@ -287,13 +294,11 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
 
     @Override
     public void saveDataSuccess(String message) {
-        counter++;
-        if(counter == hasilList){
-            progressdialog.dismiss();
-            mController.getAllRDK();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
+        progressdialog.dismiss();
+        mController.getAllRDK();
+        updateLayout(Konstanta.LAYOUT_LOADING);
+        snackbar.dismiss();
+//        this.recreate();
     }
 
     @Override

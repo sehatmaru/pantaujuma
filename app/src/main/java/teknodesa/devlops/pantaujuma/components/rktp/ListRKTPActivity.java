@@ -111,6 +111,7 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         realm.commitTransaction();
         hasilList = listrktpNotSync.size();
         Log.e("hasil", "" + hasilList);
+        Log.e("list", "" + listrktpNotSync);
     }
 
     private void populateInitialData(){

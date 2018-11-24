@@ -70,6 +70,7 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
     }
 
     private String komoditas = "";
+    private String messageError;
 
     private AppComponent appComponent;
     FragmentActivity activity;
@@ -110,7 +111,7 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         String strLuasPanen = input_luaspanen.getText().toString();
         String strSasaranProduksi = input_sasaranproduksi.getText().toString();
         String strSasaranProduktifitas = input_sasaranproduktifitas.getText().toString();
-        String strKeterangan = (input_keterangan.getText().toString() == null) ? "-" : input_keterangan.getText().toString();
+        String strKeterangan = input_keterangan.getText().toString();
 
         TargetPetugas newRealmItem = new TargetPetugas();
         if(CRUActivity.mAction == "update"){
@@ -133,13 +134,57 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
         }
         newRealmItem.setIdDesa(idDes);
         newRealmItem.setIdUser(idUs);
-        newRealmItem.setKomoditas(komoditas);
-        newRealmItem.setTahun(Integer.valueOf(strTahun));
-        newRealmItem.setLuasTanam(Float.valueOf(strLuasTanam));
-        newRealmItem.setLuasPanen(Float.valueOf(strLuasPanen));
-        newRealmItem.setSasaranProduksi(Float.valueOf(strSasaranProduksi));
-        newRealmItem.setSasaranProduktifitas(Float.valueOf(strSasaranProduktifitas));
-        newRealmItem.setKeterangan(strKeterangan);
+
+        if(komoditas.compareTo("")==0 || komoditas == null){
+            messageError = messageError+" 'Komoditas'";
+        }else{
+            newRealmItem.setKomoditas(komoditas);
+        }
+
+//        newRealmItem.setKomoditas(komoditas);
+
+        if(strTahun == null || strTahun.compareTo("")==0){
+            newRealmItem.setTahun(0);
+        }else{
+            newRealmItem.setTahun(Integer.valueOf(strTahun));
+        }
+
+        if(strLuasTanam == null || strLuasTanam.compareTo("")==0){
+            newRealmItem.setLuasTanam(0);
+        }else{
+            newRealmItem.setLuasTanam(Float.valueOf(strLuasTanam));
+        }
+
+        if(strLuasPanen == null || strLuasPanen.compareTo("")==0){
+            newRealmItem.setLuasPanen(0);
+        }else{
+            newRealmItem.setLuasPanen(Float.valueOf(strLuasPanen));
+        }
+
+        if(strSasaranProduksi == null || strSasaranProduksi.compareTo("")==0){
+            newRealmItem.setSasaranProduksi(0);
+        }else{
+            newRealmItem.setSasaranProduksi(Float.valueOf(strLuasPanen));
+        }
+
+        if(strSasaranProduktifitas == null || strSasaranProduktifitas.compareTo("")==0){
+            newRealmItem.setSasaranProduktifitas(0);
+        }else{
+            newRealmItem.setSasaranProduktifitas(Float.valueOf(strSasaranProduktifitas));
+        }
+
+        if(strKeterangan == null || strKeterangan.compareTo("")==0){
+            newRealmItem.setKeterangan("");
+        }else{
+            newRealmItem.setKeterangan(strKeterangan);
+        }
+
+//        newRealmItem.setTahun(Integer.valueOf(strTahun));
+//        newRealmItem.setLuasTanam(Float.valueOf(strLuasTanam));
+//        newRealmItem.setLuasPanen(Float.valueOf(strLuasPanen));
+//        newRealmItem.setSasaranProduksi(Float.valueOf(strSasaranProduksi));
+//        newRealmItem.setSasaranProduktifitas(Float.valueOf(strSasaranProduktifitas));
+//        newRealmItem.setKeterangan(strKeterangan);
         newRealmItem.setIsSync(0);
 
         return newRealmItem;

@@ -128,6 +128,9 @@ public class CRUActivity extends AppCompatActivity {
             case "harga":
                 replaceFragment(cruHargaFragment);
                 break;
+            case "post":
+                replaceFragment(cruPostFragment);
+                break;
         }
 
 

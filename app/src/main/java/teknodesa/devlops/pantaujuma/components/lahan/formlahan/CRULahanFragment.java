@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +36,7 @@ import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.AlamatLahanModel;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.LahanModel;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
 
 public class CRULahanFragment extends Fragment implements LahanContract.ViewController<LahanRealm>,LahanContract.View{
@@ -143,7 +142,7 @@ public class CRULahanFragment extends Fragment implements LahanContract.ViewCont
         data.setLatitude(alamatLahanModel.getLatitude());
         data.setLongitude(alamatLahanModel.getLongitude());
         try {
-            data.setIdDesa(getIdDesa());
+//            data.setIdDesa(getIdDesa());
             data.setIsSync(0);
             return data;
         }catch (Exception e){

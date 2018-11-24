@@ -1,6 +1,7 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 
 public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.MyViewHolder> {
 
@@ -42,10 +44,9 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         KomentarRealm komentarRealm = listData.get(position);
         holder.textnama.setText(komentarRealm.getNamaUser());
-        holder.textKomentar.setText(komentarRealm.getDeskripsi());
-        holder.textDesa.setText(komentarRealm.getNama());
-        holder.textTanggal.setText(komentarRealm.getTanggal());
-        holder.textWaktu.setText(komentarRealm.getWaktu());
+        holder.textkomentar.setText(komentarRealm.getDeskripsi());
+        holder.textdate.setText(komentarRealm.getTanggal());
+        holder.texttime.setText(komentarRealm.getWaktu());
     }
 
     @Override
@@ -59,18 +60,16 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textnama;
-        TextView textDesa;
-        TextView textKomentar;
-        TextView textTanggal;
-        TextView textWaktu;
+        TextView textkomentar;
+        TextView textdate;
+        TextView texttime;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textnama = (TextView)itemView.findViewById(R.id.nama);
-            textDesa = (TextView)itemView.findViewById(R.id.namaDesa);
-            textKomentar = (TextView)itemView.findViewById(R.id.komentar);
-            textTanggal = (TextView)itemView.findViewById(R.id.tanggal);
-            textWaktu = (TextView)itemView.findViewById(R.id.waktu);
+            textkomentar = (TextView)itemView.findViewById(R.id.komentar);
+            textdate = (TextView)itemView.findViewById(R.id.date);
+            texttime = (TextView)itemView.findViewById(R.id.time);
             cardview = (CardView) itemView.findViewById(R.id.komentarCardView);
         }
     }

@@ -1,10 +1,10 @@
-package teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan;
+package teknodesa.devlops.pantaujuma.dependencies.models.pojos.komoditas;
 
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
 public class LahanBody {
     private String hashId;
-    private int idDesa;
+
     private String pemilik;
     private String namaPemilikLahan;
     private String alamat;
@@ -29,29 +29,9 @@ public class LahanBody {
     public LahanBody() {
     }
 
-    public LahanBody(LahanRealm data) {
-        this.hashId = data.getHashId();
-        this.idDesa = data.getIdDesa();
-        this.pemilik = data.getPemilik();
-        this.namaPemilikLahan = data.getNamaPemilikLahan();
-        this.alamat = data.getAlamat();
-        this.rt = data.getRt();
-        this.rw = data.getRw();
-        this.dusun = data.getDusun();
-        this.desa = data.getDesa();
-        this.namaKecamatan = data.getNamaKecamatan();
-        this.datiII = data.getDatiII();
-        this.provinsi = data.getProvinsi();
-        this.longitude = data.getLongitude();
-        this.latitude = data.getLatitude();
-        this.luas = data.getLuas();
-        this.batasTimur = data.getBatasTimur();
-        this.batasBarat = data.getBatasBarat();
-        this.batasSelatan = data.getBatasSelatan();
-        this.batasUtara = data.getBatasUtara();
-        this.deskripsi = data.getDeskripsi();
-        this.status = 1;
-        this.gambar = "";
+    public LahanBody(LahanRealm realm){
+        this.hashId = realm.getHashId();
+        this.hashId = realm.getHashId();
     }
 
     public String getHashId() {
@@ -60,14 +40,6 @@ public class LahanBody {
 
     public void setHashId(String hashId) {
         this.hashId = hashId;
-    }
-
-    public int getIdDesa() {
-        return idDesa;
-    }
-
-    public void setIdDesa(int idDesa) {
-        this.idDesa = idDesa;
     }
 
     public String getPemilik() {
@@ -234,7 +206,6 @@ public class LahanBody {
     public String toString() {
         return "LahanBody{" +
                 "hashId='" + hashId + '\'' +
-                ", idDesa=" + idDesa +
                 ", pemilik='" + pemilik + '\'' +
                 ", namaPemilikLahan='" + namaPemilikLahan + '\'' +
                 ", alamat='" + alamat + '\'' +

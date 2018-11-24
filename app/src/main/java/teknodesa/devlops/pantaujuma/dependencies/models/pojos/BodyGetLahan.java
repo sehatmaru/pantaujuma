@@ -6,12 +6,12 @@ package teknodesa.devlops.pantaujuma.dependencies.models.pojos;
 
 public class BodyGetLahan {
     private String idKomoditas;
-    private String idDesa;
+    private int idDesa;
 
     public BodyGetLahan() {
     }
 
-    public BodyGetLahan(String idKomoditas, String idDesa) {
+    public BodyGetLahan(String idKomoditas, int idDesa) {
         this.idKomoditas = idKomoditas;
         this.idDesa = idDesa;
     }
@@ -24,11 +24,19 @@ public class BodyGetLahan {
         this.idKomoditas = idKomoditas;
     }
 
-    public String getIdDesa() {
+    public int getIdDesa() {
         return idDesa;
     }
 
-    public void setIdDesa(String idDesa) {
+    public void setIdDesa(int idDesa) {
         this.idDesa = idDesa;
+    }
+
+    @Override
+    public String toString() {
+        return "BodyGetLahan{" +
+                "idKomoditas='" + idKomoditas + '\'' +
+                ", idDesa=" + idDesa +
+                '}';
     }
 }

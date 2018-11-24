@@ -54,6 +54,8 @@ public class RDKAdapter extends RecyclerView.Adapter<RDKAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(RDKAdapter.MyViewHolder holder, int position) {
         RDKRealm rdk = listData.get(position);
+        holder.setIsRecyclable(false);
+
         if(rdk.getIsSync() == 0 ){
             holder.cardview.setCardBackgroundColor(Color.CYAN);
         }

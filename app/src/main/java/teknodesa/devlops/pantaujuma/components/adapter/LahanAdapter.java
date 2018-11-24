@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import teknodesa.devlops.pantaujuma.R;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
 public class LahanAdapter extends RecyclerView.Adapter<LahanAdapter.MyViewHolder> {
     private List<LahanRealm> listData;

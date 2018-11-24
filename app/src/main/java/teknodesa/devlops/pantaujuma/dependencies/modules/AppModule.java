@@ -13,10 +13,10 @@ import teknodesa.devlops.pantaujuma.components.harga.GetHargaController;
 import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
+import teknodesa.devlops.pantaujuma.components.komoditas.GetLahanByKomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.LahanRepository;
 import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRUAlamatLahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.GetLahanController;
@@ -61,6 +61,7 @@ import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetAlsinta
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetAnggotaPoktanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetHargaService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetKomentarService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetLahanByKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetLahanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPengurusPoktanService;
@@ -90,6 +91,12 @@ public class AppModule {
     }
 
     //Services
+    @Provides
+    @Singleton
+    GetLahanByKomoditasService listLahanByKomoditasService() {
+        return new GetLahanByKomoditasService(app.getComponent());
+    }
+
     @Provides
     @Singleton
     ListLahanKomoditasService listLahanKomoditasService() {
@@ -199,6 +206,12 @@ public class AppModule {
     }
 
     //Controllers
+    @Provides
+    @Singleton
+    GetLahanByKomoditasController lahanByKomoditasController() {
+        return new GetLahanByKomoditasController(app.getComponent());
+    }
+
     @Provides
     @Singleton
     KomoditasController komoditasController() {

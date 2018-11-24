@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,9 +44,14 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
     private String komoditas = "";
     private String messageError;
     public static boolean isOpen = false;
+    public static boolean check;
+
+    FragmentActivity activity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = getActivity();
         ((MainApplication) getActivity().getApplication())
                 .getComponent()
                 .inject(this);
@@ -80,7 +87,8 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
         SasaranIntensifikasi newItem = new SasaranIntensifikasi();
 
         if(komoditas.compareTo("")==0 || komoditas == null){
-            messageError = messageError+" 'Komoditas Sasaran'";
+            check = true;
+            checkData();
         }else{
             newItem.setKomoditasSI(komoditas);
         }
@@ -111,6 +119,10 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
     @Override
     public void saveData(String tipe, Parcelable itemData) {
         //not implemented yet
+    }
+
+    public void checkData(){
+
     }
 
     @Override

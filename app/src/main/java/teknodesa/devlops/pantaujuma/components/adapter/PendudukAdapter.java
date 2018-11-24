@@ -46,6 +46,8 @@ public class PendudukAdapter extends RecyclerView.Adapter<PendudukAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PendudukRealm penduduk = listData.get(position);
+        holder.setIsRecyclable(false);
+
         if(penduduk.getIsSync() == 0 ){
             holder.cardview.setCardBackgroundColor(Color.CYAN);
         }

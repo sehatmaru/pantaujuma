@@ -53,7 +53,9 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         }, tahun, bulan, tanggal);
         datePickerDialog.show();
     }
+
     public static boolean isOpen = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +91,7 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
         String strTanggal = input_tanggalJK.getText().toString();
         String strDeskripsi = input_deskripsiJK.getText().toString();
 
-        JadwalKegiatan newItem = new JadwalKegiatan(strKegiatan, strTanggal, strDeskripsi);
+        JadwalKegiatan newItem = new JadwalKegiatan();
 
         if(strKegiatan == null || strKegiatan.compareTo("")==0){
             newItem.setKegiatanJK("");
@@ -97,16 +99,16 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
             newItem.setKegiatanJK(strKegiatan);
         }
 
-        if(strKegiatan == null || strKegiatan.compareTo("")==0){
-            newItem.setKegiatanJK("");
+        if(strTanggal == null || strTanggal.compareTo("")==0){
+            newItem.setTanggalJK("");
         }else{
-            newItem.setKegiatanJK(strKegiatan);
+            newItem.setTanggalJK(strTanggal);
         }
 
-        if(strKegiatan == null || strKegiatan.compareTo("")==0){
-            newItem.setKegiatanJK("");
+        if(strDeskripsi == null || strDeskripsi.compareTo("")==0){
+            newItem.setDeskripsiJK("");
         }else{
-            newItem.setKegiatanJK(strKegiatan);
+            newItem.setDeskripsiJK(strDeskripsi);
         }
 
         return newItem;

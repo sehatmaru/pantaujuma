@@ -19,7 +19,7 @@ import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RDKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.RKTPBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.TargetPetugasBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.LahanBody;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.komoditas.LahanBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdkk.RDKKBody;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.LoginModel;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseAnggotaPoktan;
@@ -71,7 +71,7 @@ public interface PantauJumaAPI {
     @POST("lahan/insertLahan")
     Call<ResponseSaveData> insertLahan(@Header("Authorization") String token, @Body LahanBody lahankBody);
 
-    @POST("lahan/getAllLahanKomoditas")
+    @POST("lahan/getLahanByKomoditas")
     Call<ResponseGetLahanKomoditas> getLahanByKomoditas(@Header("Authorization") String token, @Body BodyGetLahan bodyGetLahan);
 
     @GET("petani/getPetaniByDesa/{idDesa}")

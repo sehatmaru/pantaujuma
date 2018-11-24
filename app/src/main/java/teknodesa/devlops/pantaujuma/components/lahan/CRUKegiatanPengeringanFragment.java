@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
 public class CRUKegiatanPengeringanFragment extends Fragment  implements LahanContract.ViewController<LahanRealm>, LahanContract.View{
     @BindView(R.id.input_tanggalmasuk)

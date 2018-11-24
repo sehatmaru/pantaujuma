@@ -32,11 +32,11 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.LahanKomoditasAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
-import teknodesa.devlops.pantaujuma.components.profile.AkunFragment;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.RiwayatLahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.RiwayatLahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class ListLahanKomoditasActivity extends BaseActivity implements ListLahanKomoditasContract.View, LahanKomoditasAdapter.OnClickKomoditasListener {
@@ -158,7 +158,7 @@ public class ListLahanKomoditasActivity extends BaseActivity implements ListLaha
         query = query.toLowerCase();
         final List<RiwayatLahanRealm> filteredList = new ArrayList<>();
         for (RiwayatLahanRealm konten : realm.where(RiwayatLahanRealm.class).findAll()) {
-            final String text = konten.getIdKegiatan().toLowerCase();
+            final String text = konten.getNamaPemilikLahan().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }
@@ -195,7 +195,7 @@ public class ListLahanKomoditasActivity extends BaseActivity implements ListLaha
                 .positiveText(R.string.yes)
                 .negativeText(R.string.no)
                 .onPositive((dialog1, which) -> {
-                    mController.getLahanKomoditas(new BodyGetLahan(komoditasRealm.getHashId(), getIdDesa()));
+                    mController.getLahanKomoditas(new BodyGetLahan(komoditasRealm.getHashId(), Integer.valueOf(getIdDesa())));
                     updateLayout(Konstanta.LAYOUT_LOADING);
                 })
                 .onNegative((dialog1, which) -> {
@@ -206,7 +206,7 @@ public class ListLahanKomoditasActivity extends BaseActivity implements ListLaha
     }
 
     @Override
-    public void getLahanKomoditasSuccess(List<RiwayatLahanRealm> riwayatLahanRealms) {
+    public void getLahanKomoditasSuccess(List<LahanRealm> lahan) {
         populateInitialData();
     }
 

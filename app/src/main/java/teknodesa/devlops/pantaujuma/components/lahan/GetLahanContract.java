@@ -2,8 +2,7 @@ package teknodesa.devlops.pantaujuma.components.lahan;
 
 import java.util.List;
 
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
 /**
  * Created by Marthin on 7/10/2018.

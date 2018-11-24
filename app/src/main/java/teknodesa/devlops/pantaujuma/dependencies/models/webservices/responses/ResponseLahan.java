@@ -2,7 +2,7 @@ package teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses;
 
 import java.util.List;
 
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 
 public class ResponseLahan {
     private boolean success;

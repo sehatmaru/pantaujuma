@@ -55,6 +55,7 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         TargetPetugas targetPetugas = listData.get(position);
+        holder.setIsRecyclable(false);
 
         KomoditasRealm komoditasRealm = realm.where(KomoditasRealm.class)
                 .equalTo("hashId", targetPetugas.getKomoditas())
@@ -72,16 +73,35 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
             komoditas = komoditasRealm.getNama();
         }
 
-        holder.textkomoditas.setText(komoditas);
+        holder.textkomoditas.setText("Komoditas: " + komoditas);
 
         String keterangan;
         if(targetPetugas.getKeterangan() == null || targetPetugas.getKeterangan().compareTo("")==0){
-            keterangan="";
+            keterangan="-";
         }else{
             keterangan = targetPetugas.getKeterangan();
         }
 
         holder.textketerangan.setText("Keterangan: " + keterangan);
+
+        String tahun;
+        if(targetPetugas.getTahun() == 0){
+            tahun="-";
+        }else{
+            tahun = String.valueOf(targetPetugas.getTahun());
+        }
+
+        holder.texttahun.setText("Tahun: " + tahun);
+
+        String luas;
+        if(targetPetugas.getLuasTanam() == 0){
+            luas="-";
+        }else{
+            luas = String.valueOf(targetPetugas.getLuasTanam());
+        }
+
+        holder.textluas.setText("Luas: " + luas);
+
         holder.cardview.setOnClickListener(view -> {
             onClicTarget.OnClickTarget(targetPetugas.getHashId());
         });
@@ -99,11 +119,15 @@ public class TargetAdapter extends RecyclerView.Adapter<TargetAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textkomoditas;
         TextView textketerangan;
+        TextView texttahun;
+        TextView textluas;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textkomoditas = (TextView)itemView.findViewById(R.id.komoditas);
             textketerangan = (TextView)itemView.findViewById(R.id.keterangan);
+            texttahun = (TextView)itemView.findViewById(R.id.tahun);
+            textluas = (TextView)itemView.findViewById(R.id.luas);
             cardview = (CardView) itemView.findViewById(R.id.targetCardView);
         }
     }

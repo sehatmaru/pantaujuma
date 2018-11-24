@@ -57,6 +57,7 @@ public class PoktanAdapter extends RecyclerView.Adapter<PoktanAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PoktanRealm poktan = listData.get(position);
+        holder.setIsRecyclable(false);
 
         if(poktan.getIsSync() == 0 ){
             holder.cardview.setCardBackgroundColor(Color.CYAN);

@@ -32,7 +32,7 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.MyVi
     }
 
     public interface OnClickKomoditasListener {
-        void OnClickKomoditas(KomoditasRealm komoditasRealm);
+        void OnClickKomoditas(String hashId);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.MyVi
         holder.txDeskripsiKomoditas.setText(""+data.getDeskripsi());
 
         holder.cardView.setOnClickListener(view -> {
-            onClick.OnClickKomoditas(data);
+            onClick.OnClickKomoditas(data.getHashId());
         });
 
     }

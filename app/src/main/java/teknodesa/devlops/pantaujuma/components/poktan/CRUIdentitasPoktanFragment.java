@@ -37,12 +37,6 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
     @BindView(R.id.input_nama)
     EditText input_namapoktan;
 
-    @BindView(R.id.input_desa)
-    EditText input_desa;
-
-    @BindView(R.id.input_kecamatan)
-    EditText input_kecamatan;
-
     @BindView(R.id.input_tanggaldidirikan)
     EditText input_tanggaldidirikan;
 
@@ -106,21 +100,7 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
 
         }
 
-        setData();
-
         return v;
-    }
-
-    private void setData(){
-        UserDB userDB = getData();
-        if(userDB != null){
-            input_desa.setText(userDB.getNamaDesa());
-            input_kecamatan.setText(userDB.getKecamatan());
-        }else{
-            input_desa.setText("-");
-            input_kecamatan.setText("-");
-        }
-
     }
 
     @Override
@@ -139,8 +119,6 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
         String strTanggalDidirikan = input_tanggaldidirikan.getText().toString();
         String strDeskripsi = input_deskripsi.getText().toString();
         String strNamaPoktan = input_namapoktan.getText().toString();
-        String strDesa = input_desa.getText().toString();
-        String strKecamatan = input_kecamatan.getText().toString();
         String strNoHP = input_hp.getText().toString();
         String strNoTelp = input_telp.getText().toString();
 
@@ -176,18 +154,6 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
             newItem.setNama(strNamaPoktan);
         }
 
-        if(strDesa == null || strDesa.compareTo("")==0){
-            newItem.setDesa("");
-        }else{
-            newItem.setDesa(strDesa);
-        }
-
-        if(strKecamatan == null || strKecamatan.compareTo("")==0){
-            newItem.setKecamatan("");
-        }else{
-            newItem.setKecamatan(strKecamatan);
-        }
-
         if(strNoHP == null || strNoHP.compareTo("")==0){
             newItem.setNoHP("");
         }else{
@@ -200,16 +166,8 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
             newItem.setNoTelp(strNoTelp);
         }
 
-//        newItem.setNama(strNamaPoktan);
-//        newItem.setAlamat(strAlamat);
-//        newItem.setTanggalDidirikan(strTanggalDidirikan);
-//        newItem.setDeskripsi(strDeskripsi);
-//        newItem.setDesa(strDesa);
-//        newItem.setKecamatan(strKecamatan);
-//        newItem.setNoHP(strNoHP);
-//        newItem.setNoTelp(strNoTelp);
-//        newItem.setStatusPoktan(0);
-//        newItem.setIdDesa(getIdDesa());
+        newItem.setStatusPoktan(0);
+        newItem.setIdDesa(getIdDesa());
         newItem.setIsSync(0);
 
         return newItem;
@@ -221,18 +179,12 @@ public class CRUIdentitasPoktanFragment extends Fragment implements PoktanContra
     }
 
     void textForEdit(){
-        try{
-            input_namapoktan.setText(DetailPoktanActivity.dataPoktan.getNama());
-            input_desa.setText(DetailPoktanActivity.dataPoktan.getDesa());
-            input_kecamatan.setText(DetailPoktanActivity.dataPoktan.getKecamatan());
-            input_tanggaldidirikan.setText(DetailPoktanActivity.dataPoktan.getTanggalDidirikan());
-            input_alamat.setText(DetailPoktanActivity.dataPoktan.getAlamat());
-            input_hp.setText(DetailPoktanActivity.dataPoktan.getNoHP());
-            input_telp.setText(DetailPoktanActivity.dataPoktan.getNoTelp());
-            input_deskripsi.setText(DetailPoktanActivity.dataPoktan.getDeskripsi());
-        } catch (NullPointerException e){
-
-        }
+        input_namapoktan.setText(DetailPoktanActivity.dataPoktan.getNama());
+        input_tanggaldidirikan.setText(DetailPoktanActivity.dataPoktan.getTanggalDidirikan());
+        input_alamat.setText(DetailPoktanActivity.dataPoktan.getAlamat());
+        input_hp.setText(DetailPoktanActivity.dataPoktan.getNoHP());
+        input_telp.setText(DetailPoktanActivity.dataPoktan.getNoTelp());
+        input_deskripsi.setText(DetailPoktanActivity.dataPoktan.getDeskripsi());
     }
 
     protected String getSaltString() {

@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,11 +39,13 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PostAdapter;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetKomentarService;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 import teknodesa.devlops.pantaujuma.utils.NetworkUtils;
 
-public class PostFragment extends Fragment implements GetPostContract.View , PostAdapter.OnClickPostListener{
+public class PostFragment extends Fragment implements GetPostContract.View, GetKomentarContract.View, PostAdapter.OnClickPostListener{
 
     FragmentActivity activity;
     private final String mJenisCRU = "post";
@@ -52,11 +55,18 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
 
     @OnClick(R.id.fabTambah)
     void clickCheckOut() {
-        startActivity(CRUActivity.createIntent(getContext(), mJenisCRU, "insert", null));
+        if (isNetworkConnected()){
+            startActivity(CRUActivity.createIntent(getContext(), mJenisCRU, "insert", null));
+        }else{
+            createSnackbar("Koneksi tidak tersedia").show();
+        }
     }
 
     @Inject
     GetPostController mController;
+
+    @Inject
+    GetKomentarController kController;
 
     @Inject
     Realm realm;
@@ -107,6 +117,8 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
         progressdialog = new ProgressDialog(getActivity());
 
         mController.setView(this);
+        kController.setView(this);
+
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
 
         realm.beginTransaction();
@@ -114,6 +126,9 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
         realm.commitTransaction();
 
         hasilList = listpostNotSync.size();
+
+        Log.e("hasil", "" + hasilList);
+        Log.e("list", listpostNotSync.toString());
 
         updateLayout(Konstanta.LAYOUT_LOADING);
         populateInitialData();
@@ -123,7 +138,7 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listData = realm1.copyFromRealm(realm1.where(PostRealm.class).sort("judul", Sort.ASCENDING).findAll());
+            listData = realm1.copyFromRealm(realm1.where(PostRealm.class).sort("tanggal", Sort.ASCENDING, "waktu", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listData.isEmpty()) {
                 postAdapter = new PostAdapter(getActivity().getApplicationContext(), listData,this);
@@ -163,7 +178,7 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
     }
 
     private Snackbar showRealmData(String message) {
-        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data target "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data post "+message+ " yang belum di backup", 5000);
         return snackbar;
     }
 
@@ -180,7 +195,8 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
     }
 
     private Snackbar createSnackbar(String message) {
-        return Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE);
+        return snackbar;
     }
     private void updateLayout(String status) {
         switch (status) {
@@ -204,8 +220,6 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
                 break;
         }
     }
-
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
@@ -280,8 +294,6 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
         mController.saveData(listpostNotSync);
     }
 
-
-
     @Override
     public void getAllPostSuccess(List<PostRealm> allPost) {
         populateInitialData();
@@ -292,6 +304,16 @@ public class PostFragment extends Fragment implements GetPostContract.View , Pos
     public void getAllPostFailed(String message) {
         updateLayout(Konstanta.LAYOUT_ERROR);
         createSnackbar(message).show();
+    }
+
+    @Override
+    public void getAllKomentarSuccess(List<KomentarRealm> allKomentar) {
+
+    }
+
+    @Override
+    public void getAllKomentarFailed(String message) {
+
     }
 
     @Override

@@ -122,7 +122,7 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listpoktan = realm1.copyFromRealm(realm1.where(PoktanRealm.class).sort("nama", Sort.ASCENDING).findAll());
+            listpoktan = realm1.copyFromRealm(realm1.where(PoktanRealm.class).sort("isSync", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listpoktan.isEmpty()) {
                 poktanAdapter = new PoktanAdapter(getApplicationContext(), listpoktan,this);
@@ -290,7 +290,7 @@ public class ListPoktanActivity extends BaseActivity implements PoktanAdapter.On
     }
 
     private Snackbar showRealmData(String message) {
-        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data poktan "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki " +message+  " data yang belum di backup", Snackbar.LENGTH_INDEFINITE);
         return snackbar;
     }
 

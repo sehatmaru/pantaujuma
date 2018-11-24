@@ -86,8 +86,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
-
-        checkDataRealm();
     }
 
     private void populateInitialData() {
@@ -153,7 +151,7 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
         query = query.toLowerCase();
         final List<AlsintanRealm> filteredList = new ArrayList<>();
         for (AlsintanRealm konten : realm.where(AlsintanRealm.class).findAll()) {
-            final String text = konten.getHashId().toLowerCase();
+            final String text = konten.getNamaAlat().toLowerCase();
             if (text.contains(query)) {
                 filteredList.add(konten);
             }
@@ -210,16 +208,6 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
                 })
                 .build();
         dialog.show();
-    }
-
-    private void checkDataRealm() {
-        if (hasilList > 0) {
-            showRealmData("" + hasilList).show();
-        }
-    }
-
-    private Snackbar showRealmData(String message) {
-        return Snackbar.make(coordinatorLayout, "Anda memiliki data alsintan " + message + " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
     }
 
     @Override

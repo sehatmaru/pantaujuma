@@ -213,17 +213,26 @@ public class CRUHargaFragment extends Fragment implements
         HargaContract.Controller<HargaRealm> mController = new HargaController(this, appComponent);
         HargaRealm uiItem = getUIData();
 
-        if(messageError.compareTo("")==0){
-            if (tipe.equals("insert")) {
-                mController.addItem(uiItem);
-            } else {
-                if (tipe.equals("update")) {
-                    String idItem = ((HargaRealm) itemData).getHashId();
-                    mController.updateItem(idItem, uiItem);
-                }
+//        if(messageError.compareTo("")==0){
+//            if (tipe.equals("insert")) {
+//                mController.addItem(uiItem);
+//            } else {
+//                if (tipe.equals("update")) {
+//                    String idItem = ((Harga) itemData).getHashId();
+//                    mController.updateItem(idItem, uiItem);
+//                }
+//            }
+//        }else {
+//            Toast.makeText(activity, "Harap mengisi data "+ messageError, Toast.LENGTH_SHORT).show();
+//        }
+
+        if (tipe.equals("insert")) {
+            mController.addItem(uiItem);
+        } else {
+            if (tipe.equals("update")) {
+                String idItem = ((Harga) itemData).getHashId();
+                mController.updateItem(idItem, uiItem);
             }
-        }else {
-            Toast.makeText(activity, "Harap mengisi data "+ messageError, Toast.LENGTH_SHORT).show();
         }
     }
 

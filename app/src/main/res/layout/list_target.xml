@@ -38,6 +38,24 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tahun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="2010"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/luas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="20.1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
                     android:id="@+id/keterangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

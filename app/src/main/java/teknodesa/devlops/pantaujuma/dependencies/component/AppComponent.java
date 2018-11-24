@@ -13,6 +13,7 @@ import teknodesa.devlops.pantaujuma.components.adapter.HargaAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.PengurusPoktanAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.PetaniAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.PoktanAdapter;
+import teknodesa.devlops.pantaujuma.components.adapter.PostAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.RDKAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.RDKKAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.RKTPAdapter;
@@ -31,8 +32,10 @@ import teknodesa.devlops.pantaujuma.components.harga.ListHargaActivity;
 import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
+import teknodesa.devlops.pantaujuma.components.komoditas.GetLahanByKomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
+import teknodesa.devlops.pantaujuma.components.komoditas.MapLahan;
 import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPemanenanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPembajakanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPembersihanLahanFragment;
@@ -143,6 +146,7 @@ import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetAlsinta
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetAnggotaPoktanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetHargaService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetKomentarService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetLahanByKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetLahanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPendudukService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPengurusPoktanService;
@@ -182,6 +186,7 @@ public interface AppComponent {
     void inject(KomoditasService komoditasService);
     void inject(ListLahanKomoditasService listLahanKomoditasService);
     void inject(GetLahanService getLahanService);
+    void inject(GetLahanByKomoditasService getLahanByKomoditasService);
 
     //Controllers
     void inject(SplashscreenController controller);
@@ -219,7 +224,7 @@ public interface AppComponent {
     void inject(CRUPostController cruPostController);
     void inject(LahanController lahanController);
     void inject(GetLahanController getLahanController);
-
+    void inject(GetLahanByKomoditasController getLahanByKomoditasController);
 
     //Repository
     void inject(PendudukRepository repository);
@@ -264,6 +269,7 @@ public interface AppComponent {
     void inject(DetailPoktanActivity detailPoktanActivity);
     void inject(DetailPetaniActivity detailPetaniActivity);
     void inject(DetailHargaActivity detailHargaActivity);
+    void inject(MapLahan mapLahan);
 
     //fragment
     void inject(DetailLahanFragment fragment);
@@ -325,4 +331,5 @@ public interface AppComponent {
     void inject(HargaAdapter hargaAdapter);
     void inject(AnggotaPoktanAdapter anggotaPoktanAdapter);
     void inject(PengurusPoktanAdapter pengurusPoktanAdapter);
+    void inject(PostAdapter postAdapter);
 }

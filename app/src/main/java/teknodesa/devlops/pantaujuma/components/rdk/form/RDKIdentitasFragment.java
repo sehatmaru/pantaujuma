@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +67,12 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     @BindView(R.id.input_keterangan)
     EditText input_keterangan;
 
-    String poktan;
+    public String poktan = "";
     public static boolean isOpen=false;
+    public static boolean check;
+
+    FragmentActivity activity;
+
     @OnClick(R.id.btnPoktan)
     void clickPilihPoktan() {
         SearchPoktanFragment.keterangan = 1;
@@ -77,6 +82,7 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = getActivity();
         ((MainApplication) getActivity().getApplication())
                 .getComponent()
                 .inject(SearchPoktanFragment.newInstance(this));
@@ -106,19 +112,36 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
 
     @Override
     public Identitas getUIData() {
-        String strTanggal = "";
-        String strLuasSawah = "";
-        String strKeterangan = "";
-        String strPoktan = "";
+        String strTanggal = input_tanggal.getText().toString();
+        String strLuasSawah = input_luasSawah.getText().toString();
+        String strKeterangan = input_keterangan.getText().toString();
 
-        try{
-            strTanggal = (input_tanggal.getText().toString() == null) ? "-" : input_tanggal.getText().toString();
-            strLuasSawah = (input_luasSawah.getText().toString() == null) ? "-" : input_luasSawah.getText().toString();
-            strKeterangan = (input_keterangan.getText().toString() == null) ? "-" : input_keterangan.getText().toString();
-            strPoktan = (poktan == null) ? "-" : poktan;
-        }catch (NullPointerException e){}
+        Identitas newItem = new Identitas();
 
-        Identitas newItem = new Identitas(strPoktan, strTanggal, strLuasSawah, strKeterangan);
+        if(poktan.compareTo("")==0 || poktan == null){
+            check=true;
+            checkData();
+        }else{
+            newItem.setPoktan(poktan);
+        }
+
+        if(strTanggal == null || strTanggal.compareTo("")==0){
+            newItem.setTanggal("");
+        }else{
+            newItem.setTanggal(strTanggal);
+        }
+
+        if(strLuasSawah == null || strLuasSawah.compareTo("")==0){
+            newItem.setLuasSawah("");
+        }else{
+            newItem.setLuasSawah(strLuasSawah);
+        }
+
+        if(strKeterangan == null || strKeterangan.compareTo("")==0){
+            newItem.setKeterangan("");
+        }else{
+            newItem.setKeterangan(strKeterangan);
+        }
 
         return newItem;
     }
@@ -134,7 +157,11 @@ public class RDKIdentitasFragment extends Fragment implements RDKContract.ViewCo
 
     @Override
     public void saveData(String tipe, Parcelable itemData) {
-        //not implemented yet
+
+    }
+
+    public void checkData(){
+
     }
 
     @Override

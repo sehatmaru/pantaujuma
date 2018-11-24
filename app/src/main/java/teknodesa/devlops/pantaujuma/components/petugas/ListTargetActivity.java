@@ -67,7 +67,7 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
     FloatingActionButton fabTambah;
     @OnClick(R.id.fabTambah)
     void clickCheckOut() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "target", null));
+        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "insert", null));
         finish();
     }
 

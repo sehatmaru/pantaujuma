@@ -250,5 +250,8 @@
     <string name="isi">Isi</string>
     <string name="tahun_kerja">Tahun Kerja</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_map_lahan">Map</string>
+    <string name="topik">Topik</string>
+    <string name="kirim">Kirim</string>
 
 </resources>

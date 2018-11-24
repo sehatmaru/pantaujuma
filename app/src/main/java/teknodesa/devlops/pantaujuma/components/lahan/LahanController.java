@@ -2,11 +2,8 @@ package teknodesa.devlops.pantaujuma.components.lahan;
 
 import android.support.annotation.NonNull;
 
-import javax.inject.Inject;
-
-import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.lahan.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Pesan;
 
 public class LahanController implements LahanContract.Controller<LahanRealm> {

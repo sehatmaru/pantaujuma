@@ -66,7 +66,7 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
     FloatingActionButton fabTambah;
     @OnClick(R.id.fabTambah)
     void clickCheckOut() {
-        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "harga", null));
+        startActivity(CRUActivity.createIntent(getApplicationContext(), mJenisCRU, "insert", null));
         finish();
     }
 
@@ -97,7 +97,6 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
-        getNotSync();
         spinner.setVisibility(View.VISIBLE);
 
         populateInitialData();
@@ -109,11 +108,12 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
         realm.commitTransaction();
         hasilList = listhargaNotSync.size();
         Log.e("hasil", "" + hasilList);
+        Log.e("list", listhargaNotSync.toString());
     }
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listharga = realm1.copyFromRealm(realm1.where(HargaRealm.class).sort("isSync",Sort.ASCENDING).findAll());
+            listharga = realm1.copyFromRealm(realm1.where(HargaRealm.class).findAll());
         }, () -> {
             if (!listharga.isEmpty()) {
                 hargaAdapter = new HargaAdapter(getApplicationContext(), listharga,this);

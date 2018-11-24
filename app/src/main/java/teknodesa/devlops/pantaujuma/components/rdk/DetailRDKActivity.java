@@ -161,7 +161,7 @@ public class DetailRDKActivity extends AppCompatActivity {
         String strModalPemupukan = (dataRDK.getPemupukanModal() == null) ? "-" : dataRDK.getPemupukanModal();
 
         deskripsiIrigasi.setText(strDescIrigasi);
-        poktanrdk.setText("-");
+        poktanrdk.setText(dataPoktan.getNama());
         tanggaldata.setText(strTanggalData);
         luassawahdata.setText(strLuasSawah);
         keterangandata.setText(strKeterangan);
@@ -179,26 +179,8 @@ public class DetailRDKActivity extends AppCompatActivity {
         target.setText(strTarget);
         targethasil.setText(strTargetHasil);
         iurananggota.setText(strIuranAnggota);
-
-        if(dataRDK.getKomoditasSI() == null || dataRDK.getKomoditasSI().compareTo("")==0){
-            komoditassi.setText("-");
-        }else {
-            if(dataKomoditasSI != null){
-                komoditassi.setText(dataKomoditasSI.getNama());
-            }else{
-                komoditassi.setText("-");
-            }
-        }
-
-        if(dataRDK.getKomoditasRU() == null || dataRDK.getKomoditasRU().compareTo("")==0){
-            komoditaspb.setText("-");
-        }else{
-            if(dataKomoditasRU!=null){
-                komoditaspb.setText("-");
-            }else {
-                komoditaspb.setText(dataKomoditasRU.getNama());
-            }
-        }
+        komoditassi.setText(dataKomoditasSI.getNama());
+        komoditaspb.setText(dataKomoditasRU.getNama());
 
     }
 }

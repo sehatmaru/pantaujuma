@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,9 +41,10 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.KomoditasAdapter;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
-public class KomoditasFragment extends Fragment implements KomoditasContract.View , KomoditasAdapter.OnClickKomoditasListener{
+public class KomoditasFragment extends Fragment implements KomoditasContract.View, KomoditasAdapter.OnClickKomoditasListener{
 
     FragmentActivity activity;
 
@@ -174,8 +176,6 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
         }
     }
 
-
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.menu_komoditas, menu);
@@ -207,6 +207,7 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
                 .negativeText(R.string.no)
                 .onPositive((dialog1, which) -> {
                     mController.getAllKomoditas();
+
                     updateLayout(Konstanta.LAYOUT_LOADING);
                 })
                 .onNegative((dialog1, which) -> {
@@ -215,8 +216,6 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
                 .build();
         dialog.show();
     }
-
-
 
     @Override
     public void getAllKomoditasSuccess(List<KomoditasRealm> allKomoditas) {
@@ -231,8 +230,8 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
     }
 
     @Override
-    public void OnClickKomoditas(KomoditasRealm komoditasRealm) {
-        startActivity(ListLahanKomoditasActivity.createIntent(getActivity().getApplicationContext(),komoditasRealm));
+    public void OnClickKomoditas(String hashId) {
+        startActivity(MapLahan.createIntent(getActivity().getApplicationContext(),hashId));
     }
     private Boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager

@@ -22,26 +22,34 @@ public class GetKomentarController implements GetKomentarContract.Controller {
         appComponent.inject(this);
     }
 
-
     public void setView(GetKomentarContract.View view){
         mService.instanceClass(this);
         views = view;
     }
 
-    @Override
-    public void getAllKomentar(String idPost) {
-
-        if(idPost ==null ){
-            views.getAllKomentarFailed("Terjadi Kesalahan, Silahkan Logout dan login kembali");
+    public int getIdKomentar() {
+        realm.beginTransaction();
+        KomentarRealm komentar =realm.where(KomentarRealm.class).findFirst();
+        realm.commitTransaction();
+        if(komentar == null){
+            return 0;
         }else{
-
-        mService.getAllKomentar(idPost);
+            return Integer.valueOf(komentar.getHashId());
         }
     }
 
     @Override
-    public void saveData(List<KomentarRealm> allKomentar) {
-        mService.saveData(allKomentar);
+    public void getAllKomentar(String idPost) {
+        if(idPost == null ){
+            views.getAllKomentarFailed("Terjadi Kesalahan, Silahkan Logout dan login kembali");
+        }else{
+            mService.getAllKomentar(idPost);
+        }
+    }
+
+    @Override
+    public void saveData(KomentarRealm komentar) {
+        mService.saveData(komentar);
     }
 
     @Override
@@ -55,23 +63,12 @@ public class GetKomentarController implements GetKomentarContract.Controller {
     }
 
     @Override
-    public void saveDataSuccess(String message,KomentarRealm posttemp) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(posttemp);
-        });
-        realm.commitTransaction();
-
+    public void saveDataSuccess(String message) {
         views.saveDataSuccess(message);
     }
 
     @Override
     public void saveDataFailed(String message) {
         views.saveDataFailed(message);
-    }
-
-    @Override
-    public void updateDataRealm(KomentarRealm posttemp) {
-
     }
 }
