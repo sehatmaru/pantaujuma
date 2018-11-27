@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import io.realm.Sort;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
-import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
 
@@ -68,8 +64,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 .findAll();
 
         hasil = listKomentar.size();
-
-        Log.e("hasil komentar", listKomentar.size() + "");
 
         if(postRealm.getIsSync() == 0 ){
             holder.cardview.setCardBackgroundColor(Color.CYAN);

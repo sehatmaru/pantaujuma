@@ -58,12 +58,183 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Nama Pemilik Lahan"
+                            android:text="Pemilik Lahan"
                             android:textStyle="bold" />
 
 
                         <TextView
                             android:id="@+id/namaPemilikLahan"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/luasImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/field"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataLuas"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/luasImage"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/luastext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/luas"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/luas"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/alamatImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/marker2"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataAlamat"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/alamatImage"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/alamattext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/alamat"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/alamat"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:maxLines="3"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/deskripsiImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/note"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/dataDeskripsi"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/deskripsiImage"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/deskripsitext"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingLeft="5dip"
+                            android:paddingRight="5dip"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@string/deskripsi"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/deskripsi"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -90,94 +261,6 @@
                 android:layout_marginTop="3dp"
                 android:background="@color/white"
                 android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="Luas"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/luas"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="Alamat"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/alamat"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -359,52 +442,6 @@
                             android:textSize="15sp" />
                     </LinearLayout>
                 </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="Deskripsi"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:id="@+id/deskripsi"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </RelativeLayout>
-
 
             </LinearLayout>
 

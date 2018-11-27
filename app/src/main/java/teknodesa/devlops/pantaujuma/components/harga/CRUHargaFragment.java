@@ -35,7 +35,6 @@ import teknodesa.devlops.pantaujuma.components.searchpasar.SearchPasarFragment;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Harga;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.pasar.PasarRealm;
 
 public class CRUHargaFragment extends Fragment implements
         HargaContract.ViewController<HargaRealm>, HargaContract.View,
@@ -133,10 +132,6 @@ public class CRUHargaFragment extends Fragment implements
     public HargaRealm getUIData() {
         messageError = "";
 
-//        String strTanggal = (input_tanggal.getText().toString() == null) ? "-" : input_tanggal.getText().toString();
-//        String strHarga = (input_harga.getText().toString() == null) ? "-" : input_harga.getText().toString();
-//        String strSatuan = (input_satuan.getText().toString() == null) ? "-" : input_satuan.getText().toString();
-
         String strTanggal = input_tanggal.getText().toString();
         String strHarga = input_harga.getText().toString();
         String strSatuan = input_satuan.getText().toString();
@@ -179,11 +174,6 @@ public class CRUHargaFragment extends Fragment implements
             newRealmItem.setSatuan(strSatuan);
         }
 
-//        newRealmItem.setHashKomoditas(komoditas);
-//        newRealmItem.setHashPasar(strpasar);
-//        newRealmItem.setTanggal(strTanggal);
-//        newRealmItem.setNilai(strHarga);
-//        newRealmItem.setSatuan(strSatuan);
         newRealmItem.setNamaPasar(strnama);
         newRealmItem.setAlamat(stralamat);
         newRealmItem.setKecamatan(strkecamatan);
@@ -212,19 +202,6 @@ public class CRUHargaFragment extends Fragment implements
     public void saveData(String tipe, Parcelable itemData) {
         HargaContract.Controller<HargaRealm> mController = new HargaController(this, appComponent);
         HargaRealm uiItem = getUIData();
-
-//        if(messageError.compareTo("")==0){
-//            if (tipe.equals("insert")) {
-//                mController.addItem(uiItem);
-//            } else {
-//                if (tipe.equals("update")) {
-//                    String idItem = ((Harga) itemData).getHashId();
-//                    mController.updateItem(idItem, uiItem);
-//                }
-//            }
-//        }else {
-//            Toast.makeText(activity, "Harap mengisi data "+ messageError, Toast.LENGTH_SHORT).show();
-//        }
 
         if (tipe.equals("insert")) {
             mController.addItem(uiItem);

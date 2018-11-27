@@ -47,21 +47,6 @@ public class LahanKomoditasAdapter extends RecyclerView.Adapter<LahanKomoditasAd
 
     }
 
-//    @Override
-//    public void onBindViewHolder(MyViewHolder holder, int position) {
-//        RiwayatLahanRealm data = listData.get(position);
-//        holder.namaPemilikLahan.setText(""+data.getNamaPemilikLahan());
-//        holder.alamatLahan.setText(""+data.getAlamat());
-//        holder.tanggalMulaiLahan.setText(""+data.getTanggalMulai());
-//        holder.tanggalAkhirLahan.setText(""+data.getTanggalAkhir());
-//        holder.tanggalMasaKegiatan.setText(""+data.getMasaKegiatan());
-//        holder.luas.setText(""+data.getLuas());
-//        holder.cardView.setOnClickListener(view -> {
-//            onClick.OnClickKomoditas(data);
-//        });
-//
-//    }
-
     @Override
     public int getItemCount() {
         return listData.size();

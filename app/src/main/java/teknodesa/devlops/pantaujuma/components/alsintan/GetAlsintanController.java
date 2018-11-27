@@ -52,11 +52,6 @@ public class GetAlsintanController implements GetAlsintanContract.Controller {
     }
 
     @Override
-    public void saveData(List<AlsintanRealm> allPen) {
-        mService.saveData(allPen);
-    }
-
-    @Override
     public void getAllAlsintanSuccess(List<AlsintanRealm> allAlsintan) {
         views.getAllAlsintanSuccess(allAlsintan);
     }
@@ -65,26 +60,4 @@ public class GetAlsintanController implements GetAlsintanContract.Controller {
     public void getAllAlsintanFailed(String message) {
         views.getAllAlsintanFailed(message);
     }
-
-    @Override
-    public void saveDataSuccess(String message,AlsintanRealm alsintanTempRealm) {
-        realm.beginTransaction();
-        realm.executeTransactionAsync(realmuser -> {
-            realmuser.insertOrUpdate(alsintanTempRealm);
-        });
-        realm.commitTransaction();
-
-        views.saveDataSuccess(message);
-    }
-
-    @Override
-    public void saveDataFailed(String message) {
-        views.saveDataFailed(message);
-    }
-
-    @Override
-    public void updateDataRealm(AlsintanRealm alsintanTempRealm) {
-
-    }
-
 }

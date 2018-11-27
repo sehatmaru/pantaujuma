@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.harga;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -25,7 +24,6 @@ public class HargaRepository implements HargaContract.Repository<HargaRealm> {
 
     @Override
     public void addItem(HargaRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -40,7 +38,6 @@ public class HargaRepository implements HargaContract.Repository<HargaRealm> {
 
     @Override
     public void updateItem(String idItem, HargaRealm item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> {
             bgRealm.insertOrUpdate(item);
         }, () -> {
@@ -69,7 +66,6 @@ public class HargaRepository implements HargaContract.Repository<HargaRealm> {
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         HargaRealm deletedItem = realm.where(HargaRealm.class).equalTo("hashId", idItem).findFirst();
     }
 }

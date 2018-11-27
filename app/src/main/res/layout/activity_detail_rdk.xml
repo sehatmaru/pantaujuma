@@ -32,7 +32,7 @@
                         android:id="@+id/nameImage1"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsuser"
+                        android:src="@drawable/group"
                         android:visibility="visible" />
 
 
@@ -88,7 +88,7 @@
                         android:id="@+id/tanggal"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsmalefilled"
+                        android:src="@drawable/calendar"
                         android:visibility="visible" />
 
                     <LinearLayout
@@ -143,7 +143,7 @@
                         android:id="@+id/luassawah"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsdiabetesfilled"
+                        android:src="@drawable/field"
                         android:visibility="visible" />
 
 
@@ -200,7 +200,7 @@
                         android:id="@+id/keterangan"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconslovefilled"
+                        android:src="@drawable/note"
                         android:visibility="visible" />
 
 

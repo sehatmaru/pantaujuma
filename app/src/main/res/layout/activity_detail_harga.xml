@@ -33,7 +33,7 @@
                         android:id="@+id/namegd"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsdiabetesfilled"
+                        android:src="@drawable/product"
                         android:visibility="visible" />
 
 
@@ -90,7 +90,7 @@
                         android:id="@+id/namegd1"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsdiabetesfilled"
+                        android:src="@drawable/market"
                         android:visibility="visible" />
 
 

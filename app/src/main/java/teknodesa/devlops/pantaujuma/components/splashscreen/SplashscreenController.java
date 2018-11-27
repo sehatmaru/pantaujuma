@@ -28,7 +28,6 @@ public class SplashscreenController implements SplashscreenContract.Controller {
 
     private SplashscreenContract.View views;
 
-    //private FirebaseAuth mAuth;
     public SplashscreenController(@NonNull AppComponent appComponent) {
         appComponent.inject(this);
     }

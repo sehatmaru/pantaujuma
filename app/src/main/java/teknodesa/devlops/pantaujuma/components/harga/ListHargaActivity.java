@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -107,13 +106,11 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
         listhargaNotSync = realm.where(HargaRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
         hasilList = listhargaNotSync.size();
-        Log.e("hasil", "" + hasilList);
-        Log.e("list", listhargaNotSync.toString());
     }
 
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
-            listharga = realm1.copyFromRealm(realm1.where(HargaRealm.class).findAll());
+            listharga = realm1.copyFromRealm(realm1.where(HargaRealm.class).sort("isSync", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listharga.isEmpty()) {
                 hargaAdapter = new HargaAdapter(getApplicationContext(), listharga,this);
@@ -294,7 +291,6 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
         mController.getAllHarga();
         updateLayout(Konstanta.LAYOUT_LOADING);
         snackbar.dismiss();
-//        this.recreate();
     }
 
     @Override

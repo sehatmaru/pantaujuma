@@ -1,22 +1,17 @@
 package teknodesa.devlops.pantaujuma.components.komoditas;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import teknodesa.devlops.pantaujuma.components.petani.GetPetaniContract;
 import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.RiwayatLahanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetLahanByKomoditasService;
-import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetPetaniService;
 
 /**
  * Created by Marthin on 7/10/2018.

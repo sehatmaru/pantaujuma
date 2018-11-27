@@ -57,19 +57,15 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
                     replaceFragment(homeFragment);
                     return true;
                 case R.id.navigation_komoditas:
-                    //mTextMessage.setText(R.string.title_post);
                     replaceFragment(komoditasFragment);
                     return true;
                 case R.id.navigation_post:
-                    //mTextMessage.setText(R.string.title_post);
                     replaceFragment(postFragment);
                     return true;
                 case R.id.navigation_profil:
-                    //mTextMessage.setText(R.string.title_profil);
                     replaceFragment(akunFragment);
                     return true;
             }

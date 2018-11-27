@@ -1,144 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coordinatorLayoutToko"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        android:orientation="vertical"
+        android:id="@+id/content_toko">
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:visibility="gone"/>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/spinnerIcon"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:layout_marginTop="200dp"
+                android:text="{fa-spinner 300% spin}" />
+        </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
+    </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/namegd"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsdiabetesfilled"
-                        android:visibility="visible" />
-
-
-                    <LinearLayout
-                        android:id="@+id/datagd"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namegd"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/gdtext"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text="@string/namaAlat"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:id="@+id/namaAlat"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="3dp"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/deskripsitext"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:scrollHorizontally="true"
-                            android:text="@string/deskripsi"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/deskripsi"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="5dip"
-                            android:paddingRight="5dip"
-                            android:paddingBottom="30dp"
-                            android:scrollHorizontally="true"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

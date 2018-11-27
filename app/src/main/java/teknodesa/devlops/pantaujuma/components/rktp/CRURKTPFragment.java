@@ -187,7 +187,6 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
 
         newRealmItem.setIdDesa(idDes);
         newRealmItem.setIdUser(idUs);
-//        newRealmItem.setPoktan(idPoktan);
         if(strTujuan == null || strTujuan.compareTo("")==0){
             newRealmItem.setTujuan("");
         }else{
@@ -253,19 +252,6 @@ public class CRURKTPFragment extends Fragment implements RKTPContract.ViewContro
         }else{
             newRealmItem.setKeterangan(strKeterangan);
         }
-//        newRealmItem.setTujuan(strTujuan);
-//        newRealmItem.setTahun(strTahun);
-//        newRealmItem.setPelaksana(strPelaksana);
-//        newRealmItem.setPenanggungJawab(strPenanggungJawab);
-//        newRealmItem.setSumberBiaya(strSumberBiaya);
-//        newRealmItem.setWaktu(strWaktu);
-//        newRealmItem.setLokasi(strLokasi);
-//        newRealmItem.setMasalah(strMasalah);
-//        newRealmItem.setSasaran(strSasaran);
-//        newRealmItem.setMateri(strMateri);
-//        newRealmItem.setMetode(strMetode);
-//        newRealmItem.setVolume(strVolume);
-//        newRealmItem.setKeterangan(strKeterangan);
         newRealmItem.setIsSync(0);
 
         return newRealmItem;

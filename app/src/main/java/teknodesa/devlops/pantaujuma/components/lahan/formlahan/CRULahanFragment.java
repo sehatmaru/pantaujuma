@@ -76,7 +76,6 @@ public class CRULahanFragment extends Fragment implements LahanContract.ViewCont
         setViewpager();
         setupTabIcons();
         viewPager.setCurrentItem(0);
-        //viewPager.getCurrentItem();
         return v;
     }
 
@@ -142,7 +141,6 @@ public class CRULahanFragment extends Fragment implements LahanContract.ViewCont
         data.setLatitude(alamatLahanModel.getLatitude());
         data.setLongitude(alamatLahanModel.getLongitude());
         try {
-//            data.setIdDesa(getIdDesa());
             data.setIsSync(0);
             return data;
         }catch (Exception e){

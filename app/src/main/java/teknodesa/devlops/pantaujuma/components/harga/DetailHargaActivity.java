@@ -115,7 +115,6 @@ public class DetailHargaActivity extends AppCompatActivity {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
                     //Yes button clicked
-//                    CRUHargaFragment.setDeletedData(itemDetail, appComponent);
                     startActivity(ListHargaActivity.createIntent(getApplicationContext()));
                     break;
 

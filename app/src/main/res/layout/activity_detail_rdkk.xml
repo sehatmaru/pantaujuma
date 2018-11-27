@@ -34,7 +34,7 @@
                         android:id="@+id/nameImage"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsuser"
+                        android:src="@drawable/group"
                         android:visibility="visible" />
 
 
@@ -147,7 +147,7 @@
                         android:id="@+id/nameImage2"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsuser"
+                        android:src="@drawable/product"
                         android:visibility="visible" />
 
 
@@ -203,7 +203,7 @@
                         android:id="@+id/nameImage3"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconsuser"
+                        android:src="@drawable/winter"
                         android:visibility="visible" />
 
 

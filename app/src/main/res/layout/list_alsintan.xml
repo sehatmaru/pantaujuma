@@ -41,7 +41,7 @@
                     android:id="@+id/deskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
+                    android:maxLines="3"
                     android:text="Deskripsi"
                     android:textColor="@color/black"
                     android:textSize="14sp" />

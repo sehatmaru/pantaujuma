@@ -1,6 +1,5 @@
 package teknodesa.devlops.pantaujuma.components.lahan;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -24,7 +23,6 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
     }
     @Override
     public void addItem(LahanRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -39,7 +37,6 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
 
     @Override
     public void updateItem(String idItem, LahanRealm item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> {
             bgRealm.insertOrUpdate(item);
         }, () -> {
@@ -68,7 +65,6 @@ public class LahanRepository implements LahanContract.Repository<LahanRealm> {
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         LahanRealm deletedItem = realm.where(LahanRealm.class).equalTo("hashId", idItem).findFirst();
     }
 }

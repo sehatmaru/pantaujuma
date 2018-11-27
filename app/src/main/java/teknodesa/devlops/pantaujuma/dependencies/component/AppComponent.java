@@ -18,11 +18,11 @@ import teknodesa.devlops.pantaujuma.components.adapter.RDKAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.RDKKAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.RKTPAdapter;
 import teknodesa.devlops.pantaujuma.components.adapter.TargetAdapter;
-import teknodesa.devlops.pantaujuma.components.alsintan.AlsintanController;
-import teknodesa.devlops.pantaujuma.components.alsintan.AlsintanRepository;
 import teknodesa.devlops.pantaujuma.components.alsintan.DetailAlsintanActivity;
 import teknodesa.devlops.pantaujuma.components.alsintan.GetAlsintanController;
+import teknodesa.devlops.pantaujuma.components.alsintan.GetTokoAlsintanController;
 import teknodesa.devlops.pantaujuma.components.alsintan.ListAlsintanActivity;
+import teknodesa.devlops.pantaujuma.components.alsintan.TokoMapsActivity;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.harga.DetailHargaActivity;
 import teknodesa.devlops.pantaujuma.components.harga.GetHargaController;
@@ -31,25 +31,10 @@ import teknodesa.devlops.pantaujuma.components.harga.HargaRepository;
 import teknodesa.devlops.pantaujuma.components.harga.ListHargaActivity;
 import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
-import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.GetLahanByKomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.MapLahan;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPemanenanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPembajakanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPembersihanLahanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPembersihanPanenFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPembibitanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPemupukanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPenanamanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPencangkulanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPengeringanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPenyimpananFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPerawatanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPerontokanFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.CRUKegiatanPersemaianFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRUAlamatLahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanActivity;
@@ -57,8 +42,6 @@ import teknodesa.devlops.pantaujuma.components.lahan.GetLahanController;
 import teknodesa.devlops.pantaujuma.components.lahan.LahanController;
 import teknodesa.devlops.pantaujuma.components.lahan.LahanRepository;
 import teknodesa.devlops.pantaujuma.components.lahan.ListLahanActivity;
-import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasActivity;
-import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasController;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.CRUPendudukFragment;
@@ -157,8 +140,8 @@ import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRDKKSer
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRDKService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRKTPService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetTargetService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetTokoAlsintanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
-import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
@@ -184,9 +167,9 @@ public interface AppComponent {
     void inject(GetPengurusPoktanService getPengurusPoktanService);
     void inject(PromoService promoService);
     void inject(KomoditasService komoditasService);
-    void inject(ListLahanKomoditasService listLahanKomoditasService);
     void inject(GetLahanService getLahanService);
     void inject(GetLahanByKomoditasService getLahanByKomoditasService);
+    void inject(GetTokoAlsintanService getTokoAlsintanService);
 
     //Controllers
     void inject(SplashscreenController controller);
@@ -196,7 +179,6 @@ public interface AppComponent {
     void inject(HomeController controller);
     void inject(GetPendudukController controller);
     void inject(KomoditasController controller);
-    void inject(ListLahanKomoditasController controller);
     void inject(UserRealmController controller);
     void inject(PetaniController petaniController);
     void inject(GetRDKKController getRDKKController);
@@ -208,7 +190,6 @@ public interface AppComponent {
     void inject(GetRKTPController getRKTPController);
     void inject(GetTargetController getTargetController);
     void inject(AnggotaPoktanController anggotaPoktanController);
-    void inject(AlsintanController alsintanController);
     void inject(GetAnggotaPoktanController getAnggotaPoktanController);
     void inject(GetRDKController getRDKController);
     void inject(RKTPController rktpController);
@@ -225,6 +206,7 @@ public interface AppComponent {
     void inject(LahanController lahanController);
     void inject(GetLahanController getLahanController);
     void inject(GetLahanByKomoditasController getLahanByKomoditasController);
+    void inject(GetTokoAlsintanController getTokoAlsintanController);
 
     //Repository
     void inject(PendudukRepository repository);
@@ -239,7 +221,6 @@ public interface AppComponent {
     void inject(HargaRepository hargaRepository);
     void inject(RKTPRepository rktpRepository);
     void inject(RDKRepository rdkRepository);
-    void inject(AlsintanRepository alsintanRepository);
     void inject(PengurusPoktanRepository pengurusPoktanRepository);
 
     //Activity
@@ -257,7 +238,6 @@ public interface AppComponent {
     void inject(ListLahanActivity activity);
     void inject(ListHargaActivity activity);
     void inject(DetailPendudukActivity activity);
-    void inject(ListLahanKomoditasActivity activity);
     void inject(ListAlsintanActivity listAlsintanActivity);
     void inject(DetailAlsintanActivity detailAlsintanActivity);
     void inject(DetailPostActivity detailPostActivity);
@@ -272,7 +252,6 @@ public interface AppComponent {
     void inject(MapLahan mapLahan);
 
     //fragment
-    void inject(DetailLahanFragment fragment);
     void inject(HomeFragment fragment);
     void inject(CRUPendudukFragment fragment);
     void inject(CRUPetaniFragment fragment);
@@ -281,7 +260,6 @@ public interface AppComponent {
     void inject(CRURKTPFragment fragment);
     void inject(CRUTargetPetugasFragment fragment);
     void inject(CRULahanFragment fragment);
-    void inject(CRUKomoditasFragment fragment);
     void inject(CRUHargaFragment fragment);
     void inject(BiodataFragment fragment);
     void inject(AlamatFragment fragment);
@@ -305,19 +283,6 @@ public interface AppComponent {
     void inject(PostFragment postFragment);
     void inject(CRUAlamatLahanFragment fragment);
     void inject(CRUPostFragment cruPostFragment);
-    void inject(CRUKegiatanPemanenanFragment fragment);
-    void inject(CRUKegiatanPembersihanLahanFragment fragment);
-    void inject(CRUKegiatanPembibitanFragment fragment);
-    void inject(CRUKegiatanPembajakanFragment fragment);
-    void inject(CRUKegiatanPemupukanFragment fragment);
-    void inject(CRUKegiatanPencangkulanFragment fragment);
-    void inject(CRUKegiatanPengeringanFragment fragment);
-    void inject(CRUKegiatanPenyimpananFragment fragment);
-    void inject(CRUKegiatanPerontokanFragment fragment);
-    void inject(CRUKegiatanPersemaianFragment fragment);
-    void inject(CRUKegiatanPembersihanPanenFragment fragment);
-    void inject(CRUKegiatanPenanamanFragment fragment);
-    void inject(CRUKegiatanPerawatanFragment fragment);
 
     //adapter
     void inject(TargetAdapter targetAdapter);
@@ -332,4 +297,6 @@ public interface AppComponent {
     void inject(AnggotaPoktanAdapter anggotaPoktanAdapter);
     void inject(PengurusPoktanAdapter pengurusPoktanAdapter);
     void inject(PostAdapter postAdapter);
+
+    void inject(TokoMapsActivity tokoMapsActivity);
 }

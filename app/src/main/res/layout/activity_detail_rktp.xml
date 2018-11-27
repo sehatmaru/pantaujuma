@@ -33,7 +33,7 @@
                         android:id="@+id/pickImage"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconschipcard"
+                        android:src="@drawable/group"
                         android:visibility="visible" />
 
                     <LinearLayout
@@ -135,30 +135,31 @@
                     </LinearLayout>
                 </RelativeLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataTujuan"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/LPText"
+                            android:id="@+id/tujuantext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -170,8 +171,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Tujuan"
+                            android:text="@string/tujuan"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/tujuan"
@@ -196,25 +198,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl2"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataSasaranProduktifitas"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl2"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/SPTText"
+                            android:id="@+id/masalahtext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -226,7 +218,7 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Masalah"
+                            android:text="@string/masalah"
                             android:textStyle="bold" />
 
                         <TextView
@@ -252,25 +244,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataSasaranProduksi"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl1"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/SPText"
+                            android:id="@+id/sasarantext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -282,8 +264,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Sasaran"
+                            android:text="@string/sasaran"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/sasaran"
@@ -308,25 +291,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl3"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataKeterangan"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl3"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/KText"
+                            android:id="@+id/materitext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -338,8 +311,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Materi"
+                            android:text="@string/materi"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/materi"
@@ -364,25 +338,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl4"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataMetode"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl4"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/MText"
+                            android:id="@+id/metodetext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -394,8 +358,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Metode"
+                            android:text="@string/metode"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/metode"
@@ -420,25 +385,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl41"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataVolume"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl41"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/VText"
+                            android:id="@+id/volumetext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -450,8 +405,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Volume"
+                            android:text="@string/volume"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/volume"
@@ -476,25 +432,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl42"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataLokasi"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl42"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/LText"
+                            android:id="@+id/lokasitext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -506,8 +452,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Lokasi"
+                            android:text="@string/lokasi"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/lokasi"
@@ -532,25 +479,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl43"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataWaktu"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl43"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/WText"
+                            android:id="@+id/waktutext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -562,8 +499,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Waktu"
+                            android:text="@string/waktu"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/waktu"
@@ -588,25 +526,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl47"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataSumberBiaya"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl47"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/SBText"
+                            android:id="@+id/sumbertext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -618,8 +546,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Sumber Biaya"
+                            android:text="@string/sumberBiaya"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/sumberBiaya"
@@ -644,25 +573,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl449"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataTahun"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl449"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/PWText"
+                            android:id="@+id/tahuntext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -674,8 +593,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Tahun"
+                            android:text="@string/tahun"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/tahun"
@@ -700,25 +620,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl448"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/dataPelaksana"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl448"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/PLText"
+                            android:id="@+id/pelaksanatext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -730,8 +640,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Pelaksana"
+                            android:text="@string/pelaksana"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/pelaksana"
@@ -756,25 +667,15 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:id="@+id/namettl46"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/iconsbirthdate"
-                        android:visibility="visible" />
-
 
                     <LinearLayout
-                        android:id="@+id/datKet"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/namettl46"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/KtrText"
+                            android:id="@+id/keterangantext"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -786,8 +687,9 @@
                             android:paddingRight="5dip"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:text="Keterangan"
+                            android:text="@string/keterangan"
                             android:textStyle="bold" />
+
 
                         <TextView
                             android:id="@+id/keterangan"

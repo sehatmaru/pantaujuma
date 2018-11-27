@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import javax.inject.Inject;
 import io.realm.Realm;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 
 public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.MyViewHolder> {
 

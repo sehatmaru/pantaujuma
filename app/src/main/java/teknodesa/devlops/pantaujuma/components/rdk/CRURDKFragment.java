@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,6 @@ import teknodesa.devlops.pantaujuma.dependencies.component.AppComponent;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Identitas;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.Irigasi;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.JadwalKegiatan;
-import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RDKParcelable;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.RencanaUmum;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.SasaranIntensifikasi;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
@@ -167,10 +165,7 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
     public RDKRealm getUIData() {
         RDKRealm newRealmItem = new RDKRealm();
 
-        Log.e("Hasil Repo",CRUActivity.mAction+" ");
         if (CRUActivity.mAction.equals("update")){
-            Log.e("Hasil Repo",CRUActivity.mAction+" di update");
-
             RDKRealm dataRealm = getDataRDK(DetailRDKActivity.dataRDK.getHashId());
             newRealmItem.setHashId(DetailRDKActivity.dataRDK.getHashId());
             newRealmItem.setHashIdIrigasi(DetailRDKActivity.dataRDK.getHashIdIrigasi());
@@ -204,7 +199,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
             newRealmItem.setTargetHasilPerHa(dataRealm.getTargetHasilPerHa());
 
         } else {
-            Log.e("Hasil Repo",CRUActivity.mAction+" di create");
             String hashIdIrigasi = getSaltString();
             String hashIdJadwal = getSaltString();
             String hashIdRencana = getSaltString();
@@ -240,7 +234,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
             newRealmItem.setDeskripsiJK(jadwalKegiatan.getDeskripsiJK());
         }
         if(RDKRencanaUmumFragment.isOpen){
-            Log.e("Hasil repo","masuk rencana umum");
             rencanaUmum = rdkRencanaUmumFragment.getUIData();
             newRealmItem.setPaketTeknologi(rencanaUmum.getPaketTeknologi());
             newRealmItem.setPolaTanam(rencanaUmum.getPolaTanam());
@@ -274,7 +267,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
         newRealmItem.setIdDesa(idDes);
         newRealmItem.setIdUser(idUs);
         newRealmItem.setIsSync(0);
-        Log.e("Hasil RDK", newRealmItem.toString());
         return newRealmItem;
     }
 
@@ -287,7 +279,6 @@ public class CRURDKFragment extends Fragment implements RDKContract.ViewControll
     public void saveData(String tipe, Parcelable itemData) {
         RDKContract.Controller<RDKRealm> mController = new RDKController(this, appComponent);
         RDKRealm uiItem = getUIData();
-        Log.e("Tipe data",tipe+" ");
 
         if(RDKIdentitasFragment.isOpen){
             identitas = rdkIdentitasFragment.getUIData();

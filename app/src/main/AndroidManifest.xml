@@ -57,7 +57,8 @@
         <activity
             android:name=".components.alsintan.DetailAlsintanActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Toko Penjual"
+            android:parentActivityName=".components.MainActivity" />
         <activity
             android:name=".components.petani.DetailPetaniActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -76,7 +77,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".components.rdkk.DetailRDKKActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".components.rdk.DetailRDKActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -142,9 +144,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="RKTP"
             android:parentActivityName=".components.MainActivity" />
-        <activity
-            android:name=".components.lahan.ListLahanKomoditasActivity"
-            android:label="Daftar Lahan Komditas" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -160,6 +159,11 @@
         <activity
             android:name=".components.maps.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".components.alsintan.TokoMapsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Lokasi Toko"
+            android:parentActivityName=".components.MainActivity" />
     </application>
 
 </manifest>

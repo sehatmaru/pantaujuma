@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +14,6 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.LatLng;
 
 import javax.inject.Inject;
 
@@ -30,7 +25,6 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanActivity;
 import teknodesa.devlops.pantaujuma.components.lahan.LahanContract;
-import teknodesa.devlops.pantaujuma.components.maps.GPSTracker;
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.lahan.AlamatLahanModel;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.UserDB;
 
@@ -141,8 +135,6 @@ public class CRUAlamatLahanFragment extends Fragment implements LahanContract.Vi
         String strKecamatan = input_kecamatan.getText().toString();
         String strDatiII = input_datiii.getText().toString();
         String strProvinsi = input_provinsi.getText().toString();
-        Log.e("Hasil latitude",latitudeAdd+" itu");
-        Log.e("Hasil latitude",longitudeAdd+" itu");
         AlamatLahanModel newItem = new AlamatLahanModel(strAlamat, strRt,strRw,strDusun,strDesa,strKecamatan,
                 strDatiII,strProvinsi,longitudeAdd,latitudeAdd);
         return newItem;
@@ -177,7 +169,6 @@ public class CRUAlamatLahanFragment extends Fragment implements LahanContract.Vi
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("hasil request code",requestCode+" ");
         if(requestCode == RESPONSE_PICKER){
             try{
                 final Place place = PlacePicker.getPlace(data, getActivity().getApplicationContext());
@@ -185,12 +176,7 @@ public class CRUAlamatLahanFragment extends Fragment implements LahanContract.Vi
                 input_alamat.setText(address.toString());
                 latitudeAdd = place.getLatLng().latitude;
                 longitudeAdd = place.getLatLng().longitude;
-                Log.e("Hasil latitude",latitudeAdd+" ini");
-                Log.e("Hasil latitude",longitudeAdd+" ini");
-            }catch (NullPointerException nx)
-            {
-                Log.e("null","back pressed");
-            }
+            }catch (NullPointerException nx) {}
 
         }
     }

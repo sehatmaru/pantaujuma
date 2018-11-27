@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -110,8 +109,6 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
         listrktpNotSync = realm.where(RKTPRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
         hasilList = listrktpNotSync.size();
-        Log.e("hasil", "" + hasilList);
-        Log.e("list", "" + listrktpNotSync);
     }
 
     private void populateInitialData(){

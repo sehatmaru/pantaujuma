@@ -1,7 +1,5 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,7 +37,6 @@ public class GetLahanService implements GetLahanContract.Repository {
     public boolean insertLahan =true;
     @Override
     public void getAllLahan(int idDesa) {
-        Log.e("send","data comehere"+idDesa);
         Call<ResponseLahan> call = sisApi.getAllLahan(WebServiceModule.ACCESS_TOKEN_TEMP,idDesa);
         call.enqueue(new Callback<ResponseLahan>() {
             @Override
@@ -54,7 +51,6 @@ public class GetLahanService implements GetLahanContract.Repository {
                         realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(response.body().getData()), () -> {
                             controller.getAllLahanSuccess(response.body().getData());
                         }, error -> {
-                            Log.e("getlahaneror",error.getMessage());
                         });
                     }else
                         controller.getAllLahanFailed(response.body().getMessage());
@@ -65,7 +61,6 @@ public class GetLahanService implements GetLahanContract.Repository {
 
             @Override
             public void onFailure(Call<ResponseLahan> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllLahanFailed(t.getMessage());
                 t.printStackTrace();
             }
@@ -78,14 +73,12 @@ public class GetLahanService implements GetLahanContract.Repository {
             final int dataLoop = i;
             LahanRealm lahanTempRealm = allPen.get(i);
             LahanBody lahanBody = new LahanBody(lahanTempRealm);
-            Log.e("Hasil Lahan", lahanBody.toString());
             Call<ResponseSaveData> call = sisApi.insertLahan(WebServiceModule.ACCESS_TOKEN_TEMP,lahanBody);
             call.enqueue(new Callback<ResponseSaveData>() {
                 @Override
                 public void onResponse(Call<ResponseSaveData> call, Response<ResponseSaveData> response) {
                     if (response.isSuccessful()) {
                         if (response.body().isSuccess()) {
-                            Log.e("hasil",dataLoop+" kelompok "+allPen.size() );
                             if (dataLoop == allPen.size()-1) {
                                 controller.saveDataSuccess("Success",lahanTempRealm);
                             }
@@ -103,7 +96,6 @@ public class GetLahanService implements GetLahanContract.Repository {
                 @Override
                 public void onFailure(Call<ResponseSaveData> call, Throwable t) {
                     insertLahan =false;
-                    Log.e("lahan service","error server"+t.getMessage());
                     controller.saveDataFailed("Failed"+t.getMessage());
                     t.printStackTrace();
                 }

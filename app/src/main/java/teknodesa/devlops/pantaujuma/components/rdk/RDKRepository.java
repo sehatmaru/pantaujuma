@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.rdk;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -25,7 +24,6 @@ public class RDKRepository implements RDKContract.Repository<RDKRealm> {
 
     @Override
     public void addItem(RDKRealm item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -40,7 +38,6 @@ public class RDKRepository implements RDKContract.Repository<RDKRealm> {
 
     @Override
     public void updateItem(String idItem, RDKRealm item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> bgRealm.insertOrUpdate(item), () -> {
             // Transaction was a success.
             mController.responseCRUD(true, "update");
@@ -67,7 +64,6 @@ public class RDKRepository implements RDKContract.Repository<RDKRealm> {
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         RDKRealm deletedItem = realm.where(RDKRealm.class).equalTo("hashId", idItem).findFirst();
     }
 }

@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,7 +40,6 @@ import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PostAdapter;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.KomentarRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.PostRealm;
-import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetKomentarService;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 import teknodesa.devlops.pantaujuma.utils.NetworkUtils;
 
@@ -126,9 +124,6 @@ public class PostFragment extends Fragment implements GetPostContract.View, GetK
         realm.commitTransaction();
 
         hasilList = listpostNotSync.size();
-
-        Log.e("hasil", "" + hasilList);
-        Log.e("list", listpostNotSync.toString());
 
         updateLayout(Konstanta.LAYOUT_LOADING);
         populateInitialData();

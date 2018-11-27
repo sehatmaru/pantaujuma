@@ -4,8 +4,6 @@ import java.util.List;
 
 import teknodesa.devlops.pantaujuma.dependencies.models.pojos.BodyGetLahan;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.RiwayatLahanRealm;
-import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 
 /**
  * Created by Marthin on 7/10/2018.

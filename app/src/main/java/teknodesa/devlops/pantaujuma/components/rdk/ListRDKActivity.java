@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -113,7 +112,6 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
         listrdkNotSync = realm.where(RDKRealm.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
         hasilList = listrdkNotSync.size();
-        Log.e("hasil", "" + hasilList);
     }
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {

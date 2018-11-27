@@ -2,14 +2,13 @@ package teknodesa.devlops.pantaujuma.components.komoditas;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.design.widget.CoordinatorLayout;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +26,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
@@ -77,12 +77,19 @@ public class MapLahan extends BaseActivity implements GetLahanByKomoditasContrac
 
         setBody();
         getAllLahan();
-        populateInitialData();
     }
 
     public void onMapReady(GoogleMap googleMap) {
         riwayatArray = new LahanRealm[listData.size()];
 
+        if (listData.size() > 0){
+            setLocation(googleMap);
+        } else{
+            Toast.makeText(this, "Tidak ada lahan", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setLocation(GoogleMap googleMap){
         for(int i = 0; i < listData.size(); i++){
             riwayatArray[i] = listData.get(i);
 
@@ -127,6 +134,9 @@ public class MapLahan extends BaseActivity implements GetLahanByKomoditasContrac
     }
 
     private void populateInitialData(){
+        RealmResults<LahanRealm> allLahan = realm.where(LahanRealm.class).findAll();
+        allLahan.deleteAllFromRealm();
+
         realm.executeTransactionAsync(realm1 -> {
             listData = realm1.copyFromRealm(realm1.where(LahanRealm.class).equalTo("isSync", 1).findAll());
         });
@@ -145,19 +155,11 @@ public class MapLahan extends BaseActivity implements GetLahanByKomoditasContrac
     }
 
     private void getAllLahan(){
-        if (getLahan != null) {
-            if(isNetworkAvailable()) {
-                mController.getAllLahanByKomoditas(getLahan);
-            }
+        if (idKomoditas != null) {
+            realm.executeTransactionAsync(realm1 -> {
+                listData = realm1.copyFromRealm(realm1.where(LahanRealm.class).equalTo("hashId", idKomoditas).findAll());
+            });
         }
-    }
-
-    private Boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-
-        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
     public UserDB getData() {
@@ -178,7 +180,7 @@ public class MapLahan extends BaseActivity implements GetLahanByKomoditasContrac
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.custom_info_window, null);
+        final View dialogView = inflater.inflate(R.layout.window_lahan, null);
         dialogBuilder.setView(dialogView);
 
         String strName;
@@ -230,5 +232,4 @@ public class MapLahan extends BaseActivity implements GetLahanByKomoditasContrac
         final AlertDialog b = dialogBuilder.create();
         b.show();
     }
-
 }

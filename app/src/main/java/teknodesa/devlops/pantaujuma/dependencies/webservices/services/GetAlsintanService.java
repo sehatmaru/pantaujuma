@@ -1,9 +1,5 @@
 package teknodesa.devlops.pantaujuma.dependencies.webservices.services;
 
-import android.util.Log;
-
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.realm.Realm;
@@ -67,15 +63,10 @@ public class GetAlsintanService implements GetAlsintanContract.Repository {
 
             @Override
             public void onFailure(Call<ResponseGetAlsintan> call, Throwable t) {
-                Log.e("Failure", "onFailure");
                 controller.getAllAlsintanFailed(t.getMessage());
                 t.printStackTrace();
             }
         });
     }
 
-    @Override
-    public void saveData(List<AlsintanRealm> allPen) {
-
-    }
 }

@@ -27,6 +27,7 @@ import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.Re
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetLahanKomoditas;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetPasar;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetPupuk;
+import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseGetTokoAlsintan;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseHarga;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseKomentar;
 import teknodesa.devlops.pantaujuma.dependencies.models.webservices.responses.ResponseKomoditasService;
@@ -139,6 +140,9 @@ public interface PantauJumaAPI {
 
     @GET("alsintan/getAllAlsintan")
     Call<ResponseGetAlsintan> getAlsintan(@Header("Authorization") String token);
+
+    @GET("alsintan/getTokoAlsintan")
+    Call<ResponseGetTokoAlsintan> getTokoAlsintan(@Header("Authorization") String token);
 
     @GET("post/getAllPost")
     Call<ResponsePost> getAllPost(@Header("Authorization") String token);

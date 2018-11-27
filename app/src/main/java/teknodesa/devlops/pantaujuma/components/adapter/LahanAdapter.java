@@ -44,13 +44,9 @@ public class LahanAdapter extends RecyclerView.Adapter<LahanAdapter.MyViewHolder
         if(lahan.getIsSync() == 0 ){
             holder.cardview.setCardBackgroundColor(Color.CYAN);
         }
-        holder.textnamapemilik.setText(lahan.getNamaPemilikLahan());
-        holder.textluas.setText(lahan.getLuas());
-        holder.textalamatlahan.setText(lahan.getAlamat());
-        holder.textbatastimur.setText(lahan.getBatasTimur());
-        holder.textbatasselatan.setText(lahan.getBatasSelatan());
-        holder.textbatasbarat.setText(lahan.getBatasBarat());
-        holder.textbatasutara.setText(lahan.getBatasUtara());
+        holder.textnamapemilik.setText("Pemilik: " + lahan.getNamaPemilikLahan());
+        holder.textluas.setText("Luas: " + lahan.getLuas());
+        holder.textalamatlahan.setText("Alamat: " + lahan.getAlamat());
         holder.cardview.setOnClickListener(view -> {
             onClicLahan.OnClickLahan(lahan);
         });
@@ -70,20 +66,12 @@ public class LahanAdapter extends RecyclerView.Adapter<LahanAdapter.MyViewHolder
         TextView textnamapemilik;
         TextView textluas;
         TextView textalamatlahan;
-        TextView textbatastimur;
-        TextView textbatasselatan;
-        TextView textbatasbarat;
-        TextView textbatasutara;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
             textnamapemilik = (TextView)itemView.findViewById(R.id.namaPemilikLahan);
             textluas = (TextView)itemView.findViewById(R.id.luas);
             textalamatlahan = (TextView)itemView.findViewById(R.id.alamatlahan);
-            textbatastimur = (TextView)itemView.findViewById(R.id.batastimur);
-            textbatasselatan = (TextView)itemView.findViewById(R.id.batasselatan);
-            textbatasbarat = (TextView)itemView.findViewById(R.id.batasbarat);
-            textbatasutara = (TextView)itemView.findViewById(R.id.batasutara);
             cardview = (CardView) itemView.findViewById(R.id.lahanCardView);
         }
     }

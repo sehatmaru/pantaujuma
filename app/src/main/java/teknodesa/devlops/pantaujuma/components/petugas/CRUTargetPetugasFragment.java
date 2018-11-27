@@ -141,8 +141,6 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
             newRealmItem.setKomoditas(komoditas);
         }
 
-//        newRealmItem.setKomoditas(komoditas);
-
         if(strTahun == null || strTahun.compareTo("")==0){
             newRealmItem.setTahun(0);
         }else{
@@ -179,12 +177,6 @@ public class CRUTargetPetugasFragment extends Fragment implements TargetContract
             newRealmItem.setKeterangan(strKeterangan);
         }
 
-//        newRealmItem.setTahun(Integer.valueOf(strTahun));
-//        newRealmItem.setLuasTanam(Float.valueOf(strLuasTanam));
-//        newRealmItem.setLuasPanen(Float.valueOf(strLuasPanen));
-//        newRealmItem.setSasaranProduksi(Float.valueOf(strSasaranProduksi));
-//        newRealmItem.setSasaranProduktifitas(Float.valueOf(strSasaranProduktifitas));
-//        newRealmItem.setKeterangan(strKeterangan);
         newRealmItem.setIsSync(0);
 
         return newRealmItem;

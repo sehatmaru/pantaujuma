@@ -253,5 +253,7 @@
     <string name="title_activity_map_lahan">Map</string>
     <string name="topik">Topik</string>
     <string name="kirim">Kirim</string>
+    <string name="title_activity_toko_maps">Map</string>
+    <string name="stock">Stock</string>
 
 </resources>

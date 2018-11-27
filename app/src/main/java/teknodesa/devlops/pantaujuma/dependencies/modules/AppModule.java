@@ -8,19 +8,17 @@ import dagger.Module;
 import dagger.Provides;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.components.alsintan.GetAlsintanController;
+import teknodesa.devlops.pantaujuma.components.alsintan.GetTokoAlsintanController;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
 import teknodesa.devlops.pantaujuma.components.harga.GetHargaController;
 import teknodesa.devlops.pantaujuma.components.home.HomeController;
 import teknodesa.devlops.pantaujuma.components.home.HomeFragment;
-import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.komoditas.GetLahanByKomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasController;
 import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
-import teknodesa.devlops.pantaujuma.components.lahan.DetailLahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRUAlamatLahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.GetLahanController;
-import teknodesa.devlops.pantaujuma.components.lahan.ListLahanKomoditasController;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.AlamatFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.BiodataFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.CRUPendudukFragment;
@@ -72,8 +70,8 @@ import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRDKKSer
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRDKService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetRKTPService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetTargetService;
+import teknodesa.devlops.pantaujuma.dependencies.webservices.services.GetTokoAlsintanService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.KomoditasService;
-import teknodesa.devlops.pantaujuma.dependencies.webservices.services.ListLahanKomoditasService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.LoginService;
 import teknodesa.devlops.pantaujuma.dependencies.webservices.services.PromoService;
 
@@ -99,8 +97,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ListLahanKomoditasService listLahanKomoditasService() {
-        return new ListLahanKomoditasService(app.getComponent());
+    GetTokoAlsintanService tokoAlsintanService() {
+        return new GetTokoAlsintanService(app.getComponent());
     }
 
     @Provides
@@ -220,6 +218,12 @@ public class AppModule {
 
     @Provides
     @Singleton
+    GetTokoAlsintanController getTokoAlsintanController() {
+        return new GetTokoAlsintanController(app.getComponent());
+    }
+
+    @Provides
+    @Singleton
     GetKomentarController getKomentarController() {
         return new GetKomentarController(app.getComponent());
     }
@@ -334,12 +338,6 @@ public class AppModule {
         return new GetAlsintanController(app.getComponent());
     }
 
-    @Provides
-    @Singleton
-    ListLahanKomoditasController listLahanKomoditasController() {
-        return new ListLahanKomoditasController(app.getComponent());
-    }
-
     //Repository
     @Provides
     @Singleton
@@ -352,10 +350,6 @@ public class AppModule {
     //Activities
 
     //Fragments
-    @Provides
-    @Singleton
-    DetailLahanFragment detailLahanFragment(){return new DetailLahanFragment();}
-
     @Provides
     @Singleton
     KomoditasFragment komoditasFragment(){return new KomoditasFragment();}
@@ -447,10 +441,6 @@ public class AppModule {
     @Provides
     @Singleton
     CRULahanFragment provideCRULahanFragment(){return new CRULahanFragment();}
-
-    @Provides
-    @Singleton
-    CRUKomoditasFragment provideCRUKomoditasFragment(){return new CRUKomoditasFragment();}
 
     @Provides
     @Singleton

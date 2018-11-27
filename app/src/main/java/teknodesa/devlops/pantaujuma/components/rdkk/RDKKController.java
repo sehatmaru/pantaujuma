@@ -22,10 +22,6 @@ public class RDKKController implements RDKKContract.Controller<RDKKPupukSubsidiR
         this.mRepository = new RDKKRepository(this, appComponent);
     }
 
-    public RDKKController(AppComponent component) {
-
-    }
-
     @Override
     public void addItem(RDKKPupukSubsidiRealm item) {
         mRepository.addItem(item);

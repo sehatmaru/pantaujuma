@@ -1,7 +1,6 @@
 package teknodesa.devlops.pantaujuma.components.petugas;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -25,7 +24,6 @@ public class TargetRepository implements TargetContract.Repository<TargetPetugas
 
     @Override
     public void addItem(TargetPetugas item) {
-        Log.e("Error", "Masuk addItem success");
         realm.beginTransaction();
         realm.executeTransactionAsync(realmIns -> {
             realmIns.insertOrUpdate(item);
@@ -40,7 +38,6 @@ public class TargetRepository implements TargetContract.Repository<TargetPetugas
 
     @Override
     public void updateItem(String idItem, TargetPetugas item) {
-        Log.e("Error", "Masuk updateItem success");
         realm.executeTransactionAsync(bgRealm -> {
             bgRealm.insertOrUpdate(item);
         }, () -> {
@@ -69,7 +66,6 @@ public class TargetRepository implements TargetContract.Repository<TargetPetugas
 
     @Override
     public void setItemDeleted(String idItem) {
-        Log.e("Error", "Masuk setItemDeleted success");
         TargetPetugas deletedItem = realm.where(TargetPetugas.class).equalTo("hashId", idItem).findFirst();
     }
 }

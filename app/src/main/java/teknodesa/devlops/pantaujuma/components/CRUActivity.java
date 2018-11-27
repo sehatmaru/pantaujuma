@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.harga.CRUHargaFragment;
-import teknodesa.devlops.pantaujuma.components.komoditas.CRUKomoditasFragment;
 import teknodesa.devlops.pantaujuma.components.lahan.formlahan.CRULahanFragment;
 import teknodesa.devlops.pantaujuma.components.penduduk.form.CRUPendudukFragment;
 import teknodesa.devlops.pantaujuma.components.petani.CRUPetaniFragment;
@@ -58,8 +57,6 @@ public class CRUActivity extends AppCompatActivity {
     CRUTargetPetugasFragment cruTargetPetugasFragment;
     @Inject
     CRULahanFragment cruLahanFragment;
-    @Inject
-    CRUKomoditasFragment cruKomoditasFragment;
     @Inject
     CRUHargaFragment cruHargaFragment;
     @Inject
@@ -121,9 +118,6 @@ public class CRUActivity extends AppCompatActivity {
                 break;
             case "lahan":
                 replaceFragment(cruLahanFragment);
-                break;
-            case "komoditas":
-                replaceFragment(cruKomoditasFragment);
                 break;
             case "harga":
                 replaceFragment(cruHargaFragment);

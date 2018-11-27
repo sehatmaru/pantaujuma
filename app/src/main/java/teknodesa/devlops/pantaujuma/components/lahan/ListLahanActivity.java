@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,7 +114,6 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
             listlahan = realm1.copyFromRealm(realm1.where(LahanRealm.class).sort("namaPemilikLahan", Sort.ASCENDING).findAll());
         }, () -> {
             if (!listlahan.isEmpty()) {
-                Log.e("List BiodataLahan","ini hasil"+listlahan.size());
 
                 lahanAdapter = new LahanAdapter(getApplicationContext(), listlahan,this);
                 scaleInAnimationAdapter = new ScaleInAnimationAdapter(lahanAdapter);
@@ -190,7 +188,6 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
     @Override
     public void OnClickLahan(LahanRealm idLahan) {
         startActivity(DetailLahanActivity.createIntent(getApplicationContext(),idLahan));
-//        startActivity(MapsActivity.createIntent(getApplicationContext()));
     }
 
     @Override

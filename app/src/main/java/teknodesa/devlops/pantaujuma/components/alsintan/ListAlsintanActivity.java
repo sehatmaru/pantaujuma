@@ -33,9 +33,10 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.AlsintanAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan.AlsintanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.alsintan.TokoAlsintanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
-public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapter.OnClickAlsintanListener, GetAlsintanContract.View {
+public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapter.OnClickAlsintanListener, GetAlsintanContract.View, GetTokoAlsintanContract.View {
     static int counter;
     static int hasilList = 0;
 
@@ -48,6 +49,9 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
 
     @Inject
     GetAlsintanController mController;
+
+    @Inject
+    GetTokoAlsintanController tController;
 
     @BindView(R.id.coordinatorLayoutAlsintan)
     CoordinatorLayout coordinatorLayout;
@@ -79,6 +83,7 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
         ButterKnife.bind(this);
         counter = 0;
         mController.setView(this);
+        tController.setView(this);
         progressdialog = new ProgressDialog(this);
 
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -201,6 +206,7 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
                 .negativeText(R.string.no)
                 .onPositive((dialog1, which) -> {
                     mController.getAllAlsintan();
+                    tController.getAllTokoAlsintan();
                     updateLayout(Konstanta.LAYOUT_LOADING);
                 })
                 .onNegative((dialog1, which) -> {
@@ -222,19 +228,12 @@ public class ListAlsintanActivity extends BaseActivity implements AlsintanAdapte
     }
 
     @Override
-    public void saveDataSuccess(String message) {
-        counter++;
-        if (counter == hasilList) {
-            progressdialog.dismiss();
-            mController.getAllAlsintan();
-            updateLayout(Konstanta.LAYOUT_LOADING);
-            this.recreate();
-        }
+    public void getAllTokoAlsintanSuccess(List<TokoAlsintanRealm> allTokoAlsintan) {
+
     }
 
     @Override
-    public void saveDataFailed(String message) {
-        progressdialog.dismiss();
-        onError(message);
+    public void getAllTokoAlsintanFailed(String message) {
+
     }
 }

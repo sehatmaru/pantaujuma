@@ -28,7 +28,6 @@ import teknodesa.devlops.pantaujuma.dependencies.models.pojos.rdk.JadwalKegiatan
 public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.ViewController<JadwalKegiatan> {
 
     Calendar myCalendar;
-//    DatePickerDialog.OnDateSetListener date;
 
     @BindView(R.id.input_kegiatan)
     EditText input_kegiatan;
@@ -87,25 +86,25 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
 
     @Override
     public JadwalKegiatan getUIData() {
-        String strKegiatan = input_kegiatan.getText().toString();
-        String strTanggal = input_tanggalJK.getText().toString();
-        String strDeskripsi = input_deskripsiJK.getText().toString();
+        String strKegiatan = "";
+        String strTanggal = "";
+        String strDeskripsi = "";
 
         JadwalKegiatan newItem = new JadwalKegiatan();
 
-        if(strKegiatan == null || strKegiatan.compareTo("")==0){
+        if(input_kegiatan.getText().toString() == null || input_kegiatan.getText().toString().compareTo("")==0){
             newItem.setKegiatanJK("");
         }else{
             newItem.setKegiatanJK(strKegiatan);
         }
 
-        if(strTanggal == null || strTanggal.compareTo("")==0){
+        if(input_tanggalJK.getText().toString() == null || input_tanggalJK.getText().toString().compareTo("")==0){
             newItem.setTanggalJK("");
         }else{
             newItem.setTanggalJK(strTanggal);
         }
 
-        if(strDeskripsi == null || strDeskripsi.compareTo("")==0){
+        if(input_deskripsiJK.getText().toString() == null || input_deskripsiJK.getText().toString().compareTo("")==0){
             newItem.setDeskripsiJK("");
         }else{
             newItem.setDeskripsiJK(strDeskripsi);

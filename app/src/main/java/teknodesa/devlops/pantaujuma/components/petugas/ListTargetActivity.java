@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +18,6 @@ import android.view.View;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
 
-import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -109,7 +107,6 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
         listtargetNotSync = realm.where(TargetPetugas.class).equalTo("isSync",0).findAll();
         realm.commitTransaction();
         hasilList = listtargetNotSync.size();
-        Log.e("hasil", "" + hasilList);
     }
 
     private void populateInitialData(){
@@ -295,7 +292,6 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
         mController.getAllTarget();
         updateLayout(Konstanta.LAYOUT_LOADING);
         snackbar.dismiss();
-//        this.recreate();
     }
 
     @Override

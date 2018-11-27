@@ -374,7 +374,7 @@
                         android:id="@+id/namesp"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/iconslovefilled"
+                        android:src="@drawable/job"
                         android:visibility="visible" />
 
 

@@ -44,12 +44,6 @@ public class KomentarController implements KomentarContract.Controller<KomentarR
 
     }
 
-//    @Override
-//    public void getAllKomentar() {
-////        mService.instanceClass(this);
-//        mService.getAllPost();
-//    }
-
     @Override
     public void responseCRUD(boolean status, String type) {
         if (status == true) {
