@@ -36,11 +36,13 @@ import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.HargaAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.harga.HargaRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnClickHargaListener, GetHargaContract.View {
     private final String mJenisCRU = "harga";
 
+    private List<KomoditasRealm> komoditas = Collections.EMPTY_LIST;
     private List<HargaRealm> listharga = Collections.EMPTY_LIST;
     private List<HargaRealm> listhargaNotSync = Collections.EMPTY_LIST;
 
@@ -111,16 +113,22 @@ public class ListHargaActivity extends BaseActivity implements HargaAdapter.OnCl
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listharga = realm1.copyFromRealm(realm1.where(HargaRealm.class).sort("isSync", Sort.ASCENDING).findAll());
+            komoditas = realm1.copyFromRealm(realm1.where(KomoditasRealm.class).findAll());
         }, () -> {
             if (!listharga.isEmpty()) {
-                hargaAdapter = new HargaAdapter(getApplicationContext(), listharga,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(hargaAdapter);
-                rcList.setAdapter(scaleInAnimationAdapter);
-                rcList.setLayoutManager(linearLayoutManager);
-                getNotSync();
-                checkDataRealm();
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (komoditas.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Komoditas terlebih dahulu", 3000).show();
+                }else{
+                    hargaAdapter = new HargaAdapter(getApplicationContext(), listharga,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(hargaAdapter);
+                    rcList.setAdapter(scaleInAnimationAdapter);
+                    rcList.setLayoutManager(linearLayoutManager);
+                    getNotSync();
+                    checkDataRealm();
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }

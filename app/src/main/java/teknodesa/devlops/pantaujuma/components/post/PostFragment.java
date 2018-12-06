@@ -116,6 +116,7 @@ public class PostFragment extends Fragment implements GetPostContract.View, GetK
 
         mController.setView(this);
         kController.setView(this);
+        recyclerView.setNestedScrollingEnabled(false);
 
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
 

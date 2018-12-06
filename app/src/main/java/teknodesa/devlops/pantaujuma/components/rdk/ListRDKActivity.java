@@ -35,6 +35,9 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.RDKAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.components.komoditas.KomoditasFragment;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdk.RDKRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
@@ -47,6 +50,8 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
 
     private final String mJenisCRU = "rdk";
 
+    private List<KomoditasRealm> komoditas = Collections.EMPTY_LIST;
+    private List<PoktanRealm> poktan = Collections.EMPTY_LIST;
     private List<RDKRealm> listrdk = Collections.EMPTY_LIST;
     private List<RDKRealm> listrdkNotSync = Collections.EMPTY_LIST;
 
@@ -116,16 +121,23 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listrdk = realm1.copyFromRealm(realm1.where(RDKRealm.class).sort("isSync",Sort.ASCENDING).findAll());
+            poktan = realm1.copyFromRealm(realm1.where(PoktanRealm.class).findAll());
+            komoditas = realm1.copyFromRealm(realm1.where(KomoditasRealm.class).findAll());
         }, () -> {
             if (!listrdk.isEmpty()) {
-                rdkAdapter = new RDKAdapter(getApplicationContext(), listrdk,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkAdapter);
-                rcList.setAdapter(scaleInAnimationAdapter);
-                rcList.setLayoutManager(linearLayoutManager);
-                getNotSync();
-                checkDataRealm();
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (poktan.isEmpty() || komoditas.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Poktan & Komoditas terlebih dahulu", 3000).show();
+                }else{
+                    rdkAdapter = new RDKAdapter(getApplicationContext(), listrdk,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkAdapter);
+                    rcList.setAdapter(scaleInAnimationAdapter);
+                    rcList.setLayoutManager(linearLayoutManager);
+                    getNotSync();
+                    checkDataRealm();
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }
@@ -206,6 +218,11 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        realm.beginTransaction();
+        List<PoktanRealm> poktan = realm.copyFromRealm(realm.where(PoktanRealm.class).findAll());
+        List<KomoditasRealm> komoditas = realm.copyFromRealm(realm.where(KomoditasRealm.class).findAll());
+        realm.commitTransaction();
+
         if (id == R.id.action_sync){
             if(isNetworkConnected()){
                 syncDialog();
@@ -216,7 +233,11 @@ public class ListRDKActivity extends BaseActivity implements RDKAdapter.OnClickR
         }
         if (id == R.id.action_download){
             if(isNetworkConnected()){
-                createDownloadDialog();
+                if (poktan.size() > 0 && komoditas.size() >0){
+                    createDownloadDialog();
+                }else{
+                    Snackbar.make(coordinatorLayout, "Download Poktan & Komoditas terlebih dahulu", 3000).show();
+                }
             }else {
                 createSnackbar("Koneksi Tidak Tersedia").show();
             }

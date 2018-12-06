@@ -36,6 +36,7 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.PetaniAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
@@ -48,6 +49,7 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
 
     private final String mJenisCRU = "petani";
 
+    private List<PendudukRealm> penduduk = Collections.EMPTY_LIST;
     private List<PetaniRealm> listpetani = Collections.EMPTY_LIST;
     private List<PetaniRealm> listpetaniNotSync = Collections.EMPTY_LIST;
 
@@ -118,16 +120,22 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listpetani = realm1.copyFromRealm(realm1.where(PetaniRealm.class).sort("isSync",Sort.ASCENDING).findAll());
+            penduduk = realm1.copyFromRealm(realm1.where(PendudukRealm.class).findAll());
         }, () -> {
             if (!listpetani.isEmpty()) {
-                petaniAdapter = new PetaniAdapter(getApplicationContext(), listpetani,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(petaniAdapter);
-                rcList.setAdapter(scaleInAnimationAdapter);
-                rcList.setLayoutManager(linearLayoutManager);
-                getNotSync();
-                checkDataRealm();
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (penduduk.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Penduduk terlebih dahulu", 3000).show();
+                }else{
+                    petaniAdapter = new PetaniAdapter(getApplicationContext(), listpetani,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(petaniAdapter);
+                    rcList.setAdapter(scaleInAnimationAdapter);
+                    rcList.setLayoutManager(linearLayoutManager);
+                    getNotSync();
+                    checkDataRealm();
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }
@@ -276,7 +284,7 @@ public class ListPetaniActivity extends BaseActivity implements PetaniAdapter.On
     }
 
     private Snackbar showRealmData(String message) {
-        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki data petani "+message+ " yang belum di backup", Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(coordinatorLayout, "Anda memiliki " +message+" data petani yang belum di backup", Snackbar.LENGTH_INDEFINITE);
 
         return snackbar;
     }

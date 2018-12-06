@@ -200,7 +200,7 @@
                         android:id="@+id/keterangan"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/note"
+                        android:src="@drawable/note1"
                         android:visibility="visible" />
 
 

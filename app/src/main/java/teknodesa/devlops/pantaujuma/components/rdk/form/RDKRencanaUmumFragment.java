@@ -125,14 +125,34 @@ public class RDKRencanaUmumFragment extends Fragment implements RDKContract.View
     public RencanaUmum getUIData() {
         messageError = "";
 
-        String paketTeknologi = input_paketteknologi.getText().toString();
-        String polaTanam = input_polatanam.getText().toString();
-        String jadwalTanam = input_jadwaltanam.getText().toString();
-        String varietas = input_varietas.getText().toString();
-        String iuranAnggota = input_iurananggota.getText().toString();
-        String sumberBenih = input_sumberbenih.getText().toString();
-        String tabunganAnggota = input_tabungananggota.getText().toString();
-        String pemupukanModal = input_pemupukanmodal.getText().toString();
+        String paketTeknologi;
+        String polaTanam;
+        String jadwalTanam;
+        String varietas;
+        String iuranAnggota;
+        String sumberBenih;
+        String tabunganAnggota;
+        String pemupukanModal;
+
+        try{
+            paketTeknologi = input_paketteknologi.getText().toString();
+            polaTanam = input_polatanam.getText().toString();
+            jadwalTanam = input_jadwaltanam.getText().toString();
+            varietas = input_varietas.getText().toString();
+            iuranAnggota = input_iurananggota.getText().toString();
+            sumberBenih = input_sumberbenih.getText().toString();
+            tabunganAnggota = input_tabungananggota.getText().toString();
+            pemupukanModal = input_pemupukanmodal.getText().toString();
+        } catch (NullPointerException e){
+            paketTeknologi = "";
+            polaTanam = "";
+            jadwalTanam = "";
+            varietas = "";
+            iuranAnggota = "";
+            sumberBenih = "";
+            tabunganAnggota = "";
+            pemupukanModal = "";
+        }
 
         RencanaUmum newItem = new RencanaUmum();
 

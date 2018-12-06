@@ -86,25 +86,57 @@ public class RDKJadwalKegiatanFragment extends Fragment implements RDKContract.V
 
     @Override
     public JadwalKegiatan getUIData() {
-        String strKegiatan = "";
-        String strTanggal = "";
-        String strDeskripsi = "";
+        String strKegiatan;
+        String strTanggal;
+        String strDeskripsi;
+
+//        String strKegiatan = input_kegiatan.getText().toString();
+//        String strTanggal = input_tanggalJK.getText().toString();
+//        String strDeskripsi = input_deskripsiJK.getText().toString();
 
         JadwalKegiatan newItem = new JadwalKegiatan();
 
-        if(input_kegiatan.getText().toString() == null || input_kegiatan.getText().toString().compareTo("")==0){
+        try{
+            strKegiatan = input_kegiatan.getText().toString();
+            strTanggal = input_tanggalJK.getText().toString();
+            strDeskripsi = input_deskripsiJK.getText().toString();
+        } catch (NullPointerException e){
+            strKegiatan = "";
+            strTanggal = "";
+            strDeskripsi = "";
+        }
+
+        if(strKegiatan == null || strKegiatan.compareTo("")==0){
             newItem.setKegiatanJK("");
         }else{
             newItem.setKegiatanJK(strKegiatan);
         }
 
-        if(input_tanggalJK.getText().toString() == null || input_tanggalJK.getText().toString().compareTo("")==0){
+//        if(input_kegiatan.getText().toString() == null || input_kegiatan.getText().toString().compareTo("")==0){
+//            newItem.setKegiatanJK("");
+//        }else{
+//            newItem.setKegiatanJK(strKegiatan);
+//        }
+
+//        if(input_tanggalJK.getText().toString() == null || input_tanggalJK.getText().toString().compareTo("")==0){
+//            newItem.setTanggalJK("");
+//        }else{
+//            newItem.setTanggalJK(strTanggal);
+//        }
+//
+//        if(input_deskripsiJK.getText().toString() == null || input_deskripsiJK.getText().toString().compareTo("")==0){
+//            newItem.setDeskripsiJK("");
+//        }else{
+//            newItem.setDeskripsiJK(strDeskripsi);
+//        }
+
+        if(strTanggal == null || strTanggal.compareTo("")==0){
             newItem.setTanggalJK("");
         }else{
             newItem.setTanggalJK(strTanggal);
         }
 
-        if(input_deskripsiJK.getText().toString() == null || input_deskripsiJK.getText().toString().compareTo("")==0){
+        if(strDeskripsi == null || strDeskripsi.compareTo("")==0){
             newItem.setDeskripsiJK("");
         }else{
             newItem.setDeskripsiJK(strDeskripsi);

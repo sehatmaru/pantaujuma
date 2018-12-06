@@ -42,7 +42,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_post_fragment" />
+    <include layout="@layout/content_post_fragment"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabTambah"

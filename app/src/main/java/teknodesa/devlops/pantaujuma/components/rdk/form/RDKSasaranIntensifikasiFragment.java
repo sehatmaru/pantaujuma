@@ -77,10 +77,18 @@ public class RDKSasaranIntensifikasiFragment extends Fragment implements RDKCont
 
     @Override
     public SasaranIntensifikasi getUIData() {
-        String targetHasil = input_targethasilperha.getText().toString();
-        String target = input_target.getText().toString();
+        String targetHasil;
+        String target;
 
         SasaranIntensifikasi newItem = new SasaranIntensifikasi();
+
+        try{
+            targetHasil = input_targethasilperha.getText().toString();
+            target = input_target.getText().toString();
+        } catch (NullPointerException e){
+            targetHasil = "";
+            target = "";
+        }
 
         if(komoditas.compareTo("")==0 || komoditas == null){
             check = true;

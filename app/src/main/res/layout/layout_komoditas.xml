@@ -38,6 +38,14 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/kategoriKomoditas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="211132144512"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/deskripsiKomoditas"

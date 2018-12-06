@@ -70,15 +70,6 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
     @BindView(R.id.textKomentar)
     EditText textKomentar;
 
-    @BindView(R.id.comment)
-    TextView textKomen;
-
-    @BindView(R.id.like)
-    TextView textLike;
-
-    @BindView(R.id.share)
-    TextView textShare;
-
     @BindView(R.id.btnKomentar)
     Button btnKomentar;
 
@@ -244,9 +235,6 @@ public class DetailPostActivity extends BaseActivity implements KomentarContract
         isi.setText(dataPost.getIsi());
         tanggal.setText(dataPost.getTanggal());
         waktu.setText(dataPost.getWaktu());
-        textLike.setText(String.valueOf(dataPost.getLikes()));
-        textKomen.setText(String.valueOf(listData.size()));
-        textShare.setText(String.valueOf(dataPost.getDislike()));
     }
 
     protected String getSaltString() {

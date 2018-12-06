@@ -74,9 +74,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         holder.textisi.setText(postRealm.getIsi());
         holder.textdate.setText(postRealm.getTanggal());
         holder.texttime.setText(postRealm.getWaktu());
-        holder.textcomment.setText(String.valueOf(hasil));
-        holder.textlike.setText(String.valueOf(postRealm.getViewCount()));
-        holder.textshare.setText(String.valueOf(postRealm.getViewCount()));
         holder.cardview.setOnClickListener(view -> {
             onClicPost.OnClickPost(postRealm.getHashId());
         });
@@ -97,9 +94,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         TextView textisi;
         TextView textdate;
         TextView texttime;
-        TextView textcomment;
-        TextView textshare;
-        TextView textlike;
         CardView cardview;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -108,9 +102,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             textisi = (TextView)itemView.findViewById(R.id.isi);
             textdate = (TextView)itemView.findViewById(R.id.date);
             texttime = (TextView)itemView.findViewById(R.id.time);
-            textcomment = (TextView)itemView.findViewById(R.id.comment);
-            textlike = (TextView)itemView.findViewById(R.id.like);
-            textshare = (TextView)itemView.findViewById(R.id.share);
             cardview = (CardView) itemView.findViewById(R.id.postCardView);
         }
     }

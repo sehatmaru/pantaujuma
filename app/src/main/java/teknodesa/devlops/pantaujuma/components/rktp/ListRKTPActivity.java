@@ -35,6 +35,7 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.RKTPAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rktp.RKTPRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
@@ -44,6 +45,7 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
 
     private final String mJenisCRU = "rktp";
 
+    private List<PoktanRealm> poktan = Collections.EMPTY_LIST;
     private List<RKTPRealm> listrktp = Collections.EMPTY_LIST;
     private List<RKTPRealm> listrktpNotSync = Collections.EMPTY_LIST;
 
@@ -114,16 +116,22 @@ public class ListRKTPActivity extends BaseActivity implements RKTPAdapter.OnClic
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listrktp = realm1.copyFromRealm(realm1.where(RKTPRealm.class).sort("isSync",Sort.ASCENDING).findAll());
+            poktan = realm1.copyFromRealm(realm1.where(PoktanRealm.class).findAll());
         }, () -> {
             if (!listrktp.isEmpty()) {
-                rktpAdapter = new RKTPAdapter(getApplicationContext(), listrktp,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(rktpAdapter);
-                rcList.setAdapter(scaleInAnimationAdapter);
-                rcList.setLayoutManager(linearLayoutManager);
-                getNotSync();
-                checkDataRealm();
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (poktan.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Poktan terlebih dahulu", 3000).show();
+                }else{
+                    rktpAdapter = new RKTPAdapter(getApplicationContext(), listrktp,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(rktpAdapter);
+                    rcList.setAdapter(scaleInAnimationAdapter);
+                    rcList.setLayoutManager(linearLayoutManager);
+                    getNotSync();
+                    checkDataRealm();
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }

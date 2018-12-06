@@ -36,6 +36,7 @@ import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.LahanAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnClickLahanListener, GetLahanContract.View {
@@ -47,6 +48,7 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
 
     private final String mJenisCRU = "lahan";
 
+    private List<PendudukRealm> penduduk = Collections.EMPTY_LIST;
     private List<LahanRealm> listlahan = Collections.EMPTY_LIST;
     private List<LahanRealm> listlahanNotSync = Collections.EMPTY_LIST;
 
@@ -112,15 +114,20 @@ public class ListLahanActivity extends BaseActivity implements LahanAdapter.OnCl
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listlahan = realm1.copyFromRealm(realm1.where(LahanRealm.class).sort("namaPemilikLahan", Sort.ASCENDING).findAll());
+            penduduk = realm1.copyFromRealm(realm1.where(PendudukRealm.class).findAll());
         }, () -> {
             if (!listlahan.isEmpty()) {
-
-                lahanAdapter = new LahanAdapter(getApplicationContext(), listlahan,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(lahanAdapter);
-                rcList.setAdapter(scaleInAnimationAdapter);
-                rcList.setLayoutManager(linearLayoutManager);
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (penduduk.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Penduduk terlebih dahulu", 3000).show();
+                }else{
+                    lahanAdapter = new LahanAdapter(getApplicationContext(), listlahan,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(lahanAdapter);
+                    rcList.setAdapter(scaleInAnimationAdapter);
+                    rcList.setLayoutManager(linearLayoutManager);
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }

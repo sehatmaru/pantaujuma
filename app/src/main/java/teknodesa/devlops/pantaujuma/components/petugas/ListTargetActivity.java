@@ -35,12 +35,14 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.TargetAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.petugas.TargetPetugas;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class ListTargetActivity extends BaseActivity implements TargetAdapter.OnClickTargetListener, GetTargetContract.View {
     private final String mJenisCRU = "target";
 
+    private List<KomoditasRealm> komoditas = Collections.EMPTY_LIST;
     private List<TargetPetugas> listtarget = Collections.EMPTY_LIST;
     private List<TargetPetugas> listtargetNotSync = Collections.EMPTY_LIST;
 
@@ -112,16 +114,22 @@ public class ListTargetActivity extends BaseActivity implements TargetAdapter.On
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listtarget = realm1.copyFromRealm(realm1.where(TargetPetugas.class).sort("isSync",Sort.ASCENDING).findAll());
+            komoditas = realm1.copyFromRealm(realm1.where(KomoditasRealm.class).findAll());
         }, () -> {
             if (!listtarget.isEmpty()) {
-                targetAdapter = new TargetAdapter(getApplicationContext(), listtarget,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(targetAdapter);
-                rcList.setAdapter(scaleInAnimationAdapter);
-                rcList.setLayoutManager(linearLayoutManager);
-                getNotSync();
-                checkDataRealm();
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (komoditas.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Komoditas terlebih dahulu", 3000).show();
+                }else{
+                    targetAdapter = new TargetAdapter(getApplicationContext(), listtarget,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(targetAdapter);
+                    rcList.setAdapter(scaleInAnimationAdapter);
+                    rcList.setLayoutManager(linearLayoutManager);
+                    getNotSync();
+                    checkDataRealm();
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }

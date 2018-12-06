@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -64,47 +65,48 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
         PendudukRealm penduduk = realm.where(PendudukRealm.class)
                 .equalTo("hashId", petani.getBiodata())
                 .findFirst();
-        if(petani.getIsSync() == 0 ){
+
+        if (petani.getIsSync() == 0) {
             holder.cardview.setCardBackgroundColor(Color.CYAN);
         }
-        if(penduduk.getNIK() == null || penduduk.getNIK().compareTo("")==0){
+        if (penduduk.getNIK() == null || penduduk.getNIK().compareTo("") == 0) {
             holder.textnik.setText("NIK: -");
-        }else{
-            holder.textnik.setText("NIK: "+penduduk.getNIK());
+        } else {
+            holder.textnik.setText("NIK: " + penduduk.getNIK());
         }
 
         String namaDepan;
         String namaBelakang;
-        if(penduduk.getNamaDepan() == null || penduduk.getNamaDepan().compareTo("")==0){
-            namaDepan="";
-        }else{
+        if (penduduk.getNamaDepan() == null || penduduk.getNamaDepan().compareTo("") == 0) {
+            namaDepan = "";
+        } else {
             namaDepan = penduduk.getNamaDepan();
         }
-        if(penduduk.getNamaBelakang() == null || penduduk.getNamaBelakang().compareTo("")==0){
-            namaBelakang="";
-        }else{
+        if (penduduk.getNamaBelakang() == null || penduduk.getNamaBelakang().compareTo("") == 0) {
+            namaBelakang = "";
+        } else {
             namaBelakang = penduduk.getNamaBelakang();
         }
-        holder.textname.setText("Nama: "+namaDepan+" "+ namaBelakang);
+        holder.textname.setText("Nama: " + namaDepan + " " + namaBelakang);
 
-        if(penduduk.getJenisKelamin() == null || penduduk.getJenisKelamin().compareTo("")==0){
+        if (penduduk.getJenisKelamin() == null || penduduk.getJenisKelamin().compareTo("") == 0) {
             holder.textjk.setText("Jenis Kelamin: -");
-        }else{
-            holder.textjk.setText("Jenis Kelamin: "+penduduk.getJenisKelamin());
+        } else {
+            holder.textjk.setText("Jenis Kelamin: " + penduduk.getJenisKelamin());
         }
         String tempatLahir;
         String tanggalLahir;
-        if(penduduk.getTempatLahir() == null || penduduk.getTempatLahir().compareTo("")==0){
-            tempatLahir="";
-        }else{
+        if (penduduk.getTempatLahir() == null || penduduk.getTempatLahir().compareTo("") == 0) {
+            tempatLahir = "";
+        } else {
             tempatLahir = penduduk.getTempatLahir();
         }
-        if(penduduk.getTanggalLahir() == null || penduduk.getTanggalLahir().compareTo("")==0){
-            tanggalLahir="";
-        }else{
+        if (penduduk.getTanggalLahir() == null || penduduk.getTanggalLahir().compareTo("") == 0) {
+            tanggalLahir = "";
+        } else {
             tanggalLahir = penduduk.getTanggalLahir();
         }
-        holder.textttl.setText("TTL : "+tempatLahir+", "+tanggalLahir);
+        holder.textttl.setText("TTL : " + tempatLahir + ", " + tanggalLahir);
 
         holder.cardview.setOnClickListener(view -> {
             onClicPetani.OnClickPetani(petani.getHashId());
@@ -115,6 +117,7 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
     public int getItemCount() {
         return listData.size();
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -126,20 +129,23 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
         TextView textjk;
         TextView textttl;
         CardView cardview;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            textname = (TextView)itemView.findViewById(R.id.nama);
-            textnik = (TextView)itemView.findViewById(R.id.nik);
-            textjk = (TextView)itemView.findViewById(R.id.jenisKelamin);
-            textttl = (TextView)itemView.findViewById(R.id.ttl);
+            textname = (TextView) itemView.findViewById(R.id.nama);
+            textnik = (TextView) itemView.findViewById(R.id.nik);
+            textjk = (TextView) itemView.findViewById(R.id.jenisKelamin);
+            textttl = (TextView) itemView.findViewById(R.id.ttl);
             cardview = (CardView) itemView.findViewById(R.id.petaniCardView);
         }
     }
+
     public void animateTo(List<PetaniRealm> models) {
         applyAndAnimateRemovals(models);
         applyAndAnimateAdditions(models);
         applyAndAnimateMovedItems(models);
     }
+
     private void applyAndAnimateRemovals(List<PetaniRealm> newModels) {
         for (int i = listData.size() - 1; i >= 0; i--) {
             final PetaniRealm model = listData.get(i);
@@ -157,10 +163,12 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
             }
         }
     }
+
     public void addItem(int position, PetaniRealm model) {
         listData.add(position, model);
         notifyItemInserted(position);
     }
+
     private void applyAndAnimateMovedItems(List<PetaniRealm> newModels) {
         for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
             final PetaniRealm model = newModels.get(toPosition);
@@ -176,6 +184,7 @@ public class PetaniAdapter extends RecyclerView.Adapter<PetaniAdapter.MyViewHold
         listData.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
     }
+
     public void removeItem(int position) {
         listData.remove(position);
         notifyItemRemoved(position);

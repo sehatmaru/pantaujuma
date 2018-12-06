@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import teknodesa.devlops.pantaujuma.R;
@@ -46,7 +48,8 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.MyVi
     public void onBindViewHolder(MyViewHolder holder, int position) {
         KomoditasRealm data = listData.get(position);
         holder.txNamaKomoditas.setText(""+data.getNama());
-        holder.txDeskripsiKomoditas.setText(""+data.getDeskripsi());
+        holder.txKetegoriKomoditas.setText("Kategori: " +data.getKategori());
+        holder.txDeskripsiKomoditas.setText("Deskripsi: "+data.getDeskripsi());
 
         holder.cardView.setOnClickListener(view -> {
             onClick.OnClickKomoditas(data.getHashId());
@@ -65,11 +68,13 @@ public class KomoditasAdapter extends RecyclerView.Adapter<KomoditasAdapter.MyVi
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txNamaKomoditas;
+        TextView txKetegoriKomoditas;
         TextView txDeskripsiKomoditas;
         CardView cardView;
         public MyViewHolder(View itemView) {
             super(itemView);
             txNamaKomoditas = (TextView)itemView.findViewById(R.id.namaKomoditas);
+            txKetegoriKomoditas = (TextView)itemView.findViewById(R.id.kategoriKomoditas);
             txDeskripsiKomoditas = (TextView)itemView.findViewById(R.id.deskripsiKomoditas);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
         }

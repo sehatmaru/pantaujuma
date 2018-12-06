@@ -39,6 +39,7 @@ import teknodesa.devlops.pantaujuma.MainApplication;
 import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.adapter.KomoditasAdapter;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.LahanRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
 public class KomoditasFragment extends Fragment implements KomoditasContract.View, KomoditasAdapter.OnClickKomoditasListener{
@@ -69,6 +70,7 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
     private ProgressDialog progressdialog;
     private Snackbar snackbar;
 
+    private List<LahanRealm> lahan = Collections.EMPTY_LIST;
     private List<KomoditasRealm> listData = Collections.EMPTY_LIST;
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     KomoditasAdapter pendudukAdapter;
@@ -94,6 +96,7 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
         progressdialog = new ProgressDialog(getActivity());
 
         mController.setView(this);
+        recyclerView.setNestedScrollingEnabled(false);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         updateLayout(Konstanta.LAYOUT_LOADING);
         populateInitialData();
@@ -103,14 +106,20 @@ public class KomoditasFragment extends Fragment implements KomoditasContract.Vie
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listData = realm1.copyFromRealm(realm1.where(KomoditasRealm.class).sort("nama", Sort.ASCENDING).findAll());
+            lahan = realm1.copyFromRealm(realm1.where(LahanRealm.class).findAll());
         }, () -> {
             if (!listData.isEmpty()) {
-                pendudukAdapter = new KomoditasAdapter(getActivity().getApplicationContext(), listData,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(pendudukAdapter);
-                recyclerView.setAdapter(scaleInAnimationAdapter);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (lahan.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Lahan terlebih dahulu", 3000).show();
+                }else{
+                    pendudukAdapter = new KomoditasAdapter(getActivity().getApplicationContext(), listData,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(pendudukAdapter);
+                    recyclerView.setAdapter(scaleInAnimationAdapter);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }

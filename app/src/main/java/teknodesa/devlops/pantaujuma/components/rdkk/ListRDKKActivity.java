@@ -14,6 +14,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -35,6 +36,11 @@ import teknodesa.devlops.pantaujuma.R;
 import teknodesa.devlops.pantaujuma.components.CRUActivity;
 import teknodesa.devlops.pantaujuma.components.adapter.RDKKAdapter;
 import teknodesa.devlops.pantaujuma.components.base.BaseActivity;
+import teknodesa.devlops.pantaujuma.dependencies.models.pojos.Poktan;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.komoditas.KomoditasRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.penduduk.PendudukRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.petani.PetaniRealm;
+import teknodesa.devlops.pantaujuma.dependencies.models.realms.poktan.PoktanRealm;
 import teknodesa.devlops.pantaujuma.dependencies.models.realms.rdkk.RDKKPupukSubsidiRealm;
 import teknodesa.devlops.pantaujuma.utils.Konstanta;
 
@@ -49,6 +55,10 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
 
     private List<RDKKPupukSubsidiRealm> listrdkk = Collections.EMPTY_LIST;
     private List<RDKKPupukSubsidiRealm> listrdkkNotSync = Collections.EMPTY_LIST;
+    private List<PoktanRealm> poktan = Collections.EMPTY_LIST;
+    private List<PendudukRealm> penduduk = Collections.EMPTY_LIST;
+    private List<PetaniRealm> petani = Collections.EMPTY_LIST;
+    private List<KomoditasRealm> komoditas = Collections.EMPTY_LIST;
 
     private ScaleInAnimationAdapter scaleInAnimationAdapter;
     RDKKAdapter rdkkAdapter;
@@ -114,16 +124,26 @@ public class ListRDKKActivity extends BaseActivity implements RDKKAdapter.OnClic
     private void populateInitialData(){
         realm.executeTransactionAsync(realm1 -> {
             listrdkk = realm1.copyFromRealm(realm1.where(RDKKPupukSubsidiRealm.class).sort("isSync",Sort.ASCENDING).findAll());
+            penduduk = realm1.copyFromRealm(realm1.where(PendudukRealm.class).findAll());
+            poktan = realm1.copyFromRealm(realm1.where(PoktanRealm.class).findAll());
+            komoditas = realm1.copyFromRealm(realm1.where(KomoditasRealm.class).findAll());
+            petani = realm1.copyFromRealm(realm1.where(PetaniRealm.class).findAll());
+
         }, () -> {
             if (!listrdkk.isEmpty()) {
-                rdkkAdapter = new RDKKAdapter(getApplicationContext(), listrdkk,this);
-                scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkkAdapter);
-                rcList.setAdapter(scaleInAnimationAdapter);
-                rcList.setLayoutManager(linearLayoutManager);
-                getNotSync();
-                checkDataRealm();
-                updateLayout(Konstanta.LAYOUT_SUCCESS);
-                setSearchFunction();
+                if (penduduk.isEmpty() || poktan.isEmpty() || petani.isEmpty() || komoditas.isEmpty()){
+                    updateLayout(Konstanta.LAYOUT_EMPTY);
+                    Snackbar.make(coordinatorLayout, "Download Poktan, Petani, Penduduk & Komoditas terlebih dahulu", 3000).show();
+                }else{
+                    rdkkAdapter = new RDKKAdapter(getApplicationContext(), listrdkk,this);
+                    scaleInAnimationAdapter = new ScaleInAnimationAdapter(rdkkAdapter);
+                    rcList.setAdapter(scaleInAnimationAdapter);
+                    rcList.setLayoutManager(linearLayoutManager);
+                    getNotSync();
+                    checkDataRealm();
+                    updateLayout(Konstanta.LAYOUT_SUCCESS);
+                    setSearchFunction();
+                }
             }else {
                 updateLayout(Konstanta.LAYOUT_EMPTY);
             }
